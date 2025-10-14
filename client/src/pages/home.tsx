@@ -94,6 +94,8 @@ export default function Home() {
 
   const handleChordSelect = (chord: string) => {
     setSelectedChord(chord);
+    // Immediately show the fretboard when a chord is clicked
+    handleShowFretboard(chord);
   };
 
   const handleShowFretboard = (chordName?: string) => {
