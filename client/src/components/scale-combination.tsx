@@ -28,20 +28,20 @@ interface FretPosition {
   note: string;
 }
 
-// Standard tuning fretboard note mapping (first 12 frets)
+// Standard tuning fretboard note mapping (24 frets)
 const fretboardNotes: string[][] = [
-  // String 6 (Low E): E F F# G G# A A# B C C# D D# E
-  ['E', 'F', 'F♯', 'G', 'G♯', 'A', 'A♯', 'B', 'C', 'C♯', 'D', 'D♯', 'E'],
-  // String 5 (A): A A# B C C# D D# E F F# G G# A
-  ['A', 'A♯', 'B', 'C', 'C♯', 'D', 'D♯', 'E', 'F', 'F♯', 'G', 'G♯', 'A'],
-  // String 4 (D): D D# E F F# G G# A A# B C C# D
-  ['D', 'D♯', 'E', 'F', 'F♯', 'G', 'G♯', 'A', 'A♯', 'B', 'C', 'C♯', 'D'],
-  // String 3 (G): G G# A A# B C C# D D# E F F# G
-  ['G', 'G♯', 'A', 'A♯', 'B', 'C', 'C♯', 'D', 'D♯', 'E', 'F', 'F♯', 'G'],
-  // String 2 (B): B C C# D D# E F F# G G# A A# B
-  ['B', 'C', 'C♯', 'D', 'D♯', 'E', 'F', 'F♯', 'G', 'G♯', 'A', 'A♯', 'B'],
-  // String 1 (High E): E F F# G G# A A# B C C# D D# E
-  ['E', 'F', 'F♯', 'G', 'G♯', 'A', 'A♯', 'B', 'C', 'C♯', 'D', 'D♯', 'E']
+  // String 6 (Low E): E to E (0-24 frets)
+  ['E', 'F', 'F♯', 'G', 'G♯', 'A', 'A♯', 'B', 'C', 'C♯', 'D', 'D♯', 'E', 'F', 'F♯', 'G', 'G♯', 'A', 'A♯', 'B', 'C', 'C♯', 'D', 'D♯', 'E'],
+  // String 5 (A): A to A (0-24 frets)
+  ['A', 'A♯', 'B', 'C', 'C♯', 'D', 'D♯', 'E', 'F', 'F♯', 'G', 'G♯', 'A', 'A♯', 'B', 'C', 'C♯', 'D', 'D♯', 'E', 'F', 'F♯', 'G', 'G♯', 'A'],
+  // String 4 (D): D to D (0-24 frets)
+  ['D', 'D♯', 'E', 'F', 'F♯', 'G', 'G♯', 'A', 'A♯', 'B', 'C', 'C♯', 'D', 'D♯', 'E', 'F', 'F♯', 'G', 'G♯', 'A', 'A♯', 'B', 'C', 'C♯', 'D'],
+  // String 3 (G): G to G (0-24 frets)
+  ['G', 'G♯', 'A', 'A♯', 'B', 'C', 'C♯', 'D', 'D♯', 'E', 'F', 'F♯', 'G', 'G♯', 'A', 'A♯', 'B', 'C', 'C♯', 'D', 'D♯', 'E', 'F', 'F♯', 'G'],
+  // String 2 (B): B to B (0-24 frets)
+  ['B', 'C', 'C♯', 'D', 'D♯', 'E', 'F', 'F♯', 'G', 'G♯', 'A', 'A♯', 'B', 'C', 'C♯', 'D', 'D♯', 'E', 'F', 'F♯', 'G', 'G♯', 'A', 'A♯', 'B'],
+  // String 1 (High E): E to E (0-24 frets)
+  ['E', 'F', 'F♯', 'G', 'G♯', 'A', 'A♯', 'B', 'C', 'C♯', 'D', 'D♯', 'E', 'F', 'F♯', 'G', 'G♯', 'A', 'A♯', 'B', 'C', 'C♯', 'D', 'D♯', 'E']
 ];
 
 const availableScales: Record<string, ScaleInfo> = {
@@ -197,6 +197,101 @@ export default function ScaleCombination({ onUpgrade }: ScaleCombinationProps) {
     return colorMap[bgColorClass] || 'rgb(59, 130, 246)';
   };
 
+  // Single fretboard component for individual scale visualization
+  const SingleScaleFretboard = ({ 
+    scale, 
+    scaleColor 
+  }: { 
+    scale: ScaleInfo,
+    scaleColor: string
+  }) => {
+    const strings = ['E', 'A', 'D', 'G', 'B', 'E'];
+    const frets = Array.from({ length: 25 }, (_, i) => i); // 0-24 frets
+    
+    // Get positions for this scale only
+    const scalePositions = scale.notes.flatMap(note => 
+      findNotePositions(note).map(pos => ({
+        ...pos,
+        color: scaleColor,
+        label: note.charAt(0)
+      }))
+    );
+
+    return (
+      <div className="bg-card rounded-lg p-3 border border-border">
+        <h4 className="text-sm font-semibold mb-3 text-center" style={{ color: scaleColor }}>
+          {scale.name}
+        </h4>
+        
+        <div className="overflow-x-auto">
+          <div className="min-w-[800px]">
+            {/* Fret numbers */}
+            <div className="flex mb-1">
+              <div className="w-6 text-xs"></div>
+              {frets.map(fret => (
+                <div key={fret} className={`${fret === 0 ? 'w-8' : 'w-8'} text-xs text-center font-medium text-muted-foreground`}>
+                  {fret}
+                </div>
+              ))}
+            </div>
+            
+            {/* Fretboard strings */}
+            {strings.map((string, stringIndex) => (
+              <div key={stringIndex} className="flex items-center mb-0.5">
+                {/* String name */}
+                <div className="w-6 text-xs text-center font-bold text-muted-foreground">
+                  {string}
+                </div>
+                
+                {/* Frets */}
+                {frets.map(fret => {
+                  const positionsAtThisFret = scalePositions.filter(
+                    pos => pos.string === stringIndex && pos.fret === fret
+                  );
+                  
+                  return (
+                    <div key={fret} className={`${fret === 0 ? 'w-8' : 'w-8'} h-6 relative flex items-center justify-center`}>
+                      {/* String line */}
+                      <div className="absolute w-full h-px bg-gray-400 dark:bg-gray-600"></div>
+                      
+                      {/* Fret wire */}
+                      {fret > 0 && (
+                        <div className="absolute left-0 w-px h-6 bg-gray-500 dark:bg-gray-500"></div>
+                      )}
+                      
+                      {/* Note markers */}
+                      {positionsAtThisFret.map((position, index) => (
+                        <div
+                          key={index}
+                          className="absolute w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold z-10"
+                          style={{ 
+                            backgroundColor: position.color,
+                            color: 'white'
+                          }}
+                          title={`${position.note} (${scale.name})`}
+                        >
+                          {position.label}
+                        </div>
+                      ))}
+                      
+                      {/* Fret position markers */}
+                      {stringIndex === 2 && [3, 5, 7, 9, 15, 17, 19, 21].includes(fret) && (
+                        <div className="absolute w-1.5 h-1.5 bg-gray-400 dark:bg-gray-600 rounded-full opacity-40"></div>
+                      )}
+                      {stringIndex === 2 && fret === 12 && (
+                        <div className="absolute w-2 h-2 bg-gray-400 dark:bg-gray-600 rounded-full opacity-40"></div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   // Fretboard visualization component
   const FretboardVisualization = ({ 
     scales, 
@@ -208,26 +303,11 @@ export default function ScaleCombination({ onUpgrade }: ScaleCombinationProps) {
     variant?: "scales" | "mode" 
   }) => {
     const strings = ['E', 'A', 'D', 'G', 'B', 'E'];
-    const frets = Array.from({ length: 13 }, (_, i) => i); // 0-12 frets
-    
-    let scalePositions: any[] = [];
-    
-    if (variant === "scales" && scales) {
-      // Collect all note positions for all scales
-      scalePositions = scales.flatMap((scale, scaleIndex) => 
-        scale.notes.flatMap(note => 
-          findNotePositions(note).map(pos => ({
-            ...pos,
-            scaleIndex,
-            scaleName: scale.name,
-            color: getColorHex(scale.color),
-            label: note.charAt(0)
-          }))
-        )
-      );
-    } else if (variant === "mode" && mode) {
-      // Collect mode note positions with degree numbers
-      scalePositions = mode.notes.flatMap((note, noteIndex) => 
+    const frets = Array.from({ length: 25 }, (_, i) => i); // 0-24 frets
+
+    // For mode visualization (single fretboard)
+    if (variant === "mode" && mode) {
+      const scalePositions = mode.notes.flatMap((note, noteIndex) => 
         findNotePositions(note).map(pos => {
           const degree = noteIndex + 1;
           const isChordTone = mode.mode.characteristicDegrees.includes(degree) || [1, 3, 5].includes(degree);
@@ -244,120 +324,127 @@ export default function ScaleCombination({ onUpgrade }: ScaleCombinationProps) {
           };
         })
       );
-    }
 
-    return (
-      <div className="bg-amber-50 dark:bg-amber-950/20 rounded-lg p-4 border-2 border-amber-200 dark:border-amber-800">
-        <div className="flex items-center justify-center mb-3">
-          <Guitar className="mr-2 h-5 w-5 text-amber-600 dark:text-amber-400" />
-          <h4 className="text-lg font-semibold text-amber-800 dark:text-amber-200">
-            Fretboard Visualization
-          </h4>
-        </div>
-        
-        <div className="overflow-x-auto">
-          <div className="min-w-[600px]">
-            {/* String labels */}
-            <div className="flex mb-2">
-              <div className="w-8 text-xs text-center">Fret</div>
-              {frets.map(fret => (
-                <div key={fret} className="w-12 text-xs text-center font-medium text-muted-foreground">
-                  {fret}
+      return (
+        <div className="bg-amber-50 dark:bg-amber-950/20 rounded-lg p-4 border-2 border-amber-200 dark:border-amber-800">
+          <div className="flex items-center justify-center mb-3">
+            <Guitar className="mr-2 h-5 w-5 text-amber-600 dark:text-amber-400" />
+            <h4 className="text-lg font-semibold text-amber-800 dark:text-amber-200">
+              {mode.mode.name} - Full Fretboard (0-24)
+            </h4>
+          </div>
+          
+          <div className="overflow-x-auto">
+            <div className="min-w-[800px]">
+              {/* Fret numbers */}
+              <div className="flex mb-2">
+                <div className="w-6 text-xs"></div>
+                {frets.map(fret => (
+                  <div key={fret} className="w-8 text-xs text-center font-medium text-muted-foreground">
+                    {fret}
+                  </div>
+                ))}
+              </div>
+              
+              {/* Fretboard */}
+              {strings.map((string, stringIndex) => (
+                <div key={stringIndex} className="flex items-center mb-1">
+                  <div className="w-6 text-xs text-center font-bold text-amber-700 dark:text-amber-300">
+                    {string}
+                  </div>
+                  
+                  {frets.map(fret => {
+                    const positionsAtThisFret = scalePositions.filter(
+                      pos => pos.string === stringIndex && pos.fret === fret
+                    );
+                    
+                    return (
+                      <div key={fret} className="w-8 h-6 relative flex items-center justify-center">
+                        <div className="absolute w-full h-px bg-gray-400 dark:bg-gray-600"></div>
+                        {fret > 0 && <div className="absolute left-0 w-px h-6 bg-gray-600 dark:bg-gray-400"></div>}
+                        
+                        {positionsAtThisFret.map((position, index) => {
+                          const isChordTone = position.isChordTone;
+                          const isAvoid = position.isAvoid;
+                          
+                          return (
+                            <div
+                              key={index}
+                              className={`absolute w-5 h-5 rounded-full border-2 flex items-center justify-center text-xs font-bold z-10 ${
+                                isAvoid ? 'opacity-50' : ''
+                              }`}
+                              style={{ 
+                                backgroundColor: !isChordTone ? 'transparent' : position.color,
+                                borderColor: position.color,
+                                color: !isChordTone ? position.color : 'white',
+                                borderWidth: '2px'
+                              }}
+                              title={`${position.note} (Degree ${position.degree}${isChordTone ? ' - Chord Tone' : ''}${isAvoid ? ' - Avoid' : ''})`}
+                            >
+                              {position.label}
+                            </div>
+                          );
+                        })}
+                        
+                        {stringIndex === 2 && [3, 5, 7, 9, 15, 17, 19, 21].includes(fret) && (
+                          <div className="absolute w-1.5 h-1.5 bg-gray-300 dark:bg-gray-600 rounded-full opacity-50"></div>
+                        )}
+                        {stringIndex === 2 && fret === 12 && (
+                          <div className="absolute w-2 h-2 bg-gray-300 dark:bg-gray-600 rounded-full opacity-50"></div>
+                        )}
+                      </div>
+                    );
+                  })}
                 </div>
               ))}
             </div>
-            
-            {/* Fretboard strings */}
-            {strings.map((string, stringIndex) => (
-              <div key={stringIndex} className="flex items-center mb-1">
-                {/* String name */}
-                <div className="w-8 text-xs text-center font-bold text-amber-700 dark:text-amber-300">
-                  {string}
-                </div>
-                
-                {/* Frets for this string */}
-                {frets.map(fret => {
-                  const positionsAtThisFret = scalePositions.filter(
-                    pos => pos.string === stringIndex && pos.fret === fret
-                  );
-                  
-                  return (
-                    <div key={fret} className="w-12 h-8 relative flex items-center justify-center">
-                      {/* String line */}
-                      <div className="absolute w-full h-0.5 bg-gray-400 dark:bg-gray-600"></div>
-                      
-                      {/* Fret wire */}
-                      {fret > 0 && (
-                        <div className="absolute left-0 w-0.5 h-8 bg-gray-600 dark:bg-gray-400"></div>
-                      )}
-                      
-                      {/* Note markers */}
-                      {positionsAtThisFret.map((position, index) => {
-                        const isMode = variant === "mode";
-                        const isChordTone = isMode && position.isChordTone;
-                        const isAvoid = isMode && position.isAvoid;
-                        
-                        return (
-                          <div
-                            key={index}
-                            className={`absolute w-6 h-6 rounded-full border-2 flex items-center justify-center text-xs font-bold z-10 ${
-                              isAvoid ? 'opacity-50' : ''
-                            }`}
-                            style={{ 
-                              backgroundColor: isMode && !isChordTone ? 'transparent' : position.color,
-                              borderColor: position.color,
-                              color: isMode && !isChordTone ? position.color : 'white',
-                              borderWidth: isMode && !isChordTone ? '2px' : '2px',
-                              transform: `translateY(${index * 2 - (positionsAtThisFret.length - 1)}px)`
-                            }}
-                            title={isMode ? 
-                              `${position.note} (Degree ${position.degree}${isChordTone ? ' - Chord Tone' : ''}${isAvoid ? ' - Avoid' : ''})` :
-                              `${position.note} (${position.scaleName})`
-                            }
-                            data-testid={`fretboard-note-${stringIndex}-${fret}-${index}`}
-                          >
-                            {position.label}
-                          </div>
-                        );
-                      })}
-                      
-                      {/* Fret position markers (dots) */}
-                      {stringIndex === 2 && [3, 5, 7, 9, 15, 17, 19, 21].includes(fret) && (
-                        <div className="absolute w-2 h-2 bg-gray-300 dark:bg-gray-600 rounded-full opacity-50"></div>
-                      )}
-                      {stringIndex === 2 && fret === 12 && (
-                        <div className="absolute w-3 h-3 bg-gray-300 dark:bg-gray-600 rounded-full opacity-50"></div>
-                      )}
-                    </div>
-                  );
-                })}
+          </div>
+          
+          <div className="mt-4 text-xs text-muted-foreground space-y-2">
+            <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-2">
+                <div className="w-4 h-4 rounded-full border-2" style={{ backgroundColor: mode.mode.color, borderColor: mode.mode.color }}></div>
+                <span>Chord Tones (1,3,5)</span>
               </div>
-            ))}
+              <div className="flex items-center space-x-2">
+                <div className="w-4 h-4 rounded-full border-2 bg-transparent" style={{ borderColor: mode.mode.color, color: mode.mode.color }}></div>
+                <span>Tensions/Extensions</span>
+              </div>
+            </div>
+            <p>💡 Full 24-fret visualization. Filled dots = chord tones, outlined = tensions.</p>
           </div>
         </div>
-        
-        {/* Legend */}
-        <div className="mt-4 text-xs text-muted-foreground">
-          {variant === "mode" ? (
-            <div className="space-y-2">
-              <div className="flex items-center space-x-4">
-                <div className="flex items-center space-x-2">
-                  <div className="w-4 h-4 rounded-full border-2" style={{ backgroundColor: mode?.mode.color, borderColor: mode?.mode.color }}></div>
-                  <span>Chord Tones (1,3,5)</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <div className="w-4 h-4 rounded-full border-2 bg-transparent" style={{ borderColor: mode?.mode.color, color: mode?.mode.color }}></div>
-                  <span>Tensions/Extensions</span>
-                </div>
-              </div>
-              <p>💡 Tip: Numbers show scale degrees. Filled dots = chord tones, outlined = tensions. Focus on chord tones for stability!</p>
-            </div>
-          ) : (
-            <p>💡 Tip: Each colored dot shows where to play notes from the generated scales. Multiple colors = multiple scales overlap!</p>
-          )}
+      );
+    }
+
+    // For scales - show each scale on separate fretboard
+    if (variant === "scales" && scales && scales.length > 0) {
+      return (
+        <div className="space-y-4">
+          <div className="text-center mb-2">
+            <h4 className="text-lg font-semibold flex items-center justify-center gap-2">
+              <Guitar className="h-5 w-5" />
+              Full Fretboard Visualization (0-24 frets)
+            </h4>
+            <p className="text-xs text-muted-foreground mt-1">Each scale shown separately for clarity</p>
+          </div>
+          
+          {scales.map((scale, index) => (
+            <SingleScaleFretboard 
+              key={index}
+              scale={scale}
+              scaleColor={getColorHex(scale.color)}
+            />
+          ))}
+          
+          <div className="text-xs text-muted-foreground text-center p-3 bg-muted/50 rounded-lg">
+            💡 Tip: Each fretboard shows one scale across all 24 frets. Practice moving up and down the neck!
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
+
+    return null;
   };
 
   const generateScaleCombination = () => {
