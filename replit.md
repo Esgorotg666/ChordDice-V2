@@ -1,6 +1,6 @@
 # Overview
 
-This Freemium Chord Riff Generator is a web application designed for musicians to practice and create musical chord progressions. It features a 12x11 grid mapping musical keys to chord types, with color-coding for major and minor contexts. Users can generate single chords or 4-chord progressions using a virtual dice system. The application incorporates a comprehensive freemium business model, including usage limits, ad-supported token generation, subscription upgrades, and a referral program to drive user acquisition and engagement.
+Guitar Dice is a freemium chord riff generator web application designed for musicians to practice and create musical chord progressions. It features a 12x11 grid mapping musical keys to chord types, with color-coding for major and minor contexts. Users can generate single chords or 4-chord progressions using a virtual dice system. The application incorporates a comprehensive freemium business model, including usage limits, ad-supported token generation, subscription upgrades, and a referral program to drive user acquisition and engagement.
 
 # User Preferences
 

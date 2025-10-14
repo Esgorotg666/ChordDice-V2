@@ -2,7 +2,7 @@ import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'com.chorddice.app',
-  appName: 'Chord Dice',
+  appName: 'Guitar Dice',
   webDir: 'dist/public',
   server: {
     androidScheme: 'https'
