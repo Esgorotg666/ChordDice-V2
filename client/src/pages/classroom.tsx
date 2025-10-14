@@ -3,8 +3,8 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { Lock, ChevronRight, ChevronLeft, Crown, BookOpen, GraduationCap, Trophy, Music } from 'lucide-react';
-import { beginnerLessons, intermediateLessons, masteryLessons, Lesson } from '@/lib/comprehensive-lessons';
+import { Lock, ChevronRight, ChevronLeft, Crown, BookOpen, GraduationCap, Trophy, Music, Zap, Flame, Guitar as GuitarIcon } from 'lucide-react';
+import { generalBeginnerLessons, rockLessons, metalLessons, bluesLessons, jazzLessons, Lesson } from '@/lib/comprehensive-lessons';
 import { useSubscription } from '@/hooks/useSubscription';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import FretboardDisplay from '@/components/fretboard-display';
@@ -70,7 +70,41 @@ export default function Classroom() {
     }
   };
 
-  const renderLessonCards = (lessons: Lesson[], difficulty: string) => {
+  const getGenreIcon = (genre: string) => {
+    switch (genre) {
+      case 'general':
+        return <BookOpen className="h-5 w-5 text-blue-500" />;
+      case 'rock':
+        return <GuitarIcon className="h-5 w-5 text-orange-500" />;
+      case 'metal':
+        return <Flame className="h-5 w-5 text-red-500" />;
+      case 'blues':
+        return <Music className="h-5 w-5 text-purple-500" />;
+      case 'jazz':
+        return <Zap className="h-5 w-5 text-yellow-500" />;
+      default:
+        return <Music className="h-5 w-5 text-primary" />;
+    }
+  };
+
+  const getGenreDescription = (genre: string) => {
+    switch (genre) {
+      case 'general':
+        return 'Essential guitar fundamentals for beginners';
+      case 'rock':
+        return 'Power chords, palm muting, and rock techniques';
+      case 'metal':
+        return 'Speed, precision, and aggressive playing styles';
+      case 'blues':
+        return 'Bending, 12-bar blues, and soulful expression';
+      case 'jazz':
+        return 'Complex chords, improvisation, and theory';
+      default:
+        return 'Learn guitar techniques';
+    }
+  };
+
+  const renderLessonCards = (lessons: Lesson[]) => {
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {lessons.map((lesson, index) => {
@@ -85,9 +119,9 @@ export default function Classroom() {
               data-testid={`card-lesson-${lesson.id}`}
             >
               <div className="flex items-start justify-between mb-3">
-                <Badge className={getDifficultyColor(difficulty)}>
-                  {getDifficultyIcon(difficulty)}
-                  <span className="ml-1 capitalize">{difficulty}</span>
+                <Badge className={getDifficultyColor(lesson.difficulty)}>
+                  {getDifficultyIcon(lesson.difficulty)}
+                  <span className="ml-1 capitalize">{lesson.difficulty}</span>
                 </Badge>
                 {!isFree && !hasActiveSubscription && (
                   <Lock className="h-4 w-4 text-muted-foreground" data-testid={`icon-locked-${lesson.id}`} />
@@ -279,54 +313,84 @@ export default function Classroom() {
         <div className="mb-8">
           <h1 className="text-3xl md:text-4xl font-bold mb-3">Guitar Classroom</h1>
           <p className="text-muted-foreground">
-            Master guitar techniques from basics to advanced. First lesson in each level is free!
+            Master guitar techniques organized by genre. First lesson in each category is free!
           </p>
         </div>
 
-        {/* Collapsible difficulty sections */}
-        <Accordion type="multiple" defaultValue={['beginner', 'intermediate', 'mastery']} className="space-y-4">
-          <AccordionItem value="beginner" className="border border-border rounded-lg px-6 bg-card/50">
-            <AccordionTrigger className="hover:no-underline" data-testid="accordion-beginner">
+        {/* Genre-based collapsible sections */}
+        <Accordion type="multiple" defaultValue={['general', 'rock', 'metal', 'blues', 'jazz']} className="space-y-4">
+          <AccordionItem value="general" className="border border-border rounded-lg px-6 bg-card/50">
+            <AccordionTrigger className="hover:no-underline" data-testid="accordion-general">
               <div className="flex items-center gap-3">
-                <BookOpen className="h-5 w-5 text-green-500" />
+                {getGenreIcon('general')}
                 <div className="text-left">
-                  <h2 className="text-xl font-bold">Beginner</h2>
-                  <p className="text-sm text-muted-foreground">15 lessons - Foundation skills</p>
+                  <h2 className="text-xl font-bold">Beginner Basics</h2>
+                  <p className="text-sm text-muted-foreground">{generalBeginnerLessons.length} lessons - {getGenreDescription('general')}</p>
                 </div>
               </div>
             </AccordionTrigger>
             <AccordionContent className="pt-4 pb-6">
-              {renderLessonCards(beginnerLessons, 'beginner')}
+              {renderLessonCards(generalBeginnerLessons)}
             </AccordionContent>
           </AccordionItem>
 
-          <AccordionItem value="intermediate" className="border border-border rounded-lg px-6 bg-card/50">
-            <AccordionTrigger className="hover:no-underline" data-testid="accordion-intermediate">
+          <AccordionItem value="rock" className="border border-border rounded-lg px-6 bg-card/50">
+            <AccordionTrigger className="hover:no-underline" data-testid="accordion-rock">
               <div className="flex items-center gap-3">
-                <GraduationCap className="h-5 w-5 text-yellow-500" />
+                {getGenreIcon('rock')}
                 <div className="text-left">
-                  <h2 className="text-xl font-bold">Intermediate</h2>
-                  <p className="text-sm text-muted-foreground">15 lessons - Advanced techniques</p>
+                  <h2 className="text-xl font-bold">Rock</h2>
+                  <p className="text-sm text-muted-foreground">{rockLessons.length} lessons - {getGenreDescription('rock')}</p>
                 </div>
               </div>
             </AccordionTrigger>
             <AccordionContent className="pt-4 pb-6">
-              {renderLessonCards(intermediateLessons, 'intermediate')}
+              {renderLessonCards(rockLessons)}
             </AccordionContent>
           </AccordionItem>
 
-          <AccordionItem value="mastery" className="border border-border rounded-lg px-6 bg-card/50">
-            <AccordionTrigger className="hover:no-underline" data-testid="accordion-mastery">
+          <AccordionItem value="metal" className="border border-border rounded-lg px-6 bg-card/50">
+            <AccordionTrigger className="hover:no-underline" data-testid="accordion-metal">
               <div className="flex items-center gap-3">
-                <Trophy className="h-5 w-5 text-red-500" />
+                {getGenreIcon('metal')}
                 <div className="text-left">
-                  <h2 className="text-xl font-bold">Mastery</h2>
-                  <p className="text-sm text-muted-foreground">15 lessons - Expert level</p>
+                  <h2 className="text-xl font-bold">Metal</h2>
+                  <p className="text-sm text-muted-foreground">{metalLessons.length} lessons - {getGenreDescription('metal')}</p>
                 </div>
               </div>
             </AccordionTrigger>
             <AccordionContent className="pt-4 pb-6">
-              {renderLessonCards(masteryLessons, 'mastery')}
+              {renderLessonCards(metalLessons)}
+            </AccordionContent>
+          </AccordionItem>
+
+          <AccordionItem value="blues" className="border border-border rounded-lg px-6 bg-card/50">
+            <AccordionTrigger className="hover:no-underline" data-testid="accordion-blues">
+              <div className="flex items-center gap-3">
+                {getGenreIcon('blues')}
+                <div className="text-left">
+                  <h2 className="text-xl font-bold">Blues</h2>
+                  <p className="text-sm text-muted-foreground">{bluesLessons.length} lessons - {getGenreDescription('blues')}</p>
+                </div>
+              </div>
+            </AccordionTrigger>
+            <AccordionContent className="pt-4 pb-6">
+              {renderLessonCards(bluesLessons)}
+            </AccordionContent>
+          </AccordionItem>
+
+          <AccordionItem value="jazz" className="border border-border rounded-lg px-6 bg-card/50">
+            <AccordionTrigger className="hover:no-underline" data-testid="accordion-jazz">
+              <div className="flex items-center gap-3">
+                {getGenreIcon('jazz')}
+                <div className="text-left">
+                  <h2 className="text-xl font-bold">Jazz</h2>
+                  <p className="text-sm text-muted-foreground">{jazzLessons.length} lessons - {getGenreDescription('jazz')}</p>
+                </div>
+              </div>
+            </AccordionTrigger>
+            <AccordionContent className="pt-4 pb-6">
+              {renderLessonCards(jazzLessons)}
             </AccordionContent>
           </AccordionItem>
         </Accordion>
