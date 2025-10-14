@@ -317,6 +317,3 @@ export const jazzLessons: Lesson[] = [
 export const beginnerLessons: Lesson[] = generalBeginnerLessons;
 export const intermediateLessons: Lesson[] = [];
 export const masteryLessons: Lesson[] = [];
-  {
-    id: 'beginner-1',
-    difficulty: 'beginner',
