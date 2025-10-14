@@ -208,7 +208,18 @@ export const chordDiagrams: Record<string, ChordDiagram> = {
   'C9': { name: 'C Dominant 9', positions: ['X', 3, 2, 3, 3, 3], fingers: [0, 2, 1, 3, 4, 4] },
   'D9': { name: 'D Dominant 9', positions: ['X', 5, 4, 5, 5, 5], fingers: [0, 2, 1, 3, 4, 4] },
   'E9': { name: 'E Dominant 9', positions: [0, 2, 0, 1, 0, 2], fingers: [0, 2, 0, 1, 0, 3] },
+  'F9': { name: 'F Dominant 9', positions: [1, 3, 1, 2, 1, 3], fingers: [1, 3, 1, 2, 1, 4], fret: 1 },
   'G9': { name: 'G Dominant 9', positions: [3, 2, 0, 2, 0, 1], fingers: [4, 3, 0, 2, 0, 1] },
+  'A9': { name: 'A Dominant 9', positions: ['X', 0, 2, 4, 2, 3], fingers: [0, 0, 1, 3, 2, 4] },
+  'B9': { name: 'B Dominant 9', positions: ['X', 2, 1, 2, 2, 2], fingers: [0, 2, 1, 3, 3, 3], fret: 2 },
+  'C#9': { name: 'C# Dominant 9', positions: ['X', 4, 3, 4, 4, 4], fingers: [0, 2, 1, 3, 4, 4], fret: 4 },
+  'D#9': { name: 'D# Dominant 9', positions: ['X', 6, 5, 6, 6, 6], fingers: [0, 2, 1, 3, 4, 4], fret: 6 },
+  'Eb9': { name: 'Eb Dominant 9', positions: ['X', 6, 5, 6, 6, 6], fingers: [0, 2, 1, 3, 4, 4], fret: 6 },
+  'F#9': { name: 'F# Dominant 9', positions: [2, 4, 2, 3, 2, 4], fingers: [1, 3, 1, 2, 1, 4], fret: 2 },
+  'G#9': { name: 'G# Dominant 9', positions: [4, 3, 1, 3, 1, 2], fingers: [4, 3, 1, 2, 1, 1], fret: 4 },
+  'Ab9': { name: 'Ab Dominant 9', positions: [4, 3, 1, 3, 1, 2], fingers: [4, 3, 1, 2, 1, 1], fret: 4 },
+  'A#9': { name: 'A# Dominant 9', positions: ['X', 1, 3, 5, 3, 4], fingers: [0, 1, 2, 4, 2, 3], fret: 1 },
+  'Bb9': { name: 'Bb Dominant 9', positions: ['X', 1, 3, 5, 3, 4], fingers: [0, 1, 2, 4, 2, 3], fret: 1 },
 
   // 6th chords
   'C6': { name: 'C Major 6th', positions: ['X', 3, 2, 2, 1, 0], fingers: [0, 3, 2, 2, 1, 0] },
