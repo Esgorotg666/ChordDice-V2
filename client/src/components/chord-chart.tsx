@@ -1,41 +1,27 @@
-import { chordTypes, getAllKeys } from "@/lib/music-data";
+import { chordTypes, getAllKeys, colorGroups } from "@/lib/music-data";
 
 interface ChordChartProps {
   onChordSelect?: (chord: string) => void;
 }
 
 export default function ChordChart({ onChordSelect }: ChordChartProps) {
-  const keys = getAllKeys();
+  const allKeys = getAllKeys();
+  // Use only the 12 major keys for the chart (first 12 keys)
+  const majorKeys = allKeys.slice(0, 12);
 
-  const getChordCellClass = (chordType: string, key: string) => {
-    const baseClass = "chord-cell p-1 rounded text-center text-white text-xs";
-    
-    // Color coding based on key
-    if (key.includes('♭') && key.includes('m')) return `${baseClass} key-abm-am`;
-    if (key.includes('♭') && !key.includes('m')) return `${baseClass} key-ab-a`;
-    if (key === 'A' || key === 'Am') return `${baseClass} key-ab-a`;
-    if (key === 'B♭' || key === 'B♭m') return `${baseClass} key-bb-b`;
-    if (key === 'B' || key === 'Bm') return `${baseClass} key-bb-b`;
-    if (key === 'C' || key === 'Cm') return `${baseClass} key-c-db`;
-    if (key === 'D♭' || key === 'D♭m') return `${baseClass} key-c-db`;
-    if (key === 'D' || key === 'Dm') return `${baseClass} key-d-eb`;
-    if (key === 'E♭' || key === 'E♭m') return `${baseClass} key-d-eb`;
-    if (key === 'E' || key === 'Em') return `${baseClass} key-e-f`;
-    if (key === 'F' || key === 'Fm') return `${baseClass} key-e-f`;
-    if (key === 'F♯' || key === 'F♯m' || key === 'G' || key === 'Gm') return `${baseClass} key-fs-g`;
-    
-    // Default colors for different chord types
-    if (chordType === '6th') return `${baseClass} bg-gray-600`;
-    if (chordType === '7th') return `${baseClass} bg-gray-700`;
-    if (chordType === '9th') return `${baseClass} bg-blue-700`;
-    if (chordType === 'Minor 6th') return `${baseClass} bg-purple-700`;
-    if (chordType === 'Minor 7th') return `${baseClass} bg-indigo-700`;
-    if (chordType === 'Major 7th') return `${baseClass} bg-green-700`;
-    if (chordType === 'Diminished') return `${baseClass} bg-red-800`;
-    if (chordType === 'Augmented') return `${baseClass} bg-orange-700`;
-    if (chordType === 'Suspended') return `${baseClass} bg-yellow-700`;
-
-    return `${baseClass} bg-primary`;
+  // Vibrant color palette - no black/white, different colors for variety
+  const getChordCellColor = (rowIndex: number, colIndex: number) => {
+    const colors = [
+      'bg-red-600',      'bg-blue-600',     'bg-green-600',    'bg-yellow-600',
+      'bg-purple-600',   'bg-pink-600',     'bg-indigo-600',   'bg-orange-600',
+      'bg-teal-600',     'bg-cyan-600',     'bg-lime-600',     'bg-rose-600',
+      'bg-violet-600',   'bg-fuchsia-600',  'bg-emerald-600',  'bg-amber-600',
+      'bg-sky-600',      'bg-red-700',      'bg-blue-700',     'bg-green-700',
+      'bg-purple-700',   'bg-pink-700',     'bg-indigo-700',   'bg-orange-700'
+    ];
+    // Create pattern so adjacent cells have different colors
+    const index = (rowIndex * 3 + colIndex * 2) % colors.length;
+    return colors[index];
   };
 
   const formatChordDisplay = (key: string, chordType: string) => {
@@ -53,44 +39,46 @@ export default function ChordChart({ onChordSelect }: ChordChartProps) {
       'Suspended': 'sus'
     };
 
-    if (chordType === 'Minor' && key.includes('m')) {
-      return key; // Already has 'm' suffix
+    // For minor chord type, add 'm' to the key unless it already has it
+    if (chordType === 'Minor') {
+      return key.includes('m') ? key : key + 'm';
     }
-    if (chordType === 'Major' && key.includes('m')) {
-      return key.replace('m', ''); // Remove 'm' for major
+    
+    // For major chord type, use the key as-is (remove 'm' if present)
+    if (chordType === 'Major') {
+      return key.replace('m', '');
     }
 
+    // For all other types, add the suffix
     return key + (suffixes[chordType] || '');
   };
 
   const handleChordClick = (chord: string) => {
-    // Visual feedback
     console.log('Selected chord:', chord);
-    // Notify parent component
     onChordSelect?.(chord);
   };
 
   return (
-    <div className="bg-card rounded-lg p-4 border border-border">
+    <div className="bg-card rounded-lg p-4 border border-border overflow-x-auto">
       <h2 className="text-lg font-semibold mb-4 flex items-center">
         <i className="fas fa-table mr-2 text-primary"></i>Chord Chart
       </h2>
       
-      {/* Chart Header */}
-      <div className="grid grid-cols-12 gap-1 mb-2 text-xs">
-        <div className="text-center font-medium text-muted-foreground">Type</div>
-        {keys.slice(0, 11).map((key: string) => (
-          <div key={key} className="text-center font-medium text-muted-foreground text-[10px]">
+      {/* Chart Header - Now showing all 12 major keys */}
+      <div className="grid grid-cols-13 gap-2 mb-3 min-w-[900px]">
+        <div className="text-center font-medium text-muted-foreground text-sm">Type</div>
+        {majorKeys.map((key: string) => (
+          <div key={key} className="text-center font-medium text-muted-foreground text-sm">
             {key}
           </div>
         ))}
       </div>
 
       {/* Chord Types and Grid */}
-      <div className="space-y-1 text-xs">
-        {chordTypes.map((chordType: string) => (
-          <div key={chordType} className="grid grid-cols-12 gap-1">
-            <div className="text-center py-2 bg-muted rounded text-muted-foreground font-medium text-[10px]">
+      <div className="space-y-2 min-w-[900px]">
+        {chordTypes.map((chordType: string, rowIndex: number) => (
+          <div key={chordType} className="grid grid-cols-13 gap-2">
+            <div className="text-center py-3 bg-muted rounded text-muted-foreground font-medium text-sm flex items-center justify-center">
               {chordType === 'Major' ? 'Maj' : 
                chordType === 'Minor' ? 'Min' :
                chordType === 'Minor 6th' ? 'Min6' :
@@ -101,12 +89,13 @@ export default function ChordChart({ onChordSelect }: ChordChartProps) {
                chordType === 'Suspended' ? 'Sus' :
                chordType}
             </div>
-            {keys.slice(0, 11).map((key: string) => {
+            {majorKeys.map((key: string, colIndex: number) => {
               const chordDisplay = formatChordDisplay(key, chordType);
+              const colorClass = getChordCellColor(rowIndex, colIndex);
               return (
                 <div
                   key={`${key}-${chordType}`}
-                  className={getChordCellClass(chordType, key)}
+                  className={`chord-cell p-3 rounded-lg text-center text-white font-semibold text-base cursor-pointer hover:scale-105 transition-transform ${colorClass}`}
                   onClick={() => handleChordClick(chordDisplay)}
                   data-testid={`chord-${key}-${chordType}`}
                 >

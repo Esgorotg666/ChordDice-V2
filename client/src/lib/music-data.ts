@@ -203,6 +203,12 @@ export const chordDiagrams: Record<string, ChordDiagram> = {
   'C#m': { name: 'C# Minor', positions: ['X', 4, 6, 6, 5, 4], fingers: [0, 1, 3, 4, 2, 1], fret: 4 },
   'Eb': { name: 'Eb Major', positions: ['X', 'X', 1, 3, 4, 3], fingers: [0, 0, 1, 2, 4, 3] },
   'Ebm': { name: 'Eb Minor', positions: ['X', 'X', 1, 3, 4, 2], fingers: [0, 0, 1, 3, 4, 2] },
+  'Ab': { name: 'Ab Major', positions: [4, 6, 6, 5, 4, 4], fingers: [1, 3, 4, 2, 1, 1], fret: 4 },
+  'Abm': { name: 'Ab Minor', positions: [4, 6, 6, 4, 4, 4], fingers: [1, 3, 4, 1, 1, 1], fret: 4 },
+  'Db': { name: 'Db Major', positions: ['X', 4, 6, 6, 6, 4], fingers: [0, 1, 3, 4, 4, 1], fret: 4 },
+  'Dbm': { name: 'Db Minor', positions: ['X', 4, 6, 6, 5, 4], fingers: [0, 1, 3, 4, 2, 1], fret: 4 },
+  'Gb': { name: 'Gb Major', positions: [2, 4, 4, 3, 2, 2], fingers: [1, 3, 4, 2, 1, 1], fret: 2 },
+  'Gbm': { name: 'Gb Minor', positions: [2, 4, 4, 2, 2, 2], fingers: [1, 3, 4, 1, 1, 1], fret: 2 },
 
   // 9th chords
   'C9': { name: 'C Dominant 9', positions: ['X', 3, 2, 3, 3, 3], fingers: [0, 2, 1, 3, 4, 4] },

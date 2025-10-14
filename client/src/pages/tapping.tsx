@@ -87,7 +87,7 @@ export default function TappingPage() {
       if (typeof pos === 'number' && pos > 0) {
         const finger = diagram.fingers?.[stringIndex];
         metadata.set(stringIndex, {
-          color: isTapping ? 'orange' : 'blue',
+          color: isTapping ? 'bg-orange-500' : 'bg-blue-500',
           label: isTapping ? 'Tap' : (typeof finger === 'number' ? finger.toString() : ''),
           type: isTapping ? 'tapping' : 'finger'
         });

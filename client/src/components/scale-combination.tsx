@@ -595,7 +595,7 @@ export default function ScaleCombination({ onUpgrade }: ScaleCombinationProps) {
                           className="text-xs"
                           data-testid={`octave-note-${index}-${noteIndex}`}
                         >
-                          {note}
+                          {note.replace(/[0-9]/g, '')}
                         </Badge>
                       ))}
                     </div>
