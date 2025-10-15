@@ -8,12 +8,18 @@ import { useAuthContext } from "@/contexts/AuthContext";
 import { useSubscription } from "@/hooks/useSubscription";
 import { useUsageTracking } from "@/hooks/useUsageTracking";
 
-// Import genre-specific background images
-import metalBg from "@assets/stock_images/bc_rich_warlock_elec_0d6f1f4c.jpg";
-import flamencoBg from "@assets/stock_images/classical_spanish_ac_8a055841.jpg";
-import jazzBg from "@assets/stock_images/jazz_saxophone_trump_f9a5c058.jpg";
-import folkBg from "@assets/stock_images/acoustic_folk_guitar_ce848c86.jpg";
-import rockBg from "@assets/stock_images/electric_guitar_rock_6cb9979d.jpg";
+// Import genre-specific background images - Professional guitar photos
+import metalBg1 from "@assets/stock_images/bc_rich_warlock_elec_12e0db25.jpg";
+import metalBg2 from "@assets/stock_images/bc_rich_warlock_elec_4451a170.jpg";
+import metalBg3 from "@assets/stock_images/bc_rich_warlock_elec_fab626bd.jpg";
+import flamencoBg1 from "@assets/stock_images/classical_spanish_fl_b2e3ebee.jpg";
+import flamencoBg2 from "@assets/stock_images/classical_spanish_fl_b2577fe2.jpg";
+import folkBg1 from "@assets/stock_images/acoustic_folk_guitar_d5c1d2c6.jpg";
+import folkBg2 from "@assets/stock_images/acoustic_folk_guitar_23dec4a3.jpg";
+import rockBg1 from "@assets/stock_images/electric_guitar_rock_33b9efb4.jpg";
+import rockBg2 from "@assets/stock_images/electric_guitar_rock_65a75e33.jpg";
+import studioBg1 from "@assets/stock_images/professional_studio__e3ee18b3.jpg";
+import studioBg2 from "@assets/stock_images/professional_studio__6f69c515.jpg";
 
 interface DiceInterfaceProps {
   onResult: (result: { type: 'single' | 'riff'; chord?: string; colorName?: string; progression?: string[] }) => void;
@@ -568,24 +574,30 @@ export default function DiceInterface({ onResult, onUpgrade }: DiceInterfaceProp
 
   const colorGroup = colorGroups[colorDiceValue - 1];
 
-  // Genre-based background mapping
+  // Genre-based background mapping with multiple images per genre
   const backgroundImage = useMemo(() => {
-    const genreBackgrounds: Record<Genre, string> = {
-      'metal': metalBg,
-      'black-metal': metalBg,
-      'death-metal': metalBg,
-      'extreme-metal': metalBg,
-      'neo-classical': metalBg,
-      'flamenco': flamencoBg,
-      'jazz': jazzBg,
-      'blues': jazzBg,
-      'folk': folkBg,
-      'pop': rockBg,
-      'rock': rockBg,
-      'funk': rockBg,
-      'any': metalBg
+    const genreBackgrounds: Record<Genre, string[]> = {
+      'metal': [metalBg1, metalBg2, metalBg3],
+      'black-metal': [metalBg1, metalBg2, metalBg3],
+      'death-metal': [metalBg1, metalBg2, metalBg3],
+      'extreme-metal': [metalBg1, metalBg2, metalBg3],
+      'neo-classical': [studioBg1, studioBg2],
+      'flamenco': [flamencoBg1, flamencoBg2],
+      'jazz': [studioBg1, studioBg2],
+      'blues': [studioBg1, studioBg2],
+      'folk': [folkBg1, folkBg2],
+      'pop': [rockBg1, rockBg2],
+      'rock': [rockBg1, rockBg2],
+      'funk': [rockBg1, rockBg2],
+      'any': [metalBg1, metalBg2, metalBg3]
     };
-    return genreBackgrounds[selectedGenre] || metalBg;
+    
+    // Get backgrounds for selected genre
+    const backgrounds = genreBackgrounds[selectedGenre] || [metalBg1];
+    
+    // Randomly select one from the available backgrounds each time genre changes
+    const randomIndex = Math.floor(Math.random() * backgrounds.length);
+    return backgrounds[randomIndex];
   }, [selectedGenre]);
 
   return (
