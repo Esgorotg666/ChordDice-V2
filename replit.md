@@ -35,9 +35,12 @@ Preferred communication style: Simple, everyday language.
 - **Progression Types**: Single chord generation or full riff creation.
 
 ### Freemium Business Model
-- **Authentication**: Required sign-up via Replit Auth.
-- **Usage Limits**: 5 free riff generations per user.
-- **Monetization**: Ad-supported token earning system (daily limit), premium subscription ($4.99/month) for unlimited features via Stripe integration.
+- **Demo/Guest Mode**: Full premium access to try all features (no restrictions)
+- **Authentication**: Required sign-up via Replit Auth for saving progress
+- **Free Tier** (authenticated users without subscription): Limited access to basic features, exotic chords locked
+- **Usage Limits**: 5 free riff generations per authenticated free user
+- **Monetization**: Ad-supported token earning system (daily limit), premium subscription ($4.99/month) for unlimited features via Stripe integration
+- **Premium Tier**: Full access to exotic chords, advanced genres, scales, exercises, and unlimited usage
 
 ### Referral Program
 - **Unique Codes**: Collision-resistant referral code generation for each user.
