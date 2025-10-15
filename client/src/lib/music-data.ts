@@ -29,6 +29,18 @@ export const chordTypes = [
   'Suspended'
 ];
 
+// Premium exotic chord types for advanced musicians
+export const exoticChordTypes = [
+  '11th',
+  '13th',
+  'Minor 9th',
+  'Add9',
+  '6/9',
+  'Diminished 7th',
+  'Half-diminished',
+  'Augmented 7th'
+];
+
 export const exoticNumbers: Record<number, string> = {
   1: 'Diminished',
   2: 'Augmented', 

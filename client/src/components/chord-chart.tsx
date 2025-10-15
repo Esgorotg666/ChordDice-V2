@@ -1,15 +1,16 @@
-import { chordTypes, getAllKeys, colorGroups } from "@/lib/music-data";
+import { chordTypes, exoticChordTypes, getAllKeys, colorGroups } from "@/lib/music-data";
+import { useSubscription } from "@/hooks/useSubscription";
+import { Lock, Crown } from "lucide-react";
 
 interface ChordChartProps {
   onChordSelect?: (chord: string) => void;
 }
 
 export default function ChordChart({ onChordSelect }: ChordChartProps) {
+  const { hasActiveSubscription } = useSubscription();
   const allKeys = getAllKeys();
-  // Use only the 12 major keys for the chart
   const majorKeys = allKeys.slice(0, 12);
 
-  // Get color for a key using the colorGroups system
   const getKeyColor = (key: string): string => {
     for (const group of colorGroups) {
       if (group.keys.includes(key)) {
@@ -26,7 +27,7 @@ export default function ChordChart({ onChordSelect }: ChordChartProps) {
         }
       }
     }
-    return 'bg-gray-600'; // fallback
+    return 'bg-gray-600';
   };
 
   const formatChordDisplay = (key: string, chordType: string) => {
@@ -41,21 +42,51 @@ export default function ChordChart({ onChordSelect }: ChordChartProps) {
       'Major 7th': 'M7',
       'Diminished': '°',
       'Augmented': '+',
-      'Suspended': 'sus'
+      'Suspended': 'sus',
+      '11th': '11',
+      '13th': '13',
+      'Minor 9th': 'm9',
+      'Add9': 'add9',
+      '6/9': '6/9',
+      'Diminished 7th': '°7',
+      'Half-diminished': 'ø7',
+      'Augmented 7th': '+7'
     };
 
-    // For minor chord type, add 'm' to the key unless it already has it
     if (chordType === 'Minor') {
       return key.includes('m') ? key : key + 'm';
     }
     
-    // For major chord type, use the key as-is (remove 'm' if present)
     if (chordType === 'Major') {
       return key.replace('m', '');
     }
 
-    // For all other types, add the suffix
     return key + (suffixes[chordType] || '');
+  };
+
+  const getAbbreviation = (chordType: string): string => {
+    const abbreviations: Record<string, string> = {
+      'Major': 'Maj',
+      'Minor': 'Min',
+      '6th': '6th',
+      '7th': '7th',
+      '9th': '9th',
+      'Minor 6th': 'm6',
+      'Minor 7th': 'm7',
+      'Major 7th': 'M7',
+      'Diminished': 'Dim',
+      'Augmented': 'Aug',
+      'Suspended': 'Sus',
+      '11th': '11',
+      '13th': '13',
+      'Minor 9th': 'm9',
+      'Add9': 'add9',
+      '6/9': '6/9',
+      'Diminished 7th': '°7',
+      'Half-diminished': 'ø7',
+      'Augmented 7th': '+7'
+    };
+    return abbreviations[chordType] || chordType;
   };
 
   const handleChordClick = (chord: string) => {
@@ -63,14 +94,19 @@ export default function ChordChart({ onChordSelect }: ChordChartProps) {
     onChordSelect?.(chord);
   };
 
-  return (
-    <div className="bg-card rounded-lg p-3 md:p-4 border border-border">
-      <h2 className="text-base md:text-lg font-semibold mb-3 md:mb-4 flex items-center">
-        <i className="fas fa-table mr-2 text-primary"></i>Chord Chart
-      </h2>
+  const renderChordGrid = (types: string[], title: string, isPremium: boolean = false) => (
+    <div className="mb-6">
+      <h3 className="text-sm md:text-base font-semibold mb-3 flex items-center">
+        {isPremium && (
+          <Crown className="h-4 w-4 mr-2 text-yellow-500" />
+        )}
+        {title}
+        {isPremium && !hasActiveSubscription && (
+          <Lock className="h-4 w-4 ml-2 text-muted-foreground" />
+        )}
+      </h3>
       
       <div className="overflow-x-auto -mx-3 md:mx-0 px-3 md:px-0">
-        {/* Chart Header - 12 major keys */}
         <div className="grid grid-cols-13 gap-0.5 md:gap-1 mb-1 md:mb-2 min-w-[700px] md:min-w-[800px]">
           <div className="text-center font-bold text-muted-foreground text-[10px] md:text-xs p-1 md:p-2">Type</div>
           {majorKeys.map((key: string) => (
@@ -80,35 +116,32 @@ export default function ChordChart({ onChordSelect }: ChordChartProps) {
           ))}
         </div>
 
-        {/* Chord Grid - 11 chord types × 12 keys */}
         <div className="space-y-0.5 md:space-y-1 min-w-[700px] md:min-w-[800px]">
-          {chordTypes.map((chordType: string) => (
+          {types.map((chordType: string) => (
             <div key={chordType} className="grid grid-cols-13 gap-0.5 md:gap-1">
               <div className="text-center py-1.5 md:py-2 px-0.5 md:px-1 bg-muted rounded text-foreground font-bold text-[10px] md:text-xs flex items-center justify-center">
-                {chordType === 'Major' ? 'Maj' : 
-                 chordType === 'Minor' ? 'Min' :
-                 chordType === '6th' ? '6th' :
-                 chordType === '7th' ? '7th' :
-                 chordType === '9th' ? '9th' :
-                 chordType === 'Minor 6th' ? 'm6' :
-                 chordType === 'Minor 7th' ? 'm7' :
-                 chordType === 'Major 7th' ? 'M7' :
-                 chordType === 'Diminished' ? 'Dim' :
-                 chordType === 'Augmented' ? 'Aug' :
-                 chordType === 'Suspended' ? 'Sus' :
-                 chordType}
+                {getAbbreviation(chordType)}
               </div>
               {majorKeys.map((key: string) => {
                 const chordDisplay = formatChordDisplay(key, chordType);
                 const colorClass = getKeyColor(key);
+                const isLocked = isPremium && !hasActiveSubscription;
+                
                 return (
                   <div
                     key={`${key}-${chordType}`}
-                    className={`${colorClass} p-1.5 md:p-2 rounded text-center text-white font-bold text-xs md:text-sm cursor-pointer active:scale-95 md:hover:scale-105 md:hover:brightness-110 transition-all touch-manipulation`}
-                    onClick={() => handleChordClick(chordDisplay)}
+                    className={`${colorClass} p-1.5 md:p-2 rounded text-center text-white font-bold text-xs md:text-sm ${
+                      isLocked 
+                        ? 'opacity-50 cursor-not-allowed relative' 
+                        : 'cursor-pointer active:scale-95 md:hover:scale-105 md:hover:brightness-110'
+                    } transition-all touch-manipulation`}
+                    onClick={() => !isLocked && handleChordClick(chordDisplay)}
                     data-testid={`chord-${key}-${chordType}`}
                   >
-                    {chordDisplay}
+                    {isLocked && (
+                      <Lock className="h-3 w-3 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
+                    )}
+                    <span className={isLocked ? 'opacity-0' : ''}>{chordDisplay}</span>
                   </div>
                 );
               })}
@@ -116,6 +149,18 @@ export default function ChordChart({ onChordSelect }: ChordChartProps) {
           ))}
         </div>
       </div>
+    </div>
+  );
+
+  return (
+    <div className="bg-card rounded-lg p-3 md:p-4 border border-border">
+      <h2 className="text-base md:text-lg font-semibold mb-3 md:mb-4 flex items-center">
+        <i className="fas fa-table mr-2 text-primary"></i>Chord Chart
+      </h2>
+      
+      {renderChordGrid(chordTypes, "Essential Chords", false)}
+      
+      {renderChordGrid(exoticChordTypes, "Exotic Chords (Premium)", true)}
     </div>
   );
 }
