@@ -72,9 +72,19 @@ export default function FretboardDisplay({
           {chordDiagram.positions.map((position, stringIndex) => (
             <div key={stringIndex} className="w-8 text-center">
               {position === 'X' ? (
-                <span className="text-red-500 font-bold text-lg">✗</span>
+                <span 
+                  className="text-red-500 font-bold text-lg"
+                  aria-label={`String ${strings[stringIndex]} muted`}
+                  data-testid={`muted-string${stringIndex}`}
+                  role="img"
+                >✗</span>
               ) : position === 0 ? (
-                <div className="w-6 h-6 bg-primary text-primary-foreground rounded-full flex items-center justify-center mx-auto text-sm font-bold">
+                <div 
+                  className="w-6 h-6 bg-primary text-primary-foreground rounded-full flex items-center justify-center mx-auto text-sm font-bold"
+                  aria-label={`String ${strings[stringIndex]} open`}
+                  data-testid={`open-string${stringIndex}`}
+                  role="img"
+                >
                   O
                 </div>
               ) : null}
@@ -103,9 +113,15 @@ export default function FretboardDisplay({
                     const metadata = noteMetadata?.get(stringIndex);
                     const color = metadata?.color || highlightColor;
                     const displayLabel = metadata?.label || chordDiagram.fingers?.[stringIndex] || '';
+                    const ariaLabel = `String ${strings[stringIndex]}, fret ${fret}, finger ${displayLabel}`;
                     
                     return (
-                      <div className={`w-6 h-6 ${color} rounded-full flex items-center justify-center text-white text-xs font-bold z-10`}>
+                      <div 
+                        className={`w-6 h-6 ${color} rounded-full flex items-center justify-center text-white text-xs font-bold z-10`}
+                        aria-label={ariaLabel}
+                        data-testid={`marker-string${stringIndex}-fret${fret}`}
+                        role="img"
+                      >
                         {displayLabel}
                       </div>
                     );

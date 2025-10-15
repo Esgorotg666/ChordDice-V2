@@ -60,6 +60,16 @@ Preferred communication style: Simple, everyday language.
 - **Adaptive Backgrounds**: Dynamic backgrounds for the dice interface, changing based on the selected genre (e.g., Warlock guitar for metal, Spanish guitar for flamenco).
 - **Guitar Classroom**: Collapsible Accordion UI for Beginner, Intermediate, and Mastery levels, featuring 45 lessons with fretboard diagrams, scale integration, and freemium gating.
 
+## Recent Updates (October 2025)
+
+### Fretboard Diagram Overhaul
+- **Complete Visual Learning System**: All guitar classroom lessons now feature accurate, comprehensive fretboard diagrams
+- **Individual Note Display**: Single-note exercises (chromatic, spider) show one note per diagram with accurate labels (e.g., "Low E - Fret 1")
+- **Complete Scale Coverage**: Pentatonic and blues scales display ALL 12 diagrams showing every note on every string
+- **Accessibility Compliance**: All fretboard markers include aria-label, data-testid, and role="img" attributes for screen readers and automated testing
+- **Accurate Labeling**: Diagram names precisely match displayed content (eliminated misleading multi-fret labels)
+- **Muted String Clarity**: Single-string exercises correctly display only intended strings (no multiple open string artifacts)
+
 # External Dependencies
 
 - **Database**: Neon Database (PostgreSQL).
