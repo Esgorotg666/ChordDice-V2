@@ -280,6 +280,30 @@ export default function ScalesPage() {
               <strong className="text-foreground">How to use:</strong> Roll the dice to generate 2-4 compatible scales. 
               Higher match scores mean more chord notes are in the scale. Mix and match these scales to create unique melodic ideas!
             </p>
+            <div className="pt-2 border-t border-border/30 space-y-2">
+              <p className="text-foreground font-medium">Fretboard Guide:</p>
+              <ul className="space-y-1 text-xs">
+                <li className="flex items-center gap-2">
+                  <div className="w-4 h-4 rounded border border-[#D4AF37] bg-opacity-100" style={{ backgroundColor: 'rgb(220, 38, 38)' }} />
+                  <span>Root note (brightest highlight)</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <div className="w-4 h-4 rounded border border-[#D4AF37]/60" style={{ backgroundColor: 'rgba(220, 38, 38, 0.7)' }} />
+                  <span>Octave (same note, higher register)</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <div className="w-4 h-4 rounded border border-border" style={{ backgroundColor: 'rgba(220, 38, 38, 0.4)' }} />
+                  <span>Scale notes</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <div className="flex gap-0.5">
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]/40" />
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]/40" />
+                  </div>
+                  <span>Fret markers (positions 3, 5, 7, 9, 12, 15, 17, 19, 21, 24)</span>
+                </li>
+              </ul>
+            </div>
           </CardContent>
         </Card>
 
@@ -391,7 +415,9 @@ export default function ScalesPage() {
                         )}
                       </Button>
                     </div>
-                    {renderFretboard(scale)}
+                    <div key={`fretboard-${idx}-${showFullFretboard ? '24' : '12'}`}>
+                      {renderFretboard(scale)}
+                    </div>
                   </div>
                 </CardContent>
               </Card>
