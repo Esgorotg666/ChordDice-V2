@@ -44,43 +44,106 @@ const fretboardNotes: string[][] = [
   ['E', 'F', 'F♯', 'G', 'G♯', 'A', 'A♯', 'B', 'C', 'C♯', 'D', 'D♯', 'E', 'F', 'F♯', 'G', 'G♯', 'A', 'A♯', 'B', 'C', 'C♯', 'D', 'D♯', 'E']
 ];
 
-const availableScales: Record<string, ScaleInfo> = {
+// Scale definitions with interval formulas (NOT hardcoded notes!)
+interface ScaleDefinition {
+  name: string;
+  intervals: number[]; // Semitone intervals from root
+  description: string;
+  color: string;
+}
+
+const scaleDefinitions: Record<string, ScaleDefinition> = {
   minor_pentatonic: {
     name: "Minor Pentatonic",
-    notes: ["A", "C", "D", "E", "G"],
+    intervals: [0, 3, 5, 7, 10], // Root, m3, 4th, 5th, m7
     description: "Classic blues and rock foundation",
     color: "bg-red-500"
   },
   major_pentatonic: {
     name: "Major Pentatonic", 
-    notes: ["C", "D", "E", "G", "A"],
+    intervals: [0, 2, 4, 7, 9], // Root, 2nd, M3, 5th, 6th
     description: "Bright, uplifting melodic scale",
     color: "bg-blue-500"
   },
   blues: {
     name: "Blues Scale",
-    notes: ["A", "C", "D", "D♯", "E", "G"],
+    intervals: [0, 3, 5, 6, 7, 10], // Root, m3, 4th, b5 (blue note), 5th, m7
     description: "Minor pentatonic with blue note",
     color: "bg-purple-500"
   },
   dorian: {
     name: "Dorian Mode",
-    notes: ["D", "E", "F", "G", "A", "B", "C"],
+    intervals: [0, 2, 3, 5, 7, 9, 10], // Root, 2nd, m3, 4th, 5th, 6th, m7
     description: "Minor with natural 6th - jazzy feel",
     color: "bg-green-500"
   },
   mixolydian: {
     name: "Mixolydian Mode", 
-    notes: ["G", "A", "B", "C", "D", "E", "F"],
+    intervals: [0, 2, 4, 5, 7, 9, 10], // Root, 2nd, M3, 4th, 5th, 6th, m7
     description: "Major with flat 7th - dominant sound",
     color: "bg-orange-500"
   },
   natural_minor: {
     name: "Natural Minor",
-    notes: ["A", "B", "C", "D", "E", "F", "G"],
+    intervals: [0, 2, 3, 5, 7, 8, 10], // Root, 2nd, m3, 4th, 5th, m6, m7
     description: "Classic minor scale foundation",
     color: "bg-gray-500"
   }
+};
+
+// Helper to transpose a note by semitones, preserving flat/sharp family
+const transpose = (rootNote: string, semitones: number): string => {
+  const NOTES_SHARP = ['C', 'C♯', 'D', 'D♯', 'E', 'F', 'F♯', 'G', 'G♯', 'A', 'A♯', 'B'];
+  const NOTES_FLAT = ['C', 'D♭', 'D', 'E♭', 'E', 'F', 'G♭', 'G', 'A♭', 'A', 'B♭', 'B'];
+  
+  const normalizeNote = (note: string): string => {
+    return note.replace(/♯/g, '#').replace(/♭/g, 'b').replace(/\s/g, '');
+  };
+  
+  // Extract root note without chord quality (remove m, 7, maj, etc.)
+  const match = rootNote.match(/^([A-G][♯♭#b]?)/);
+  if (!match) return rootNote; // Return original if no valid root found
+  
+  const pureRoot = match[1];
+  const normalized = normalizeNote(pureRoot);
+  
+  // Determine if we should use flat or sharp notation based on the root note
+  const useFlats = pureRoot.includes('♭') || pureRoot.includes('b');
+  const noteArray = useFlats ? NOTES_FLAT : NOTES_SHARP;
+  
+  // Find root index in the appropriate array
+  let rootIndex = noteArray.findIndex(note => normalizeNote(note) === normalized);
+  
+  if (rootIndex === -1) {
+    // Handle enharmonic equivalents
+    const enharmonics: Record<string, string> = {
+      'Db': 'D♭', 'Eb': 'E♭', 'Gb': 'G♭', 'Ab': 'A♭', 'Bb': 'B♭',
+      'C#': 'C♯', 'D#': 'D♯', 'F#': 'F♯', 'G#': 'G♯', 'A#': 'A♯'
+    };
+    const equivalent = enharmonics[normalized];
+    if (equivalent) {
+      rootIndex = noteArray.findIndex(note => normalizeNote(note) === normalizeNote(equivalent));
+    }
+  }
+  
+  if (rootIndex === -1) {
+    // Try the other array as fallback
+    const fallbackArray = useFlats ? NOTES_SHARP : NOTES_FLAT;
+    rootIndex = fallbackArray.findIndex(note => normalizeNote(note) === normalized);
+    if (rootIndex !== -1) {
+      const newIndex = (rootIndex + semitones + 12) % 12;
+      return fallbackArray[newIndex];
+    }
+    return pureRoot;
+  }
+  
+  const newIndex = (rootIndex + semitones + 12) % 12;
+  return noteArray[newIndex];
+};
+
+// Build scale from root note and intervals
+const buildScale = (root: string, intervals: number[]): string[] => {
+  return intervals.map(interval => transpose(root, interval));
 };
 
 const octaveChords: OctaveChord[] = [
@@ -448,10 +511,27 @@ export default function ScaleCombination({ onUpgrade }: ScaleCombinationProps) {
   };
 
   const generateScaleCombination = () => {
-    const scales = Object.values(availableScales);
+    const roots = ['C', 'D♭', 'D', 'E♭', 'E', 'F', 'F♯', 'G', 'A♭', 'A', 'B♭', 'B'];
+    const randomRoot = roots[Math.floor(Math.random() * roots.length)];
+    
     const numScales = Math.floor(Math.random() * 2) + 2; // 2-3 scales
-    const shuffled = [...scales].sort(() => 0.5 - Math.random());
-    setScaleCombination(shuffled.slice(0, numScales));
+    const scaleKeys = Object.keys(scaleDefinitions);
+    const shuffled = [...scaleKeys].sort(() => 0.5 - Math.random());
+    const selectedKeys = shuffled.slice(0, numScales);
+    
+    const generatedScales: ScaleInfo[] = selectedKeys.map(key => {
+      const definition = scaleDefinitions[key];
+      const notes = buildScale(randomRoot, definition.intervals);
+      
+      return {
+        name: `${randomRoot} ${definition.name}`,
+        notes,
+        description: definition.description,
+        color: definition.color
+      };
+    });
+    
+    setScaleCombination(generatedScales);
   };
 
   const generateOctaveCombination = () => {

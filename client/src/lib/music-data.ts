@@ -369,32 +369,54 @@ export const modes: ModeDef[] = [
 
 // Core chromatic notes (using sharps to match fretboard mapping)
 export const NOTES = ['C', 'C♯', 'D', 'D♯', 'E', 'F', 'F♯', 'G', 'G♯', 'A', 'A♯', 'B'];
+export const NOTES_FLAT = ['C', 'D♭', 'D', 'E♭', 'E', 'F', 'G♭', 'G', 'A♭', 'A', 'B♭', 'B'];
 
 // Normalize note names for consistent comparison
 export const normalizeNote = (note: string): string => {
   return note.replace(/♯/g, '#').replace(/♭/g, 'b').replace(/\s/g, '');
 };
 
-// Transpose a note by semitones
+// Transpose a note by semitones, preserving flat/sharp family
 export const transpose = (rootNote: string, semitones: number): string => {
-  const normalized = normalizeNote(rootNote);
-  let rootIndex = NOTES.findIndex(note => normalizeNote(note) === normalized);
+  // Extract root note without chord quality (remove m, 7, maj, etc.)
+  const match = rootNote.match(/^([A-G][♯♭#b]?)/);
+  if (!match) return rootNote; // Return original if no valid root found
+  
+  const pureRoot = match[1];
+  const normalized = normalizeNote(pureRoot);
+  
+  // Determine if we should use flat or sharp notation based on the root note
+  const useFlats = pureRoot.includes('♭') || pureRoot.includes('b');
+  const noteArray = useFlats ? NOTES_FLAT : NOTES;
+  
+  // Find root index in the appropriate array
+  let rootIndex = noteArray.findIndex(note => normalizeNote(note) === normalized);
   
   if (rootIndex === -1) {
     // Handle enharmonic equivalents
     const enharmonics: Record<string, string> = {
-      'Db': 'C♯', 'Eb': 'D♯', 'Gb': 'F♯', 'Ab': 'G♯', 'Bb': 'A♯'
+      'Db': 'D♭', 'Eb': 'E♭', 'Gb': 'G♭', 'Ab': 'A♭', 'Bb': 'B♭',
+      'C#': 'C♯', 'D#': 'D♯', 'F#': 'F♯', 'G#': 'G♯', 'A#': 'A♯'
     };
-    const equivalent = enharmonics[normalized] || enharmonics[normalized.replace('b', '♭')];
+    const equivalent = enharmonics[normalized];
     if (equivalent) {
-      rootIndex = NOTES.findIndex(note => normalizeNote(note) === normalizeNote(equivalent));
+      rootIndex = noteArray.findIndex(note => normalizeNote(note) === normalizeNote(equivalent));
     }
   }
   
-  if (rootIndex === -1) return rootNote; // Return original if not found
+  if (rootIndex === -1) {
+    // Try the other array as fallback
+    const fallbackArray = useFlats ? NOTES : NOTES_FLAT;
+    rootIndex = fallbackArray.findIndex(note => normalizeNote(note) === normalized);
+    if (rootIndex !== -1) {
+      const newIndex = (rootIndex + semitones + 12) % 12;
+      return fallbackArray[newIndex];
+    }
+    return pureRoot; // Return pure root if still not found
+  }
   
   const newIndex = (rootIndex + semitones + 12) % 12;
-  return NOTES[newIndex];
+  return noteArray[newIndex];
 };
 
 // Build scale notes from root and intervals
