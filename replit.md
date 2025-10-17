@@ -65,6 +65,20 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Updates (October 2025)
 
+### Musical Theory Accuracy Fixes (October 17, 2025)
+- **Dynamic Scale Generation**: Removed all hardcoded scales, implemented dynamic generation from interval formulas for 100% musical accuracy
+- **Accidental Family Preservation**: Fixed transpose function to preserve flat/sharp spellings based on key signature
+  - Flat keys (E♭, A♭, B♭, D♭) correctly display with flat notes (E♭ F G A♭ B♭ C D)
+  - Sharp keys continue using sharp spellings (F♯ G♯ A♯)
+  - Example: E♭ Major now shows "E♭ F G A♭ B♭ C D" (not "D♯ F G G♯ A♯ C D")
+- **Modal Accidental Preference**: Added `preferFlats` flag to mode definitions
+  - Modes with flatted degrees (Dorian ♭3/♭7, Phrygian ♭2/♭3/♭6/♭7, Mixolydian ♭7, Aeolian ♭3/♭6/♭7, Locrian ♭2/♭3/♭5/♭6/♭7) use flat spellings
+  - G Dorian correctly shows "G A B♭ C D E F" (not "G A A♯ C D E F")
+  - Major modes (Ionian, Lydian) continue using sharp spellings when needed
+- **Chord Quality Suffix Handling**: Fixed transpose to extract pure root note from chord symbols (A♭m → A♭, Bm7 → B)
+- **Fretboard Visualization Fix**: Updated /scales page fretboard rendering to display notes from scale array, preserving flat/sharp spellings
+- **Comprehensive Verification**: Created test suite confirming all 7 modes, pentatonic scales, and various keys are 100% musically accurate
+
 ### Fretboard Diagram Overhaul
 - **Complete Visual Learning System**: All guitar classroom lessons now feature accurate, comprehensive fretboard diagrams
 - **Individual Note Display**: Single-note exercises (chromatic, spider) show one note per diagram with accurate labels (e.g., "Low E - Fret 1")

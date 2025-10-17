@@ -84,6 +84,13 @@ export default function ScalesPage() {
       return flatToSharp[note] || note;
     };
     
+    // Get the display note from scale.notes that matches the fretboard note
+    const getDisplayNote = (fretNote: string): string => {
+      const normalizedFret = normalizeNote(fretNote);
+      const matchingScaleNote = scale.notes.find(n => normalizeNote(n) === normalizedFret);
+      return matchingScaleNote || fretNote;
+    };
+    
     // Convert rgb() to rgba() with opacity
     const getRgbaColor = (rgbColor: string, opacity: number): string => {
       const match = rgbColor.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
@@ -106,6 +113,7 @@ export default function ScalesPage() {
                   const noteAtFret = getNoteAtFret(openString, fretIdx);
                   const isScaleNote = normalizedScaleNotes.includes(normalizeNote(noteAtFret));
                   const isRoot = normalizeNote(noteAtFret) === normalizeNote(scale.root);
+                  const displayNote = isScaleNote ? getDisplayNote(noteAtFret) : '';
                   
                   return (
                     <div
@@ -125,7 +133,7 @@ export default function ScalesPage() {
                           : 'transparent'
                       }}
                     >
-                      {isScaleNote ? noteAtFret : ''}
+                      {displayNote}
                     </div>
                   );
                 })}

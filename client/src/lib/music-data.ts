@@ -273,6 +273,7 @@ export interface ModeDef {
   characteristicDegrees: number[]; // Degrees that define the mode
   avoidDegrees?: number[]; // Degrees to avoid emphasizing
   preferredPentatonic: 'major' | 'minor';
+  preferFlats?: boolean; // Prefer flat note spellings (for modes with flatted degrees)
   color: string; // For visualization
   description: string;
   parentMajor: number; // Which degree of major scale this mode starts from
@@ -300,6 +301,7 @@ export const modes: ModeDef[] = [
     degreeFormula: ['1', '2', '♭3', '4', '5', '6', '♭7'],
     characteristicDegrees: [6], // Natural 6th makes it distinctive
     preferredPentatonic: 'minor',
+    preferFlats: true, // Has ♭3 and ♭7
     color: 'rgb(34, 197, 94)', // Green
     description: 'Minor with natural 6th - jazzy and sophisticated',
     parentMajor: 2
@@ -312,6 +314,7 @@ export const modes: ModeDef[] = [
     degreeFormula: ['1', '♭2', '♭3', '4', '5', '♭6', '♭7'],
     characteristicDegrees: [2], // Flat 2nd creates Spanish/exotic sound
     preferredPentatonic: 'minor',
+    preferFlats: true, // Has ♭2, ♭3, ♭6, ♭7
     color: 'rgb(168, 85, 247)', // Purple
     description: 'Dark and exotic - Spanish/Mediterranean flavor',
     parentMajor: 3
@@ -336,6 +339,7 @@ export const modes: ModeDef[] = [
     degreeFormula: ['1', '2', '3', '4', '5', '6', '♭7'],
     characteristicDegrees: [7], // Flat 7th gives bluesy/rock feel
     preferredPentatonic: 'major',
+    preferFlats: true, // Has ♭7
     color: 'rgb(239, 68, 68)', // Red
     description: 'Major with flat 7th - bluesy and dominant',
     parentMajor: 5
@@ -348,6 +352,7 @@ export const modes: ModeDef[] = [
     degreeFormula: ['1', '2', '♭3', '4', '5', '♭6', '♭7'],
     characteristicDegrees: [1, 3, 5],
     preferredPentatonic: 'minor',
+    preferFlats: true, // Has ♭3, ♭6, ♭7
     color: 'rgb(107, 114, 128)', // Gray
     description: 'Natural minor scale - melancholy and emotional',
     parentMajor: 6
@@ -361,6 +366,7 @@ export const modes: ModeDef[] = [
     characteristicDegrees: [5], // Flat 5th creates unstable, diminished sound
     avoidDegrees: [1], // Root is often avoided due to instability
     preferredPentatonic: 'minor',
+    preferFlats: true, // Has ♭2, ♭3, ♭5, ♭6, ♭7
     color: 'rgb(75, 85, 99)', // Dark gray
     description: 'Unstable and dissonant - rarely used as tonal center',
     parentMajor: 7
@@ -377,7 +383,7 @@ export const normalizeNote = (note: string): string => {
 };
 
 // Transpose a note by semitones, preserving flat/sharp family
-export const transpose = (rootNote: string, semitones: number): string => {
+export const transpose = (rootNote: string, semitones: number, forceFlats?: boolean): string => {
   // Extract root note without chord quality (remove m, 7, maj, etc.)
   const match = rootNote.match(/^([A-G][♯♭#b]?)/);
   if (!match) return rootNote; // Return original if no valid root found
@@ -385,8 +391,9 @@ export const transpose = (rootNote: string, semitones: number): string => {
   const pureRoot = match[1];
   const normalized = normalizeNote(pureRoot);
   
-  // Determine if we should use flat or sharp notation based on the root note
-  const useFlats = pureRoot.includes('♭') || pureRoot.includes('b');
+  // Determine if we should use flat or sharp notation
+  // Priority: 1) forceFlats parameter, 2) root note has flat, 3) default to sharps
+  const useFlats = forceFlats !== undefined ? forceFlats : (pureRoot.includes('♭') || pureRoot.includes('b'));
   const noteArray = useFlats ? NOTES_FLAT : NOTES;
   
   // Find root index in the appropriate array
@@ -420,8 +427,8 @@ export const transpose = (rootNote: string, semitones: number): string => {
 };
 
 // Build scale notes from root and intervals
-export const buildScaleByIntervals = (root: string, intervals: number[]): string[] => {
-  return intervals.map(interval => transpose(root, interval));
+export const buildScaleByIntervals = (root: string, intervals: number[], preferFlats?: boolean): string[] => {
+  return intervals.map(interval => transpose(root, interval, preferFlats));
 };
 
 // Convert degree formula to actual notes
@@ -445,12 +452,12 @@ export const isSubset = (a: string[], b: string[]): boolean => {
 
 // Generate related scales for a given mode
 export const generateRelatedScales = (mode: ModeDef, root: string): Array<{name: string, notes: string[], type: string}> => {
-  const modeNotes = buildScaleByIntervals(root, mode.intervals);
+  const modeNotes = buildScaleByIntervals(root, mode.intervals, mode.preferFlats);
   const relatedScales: Array<{name: string, notes: string[], type: string}> = [];
   
   // Major pentatonic (1 2 3 5 6)
   if (mode.preferredPentatonic === 'major') {
-    const majorPenta = [root, transpose(root, 2), transpose(root, 4), transpose(root, 7), transpose(root, 9)];
+    const majorPenta = [root, transpose(root, 2, mode.preferFlats), transpose(root, 4, mode.preferFlats), transpose(root, 7, mode.preferFlats), transpose(root, 9, mode.preferFlats)];
     if (isSubset(majorPenta, modeNotes)) {
       relatedScales.push({name: 'Major Pentatonic', notes: majorPenta, type: 'pentatonic'});
     }
@@ -458,7 +465,7 @@ export const generateRelatedScales = (mode: ModeDef, root: string): Array<{name:
   
   // Minor pentatonic (1 ♭3 4 5 ♭7)
   if (mode.preferredPentatonic === 'minor') {
-    const minorPenta = [root, transpose(root, 3), transpose(root, 5), transpose(root, 7), transpose(root, 10)];
+    const minorPenta = [root, transpose(root, 3, mode.preferFlats), transpose(root, 5, mode.preferFlats), transpose(root, 7, mode.preferFlats), transpose(root, 10, mode.preferFlats)];
     if (isSubset(minorPenta, modeNotes)) {
       relatedScales.push({name: 'Minor Pentatonic', notes: minorPenta, type: 'pentatonic'});
     }
@@ -467,11 +474,11 @@ export const generateRelatedScales = (mode: ModeDef, root: string): Array<{name:
   // Triad arpeggio
   let triadNotes: string[];
   if (mode.quality === 'major') {
-    triadNotes = [root, transpose(root, 4), transpose(root, 7)]; // 1 3 5
+    triadNotes = [root, transpose(root, 4, mode.preferFlats), transpose(root, 7, mode.preferFlats)]; // 1 3 5
   } else if (mode.quality === 'minor') {
-    triadNotes = [root, transpose(root, 3), transpose(root, 7)]; // 1 ♭3 5
+    triadNotes = [root, transpose(root, 3, mode.preferFlats), transpose(root, 7, mode.preferFlats)]; // 1 ♭3 5
   } else { // diminished
-    triadNotes = [root, transpose(root, 3), transpose(root, 6)]; // 1 ♭3 ♭5
+    triadNotes = [root, transpose(root, 3, mode.preferFlats), transpose(root, 6, mode.preferFlats)]; // 1 ♭3 ♭5
   }
   
   if (isSubset(triadNotes, modeNotes)) {
@@ -531,7 +538,7 @@ export const findCompatibleScales = (chords: string[]): CompatibleScale[] => {
   
   for (const root of roots) {
     for (const mode of modes) {
-      const scaleNotes = buildScaleByIntervals(root, mode.intervals);
+      const scaleNotes = buildScaleByIntervals(root, mode.intervals, mode.preferFlats);
       
       // Count how many chord roots are in the scale
       let matchCount = 0;

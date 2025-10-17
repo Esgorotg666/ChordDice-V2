@@ -548,7 +548,7 @@ export default function ScaleCombination({ onUpgrade }: ScaleCombinationProps) {
     const randomMode = modes[Math.floor(Math.random() * modes.length)];
     
     // Build mode notes
-    const notes = buildScaleByIntervals(randomRoot, randomMode.intervals);
+    const notes = buildScaleByIntervals(randomRoot, randomMode.intervals, randomMode.preferFlats);
     
     // Generate related scales
     const related = generateRelatedScales(randomMode, randomRoot);
