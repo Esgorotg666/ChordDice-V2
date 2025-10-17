@@ -99,6 +99,17 @@ Preferred communication style: Simple, everyday language.
 - **Accurate Labeling**: Diagram names precisely match displayed content (eliminated misleading multi-fret labels)
 - **Muted String Clarity**: Single-string exercises correctly display only intended strings (no multiple open string artifacts)
 
+### Enhanced Scale Section - Full Fretboard Visualization (October 17, 2025)
+- **24-Fret Full Neck Display**: Extended fretboard visualization from 12 to 24 frets showing complete guitar neck
+- **Interactive Toggle**: Switch between compact (12 frets) and full (24 frets) views with intuitive Maximize/Minimize button
+- **Standard Fret Markers**: Gold dots at positions 3, 5, 7, 9, 12, 15, 17, 19, 21, 24 (double dots at 12 and 24) matching real guitar inlays
+- **Octave Highlighting**: Root notes show full color, octaves show 70% opacity, scale notes show 40% opacity for pattern recognition
+- **Fret Number Labels**: Bottom row displays fret numbers 1-24 for easy position reference
+- **Visual Legend**: Comprehensive fretboard guide explaining root notes, octaves, scale notes, and fret markers
+- **Horizontal Scroll**: Touch-optimized scrolling for viewing entire 24-fret neck on mobile devices
+- **Preserved Accuracy**: All note spellings maintain flat/sharp accuracy from scale.notes array (Dorian/Phrygian use flats, Ionian/Lydian use sharps)
+- **React Optimization**: Key-based re-rendering ensures smooth toggle transitions without stale DOM elements
+
 # External Dependencies
 
 - **Database**: Neon Database (PostgreSQL).
