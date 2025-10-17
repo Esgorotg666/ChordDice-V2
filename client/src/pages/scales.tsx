@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Music, Dices, Crown } from "lucide-react";
+import { Music, Dices, Crown, Maximize2, Minimize2 } from "lucide-react";
 import { Link } from "wouter";
 import { getRandomCompatibleScales, type CompatibleScale } from "@/lib/music-data";
 import { useSubscription } from "@/hooks/useSubscription";
@@ -21,6 +21,7 @@ export default function ScalesPage() {
   const [lastRoll, setLastRoll] = useState<string | null>(null);
   const [compatibleScales, setCompatibleScales] = useState<CompatibleScale[]>([]);
   const [chordProgression, setChordProgression] = useState<string[]>([]);
+  const [showFullFretboard, setShowFullFretboard] = useState<boolean>(false);
 
   const rollDice = () => {
     if (dice.rolling) return;
@@ -66,7 +67,11 @@ export default function ScalesPage() {
     // Standard guitar tuning (low to high)
     const stringNotes = ['E', 'A', 'D', 'G', 'B', 'E'];
     const chromatic = ['C', 'C♯', 'D', 'D♯', 'E', 'F', 'F♯', 'G', 'G♯', 'A', 'A♯', 'B'];
-    const frets = 12;
+    const totalFrets = showFullFretboard ? 24 : 12;
+    
+    // Fret marker positions (standard guitar inlays)
+    const fretMarkers = [3, 5, 7, 9, 12, 15, 17, 19, 21, 24];
+    const doubleMarkers = [12, 24];
     
     // Function to get note at a specific fret
     const getNoteAtFret = (openString: string, fret: number): string => {
@@ -100,46 +105,92 @@ export default function ScalesPage() {
       return rgbColor;
     };
     
+    // Check if a note is an octave of the root
+    const isOctave = (note: string, root: string): boolean => {
+      return normalizeNote(note) === normalizeNote(root);
+    };
+    
     const normalizedScaleNotes = scale.notes.map(normalizeNote);
+    const normalizedRoot = normalizeNote(scale.root);
     
     return (
-      <div className="mt-3 overflow-x-auto">
-        <div className="min-w-[300px]">
-          {stringNotes.map((openString, stringIdx) => (
-            <div key={stringIdx} className="flex items-center gap-1 mb-1">
-              <div className="w-6 text-xs font-mono text-muted-foreground">{openString}</div>
-              <div className="flex gap-0.5">
-                {Array.from({ length: frets + 1 }).map((_, fretIdx) => {
-                  const noteAtFret = getNoteAtFret(openString, fretIdx);
-                  const isScaleNote = normalizedScaleNotes.includes(normalizeNote(noteAtFret));
-                  const isRoot = normalizeNote(noteAtFret) === normalizeNote(scale.root);
-                  const displayNote = isScaleNote ? getDisplayNote(noteAtFret) : '';
-                  
-                  return (
-                    <div
-                      key={fretIdx}
-                      className={`w-7 h-7 border flex items-center justify-center text-[10px] ${
-                        isRoot
-                          ? 'border-red-500 text-white font-bold'
-                          : isScaleNote
-                          ? 'border-border text-white'
-                          : 'border-border text-muted-foreground'
-                      }`}
-                      style={{
-                        backgroundColor: isRoot 
-                          ? scale.mode.color 
-                          : isScaleNote 
-                          ? getRgbaColor(scale.mode.color, 0.5)
-                          : 'transparent'
-                      }}
-                    >
-                      {displayNote}
-                    </div>
-                  );
-                })}
+      <div className="mt-3 space-y-2">
+        {/* Fret Markers */}
+        <div className="overflow-x-auto">
+          <div className="flex items-center gap-1" style={{ minWidth: `${(totalFrets + 1) * 28 + 24}px` }}>
+            <div className="w-6" /> {/* Spacer for string label */}
+            {Array.from({ length: totalFrets + 1 }).map((_, fretIdx) => (
+              <div key={fretIdx} className="w-7 h-4 flex items-center justify-center">
+                {fretMarkers.includes(fretIdx) && (
+                  <div className="flex gap-0.5">
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]/40" />
+                    {doubleMarkers.includes(fretIdx) && (
+                      <div className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]/40" />
+                    )}
+                  </div>
+                )}
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
+        </div>
+
+        {/* Fretboard */}
+        <div className="overflow-x-auto">
+          <div style={{ minWidth: `${(totalFrets + 1) * 28 + 24}px` }}>
+            {stringNotes.map((openString, stringIdx) => (
+              <div key={stringIdx} className="flex items-center gap-1 mb-1">
+                <div className="w-6 text-xs font-mono text-muted-foreground">{openString}</div>
+                <div className="flex gap-0.5">
+                  {Array.from({ length: totalFrets + 1 }).map((_, fretIdx) => {
+                    const noteAtFret = getNoteAtFret(openString, fretIdx);
+                    const isScaleNote = normalizedScaleNotes.includes(normalizeNote(noteAtFret));
+                    const isRootNote = normalizeNote(noteAtFret) === normalizedRoot;
+                    const isOctaveNote = isOctave(noteAtFret, scale.root) && !isRootNote;
+                    const displayNote = isScaleNote ? getDisplayNote(noteAtFret) : '';
+                    
+                    return (
+                      <div
+                        key={fretIdx}
+                        className={`w-7 h-7 border flex items-center justify-center text-[10px] ${
+                          isRootNote
+                            ? 'border-[#D4AF37] text-white font-bold'
+                            : isOctaveNote
+                            ? 'border-[#D4AF37]/60 text-white font-bold'
+                            : isScaleNote
+                            ? 'border-border text-white'
+                            : 'border-border/30 text-muted-foreground'
+                        }`}
+                        style={{
+                          backgroundColor: isRootNote 
+                            ? scale.mode.color 
+                            : isOctaveNote
+                            ? getRgbaColor(scale.mode.color, 0.7)
+                            : isScaleNote 
+                            ? getRgbaColor(scale.mode.color, 0.4)
+                            : 'transparent'
+                        }}
+                        data-testid={`fret-${stringIdx}-${fretIdx}`}
+                      >
+                        {displayNote}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Fret Number Labels */}
+        <div className="overflow-x-auto">
+          <div className="flex items-center gap-1" style={{ minWidth: `${(totalFrets + 1) * 28 + 24}px` }}>
+            <div className="w-6" /> {/* Spacer for string label */}
+            {Array.from({ length: totalFrets + 1 }).map((_, fretIdx) => (
+              <div key={fretIdx} className="w-7 text-center text-[10px] text-muted-foreground/50">
+                {fretIdx === 0 ? '' : fretIdx}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     );
@@ -318,7 +369,28 @@ export default function ScalesPage() {
                     <p className="text-sm text-muted-foreground mb-2">Formula: {scale.mode.degreeFormula.join(' - ')}</p>
                   </div>
                   <div>
-                    <p className="text-sm text-muted-foreground mb-2">Fretboard Pattern:</p>
+                    <div className="flex items-center justify-between mb-2">
+                      <p className="text-sm text-muted-foreground">Fretboard Pattern:</p>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => setShowFullFretboard(!showFullFretboard)}
+                        className="h-7 px-2 gap-1 text-xs"
+                        data-testid="button-toggle-fretboard"
+                      >
+                        {showFullFretboard ? (
+                          <>
+                            <Minimize2 className="h-3 w-3" />
+                            12 Frets
+                          </>
+                        ) : (
+                          <>
+                            <Maximize2 className="h-3 w-3" />
+                            24 Frets
+                          </>
+                        )}
+                      </Button>
+                    </div>
                     {renderFretboard(scale)}
                   </div>
                 </CardContent>
