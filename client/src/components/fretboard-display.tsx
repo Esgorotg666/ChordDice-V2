@@ -111,13 +111,23 @@ export default function FretboardDisplay({
                   {/* Finger position - match absolute fret position */}
                   {chordDiagram.positions[stringIndex] === fret && (() => {
                     const metadata = noteMetadata?.get(stringIndex);
-                    const color = metadata?.color || highlightColor;
+                    const colorClass = metadata?.color || highlightColor;
                     const displayLabel = metadata?.label || chordDiagram.fingers?.[stringIndex] || '';
                     const ariaLabel = `String ${strings[stringIndex]}, fret ${fret}, finger ${displayLabel}`;
                     
+                    // Map Tailwind classes to actual colors for inline styles
+                    const bgColorMap: Record<string, string> = {
+                      'bg-orange-500': '#f97316',
+                      'bg-purple-600': '#9333ea',
+                      'bg-blue-600': '#2563eb',
+                      'bg-blue-500': '#3b82f6'
+                    };
+                    const bgColor = bgColorMap[colorClass] || '#3b82f6';
+                    
                     return (
                       <div 
-                        className={`w-6 h-6 ${color} rounded-full flex items-center justify-center text-white text-xs font-bold z-10`}
+                        className="w-6 h-6 rounded-full flex items-center justify-center text-white text-xs font-bold z-10"
+                        style={{ backgroundColor: bgColor }}
                         aria-label={ariaLabel}
                         data-testid={`marker-string${stringIndex}-fret${fret}`}
                         role="img"

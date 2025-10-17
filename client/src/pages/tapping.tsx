@@ -83,14 +83,44 @@ export default function TappingPage() {
   const createNoteMetadata = (diagram: ChordDiagram, isTapping: boolean): Map<number, NoteMetadata> => {
     const metadata = new Map<number, NoteMetadata>();
     
+    // Find the root note (first fretted/open string for base hand only)
+    let rootStringIndex = -1;
+    if (!isTapping) {
+      for (let i = 0; i < diagram.positions.length; i++) {
+        if (diagram.positions[i] !== 'X' && diagram.positions[i] !== undefined) {
+          rootStringIndex = i;
+          break;
+        }
+      }
+    }
+    
     diagram.positions.forEach((pos, stringIndex) => {
-      if (typeof pos === 'number' && pos > 0) {
+      if (pos !== 'X' && pos !== undefined) {
         const finger = diagram.fingers?.[stringIndex];
-        metadata.set(stringIndex, {
-          color: isTapping ? 'bg-orange-500' : 'bg-blue-500',
-          label: isTapping ? 'Tap' : (typeof finger === 'number' ? finger.toString() : ''),
-          type: isTapping ? 'tapping' : 'finger'
-        });
+        
+        if (isTapping) {
+          // For tapping hand: ALL notes are orange with finger numbers
+          metadata.set(stringIndex, {
+            color: 'bg-orange-500',
+            label: typeof finger === 'number' ? finger.toString() : '',
+            type: 'tapping'
+          });
+        } else {
+          // For base hand: Root is purple, others are blue
+          if (stringIndex === rootStringIndex) {
+            metadata.set(stringIndex, {
+              color: 'bg-purple-600',
+              label: typeof finger === 'number' ? finger.toString() : '',
+              type: 'root'
+            });
+          } else {
+            metadata.set(stringIndex, {
+              color: 'bg-blue-600',
+              label: typeof finger === 'number' ? finger.toString() : '',
+              type: 'finger'
+            });
+          }
+        }
       }
     });
     
@@ -135,16 +165,24 @@ export default function TappingPage() {
       setLeftHandChord(combination.leftHand.chord);
       setRightHandChord(combination.rightHand.chord);
       
-      // Set the chord diagrams directly
+      // Calculate starting fret for each hand (minimum non-X, non-0 fret)
+      const getStartFret = (positions: (number | 'X')[]) => {
+        const frets = positions.filter(p => typeof p === 'number' && p > 0) as number[];
+        return frets.length > 0 ? Math.min(...frets) : 0;
+      };
+      
+      // Set the chord diagrams directly with calculated fret positions
       setLeftDiagram({
         name: combination.leftHand.chord,
         positions: combination.leftHand.positions,
-        fingers: combination.leftHand.fingers
+        fingers: combination.leftHand.fingers,
+        fret: getStartFret(combination.leftHand.positions)
       });
       setRightDiagram({
         name: combination.rightHand.chord,
         positions: combination.rightHand.positions,
-        fingers: combination.rightHand.fingers
+        fingers: combination.rightHand.fingers,
+        fret: getStartFret(combination.rightHand.positions)
       });
       
       setIsRollingLeft(false);
@@ -350,7 +388,7 @@ export default function TappingPage() {
                   chordName={leftHandChord || ''}
                   showLegend={false}
                   label="Left Hand"
-                  noteMetadata={createNoteMetadata(leftDiagram, false)}
+                  noteMetadata={leftDiagram ? createNoteMetadata(leftDiagram, false) : undefined}
                 />
               </Card>
             )}
@@ -372,7 +410,7 @@ export default function TappingPage() {
                   chordName={rightHandChord || ''}
                   showLegend={false}
                   label="Right Hand"
-                  noteMetadata={createNoteMetadata(rightDiagram, true)}
+                  noteMetadata={rightDiagram ? createNoteMetadata(rightDiagram, true) : undefined}
                 />
               </Card>
             )}

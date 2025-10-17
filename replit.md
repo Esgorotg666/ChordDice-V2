@@ -79,6 +79,18 @@ Preferred communication style: Simple, everyday language.
 - **Fretboard Visualization Fix**: Updated /scales page fretboard rendering to display notes from scale array, preserving flat/sharp spellings
 - **Comprehensive Verification**: Created test suite confirming all 7 modes, pentatonic scales, and various keys are 100% musically accurate
 
+### Two-Hand Tapping Display Fixes (October 17, 2025)
+- **Color Coding Correction**: Fixed tapping hand to show ALL orange markers (previously showed purple root + orange)
+  - Base hand (left): Purple root note + blue finger positions
+  - Tapping hand (right): ALL orange markers (no purple mixing)
+- **Open String Support**: Fixed to include open strings (position 0) in marker rendering
+- **Finger Number Labels**: All markers now display finger numbers (1-4) instead of generic "Tap" labels
+- **Inline Style Implementation**: Replaced dynamic Tailwind classes with explicit hex color inline styles to ensure reliable rendering:
+  - Orange tapping: #f97316 (rgb(249,115,22))
+  - Purple root: #9333ea (rgb(147,51,234))
+  - Blue fingers: #2563eb (rgb(37,99,235))
+- **High Fret Rendering**: Added automatic fret position calculation for tapping chords (e.g., Bm7 at fret 7-12)
+
 ### Fretboard Diagram Overhaul
 - **Complete Visual Learning System**: All guitar classroom lessons now feature accurate, comprehensive fretboard diagrams
 - **Individual Note Display**: Single-note exercises (chromatic, spider) show one note per diagram with accurate labels (e.g., "Low E - Fret 1")

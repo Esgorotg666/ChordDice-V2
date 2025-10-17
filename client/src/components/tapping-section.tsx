@@ -20,27 +20,29 @@ function createNoteMetadata(diagram: ChordDiagram, isTapping: boolean = false): 
   
   diagram.positions.forEach((position, stringIndex) => {
     if (position !== 'X' && position !== undefined) {
-      // Root note gets purple color
-      if (stringIndex === rootStringIndex) {
-        metadata.set(stringIndex, {
-          color: 'bg-purple-600',
-          label: diagram.fingers?.[stringIndex]?.toString() || '',
-          type: 'root'
-        });
-      } else if (isTapping) {
-        // Tapping notes get orange color
+      if (isTapping) {
+        // For tapping hand: ALL notes are orange (no separate root)
         metadata.set(stringIndex, {
           color: 'bg-orange-500',
           label: diagram.fingers?.[stringIndex]?.toString() || '',
           type: 'tapping'
         });
       } else {
-        // Regular finger positions get blue color
-        metadata.set(stringIndex, {
-          color: 'bg-blue-600',
-          label: diagram.fingers?.[stringIndex]?.toString() || '',
-          type: 'finger'
-        });
+        // For base hand: Root note gets purple, others get blue
+        if (stringIndex === rootStringIndex) {
+          metadata.set(stringIndex, {
+            color: 'bg-purple-600',
+            label: diagram.fingers?.[stringIndex]?.toString() || '',
+            type: 'root'
+          });
+        } else {
+          // Regular finger positions get blue color
+          metadata.set(stringIndex, {
+            color: 'bg-blue-600',
+            label: diagram.fingers?.[stringIndex]?.toString() || '',
+            type: 'finger'
+          });
+        }
       }
     }
   });
