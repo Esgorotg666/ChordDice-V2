@@ -42,11 +42,17 @@ export const exoticChordTypes = [
 ];
 
 export const exoticNumbers: Record<number, string> = {
-  1: 'Diminished',
-  2: 'Augmented', 
-  3: 'Suspended',
-  4: 'Major 7th',
-  5: '9th'
+  1: 'Major',
+  2: 'Minor',
+  3: '6th',
+  4: '7th',
+  5: '9th',
+  6: 'Minor 6th',
+  7: 'Minor 7th',
+  8: 'Major 7th',
+  9: 'Diminished',
+  10: 'Augmented',
+  11: 'Suspended'
 };
 
 export const getAllKeys = (): string[] => {
