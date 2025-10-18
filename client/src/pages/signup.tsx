@@ -102,21 +102,46 @@ export default function SignupPage() {
       }}
       transition={{ duration: 0.5, ease: "easeInOut" }}
     >
-      {/* Musical background decoration with dark gold */}
-      <div className="absolute inset-0 pointer-events-none" style={{ color: 'rgba(212, 175, 55, 0.08)' }}>
-        <div className="absolute top-10 left-10 text-6xl font-bold">♪</div>
-        <div className="absolute top-20 right-20 text-5xl font-bold">♫</div>
-        <div className="absolute bottom-32 left-1/4 text-4xl font-bold">C</div>
-        <div className="absolute top-1/3 right-1/4 text-4xl font-bold">G</div>
-        <div className="absolute bottom-20 right-16 text-6xl font-bold">♩</div>
-        <div className="absolute top-1/2 left-12 text-5xl font-bold">Am</div>
-        <div className="absolute bottom-1/4 left-1/3 text-4xl font-bold">♬</div>
+      {/* Animated gradient background mesh */}
+      <div className="absolute inset-0 pointer-events-none opacity-40">
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] blur-3xl animate-pulse" 
+          style={{ 
+            background: 'radial-gradient(circle, rgba(212, 175, 55, 0.25) 0%, transparent 70%)',
+            animationDuration: '4.5s'
+          }} />
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] blur-3xl animate-pulse" 
+          style={{ 
+            background: 'radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, transparent 70%)',
+            animationDuration: '5.5s',
+            animationDelay: '1s'
+          }} />
+        <div className="absolute top-1/3 left-1/4 w-[400px] h-[400px] blur-3xl animate-pulse" 
+          style={{ 
+            background: 'radial-gradient(circle, rgba(255, 215, 0, 0.12) 0%, transparent 70%)',
+            animationDuration: '6.5s',
+            animationDelay: '2s'
+          }} />
       </div>
       
-      {/* Dark gold accent glows */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-0 w-96 h-96 blur-3xl" style={{ background: 'radial-gradient(circle, rgba(212, 175, 55, 0.12) 0%, transparent 70%)' }} />
-        <div className="absolute bottom-0 right-0 w-96 h-96 blur-3xl" style={{ background: 'radial-gradient(circle, rgba(212, 175, 55, 0.08) 0%, transparent 70%)' }} />
+      {/* Floating musical notes and chords */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute text-5xl top-[15%] right-[12%] animate-float" style={{ color: 'rgba(212, 175, 55, 0.15)', animationDelay: '0s', animationDuration: '9s' }}>♪</div>
+        <div className="absolute text-6xl top-[55%] left-[10%] animate-float" style={{ color: 'rgba(212, 175, 55, 0.12)', animationDelay: '2s', animationDuration: '11s' }}>♫</div>
+        <div className="absolute text-4xl bottom-[30%] right-[20%] animate-float" style={{ color: 'rgba(212, 175, 55, 0.1)', animationDelay: '4s', animationDuration: '10s' }}>♬</div>
+        <div className="absolute text-3xl top-[35%] left-[25%] animate-float font-bold" style={{ color: 'rgba(212, 175, 55, 0.1)', animationDelay: '1s', animationDuration: '8s' }}>Em</div>
+        <div className="absolute text-4xl bottom-[20%] left-[35%] animate-float" style={{ color: 'rgba(212, 175, 55, 0.08)', animationDelay: '3s', animationDuration: '12s' }}>♩</div>
+        <div className="absolute text-3xl top-[45%] right-[30%] animate-float font-bold" style={{ color: 'rgba(212, 175, 55, 0.12)', animationDelay: '5s', animationDuration: '9s' }}>Am</div>
+      </div>
+      
+      {/* Subtle guitar silhouette overlay */}
+      <div className="absolute inset-0 pointer-events-none opacity-20">
+        <div 
+          className="absolute inset-0 animate-pulse"
+          style={{
+            backgroundImage: 'linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, transparent 50%, rgba(212, 175, 55, 0.05) 100%)',
+            animationDuration: '7s'
+          }}
+        />
       </div>
       
       <motion.div

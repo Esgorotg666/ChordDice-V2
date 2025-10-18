@@ -16,7 +16,7 @@ export default function Classroom() {
   const { hasActiveSubscription } = useSubscription();
 
   const handleLessonClick = (lesson: Lesson, isFree: boolean) => {
-    // First lesson in each category is free
+    // First 2 lessons in each category are free
     if (!isFree && !hasActiveSubscription) {
       setShowUpgradeModal(true);
       return;
@@ -108,7 +108,7 @@ export default function Classroom() {
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {lessons.map((lesson, index) => {
-          const isFree = index === 0; // First lesson is free
+          const isFree = index <= 1; // First 2 lessons are free
           return (
             <Card
               key={lesson.id}

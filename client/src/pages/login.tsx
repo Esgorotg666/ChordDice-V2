@@ -177,25 +177,47 @@ export default function LoginPage() {
       }}
       transition={{ duration: 0.5, ease: "easeInOut" }}
     >
+      {/* Animated gradient background mesh */}
+      <div className="absolute inset-0 pointer-events-none opacity-40">
+        <div className="absolute top-0 left-0 w-[600px] h-[600px] blur-3xl animate-pulse" 
+          style={{ 
+            background: 'radial-gradient(circle, rgba(212, 175, 55, 0.25) 0%, transparent 70%)',
+            animationDuration: '4s'
+          }} />
+        <div className="absolute bottom-0 right-0 w-[500px] h-[500px] blur-3xl animate-pulse" 
+          style={{ 
+            background: 'radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, transparent 70%)',
+            animationDuration: '5s',
+            animationDelay: '1s'
+          }} />
+        <div className="absolute top-1/3 right-1/4 w-[400px] h-[400px] blur-3xl animate-pulse" 
+          style={{ 
+            background: 'radial-gradient(circle, rgba(255, 215, 0, 0.12) 0%, transparent 70%)',
+            animationDuration: '6s',
+            animationDelay: '2s'
+          }} />
+      </div>
+      
       {/* BC Rich Warlock Background with enhanced visibility */}
-      <div className="absolute inset-0 pointer-events-none opacity-30">
+      <div className="absolute inset-0 pointer-events-none opacity-35">
         <div 
-          className="absolute inset-0"
+          className="absolute inset-0 animate-pulse"
           style={{
             backgroundImage: `url(${warlockImage})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            filter: 'brightness(0.5) contrast(1.3) sepia(0.3) saturate(1.2)'
+            filter: 'brightness(0.6) contrast(1.4) sepia(0.4) saturate(1.3)',
+            animationDuration: '8s'
           }}
         />
       </div>
       
-      {/* Dark gold accent glows */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-0 w-96 h-96 blur-3xl" style={{ background: 'radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, transparent 70%)' }} />
-        <div className="absolute bottom-0 right-0 w-96 h-96 blur-3xl" style={{ background: 'radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%)' }} />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full blur-3xl opacity-20" 
-          style={{ background: 'radial-gradient(ellipse at center, rgba(212, 175, 55, 0.1) 0%, transparent 60%)' }} />
+      {/* Floating musical notes */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute text-4xl top-[20%] left-[10%] animate-float" style={{ color: 'rgba(212, 175, 55, 0.15)', animationDelay: '0s', animationDuration: '8s' }}>♪</div>
+        <div className="absolute text-5xl top-[60%] right-[15%] animate-float" style={{ color: 'rgba(212, 175, 55, 0.12)', animationDelay: '2s', animationDuration: '10s' }}>♫</div>
+        <div className="absolute text-3xl bottom-[25%] left-[25%] animate-float" style={{ color: 'rgba(212, 175, 55, 0.1)', animationDelay: '4s', animationDuration: '9s' }}>♬</div>
+        <div className="absolute text-6xl top-[40%] right-[30%] animate-float" style={{ color: 'rgba(212, 175, 55, 0.08)', animationDelay: '1s', animationDuration: '11s' }}>♩</div>
       </div>
       
       <motion.div
