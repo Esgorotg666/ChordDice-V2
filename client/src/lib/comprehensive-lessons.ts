@@ -1179,14 +1179,14 @@ export const metalLessons: Lesson[] = [
     description: 'Master the symmetrical diminished scale pattern',
     fretboardPatterns: [],
     scales: [
-      { name: 'E Diminished (W-H)', pattern: 'W-H-W-H-W-H-W-H', notes: ['E', 'F#', 'G', 'A', 'Bb', 'C', 'Db', 'D'] }
+      { name: 'E Diminished (W-H)', pattern: 'W-H-W-H-W-H-W-H', notes: ['E', 'F#', 'G', 'A', 'Bb', 'C', 'C#', 'D#'] }
     ],
     subsections: [
       {
         id: 'metal-12-1',
         title: 'Symmetrical Pattern',
         content: 'Alternates whole step, half step throughout. Creates 8-note scale. Pattern repeats every 3 frets.',
-        technique: 'E diminished: E-F#-G-A-Bb-C-Db-D. Play 2 frets, 1 fret, 2 frets, 1 fret pattern.',
+        technique: 'E diminished: E-F#-G-A-Bb-C-C#-D#. Play 2 frets, 1 fret, 2 frets, 1 fret pattern.',
         tips: ['Used in technical death metal', 'Very jazz-influenced', 'Sounds mechanical and alien']
       },
       {
@@ -1707,13 +1707,13 @@ export const jazzLessons: Lesson[] = [
     description: 'Add chromatic passing tone for bebop lines',
     fretboardPatterns: [],
     scales: [
-      { name: 'C Major Bebop', pattern: '1-2-3-4-5-6-7-maj7-8', notes: ['C', 'D', 'E', 'F', 'G', 'A', 'B', 'B', 'C'] }
+      { name: 'C Major Bebop', pattern: '1-2-3-4-5-#5-6-7', notes: ['C', 'D', 'E', 'F', 'G', 'G#', 'A', 'B'] }
     ],
     subsections: [
       {
         id: 'jazz-7-1',
         title: 'The Chromatic Passing Tone',
-        content: 'Major bebop scale adds major 7th between 6 and root. Creates flowing lines.',
+        content: 'Major bebop scale adds #5 (G#) between 5 and 6. Creates flowing lines with 8 notes.',
         technique: '8 notes instead of 7. Chord tones land on downbeats.',
         tips: ['Charlie Parker invention', 'Essential bebop sound', 'Practice ascending/descending']
       }
