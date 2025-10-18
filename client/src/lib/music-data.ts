@@ -5,14 +5,20 @@ export interface ColorGroup {
 }
 
 export const colorGroups: ColorGroup[] = [
+  // Major keys
   { name: 'Red', keys: ['A♭', 'A'], class: 'key-ab-a' },
   { name: 'Orange', keys: ['B♭', 'B'], class: 'key-bb-b' },
   { name: 'Yellow', keys: ['C', 'D♭'], class: 'key-c-db' },
   { name: 'Green', keys: ['D', 'E♭'], class: 'key-d-eb' },
   { name: 'Blue', keys: ['E', 'F'], class: 'key-e-f' },
   { name: 'Purple', keys: ['F♯', 'G'], class: 'key-fs-g' },
+  // Minor keys - all 12 minor keys mapped to color groups
   { name: 'Dark Red', keys: ['A♭m', 'Am'], class: 'key-abm-am' },
-  { name: 'Dark Orange', keys: ['B♭m', 'Bm'], class: 'key-bbm-bm' }
+  { name: 'Dark Orange', keys: ['B♭m', 'Bm'], class: 'key-bbm-bm' },
+  { name: 'Dark Yellow', keys: ['Cm', 'D♭m'], class: 'key-cm-dbm' },
+  { name: 'Dark Green', keys: ['Dm', 'E♭m'], class: 'key-dm-ebm' },
+  { name: 'Dark Blue', keys: ['Em', 'Fm'], class: 'key-em-fm' },
+  { name: 'Dark Purple', keys: ['F♯m', 'Gm'], class: 'key-fsm-gm' }
 ];
 
 export const chordTypes = [
@@ -41,7 +47,8 @@ export const exoticChordTypes = [
   'Augmented 7th'
 ];
 
-export const exoticNumbers: Record<number, string> = {
+// Basic chord numbers (dice roll 1-8 on standard dice)
+export const basicChordNumbers: Record<number, string> = {
   1: 'Major',
   2: 'Minor',
   3: '6th',
@@ -53,6 +60,21 @@ export const exoticNumbers: Record<number, string> = {
   9: 'Diminished',
   10: 'Augmented',
   11: 'Suspended'
+};
+
+// Exotic chord numbers (for premium exotic chord dice)
+export const exoticNumbers: Record<number, string> = {
+  1: '11th',
+  2: '13th',
+  3: 'Minor 9th',
+  4: 'Add9',
+  5: '6/9',
+  6: 'Diminished 7th',
+  7: 'Half-diminished',
+  8: 'Augmented 7th',
+  9: 'Major',  // Fallback
+  10: 'Minor',  // Fallback
+  11: 'Suspended'  // Fallback
 };
 
 export const getAllKeys = (): string[] => {

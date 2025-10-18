@@ -87,7 +87,10 @@ export default function SignupPage() {
 
   return (
     <motion.div 
-      className="min-h-[100svh] flex items-start justify-center bg-gradient-to-br from-purple-500 via-violet-600 to-indigo-700 px-3 py-3 sm:py-8 relative overflow-hidden"
+      className="min-h-[100svh] flex items-start justify-center px-3 py-3 sm:py-8 relative overflow-hidden"
+      style={{
+        background: 'linear-gradient(135deg, #0a0a0a 0%, #000000 50%, #0a0a0a 100%)'
+      }}
       animate={isTransitioning ? { 
         opacity: 0, 
         scale: 0.95,
@@ -99,8 +102,8 @@ export default function SignupPage() {
       }}
       transition={{ duration: 0.5, ease: "easeInOut" }}
     >
-      {/* Musical background decoration */}
-      <div className="absolute inset-0 opacity-10 text-white pointer-events-none">
+      {/* Musical background decoration with dark gold */}
+      <div className="absolute inset-0 pointer-events-none" style={{ color: 'rgba(212, 175, 55, 0.08)' }}>
         <div className="absolute top-10 left-10 text-6xl font-bold">♪</div>
         <div className="absolute top-20 right-20 text-5xl font-bold">♫</div>
         <div className="absolute bottom-32 left-1/4 text-4xl font-bold">C</div>
@@ -108,6 +111,12 @@ export default function SignupPage() {
         <div className="absolute bottom-20 right-16 text-6xl font-bold">♩</div>
         <div className="absolute top-1/2 left-12 text-5xl font-bold">Am</div>
         <div className="absolute bottom-1/4 left-1/3 text-4xl font-bold">♬</div>
+      </div>
+      
+      {/* Dark gold accent glows */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 left-0 w-96 h-96 blur-3xl" style={{ background: 'radial-gradient(circle, rgba(212, 175, 55, 0.12) 0%, transparent 70%)' }} />
+        <div className="absolute bottom-0 right-0 w-96 h-96 blur-3xl" style={{ background: 'radial-gradient(circle, rgba(212, 175, 55, 0.08) 0%, transparent 70%)' }} />
       </div>
       
       <motion.div
@@ -120,14 +129,35 @@ export default function SignupPage() {
         }}
         transition={{ duration: 0.4, ease: "easeOut" }}
       >
-        <Card className="w-full max-w-sm border-0 shadow-2xl bg-white/95 backdrop-blur-sm relative z-10">
-        <CardHeader className="space-y-2 pb-3 sm:pb-6 pt-4 sm:pt-6">
+        <Card className="w-full max-w-sm shadow-2xl bg-black/95 backdrop-blur-md relative z-10 overflow-hidden" 
+          style={{ 
+            border: '2px solid rgba(212, 175, 55, 0.3)',
+            boxShadow: '0 0 40px rgba(212, 175, 55, 0.15), 0 20px 60px rgba(0, 0, 0, 0.9)'
+          }}>
+          {/* Gold shine effect */}
+          <div className="absolute inset-0 bg-gradient-to-br from-[#D4AF37]/5 via-transparent to-transparent pointer-events-none" />
+          
+        <CardHeader className="space-y-2 pb-3 sm:pb-6 pt-4 sm:pt-6 relative">
           <div className="flex justify-center mb-2">
-            <div className="h-14 w-14 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center shadow-lg">
-              <Music2 className="h-7 w-7 text-white" />
+            <div className="h-16 w-16 flex items-center justify-center shadow-lg relative"
+              style={{
+                background: 'linear-gradient(135deg, #D4AF37 0%, #B8941F 50%, #D4AF37 100%)',
+                boxShadow: '0 0 30px rgba(212, 175, 55, 0.4), inset 0 2px 10px rgba(255,255,255,0.2)'
+              }}>
+              <Music2 className="h-8 w-8 text-black" />
+              <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent" />
             </div>
           </div>
-          <CardTitle className="text-lg sm:text-2xl text-center font-bold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">Create account</CardTitle>
+          <CardTitle className="text-lg sm:text-3xl text-center font-bold tracking-tight" 
+            style={{
+              background: 'linear-gradient(135deg, #D4AF37 0%, #FFD700 50%, #D4AF37 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              textShadow: '0 0 20px rgba(212, 175, 55, 0.3)'
+            }}>
+            Join Guitar Dice
+          </CardTitle>
+          <p className="text-center text-sm" style={{ color: '#D4AF37' }}>Start your musical journey</p>
         </CardHeader>
         <CardContent className="px-4 sm:px-6">
           <Form {...form}>
@@ -211,19 +241,25 @@ export default function SignupPage() {
               
               <Button 
                 type="submit" 
-                className="w-full h-10 mt-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-semibold shadow-lg" 
+                className="w-full h-11 mt-2 text-black font-bold shadow-lg relative overflow-hidden group" 
                 disabled={isSubmitting}
                 data-testid="button-signup"
+                style={{
+                  background: 'linear-gradient(135deg, #D4AF37 0%, #FFD700 50%, #D4AF37 100%)',
+                  border: '1px solid rgba(255, 215, 0, 0.3)',
+                  boxShadow: '0 0 20px rgba(212, 175, 55, 0.3), 0 4px 10px rgba(0,0,0,0.5)'
+                }}
               >
-                {isSubmitting ? "Creating..." : "Create account"}
+                <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 group-hover:translate-x-full transition-transform duration-700" />
+                <span className="relative z-10">{isSubmitting ? "Creating..." : "Create account"}</span>
               </Button>
             </form>
           </Form>
           
           <div className="mt-4 text-center text-sm">
-            <span className="text-gray-600">Have an account? </span>
+            <span className="text-gray-400">Have an account? </span>
             <Link href="/login">
-              <Button variant="link" className="p-0 h-auto font-semibold text-purple-600 hover:text-purple-700" data-testid="link-login">
+              <Button variant="link" className="p-0 h-auto font-semibold hover:underline" style={{ color: '#D4AF37' }} data-testid="link-login">
                 Sign in
               </Button>
             </Link>
