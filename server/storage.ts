@@ -32,6 +32,7 @@ export interface IStorage {
   // Subscription methods
   updateUserStripeInfo(userId: string, stripeCustomerId: string, stripeSubscriptionId: string): Promise<User | undefined>;
   updateSubscriptionStatus(userId: string, status: string, expiry?: Date): Promise<User | undefined>;
+  getUserByStripeCustomer(customerId: string): Promise<[User | undefined]>;
   
   // Usage tracking methods
   incrementDiceRoll(userId: string): Promise<User | undefined>;
@@ -227,6 +228,10 @@ export class DatabaseStorage implements IStorage {
     return user;
   }
 
+  async getUserByStripeCustomer(customerId: string): Promise<[User | undefined]> {
+    const [user] = await db.select().from(users).where(eq(users.stripeCustomerId, customerId));
+    return [user];
+  }
 
   // Usage tracking methods
   async canUseDiceRoll(userId: string): Promise<boolean> {

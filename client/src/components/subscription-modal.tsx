@@ -19,19 +19,24 @@ export default function SubscriptionModal({ open, onOpenChange }: SubscriptionMo
   const handleUpgrade = async () => {
     setIsLoading(true);
     try {
-      // For now, just show a success message since Stripe integration needs price setup
-      toast({
-        title: "Upgrade Coming Soon!",
-        description: "Premium subscription features will be available soon. Thanks for your interest!",
-      });
-      onOpenChange(false);
-    } catch (error) {
+      const response = await apiRequest('POST', '/api/subscription/create-checkout', {});
+      
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message || 'Failed to create checkout session');
+      }
+      
+      const { url } = await response.json();
+      
+      // Redirect to Stripe Checkout
+      window.location.href = url;
+    } catch (error: any) {
+      console.error('Subscription error:', error);
       toast({
         title: "Upgrade Error",
-        description: "Something went wrong. Please try again.",
+        description: error.message || "Failed to start checkout. Please try again.",
         variant: "destructive",
       });
-    } finally {
       setIsLoading(false);
     }
   };

@@ -389,6 +389,165 @@ export async function registerRoutes(app: Express): Promise<Server> {
       return res.status(400).send({ error: { message: error.message } });
     }
   });
+
+  // Create Stripe Checkout Session for subscription
+  app.post('/api/subscription/create-checkout', isAuthenticated, csrfProtection, async (req: any, res) => {
+    try {
+      const userId = req.userId;
+      const dbUser = await storage.getUser(userId);
+
+      if (!dbUser) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+
+      // Check if user already has an active subscription
+      if (dbUser.subscriptionStatus === 'active' && dbUser.subscriptionExpiry && new Date(dbUser.subscriptionExpiry) > new Date()) {
+        return res.status(400).json({ message: 'You already have an active subscription' });
+      }
+
+      // Get or create Stripe customer
+      let customerId = dbUser.stripeCustomerId;
+      if (!customerId) {
+        const customer = await stripe.customers.create({
+          email: dbUser.email,
+          metadata: {
+            userId: dbUser.id,
+            username: dbUser.username || ''
+          }
+        });
+        customerId = customer.id;
+        await storage.updateUserStripeInfo(userId, customerId, '');
+      }
+
+      // Create checkout session
+      const session = await stripe.checkout.sessions.create({
+        customer: customerId,
+        payment_method_types: ['card'],
+        line_items: [
+          {
+            price: process.env.STRIPE_PRICE_ID || 'price_PLACEHOLDER',
+            quantity: 1,
+          },
+        ],
+        mode: 'subscription',
+        success_url: `${req.protocol}://${req.get('host')}/?subscription=success`,
+        cancel_url: `${req.protocol}://${req.get('host')}/?subscription=cancelled`,
+        metadata: {
+          userId: dbUser.id
+        }
+      });
+
+      res.json({ url: session.url });
+    } catch (error: any) {
+      console.error("Stripe checkout error:", error);
+      res.status(500).json({ message: error.message || 'Failed to create checkout session' });
+    }
+  });
+
+  // Stripe webhook handler
+  app.post('/api/stripe/webhook', express.raw({type: 'application/json'}), async (req, res) => {
+    const sig = req.headers['stripe-signature'];
+    const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+
+    if (!sig || !webhookSecret) {
+      console.error('Missing Stripe signature or webhook secret');
+      return res.status(400).send('Webhook Error: Missing signature or secret');
+    }
+
+    let event;
+    try {
+      event = stripe.webhooks.constructEvent(req.body, sig, webhookSecret);
+    } catch (err: any) {
+      console.error('Webhook signature verification failed:', err.message);
+      return res.status(400).send(`Webhook Error: ${err.message}`);
+    }
+
+    try {
+      switch (event.type) {
+        case 'checkout.session.completed': {
+          const session = event.data.object;
+          const userId = session.metadata?.userId;
+          const customerId = session.customer as string;
+          const subscriptionId = session.subscription as string;
+
+          if (userId && subscriptionId) {
+            await storage.updateUserStripeInfo(userId, customerId, subscriptionId);
+            
+            const subscription = await stripe.subscriptions.retrieve(subscriptionId);
+            const expiryDate = new Date((subscription as any).current_period_end * 1000);
+            await storage.updateSubscriptionStatus(userId, 'active', expiryDate);
+            
+            console.log(`Subscription activated for user ${userId}`);
+          }
+          break;
+        }
+
+        case 'customer.subscription.updated': {
+          const subscription = event.data.object as any;
+          const customerId = subscription.customer as string;
+          
+          const [dbUser] = await storage.getUserByStripeCustomer(customerId);
+          if (dbUser) {
+            const expiryDate = new Date(subscription.current_period_end * 1000);
+            const status = subscription.status === 'active' ? 'active' : subscription.status;
+            await storage.updateSubscriptionStatus(dbUser.id, status, expiryDate);
+            console.log(`Subscription updated for user ${dbUser.id}: ${status}`);
+          }
+          break;
+        }
+
+        case 'customer.subscription.deleted': {
+          const subscription = event.data.object;
+          const customerId = subscription.customer as string;
+          
+          const [dbUser] = await storage.getUserByStripeCustomer(customerId);
+          if (dbUser) {
+            await storage.updateSubscriptionStatus(dbUser.id, 'canceled');
+            console.log(`Subscription canceled for user ${dbUser.id}`);
+          }
+          break;
+        }
+
+        case 'invoice.payment_failed': {
+          const invoice = event.data.object;
+          const customerId = invoice.customer as string;
+          
+          const [dbUser] = await storage.getUserByStripeCustomer(customerId);
+          if (dbUser) {
+            await storage.updateSubscriptionStatus(dbUser.id, 'past_due');
+            console.log(`Payment failed for user ${dbUser.id}`);
+          }
+          break;
+        }
+      }
+
+      res.json({ received: true });
+    } catch (error) {
+      console.error('Webhook handler error:', error);
+      res.status(500).json({ error: 'Webhook handler failed' });
+    }
+  });
+
+  // Cancel subscription
+  app.post('/api/subscription/cancel', isAuthenticated, csrfProtection, async (req: any, res) => {
+    try {
+      const userId = req.userId;
+      const dbUser = await storage.getUser(userId);
+
+      if (!dbUser?.stripeSubscriptionId) {
+        return res.status(404).json({ message: 'No active subscription found' });
+      }
+
+      await stripe.subscriptions.cancel(dbUser.stripeSubscriptionId);
+      await storage.updateSubscriptionStatus(userId, 'canceled');
+
+      res.json({ message: 'Subscription canceled successfully' });
+    } catch (error: any) {
+      console.error("Subscription cancellation error:", error);
+      res.status(500).json({ message: error.message || 'Failed to cancel subscription' });
+    }
+  });
+
   // Chord progression routes
   app.get("/api/chord-progressions", async (req, res) => {
     try {
