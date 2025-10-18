@@ -2,11 +2,7 @@ import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Music, Crown, Users, Zap, Gift, Play } from "lucide-react";
-import { useAuthContext } from "@/contexts/AuthContext";
+import { Music } from "lucide-react";
 
 interface AuthGateProps {
   isOpen: boolean;
@@ -17,8 +13,6 @@ export default function AuthGate({ isOpen, onClose }: AuthGateProps) {
   const [, setLocation] = useLocation();
   const [isSigningUp, setIsSigningUp] = useState(false);
   const [referralCode, setReferralCode] = useState('');
-  const [showReferralInput, setShowReferralInput] = useState(false);
-  const { activateDemoMode } = useAuthContext();
 
   // Check URL for referral code
   useEffect(() => {
@@ -26,7 +20,6 @@ export default function AuthGate({ isOpen, onClose }: AuthGateProps) {
     const refCode = urlParams.get('ref');
     if (refCode) {
       setReferralCode(refCode.toUpperCase());
-      setShowReferralInput(true);
     }
   }, []);
 
@@ -91,24 +84,6 @@ export default function AuthGate({ isOpen, onClose }: AuthGateProps) {
           >
             Sign In
           </Button>
-          
-          {/* Demo Mode Button */}
-          {import.meta.env.VITE_DEMO_ENABLED !== 'false' && (
-            <div className="pt-2 border-t">
-              <Button 
-                variant="ghost" 
-                className="w-full text-sm"
-                onClick={() => {
-                  activateDemoMode();
-                  onClose?.();
-                }}
-                data-testid="button-demo-mode"
-              >
-                <Play className="mr-2 h-4 w-4" />
-                Continue as Guest
-              </Button>
-            </div>
-          )}
         </div>
       </DialogContent>
     </Dialog>

@@ -6,15 +6,12 @@ interface AuthContextType {
   user: User | undefined;
   isLoading: boolean;
   isAuthenticated: boolean;
-  isDemoMode: boolean;
-  activateDemoMode: () => void;
-  exitDemoMode: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const auth = useAuth(); // Single call to useAuth at the root level
+  const auth = useAuth();
   
   return (
     <AuthContext.Provider value={auth}>

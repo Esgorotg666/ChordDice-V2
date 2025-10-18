@@ -8,21 +8,20 @@ interface SubscriptionStatus {
 }
 
 export function useSubscription() {
-  const authContext = useAuthContext();
-  const { isAuthenticated, isDemoMode } = authContext;
+  const { isAuthenticated, user } = useAuthContext();
 
   const { data: subscription, isLoading } = useQuery<SubscriptionStatus>({
     queryKey: ["/api/subscription/status"],
-    enabled: isAuthenticated && !isDemoMode,
+    enabled: isAuthenticated,
     retry: false,
   });
 
-  // Demo mode: always return premium subscription status
-  // This ensures demo users have full access to all premium features
-  if (isDemoMode) {
+  // Test users bypass all subscription checks
+  const isTestUser = user?.isTestUser === true;
+  if (isTestUser) {
     return {
       hasActiveSubscription: true,
-      subscriptionStatus: 'premium' as const,
+      subscriptionStatus: 'active' as const,
       subscriptionExpiry: undefined,
       isLoading: false,
     };
