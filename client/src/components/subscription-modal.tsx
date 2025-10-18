@@ -66,39 +66,39 @@ export default function SubscriptionModal({ open, onOpenChange }: SubscriptionMo
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-md mx-auto" data-testid="subscription-modal">
-        <DialogHeader>
-          <DialogTitle className="flex items-center justify-center gap-2">
+      <DialogContent className="max-w-sm mx-auto max-h-[90vh] overflow-y-auto" data-testid="subscription-modal">
+        <DialogHeader className="pb-2">
+          <DialogTitle className="flex items-center justify-center gap-2 text-lg">
             <Crown className="h-5 w-5 text-primary" />
             Upgrade to Premium
           </DialogTitle>
         </DialogHeader>
 
-        <div className="space-y-4">
+        <div className="space-y-3">
           {/* Pricing Card */}
           <Card className="border-primary/20">
-            <CardHeader className="text-center">
-              <CardTitle className="flex items-center justify-center gap-2">
-                <Badge variant="secondary" className="bg-primary/10 text-primary">
+            <CardHeader className="text-center py-4">
+              <CardTitle className="flex items-center justify-center gap-2 mb-2">
+                <Badge variant="secondary" className="bg-primary/10 text-primary text-xs">
                   <Crown className="mr-1 h-3 w-3" />
-                  Premium Plan
+                  Premium
                 </Badge>
               </CardTitle>
-              <div className="text-3xl font-bold text-primary">$4.99</div>
-              <CardDescription>per month</CardDescription>
+              <div className="text-2xl font-bold text-primary">$4.99</div>
+              <CardDescription className="text-xs">per month</CardDescription>
             </CardHeader>
           </Card>
 
           {/* Features List */}
-          <div className="space-y-3">
+          <div className="space-y-2.5">
             {features.map((feature, index) => (
-              <div key={index} className="flex items-start gap-3">
-                <div className="bg-primary/10 p-2 rounded-full flex-shrink-0">
-                  {feature.icon}
+              <div key={index} className="flex items-start gap-2.5">
+                <div className="bg-primary/10 p-1.5 rounded-full flex-shrink-0">
+                  <div className="h-4 w-4">{feature.icon}</div>
                 </div>
                 <div>
-                  <h4 className="font-medium text-sm">{feature.title}</h4>
-                  <p className="text-xs text-muted-foreground">{feature.description}</p>
+                  <h4 className="font-medium text-sm leading-tight">{feature.title}</h4>
+                  <p className="text-xs text-muted-foreground leading-snug">{feature.description}</p>
                 </div>
               </div>
             ))}
@@ -107,7 +107,7 @@ export default function SubscriptionModal({ open, onOpenChange }: SubscriptionMo
           {/* Upgrade Button */}
           <Button 
             onClick={handleUpgrade} 
-            className="w-full" 
+            className="w-full h-10" 
             disabled={isLoading}
             data-testid="button-upgrade-premium"
           >
@@ -119,9 +119,9 @@ export default function SubscriptionModal({ open, onOpenChange }: SubscriptionMo
             {isLoading ? "Processing..." : "Upgrade Now"}
           </Button>
 
-          <div className="text-center">
-            <p className="text-xs text-muted-foreground">
-              Cancel anytime • 7-day free trial • No commitment
+          <div className="text-center pt-1">
+            <p className="text-xs text-muted-foreground leading-tight">
+              Cancel anytime • No commitment
             </p>
           </div>
         </div>
