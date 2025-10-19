@@ -1150,24 +1150,58 @@ export const metalLessons: Lesson[] = [
     id: 'metal-11',
     difficulty: 'intermediate',
     genre: 'metal',
-    title: 'Tapping - Two-Hand Technique',
-    description: 'Play notes using both hands on fretboard',
-    fretboardPatterns: [],
-    scales: [],
+    title: 'Two-Hand Tapping - Music Theory Foundation',
+    description: 'Master tapping with proper chord and scale relationships',
+    fretboardPatterns: [
+      { name: 'E Major Fretting (Left Hand)', positions: [0, 2, 1, 'x', 'x', 'x'], fingers: [0, 2, 1, 0, 0, 0] },
+      { name: 'A Minor Fretting (Left Hand)', positions: ['x', 0, 2, 2, 'x', 'x'], fingers: [0, 0, 2, 3, 0, 0] }
+    ],
+    scales: [
+      { name: 'E Major Scale (for Tapping Hand)', pattern: 'Root-2nd-3rd-4th-5th-6th-7th', notes: ['E', 'F#', 'G#', 'A', 'B', 'C#', 'D#'] },
+      { name: 'A Natural Minor Scale (for Tapping Hand)', pattern: 'Root-2nd-b3-4th-5th-b6-b7', notes: ['A', 'B', 'C', 'D', 'E', 'F', 'G'] }
+    ],
     subsections: [
       {
         id: 'metal-11-1',
-        title: 'Basic Tapping',
-        content: 'Fret G string fret 5 (left hand). TAP fret 12 with right index finger. Pull off to 5. Hammer back to 12. Creates fast runs.',
-        technique: 'Right hand taps firmly behind fret. Pull off slightly downward. Creates hammer-on sound.',
-        tips: ['Eddie Van Halen popularized', 'Sounds impossible', 'Actually not that hard']
+        title: 'Understanding the Theory',
+        content: 'Two-hand tapping splits musical roles: FRETTING HAND (left) establishes the harmonic foundation by playing the root note and chord tones (3rd, 5th). TAPPING HAND (right) plays melodic intervals from the associated scale, creating the "lead" part. All tapped notes must be FROM THE SCALE of the chord you\'re playing.',
+        technique: 'Think of it like this: Your left hand plays the "rhythm guitar" chord. Your right hand simultaneously plays the "lead guitar" solo using scale notes that fit that chord.',
+        tips: ['This is why it sounds so full and rich', 'Not random tapping - theory-based note selection', 'Each hand has a specific musical purpose']
       },
       {
         id: 'metal-11-2',
-        title: 'Classic Tapping Lick',
-        content: 'Right hand taps 12, pull to 5, pull to open. Repeat. Then tap 15, pull 7, pull 3. Ascending pattern.',
-        technique: 'Right hand index does all tapping. Left hand executes pull-offs.',
-        tips: ['Eruption uses this technique', 'Requires gain/distortion', 'Practice slowly first']
+        title: 'E Major Tapping Example',
+        content: 'LEFT HAND: Fret E major chord - Root E (low E open), B (A string fret 2), G# (D string fret 1). RIGHT HAND: Tap notes from E MAJOR SCALE on the low E string: Tap F# (fret 2), pull off to E (open). Then tap A (fret 5), pull to E. Then tap B (fret 7), pull to E.',
+        technique: 'Your left hand holds the E major chord foundation the entire time. Your right index finger taps F#-A-B (all from E major scale), pulling off to the root E each time. This creates cascading melodic runs over a sustained chord.',
+        tips: ['Start with low E string only', 'Left hand NEVER moves - just holds chord', 'Right hand taps scale intervals: 2nd (F#), 4th (A), 5th (B)']
+      },
+      {
+        id: 'metal-11-3',
+        title: 'A Minor Tapping Example',
+        content: 'LEFT HAND: Fret A minor chord - Root A (A string open), E (D string fret 2), C (G string fret 2). RIGHT HAND: Tap A MINOR SCALE notes on A string: Tap B (fret 2), pull to A (open). Tap D (fret 5), pull to A. Tap F (fret 8), pull to A.',
+        technique: 'Left hand maintains Am chord shape. Right hand taps B-D-F from A natural minor scale (A-B-C-D-E-F-G). Each tap resolves back to the root note A, creating a rhythmic melodic pattern.',
+        tips: ['Darker, sadder sound than major', 'Pull-offs should be firm and deliberate', 'Practice slowly: tap-pull, tap-pull, tap-pull']
+      },
+      {
+        id: 'metal-11-4',
+        title: 'C Dominant 7th - Mixolydian Mode',
+        content: 'LEFT HAND: Fret C7 chord - Root C (A string fret 3), plus other chord tones. RIGHT HAND: Use C MIXOLYDIAN scale (C-D-E-F-G-A-Bb) for tapping. The Bb (flatted 7th) gives the dominant sound. Tap D (A string fret 5), pull to C. Tap F (fret 8), pull to C.',
+        technique: 'Dominant 7th chords use Mixolydian mode (major scale with flatted 7th). This creates bluesy, rock tension. The tapped notes D and F are the 2nd and 4th scale degrees, pulling back to the C root.',
+        tips: ['Advanced: different scale for dominant chords', 'Mixolydian = major scale with b7', 'Eddie Van Halen used this extensively']
+      },
+      {
+        id: 'metal-11-5',
+        title: 'Right Hand Tapping Technique',
+        content: 'Use your right INDEX FINGER as the tapping finger. Strike the string FIRMLY directly behind the fret wire (just like your left hand fingers). When pulling off, pull the finger SLIGHTLY DOWNWARD/ACROSS the string - this creates a "plucking" motion that sounds the lower note clearly.',
+        technique: 'Don\'t just lift your finger straight up - that creates a weak pull-off. Pull DOWN and slightly toward the floor, like you\'re flicking the string. This snapping motion is crucial for clear articulation.',
+        tips: ['Tap with authority - don\'t be timid', 'Pull-offs need a "snap" motion', 'Same firmness as left-hand fretting']
+      },
+      {
+        id: 'metal-11-6',
+        title: 'Building Speed and Fluidity',
+        content: 'Start with ONE tap per chord: tap-pull, tap-pull (very slow). Add a second tap: tap-pull-tap-pull (still slow). Build to three taps: tap-pull-tap-pull-tap-pull. Gradually increase tempo from 60 BPM to 120+ BPM. The goal is smooth, even articulation.',
+        technique: 'Use a metronome. Start absurdly slow - one tap every 2 seconds. Focus on clean pull-offs. Speed comes naturally after 2-3 weeks of daily practice.',
+        tips: ['Patience is everything', 'Clean and slow beats fast and sloppy', 'Eddie practiced this for MONTHS before Eruption']
       }
     ]
   },

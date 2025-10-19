@@ -1,0 +1,32 @@
+:
+•  Fretting Hand Role: Presses down the root note (e.g., E on the low E string) and basic chord tones (e.g., major 3rd and perfect 5th for a major chord). This establishes the harmonic foundation.
+•  Picking Hand Role: Taps higher frets on the same or adjacent strings to sound notes from the associated scale (e.g., major scale for major chords: root, 2nd, 3rd, 4th, 5th, 6th, 7th). It then pulls off (releases the tap to sound a lower note) or hammers on for fluid phrasing, often resolving back to the root for musical resolution.
+•  Key Concept: All tapped/pull-off notes must be ‘from the root note of the chord in the scale,’ meaning they are intervals relative to the root (e.g., tapping the 5th interval pulls off to the root). This creates a ‘second-hand note tapping’ effect, integrating rhythm and lead playing.
+•  Guitar Assumptions: Standard tuning (E-A-D-G-B-E). Support open strings and fretted positions (e.g., root at fret 0 or 5). Handle right-handed and left-handed orientations via app settings.
+•  Music Theory Foundation: For a given root (e.g., C), chord type (e.g., major: root + major 3rd + perfect 5th = C-E-G), and scale (e.g., C major: C-D-E-F-G-A-B). Tapping sequences should only use scale degrees to avoid dissonance unless advanced modes are selected.
+App Feature Requirements:
+1.  User Input Interface:
+	•  Allow selection of root note (dropdown: A, A#/Bb, B, C, etc., up to G#/Ab).
+	•  Chord type options: Major, Minor, Dominant 7th, Minor 7th, Sus4, Diminished (expandable via updates).
+	•  Scale association: Auto-suggest based on chord (e.g., major scale for major chord, minor for minor), with manual overrides (e.g., pentatonic, blues, modes like Mixolydian).
+	•  Additional params: Fret position for root (default: lowest possible), tempo for playback (60-120 BPM), number of tapping notes in sequence (3-8 for beginners).
+	•  UI: Use a clean mobile/web form with sliders, buttons, and a virtual keyboard for root selection.
+2.  Chart Generation Logic:
+	•  Algorithm Steps: a. Calculate chord intervals from root (e.g., major: +4 semitones for 3rd, +7 for 5th). b. Map to fretboard: Find string/fret positions for root and chord tones (prioritize low strings for bass root). c. Generate scale from root (e.g., for C major, positions across all strings). d. Create tapping sequences: Start from root, tap ascending/descending scale notes (e.g., root -> tap 3rd -> pull-off to root; or root -> tap 5th -> tap 7th -> pull-off cascade). e. Ensure ergonomic feasibility: Avoid stretches >4 frets per hand; suggest alternative fingerings.
+	•  Output Formats:
+		•  Visual Fretboard Diagram: Interactive SVG or canvas-based view showing strings as vertical lines, frets horizontal. Mark fretting hand notes with solid dots (labeled ‘F’), picking hand taps with hollow dots/arrows (labeled ‘T’ for tap, ‘P’ for pull-off, ‘H’ for hammer-on).
+		•  Tab Notation: Text-based TAB with numbers (e.g., e|—–t12p7h5p0—–| for E string taps/pull-offs from root).
+		•  Chord Box: Standard chord diagram for the base structure.
+		•  Audio Playback: Integrate a simple MIDI or audio engine (e.g., using Web Audio API or Tone.js) to demo the sequence at selected tempo.
+	•  Customization: Users can edit sequences (add/remove notes), transpose keys, or export as PDF/PNG/Guitar Pro file (.gp).
+3.  Technical Implementation Guidelines:
+	•  Frontend: Use JavaScript/React for web/mobile. Libraries: VexFlow or AlphaTab for music notation rendering; Fretboard.js for interactive diagrams.
+	•  Backend (if needed): Python/Flask or Node.js for complex calculations (e.g., scale generation via music21 library in Python).
+	•  Data Structures: Store fretboard as a 2D array (strings x frets, up to 24 frets). Chord/scale data in JSON (e.g., {root: ‘E’, type: ‘major’, intervals: [0,4,7], scale: [0,2,4,5,7,9,11]} in semitones).
+	•  Error Handling: Validate inputs (e.g., invalid root), handle edge cases (e.g., high-fret roots causing string wraps), provide fallbacks (e.g., suggest open-position if frets exceed 24).
+	•  Accessibility: ARIA labels for diagrams, color-blind friendly (e.g., patterns instead of just colors), voice-over support for tabs.
+	•  Performance: Optimize for mobile (lazy-load diagrams), ensure real-time updates on input changes.
+4.  Examples to Implement:
+	•  E Major Example: Root E (low E open). Chord: E (fret 0), G# (A string fret 11? Wait, correct to efficient: often barred at 12th for octave, but default low: E open, B on A fret 2, G# on D fret 1? Standard open E: e0 B0 G#0 D1 A2 E0. Tapping: Tap F# (E string fret 2), pull-off to 0; extend to A (fret 5).
+	•  A Minor Example: Root A (A open). Chord: A0, E0 (D5? Standard: A0 E5 A0 E0 A0 E0 open. Tapping in A minor scale (A-B-C-D-E-F-G): Tap B (A fret 2), pull-off; tap D (fret 5).
+	•  C7 Dominant: Root C (A fret 3). Add Bb (flat 7th). Scale: Mixolydian. Tapping: From C, tap D ( +2 semitones), pull-off

@@ -110,6 +110,19 @@ Preferred communication style: Simple, everyday language.
 - **Preserved Accuracy**: All note spellings maintain flat/sharp accuracy from scale.notes array (Dorian/Phrygian use flats, Ionian/Lydian use sharps)
 - **React Optimization**: Key-based re-rendering ensures smooth toggle transitions without stale DOM elements
 
+### Two-Hand Tapping Classroom Lesson Rebuild (October 19, 2025)
+- **Music Theory Foundation**: Completely rebuilt metal-11 tapping lesson with proper chord-scale relationships
+- **Fretting Hand Role**: Clear explanation that left hand establishes harmonic foundation (root + chord tones)
+- **Tapping Hand Role**: Right hand plays melodic scale intervals relative to the chord being held
+- **Practical Examples**: Three detailed examples with fretboard positions:
+  - E Major: Left hand holds E chord (E, B, G#), right hand taps E major scale notes (F#, A, B)
+  - A Minor: Left hand holds Am chord (A, E, C), right hand taps A minor scale notes (B, D, F)
+  - C Dominant 7th: Left hand holds C7 chord, right hand uses C Mixolydian mode (with Bb)
+- **Technique Details**: Specific instructions for tap firmness, pull-off "snap" motion, and building speed
+- **6 Subsections**: Expanded from 2 to 6 comprehensive subsections covering theory, examples, and practice methods
+- **Scale Integration**: Added fretboard patterns showing left-hand chord shapes and scale info for tapping hand
+- **Progressive Training**: Step-by-step tempo building from 60 BPM to 120+ BPM with metronome guidance
+
 # External Dependencies
 
 - **Database**: Neon Database (PostgreSQL).
