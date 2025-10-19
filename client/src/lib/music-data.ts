@@ -186,53 +186,54 @@ export const chordDiagrams: Record<string, ChordDiagram> = {
   'D': { name: 'D Major', positions: ['X', 'X', 0, 2, 3, 2], fingers: [0, 0, 0, 1, 3, 2] },
   'E': { name: 'E Major', positions: [0, 2, 2, 1, 0, 0], fingers: [0, 2, 3, 1, 0, 0] },
   'F': { name: 'F Major', positions: [1, 3, 3, 2, 1, 1], fingers: [1, 3, 4, 2, 1, 1], fret: 1 },
-  'G': { name: 'G Major', positions: [3, 2, 0, 0, 3, 3], fingers: [3, 2, 0, 0, 4, 4] },
+  'G': { name: 'G Major', positions: [3, 2, 0, 0, 0, 3], fingers: [3, 2, 0, 0, 0, 4] },
   'A': { name: 'A Major', positions: ['X', 0, 2, 2, 2, 0], fingers: [0, 0, 1, 2, 3, 0] },
-  'B': { name: 'B Major', positions: ['X', 2, 4, 4, 4, 2], fingers: [0, 1, 3, 3, 3, 1], fret: 2 },
+  'B': { name: 'B Major', positions: ['X', 2, 4, 4, 4, 2], fingers: [0, 1, 3, 3, 3, 1] },
 
   // Minor chords  
   'Am': { name: 'A Minor', positions: ['X', 0, 2, 2, 1, 0], fingers: [0, 0, 2, 3, 1, 0] },
+  'Bm': { name: 'B Minor', positions: ['X', 2, 4, 4, 3, 2], fingers: [0, 1, 3, 4, 2, 1] },
+  'Cm': { name: 'C Minor', positions: ['X', 3, 5, 5, 4, 3], fingers: [0, 1, 3, 4, 2, 1] },
   'Dm': { name: 'D Minor', positions: ['X', 'X', 0, 2, 3, 1], fingers: [0, 0, 0, 2, 3, 1] },
   'Em': { name: 'E Minor', positions: [0, 2, 2, 0, 0, 0], fingers: [0, 2, 3, 0, 0, 0] },
   'Fm': { name: 'F Minor', positions: [1, 3, 3, 1, 1, 1], fingers: [1, 3, 4, 1, 1, 1], fret: 1 },
   'Gm': { name: 'G Minor', positions: [3, 5, 5, 3, 3, 3], fingers: [1, 3, 4, 1, 1, 1], fret: 3 },
-  'Bm': { name: 'B Minor', positions: ['X', 2, 4, 4, 3, 2], fingers: [0, 1, 3, 4, 2, 1], fret: 2 },
-  'Cm': { name: 'C Minor', positions: ['X', 3, 5, 5, 4, 3], fingers: [0, 1, 3, 4, 2, 1], fret: 3 },
 
   // 7th chords - Dominant
+  'A7': { name: 'A Dominant 7', positions: ['X', 0, 2, 0, 2, 0], fingers: [0, 0, 2, 0, 3, 0] },
+  'B7': { name: 'B Dominant 7', positions: ['X', 2, 4, 2, 4, 2], fingers: [0, 1, 3, 1, 4, 1] },
   'C7': { name: 'C Dominant 7', positions: ['X', 3, 2, 3, 1, 0], fingers: [0, 3, 2, 4, 1, 0] },
   'D7': { name: 'D Dominant 7', positions: ['X', 'X', 0, 2, 1, 2], fingers: [0, 0, 0, 2, 1, 3] },
   'E7': { name: 'E Dominant 7', positions: [0, 2, 0, 1, 0, 0], fingers: [0, 2, 0, 1, 0, 0] },
   'F7': { name: 'F Dominant 7', positions: [1, 3, 1, 2, 1, 1], fingers: [1, 3, 1, 2, 1, 1], fret: 1 },
   'G7': { name: 'G Dominant 7', positions: [3, 2, 0, 0, 0, 1], fingers: [3, 2, 0, 0, 0, 1] },
-  'A7': { name: 'A Dominant 7', positions: ['X', 0, 2, 0, 2, 0], fingers: [0, 0, 2, 0, 3, 0] },
-  'B7': { name: 'B Dominant 7', positions: ['X', 2, 1, 2, 0, 2], fingers: [0, 2, 1, 3, 0, 4] },
 
   // Major 7th chords
-  'CM7': { name: 'C Major 7', positions: ['X', 3, 2, 0, 0, 0], fingers: [0, 3, 2, 0, 0, 0] },
-  'DM7': { name: 'D Major 7', positions: ['X', 'X', 0, 2, 2, 2], fingers: [0, 0, 0, 1, 1, 1] },
-  'EM7': { name: 'E Major 7', positions: [0, 2, 1, 1, 0, 0], fingers: [0, 2, 1, 1, 0, 0] },
-  'FM7': { name: 'F Major 7', positions: [1, 3, 3, 2, 1, 0], fingers: [1, 3, 4, 2, 1, 0], fret: 1 },
-  'GM7': { name: 'G Major 7', positions: [3, 2, 0, 0, 0, 2], fingers: [3, 2, 0, 0, 0, 1] },
   'AM7': { name: 'A Major 7', positions: ['X', 0, 2, 1, 2, 0], fingers: [0, 0, 2, 1, 3, 0] },
-  'BM7': { name: 'B Major 7', positions: ['X', 2, 4, 3, 4, 2], fingers: [0, 1, 3, 2, 4, 1], fret: 2 },
+  'BM7': { name: 'B Major 7', positions: ['X', 2, 4, 3, 4, 2], fingers: [0, 1, 3, 2, 4, 1] },
+  'CM7': { name: 'C Major 7', positions: ['X', 3, 2, 0, 0, 0], fingers: [0, 3, 2, 0, 0, 0] },
+  'DM7': { name: 'D Major 7', positions: ['X', 'X', 0, 2, 2, 2], fingers: [0, 0, 0, 1, 2, 3] },
+  'EM7': { name: 'E Major 7', positions: [0, 2, 1, 1, 0, 0], fingers: [0, 2, 1, 1, 0, 0] },
+  'FM7': { name: 'F Major 7', positions: [1, 3, 2, 2, 1, 1], fingers: [1, 4, 2, 3, 1, 1], fret: 1 },
+  'GM7': { name: 'G Major 7', positions: [3, 2, 0, 0, 0, 2], fingers: [3, 2, 0, 0, 0, 1] },
 
   // Minor 7th chords
   'Am7': { name: 'A Minor 7', positions: ['X', 0, 2, 0, 1, 0], fingers: [0, 0, 2, 0, 1, 0] },
+  'Bm7': { name: 'B Minor 7', positions: ['X', 2, 4, 2, 3, 2], fingers: [0, 1, 3, 1, 2, 1] },
+  'Cm7': { name: 'C Minor 7', positions: ['X', 3, 5, 3, 4, 3], fingers: [0, 1, 3, 1, 2, 1] },
   'Dm7': { name: 'D Minor 7', positions: ['X', 'X', 0, 2, 1, 1], fingers: [0, 0, 0, 2, 1, 1] },
   'Em7': { name: 'E Minor 7', positions: [0, 2, 0, 0, 0, 0], fingers: [0, 2, 0, 0, 0, 0] },
   'Fm7': { name: 'F Minor 7', positions: [1, 3, 1, 1, 1, 1], fingers: [1, 3, 1, 1, 1, 1], fret: 1 },
   'Gm7': { name: 'G Minor 7', positions: [3, 5, 3, 3, 3, 3], fingers: [1, 3, 1, 1, 1, 1], fret: 3 },
-  'Bm7': { name: 'B Minor 7', positions: ['X', 2, 0, 2, 0, 2], fingers: [0, 2, 0, 3, 0, 4] },
-  'Cm7': { name: 'C Minor 7', positions: ['X', 3, 1, 3, 1, 3], fingers: [0, 3, 1, 4, 1, 2], fret: 3 },
 
   // Suspended chords
   'Asus': { name: 'A Suspended', positions: ['X', 0, 2, 2, 3, 0], fingers: [0, 0, 1, 2, 3, 0] },
-  'Csus': { name: 'C Suspended', positions: ['X', 3, 3, 0, 1, 1], fingers: [0, 2, 3, 0, 1, 1] },
-  'Dsus': { name: 'D Suspended', positions: ['X', 'X', 0, 2, 3, 3], fingers: [0, 0, 0, 1, 2, 3] },
+  'Bsus': { name: 'B Suspended 4th', positions: ['X', 2, 4, 4, 5, 2], fingers: [0, 1, 2, 3, 4, 1] },
+  'Csus': { name: 'C Suspended 4th', positions: ['X', 3, 3, 0, 1, 1], fingers: [0, 2, 3, 0, 1, 1] },
+  'Dsus': { name: 'D Suspended 4th', positions: ['X', 'X', 0, 2, 3, 3], fingers: [0, 0, 0, 1, 2, 3] },
   'Esus': { name: 'E Suspended', positions: [0, 2, 2, 2, 0, 0], fingers: [0, 1, 1, 1, 0, 0] },
-  'Fsus': { name: 'F Suspended', positions: [1, 3, 3, 3, 1, 1], fingers: [1, 2, 3, 4, 1, 1], fret: 1 },
-  'Gsus': { name: 'G Suspended', positions: [3, 3, 0, 0, 1, 3], fingers: [3, 4, 0, 0, 1, 3] },
+  'Fsus': { name: 'F Suspended 4th', positions: [1, 3, 3, 3, 1, 1], fingers: [1, 2, 3, 4, 1, 1], fret: 1 },
+  'Gsus': { name: 'G Suspended 4th', positions: [3, 3, 0, 0, 1, 3], fingers: [3, 4, 0, 0, 1, 2] },
 
   // Sharp/Flat root variants
   'F#': { name: 'F# Major', positions: [2, 4, 4, 3, 2, 2], fingers: [1, 3, 4, 2, 1, 1], fret: 2 },
@@ -251,68 +252,94 @@ export const chordDiagrams: Record<string, ChordDiagram> = {
   'Gbm': { name: 'Gb Minor', positions: [2, 4, 4, 2, 2, 2], fingers: [1, 3, 4, 1, 1, 1], fret: 2 },
 
   // 9th chords
-  'C9': { name: 'C Dominant 9', positions: ['X', 3, 2, 3, 3, 3], fingers: [0, 2, 1, 3, 4, 4] },
-  'D9': { name: 'D Dominant 9', positions: ['X', 5, 4, 5, 5, 5], fingers: [0, 2, 1, 3, 4, 4] },
+  'A9': { name: 'A Dominant 9', positions: ['X', 0, 2, 4, 2, 3], fingers: [0, 0, 1, 3, 2, 4] },
+  'B9': { name: 'B Dominant 9', positions: ['X', 2, 4, 2, 2, 2], fingers: [0, 1, 4, 2, 2, 2] },
+  'C9': { name: 'C Dominant 9', positions: ['X', 3, 2, 3, 3, 0], fingers: [0, 2, 1, 3, 4, 0] },
+  'D9': { name: 'D Dominant 9', positions: ['X', 'X', 0, 2, 1, 0], fingers: [0, 0, 0, 2, 1, 0] },
   'E9': { name: 'E Dominant 9', positions: [0, 2, 0, 1, 0, 2], fingers: [0, 2, 0, 1, 0, 3] },
   'F9': { name: 'F Dominant 9', positions: [1, 3, 1, 2, 1, 3], fingers: [1, 3, 1, 2, 1, 4], fret: 1 },
-  'G9': { name: 'G Dominant 9', positions: [3, 2, 0, 2, 0, 1], fingers: [4, 3, 0, 2, 0, 1] },
-  'A9': { name: 'A Dominant 9', positions: ['X', 0, 2, 4, 2, 3], fingers: [0, 0, 1, 3, 2, 4] },
-  'B9': { name: 'B Dominant 9', positions: ['X', 2, 1, 2, 2, 2], fingers: [0, 2, 1, 3, 3, 3], fret: 2 },
-  'C#9': { name: 'C# Dominant 9', positions: ['X', 4, 3, 4, 4, 4], fingers: [0, 2, 1, 3, 4, 4], fret: 4 },
-  'D#9': { name: 'D# Dominant 9', positions: ['X', 6, 5, 6, 6, 6], fingers: [0, 2, 1, 3, 4, 4], fret: 6 },
-  'Eb9': { name: 'Eb Dominant 9', positions: ['X', 6, 5, 6, 6, 6], fingers: [0, 2, 1, 3, 4, 4], fret: 6 },
-  'F#9': { name: 'F# Dominant 9', positions: [2, 4, 2, 3, 2, 4], fingers: [1, 3, 1, 2, 1, 4], fret: 2 },
-  'G#9': { name: 'G# Dominant 9', positions: [4, 3, 1, 3, 1, 2], fingers: [4, 3, 1, 2, 1, 1], fret: 4 },
-  'Ab9': { name: 'Ab Dominant 9', positions: [4, 3, 1, 3, 1, 2], fingers: [4, 3, 1, 2, 1, 1], fret: 4 },
-  'A#9': { name: 'A# Dominant 9', positions: ['X', 1, 3, 5, 3, 4], fingers: [0, 1, 2, 4, 2, 3], fret: 1 },
-  'Bb9': { name: 'Bb Dominant 9', positions: ['X', 1, 3, 5, 3, 4], fingers: [0, 1, 2, 4, 2, 3], fret: 1 },
+  'G9': { name: 'G Dominant 9', positions: [3, 'X', 0, 2, 0, 1], fingers: [3, 0, 0, 2, 0, 1] },
 
   // 6th chords
+  'A6': { name: 'A Major 6th', positions: ['X', 0, 2, 2, 2, 2], fingers: [0, 0, 1, 1, 1, 1] },
+  'B6': { name: 'B Major 6th', positions: ['X', 2, 4, 4, 4, 4], fingers: [0, 1, 2, 3, 3, 3] },
   'C6': { name: 'C Major 6th', positions: ['X', 3, 2, 2, 1, 0], fingers: [0, 3, 2, 2, 1, 0] },
   'D6': { name: 'D Major 6th', positions: ['X', 'X', 0, 2, 0, 2], fingers: [0, 0, 0, 2, 0, 3] },
   'E6': { name: 'E Major 6th', positions: [0, 2, 2, 1, 2, 0], fingers: [0, 2, 3, 1, 4, 0] },
   'F6': { name: 'F Major 6th', positions: [1, 3, 3, 2, 3, 1], fingers: [1, 2, 3, 1, 4, 1], fret: 1 },
   'G6': { name: 'G Major 6th', positions: [3, 2, 0, 0, 0, 0], fingers: [3, 2, 0, 0, 0, 0] },
-  'A6': { name: 'A Major 6th', positions: ['X', 0, 2, 2, 2, 2], fingers: [0, 0, 1, 1, 1, 1] },
 
   // Minor 6th chords  
   'Am6': { name: 'A Minor 6th', positions: ['X', 0, 2, 2, 1, 2], fingers: [0, 0, 2, 3, 1, 4] },
+  'Bm6': { name: 'B Minor 6th', positions: ['X', 2, 4, 4, 3, 4], fingers: [0, 1, 2, 3, 1, 4] },
+  'Cm6': { name: 'C Minor 6th', positions: ['X', 3, 5, 0, 4, 5], fingers: [0, 1, 3, 0, 2, 4] },
   'Dm6': { name: 'D Minor 6th', positions: ['X', 'X', 0, 2, 0, 1], fingers: [0, 0, 0, 2, 0, 1] },
   'Em6': { name: 'E Minor 6th', positions: [0, 2, 2, 0, 2, 0], fingers: [0, 1, 2, 0, 3, 0] },
+  'Fm6': { name: 'F Minor 6th', positions: [1, 3, 3, 1, 3, 1], fingers: [1, 2, 3, 1, 4, 1], fret: 1 },
+  'Gm6': { name: 'G Minor 6th', positions: [3, 5, 5, 3, 5, 3], fingers: [1, 2, 3, 1, 4, 1], fret: 3 },
 
   // Diminished chords
-  'C°': { name: 'C Diminished', positions: ['X', 3, 4, 2, 4, 2], fingers: [0, 2, 4, 1, 3, 1] },
   'A°': { name: 'A Diminished', positions: ['X', 0, 2, 3, 2, 3], fingers: [0, 0, 1, 3, 2, 4] },
-  'D°': { name: 'D Diminished', positions: ['X', 'X', 0, 1, 0, 1], fingers: [0, 0, 0, 1, 0, 2] },
+  'B°': { name: 'B Diminished', positions: ['X', 2, 3, 4, 3, 'X'], fingers: [0, 1, 2, 4, 3, 0] },
+  'C°': { name: 'C Diminished', positions: ['X', 3, 4, 5, 4, 'X'], fingers: [0, 1, 2, 4, 3, 0] },
+  'D°': { name: 'D Diminished', positions: ['X', 'X', 0, 1, 3, 1], fingers: [0, 0, 0, 1, 3, 2] },
   'E°': { name: 'E Diminished', positions: ['X', 'X', 2, 3, 2, 3], fingers: [0, 0, 1, 3, 2, 4] },
-  'F#°': { name: 'F# Diminished', positions: [2, 'X', 1, 2, 1, 'X'], fingers: [2, 0, 1, 3, 1, 0] },
+  'F°': { name: 'F Diminished', positions: [1, 2, 3, 1, 3, 'X'], fingers: [1, 2, 4, 1, 3, 0], fret: 1 },
+  'G°': { name: 'G Diminished', positions: [3, 'X', 2, 3, 2, 'X'], fingers: [3, 0, 1, 4, 2, 0] },
 
   // Augmented chords  
-  'C+': { name: 'C Augmented', positions: ['X', 3, 2, 1, 1, 0], fingers: [0, 4, 3, 1, 2, 0] },
   'A+': { name: 'A Augmented', positions: ['X', 0, 3, 2, 2, 1], fingers: [0, 0, 4, 2, 3, 1] },
+  'B+': { name: 'B Augmented', positions: [3, 2, 1, 0, 0, 3], fingers: [4, 3, 2, 0, 0, 1] },
+  'C+': { name: 'C Augmented', positions: ['X', 3, 2, 1, 1, 0], fingers: [0, 4, 3, 1, 2, 0] },
+  'D+': { name: 'D Augmented', positions: ['X', 'X', 0, 3, 3, 2], fingers: [0, 0, 0, 2, 3, 1] },
   'E+': { name: 'E Augmented', positions: [0, 3, 2, 1, 1, 0], fingers: [0, 4, 3, 1, 2, 0] },
-  'F#+': { name: 'F# Augmented', positions: [2, 'X', 4, 3, 3, 'X'], fingers: [1, 0, 4, 2, 3, 0] },
+  'F+': { name: 'F Augmented', positions: [1, 0, 3, 2, 2, 1], fingers: [1, 0, 4, 2, 3, 1], fret: 1 },
   'G+': { name: 'G Augmented', positions: [3, 2, 1, 0, 0, 3], fingers: [4, 3, 2, 0, 0, 1] },
   
   // Add9 chords
   'Aadd9': { name: 'A Add9', positions: ['X', 0, 2, 4, 2, 0], fingers: [0, 0, 1, 3, 2, 0] },
+  'Badd9': { name: 'B Add9', positions: ['X', 2, 4, 6, 4, 2], fingers: [0, 1, 2, 4, 3, 1] },
+  'Cadd9': { name: 'C Add9', positions: ['X', 3, 2, 0, 3, 0], fingers: [0, 2, 1, 0, 3, 0] },
+  'Dadd9': { name: 'D Add9', positions: ['X', 'X', 0, 4, 3, 2], fingers: [0, 0, 0, 3, 2, 1] },
   'Eadd9': { name: 'E Add9', positions: [0, 2, 4, 1, 0, 0], fingers: [0, 2, 4, 1, 0, 0] },
+  'Fadd9': { name: 'F Add9', positions: [1, 0, 3, 2, 1, 3], fingers: [1, 0, 3, 2, 1, 4], fret: 1 },
+  'Gadd9': { name: 'G Add9', positions: [3, 2, 0, 2, 0, 3], fingers: [3, 2, 0, 1, 0, 4] },
   
   // Suspended 2nd chords
   'Asus2': { name: 'A Suspended 2nd', positions: ['X', 0, 2, 2, 0, 0], fingers: [0, 0, 1, 2, 0, 0] },
+  'Bsus2': { name: 'B Suspended 2nd', positions: ['X', 2, 4, 4, 2, 2], fingers: [0, 1, 3, 4, 1, 1] },
+  'Csus2': { name: 'C Suspended 2nd', positions: ['X', 3, 0, 0, 1, 0], fingers: [0, 3, 0, 0, 1, 0] },
+  'Dsus2': { name: 'D Suspended 2nd', positions: ['X', 'X', 0, 2, 3, 0], fingers: [0, 0, 0, 1, 2, 0] },
   'Esus2': { name: 'E Suspended 2nd', positions: [0, 0, 2, 2, 0, 0], fingers: [0, 0, 1, 2, 0, 0] },
+  'Fsus2': { name: 'F Suspended 2nd', positions: [1, 0, 3, 0, 1, 1], fingers: [1, 0, 3, 0, 1, 1], fret: 1 },
+  'Gsus2': { name: 'G Suspended 2nd', positions: [3, 0, 0, 0, 3, 3], fingers: [2, 0, 0, 0, 3, 4] },
   
   // Diminished 7th chords
   'A°7': { name: 'A Diminished 7th', positions: ['X', 0, 1, 2, 1, 2], fingers: [0, 0, 1, 3, 2, 4] },
+  'B°7': { name: 'B Diminished 7th', positions: ['X', 2, 3, 1, 3, 1], fingers: [0, 2, 3, 1, 4, 1] },
+  'C°7': { name: 'C Diminished 7th', positions: ['X', 3, 4, 2, 4, 'X'], fingers: [0, 2, 4, 1, 3, 0] },
+  'D°7': { name: 'D Diminished 7th', positions: ['X', 'X', 0, 1, 0, 1], fingers: [0, 0, 0, 1, 0, 2] },
   'E°7': { name: 'E Diminished 7th', positions: [0, 1, 2, 0, 2, 0], fingers: [0, 1, 3, 0, 4, 0] },
+  'F°7': { name: 'F Diminished 7th', positions: [1, 2, 0, 1, 0, 1], fingers: [2, 3, 0, 1, 0, 1], fret: 1 },
+  'G°7': { name: 'G Diminished 7th', positions: [3, 'X', 2, 3, 2, 1], fingers: [4, 0, 2, 3, 2, 1] },
   
   // Minor Major 7th chords
   'AmM7': { name: 'A Minor Major 7th', positions: ['X', 0, 2, 1, 1, 0], fingers: [0, 0, 2, 1, 1, 0] },
+  'BmM7': { name: 'B Minor Major 7th', positions: ['X', 2, 4, 3, 3, 'X'], fingers: [0, 1, 4, 2, 3, 0] },
+  'CmM7': { name: 'C Minor Major 7th', positions: ['X', 3, 5, 4, 4, 3], fingers: [0, 1, 4, 2, 3, 1] },
+  'DmM7': { name: 'D Minor Major 7th', positions: ['X', 'X', 0, 2, 2, 1], fingers: [0, 0, 0, 2, 3, 1] },
   'EmM7': { name: 'E Minor Major 7th', positions: [0, 2, 1, 0, 0, 0], fingers: [0, 2, 1, 0, 0, 0] },
+  'FmM7': { name: 'F Minor Major 7th', positions: [1, 3, 2, 1, 1, 1], fingers: [1, 4, 2, 1, 1, 1], fret: 1 },
+  'GmM7': { name: 'G Minor Major 7th', positions: [3, 5, 4, 3, 3, 3], fingers: [1, 4, 2, 1, 1, 1], fret: 3 },
   
   // 7#9 chords
   'A7#9': { name: 'A Dominant 7#9', positions: ['X', 0, 2, 3, 2, 5], fingers: [0, 0, 1, 2, 1, 4] },
+  'B7#9': { name: 'B Dominant 7#9', positions: ['X', 2, 4, 2, 4, 5], fingers: [0, 1, 3, 1, 4, 2] },
+  'C7#9': { name: 'C Dominant 7#9', positions: ['X', 3, 2, 3, 4, 'X'], fingers: [0, 2, 1, 3, 4, 0] },
+  'D7#9': { name: 'D Dominant 7#9', positions: ['X', 'X', 0, 2, 1, 3], fingers: [0, 0, 0, 2, 1, 4] },
   'E7#9': { name: 'E Dominant 7#9', positions: ['X', 'X', 2, 4, 3, 5], fingers: [0, 0, 1, 3, 2, 4] },
+  'F7#9': { name: 'F Dominant 7#9', positions: [1, 3, 1, 2, 1, 4], fingers: [1, 3, 1, 2, 1, 4], fret: 1 },
+  'G7#9': { name: 'G Dominant 7#9', positions: [3, 'X', 3, 4, 4, 'X'], fingers: [1, 0, 2, 3, 4, 0] },
   
   // E Barre chords (7th fret position)
   'E_barre': { name: 'E Major (Barre)', positions: ['X', 7, 9, 9, 9, 7], fingers: [0, 1, 3, 3, 3, 1], fret: 7 },
@@ -334,7 +361,62 @@ export const chordDiagrams: Record<string, ChordDiagram> = {
   'Asus_barre': { name: 'A Suspended 4th (Barre)', positions: [5, 7, 7, 7, 5, 5], fingers: [1, 2, 3, 4, 1, 1], fret: 5 },
   'A+_barre': { name: 'A Augmented (Barre)', positions: ['X', 7, 6, 6, 6, 5], fingers: [0, 4, 2, 2, 3, 1], fret: 5 },
   'A°_barre': { name: 'A Diminished (Barre)', positions: ['X', 7, 5, 6, 5, 6], fingers: [0, 4, 1, 3, 1, 2], fret: 5 },
-  'Aadd9_barre': { name: 'A Add9 (Barre)', positions: [5, 7, 5, 6, 5, 7], fingers: [1, 3, 1, 2, 1, 4], fret: 5 }
+  'Aadd9_barre': { name: 'A Add9 (Barre)', positions: [5, 7, 5, 6, 5, 7], fingers: [1, 3, 1, 2, 1, 4], fret: 5 },
+  
+  // B Barre chords (7th fret position)
+  'B_barre': { name: 'B Major (Barre)', positions: [7, 9, 9, 8, 7, 7], fingers: [1, 3, 4, 2, 1, 1], fret: 7 },
+  'Bm_barre': { name: 'B Minor (Barre)', positions: [7, 9, 9, 7, 7, 7], fingers: [1, 3, 4, 1, 1, 1], fret: 7 },
+  'B7_barre': { name: 'B Dominant 7th (Barre)', positions: [7, 9, 7, 8, 7, 7], fingers: [1, 3, 1, 2, 1, 1], fret: 7 },
+  'Bm7_barre': { name: 'B Minor 7th (Barre)', positions: [7, 9, 7, 7, 7, 7], fingers: [1, 3, 1, 1, 1, 1], fret: 7 },
+  'BM7_barre': { name: 'B Major 7th (Barre)', positions: [7, 9, 8, 8, 7, 7], fingers: [1, 4, 2, 3, 1, 1], fret: 7 },
+  'Bsus_barre': { name: 'B Suspended 4th (Barre)', positions: [7, 9, 9, 9, 7, 7], fingers: [1, 2, 3, 4, 1, 1], fret: 7 },
+  'B+_barre': { name: 'B Augmented (Barre)', positions: [8, 7, 6, 6, 6, 'X'], fingers: [4, 3, 1, 1, 2, 0], fret: 6 },
+  'B°_barre': { name: 'B Diminished (Barre)', positions: [7, 8, 6, 7, 6, 'X'], fingers: [2, 4, 1, 3, 1, 0], fret: 6 },
+  'Badd9_barre': { name: 'B Add9 (Barre)', positions: [7, 9, 7, 8, 7, 9], fingers: [1, 3, 1, 2, 1, 4], fret: 7 },
+  
+  // C Barre chords (8th fret position)
+  'C_barre': { name: 'C Major (Barre)', positions: [8, 10, 10, 9, 8, 8], fingers: [1, 3, 4, 2, 1, 1], fret: 8 },
+  'Cm_barre': { name: 'C Minor (Barre)', positions: [3, 5, 5, 3, 3, 3], fingers: [1, 3, 4, 1, 1, 1], fret: 3 },
+  'C7_barre': { name: 'C Dominant 7th (Barre)', positions: [8, 10, 8, 9, 8, 8], fingers: [1, 3, 1, 2, 1, 1], fret: 8 },
+  'Cm7_barre': { name: 'C Minor 7th (Barre)', positions: [3, 5, 3, 3, 3, 3], fingers: [1, 3, 1, 1, 1, 1], fret: 3 },
+  'CM7_barre': { name: 'C Major 7th (Barre)', positions: [8, 10, 9, 9, 8, 8], fingers: [1, 4, 2, 3, 1, 1], fret: 8 },
+  'Csus_barre': { name: 'C Suspended 4th (Barre)', positions: [8, 10, 10, 10, 8, 8], fingers: [1, 2, 3, 4, 1, 1], fret: 8 },
+  'C+_barre': { name: 'C Augmented (Barre)', positions: ['X', 9, 8, 7, 7, 'X'], fingers: [0, 4, 3, 1, 2, 0], fret: 7 },
+  'C°_barre': { name: 'C Diminished (Barre)', positions: ['X', 9, 7, 8, 7, 'X'], fingers: [0, 4, 1, 3, 2, 0], fret: 7 },
+  'Cadd9_barre': { name: 'C Add9 (Barre)', positions: [8, 10, 8, 9, 8, 10], fingers: [1, 3, 1, 2, 1, 4], fret: 8 },
+  
+  // D Barre chords (5th fret position)
+  'D_barre': { name: 'D Major (Barre)', positions: ['X', 5, 7, 7, 7, 5], fingers: [0, 1, 2, 3, 4, 1], fret: 5 },
+  'Dm_barre': { name: 'D Minor (Barre)', positions: ['X', 5, 7, 7, 6, 5], fingers: [0, 1, 3, 4, 2, 1], fret: 5 },
+  'D7_barre': { name: 'D Dominant 7th (Barre)', positions: ['X', 5, 7, 5, 7, 5], fingers: [0, 1, 3, 1, 4, 1], fret: 5 },
+  'Dm7_barre': { name: 'D Minor 7th (Barre)', positions: ['X', 5, 7, 5, 6, 5], fingers: [0, 1, 3, 1, 2, 1], fret: 5 },
+  'DM7_barre': { name: 'D Major 7th (Barre)', positions: ['X', 5, 7, 6, 7, 5], fingers: [0, 1, 3, 2, 4, 1], fret: 5 },
+  'Dsus_barre': { name: 'D Suspended 4th (Barre)', positions: ['X', 5, 7, 7, 8, 5], fingers: [0, 1, 2, 3, 4, 1], fret: 5 },
+  'D+_barre': { name: 'D Augmented (Barre)', positions: ['X', 5, 4, 3, 3, 'X'], fingers: [0, 4, 3, 1, 2, 0], fret: 3 },
+  'D°_barre': { name: 'D Diminished (Barre)', positions: ['X', 5, 6, 4, 5, 'X'], fingers: [0, 2, 4, 1, 3, 0], fret: 4 },
+  'Dadd9_barre': { name: 'D Add9 (Barre)', positions: ['X', 5, 7, 5, 7, 7], fingers: [0, 1, 3, 1, 2, 4], fret: 5 },
+  
+  // F Barre chords (8th fret position)
+  'F_barre': { name: 'F Major (Barre)', positions: ['X', 8, 10, 10, 10, 8], fingers: [0, 1, 3, 3, 3, 1], fret: 8 },
+  'Fm_barre': { name: 'F Minor (Barre)', positions: ['X', 8, 10, 10, 9, 8], fingers: [0, 1, 3, 4, 2, 1], fret: 8 },
+  'F7_barre': { name: 'F Dominant 7th (Barre)', positions: ['X', 8, 10, 8, 10, 8], fingers: [0, 1, 3, 1, 4, 1], fret: 8 },
+  'Fm7_barre': { name: 'F Minor 7th (Barre)', positions: ['X', 8, 10, 8, 9, 8], fingers: [0, 1, 3, 1, 2, 1], fret: 8 },
+  'FM7_barre': { name: 'F Major 7th (Barre)', positions: ['X', 8, 10, 9, 10, 8], fingers: [0, 1, 3, 2, 4, 1], fret: 8 },
+  'Fsus_barre': { name: 'F Suspended 4th (Barre)', positions: ['X', 8, 10, 10, 11, 8], fingers: [0, 1, 2, 3, 4, 1], fret: 8 },
+  'F+_barre': { name: 'F Augmented (Barre)', positions: ['X', 8, 7, 6, 6, 'X'], fingers: [0, 4, 3, 1, 2, 0], fret: 6 },
+  'F°_barre': { name: 'F Diminished (Barre)', positions: ['X', 8, 9, 7, 9, 'X'], fingers: [0, 2, 4, 1, 3, 0], fret: 7 },
+  'Fadd9_barre': { name: 'F Add9 (Barre)', positions: ['X', 8, 10, 8, 10, 10], fingers: [0, 1, 3, 1, 2, 4], fret: 8 },
+  
+  // G Barre chords (10th fret position)
+  'G_barre': { name: 'G Major (Barre)', positions: ['X', 10, 12, 12, 12, 10], fingers: [0, 1, 3, 3, 3, 1], fret: 10 },
+  'Gm_barre': { name: 'G Minor (Barre)', positions: ['X', 10, 12, 12, 11, 10], fingers: [0, 1, 3, 4, 2, 1], fret: 10 },
+  'G7_barre': { name: 'G Dominant 7th (Barre)', positions: ['X', 10, 12, 10, 12, 10], fingers: [0, 1, 3, 1, 4, 1], fret: 10 },
+  'Gm7_barre': { name: 'G Minor 7th (Barre)', positions: ['X', 10, 12, 10, 11, 10], fingers: [0, 1, 3, 1, 2, 1], fret: 10 },
+  'GM7_barre': { name: 'G Major 7th (Barre)', positions: ['X', 10, 12, 11, 12, 10], fingers: [0, 1, 3, 2, 4, 1], fret: 10 },
+  'Gsus_barre': { name: 'G Suspended 4th (Barre)', positions: ['X', 10, 12, 12, 13, 10], fingers: [0, 1, 2, 3, 4, 1], fret: 10 },
+  'G+_barre': { name: 'G Augmented (Barre)', positions: ['X', 11, 10, 9, 9, 'X'], fingers: [0, 4, 3, 1, 2, 0], fret: 9 },
+  'G°_barre': { name: 'G Diminished (Barre)', positions: ['X', 11, 9, 10, 9, 'X'], fingers: [0, 4, 1, 3, 2, 0], fret: 9 },
+  'Gadd9_barre': { name: 'G Add9 (Barre)', positions: ['X', 10, 12, 10, 12, 12], fingers: [0, 1, 3, 1, 2, 4], fret: 10 }
 };
 
 // Musical Mode Definitions for advanced theory
