@@ -282,29 +282,36 @@ export const chordDiagrams: Record<string, ChordDiagram> = {
 
   // Diminished chords
   'C°': { name: 'C Diminished', positions: ['X', 3, 4, 2, 4, 2], fingers: [0, 2, 4, 1, 3, 1] },
+  'A°': { name: 'A Diminished', positions: ['X', 0, 2, 3, 2, 3], fingers: [0, 0, 1, 3, 2, 4] },
   'D°': { name: 'D Diminished', positions: ['X', 'X', 0, 1, 0, 1], fingers: [0, 0, 0, 1, 0, 2] },
   'E°': { name: 'E Diminished', positions: ['X', 'X', 2, 3, 2, 3], fingers: [0, 0, 1, 3, 2, 4] },
   'F#°': { name: 'F# Diminished', positions: [2, 'X', 1, 2, 1, 'X'], fingers: [2, 0, 1, 3, 1, 0] },
 
   // Augmented chords  
   'C+': { name: 'C Augmented', positions: ['X', 3, 2, 1, 1, 0], fingers: [0, 4, 3, 1, 2, 0] },
+  'A+': { name: 'A Augmented', positions: ['X', 0, 3, 2, 2, 1], fingers: [0, 0, 4, 2, 3, 1] },
   'E+': { name: 'E Augmented', positions: [0, 3, 2, 1, 1, 0], fingers: [0, 4, 3, 1, 2, 0] },
   'F#+': { name: 'F# Augmented', positions: [2, 'X', 4, 3, 3, 'X'], fingers: [1, 0, 4, 2, 3, 0] },
   'G+': { name: 'G Augmented', positions: [3, 2, 1, 0, 0, 3], fingers: [4, 3, 2, 0, 0, 1] },
   
   // Add9 chords
+  'Aadd9': { name: 'A Add9', positions: ['X', 0, 2, 4, 2, 0], fingers: [0, 0, 1, 3, 2, 0] },
   'Eadd9': { name: 'E Add9', positions: [0, 2, 4, 1, 0, 0], fingers: [0, 2, 4, 1, 0, 0] },
   
   // Suspended 2nd chords
+  'Asus2': { name: 'A Suspended 2nd', positions: ['X', 0, 2, 2, 0, 0], fingers: [0, 0, 1, 2, 0, 0] },
   'Esus2': { name: 'E Suspended 2nd', positions: [0, 0, 2, 2, 0, 0], fingers: [0, 0, 1, 2, 0, 0] },
   
   // Diminished 7th chords
+  'A°7': { name: 'A Diminished 7th', positions: ['X', 0, 1, 2, 1, 2], fingers: [0, 0, 1, 3, 2, 4] },
   'E°7': { name: 'E Diminished 7th', positions: [0, 1, 2, 0, 2, 0], fingers: [0, 1, 3, 0, 4, 0] },
   
   // Minor Major 7th chords
+  'AmM7': { name: 'A Minor Major 7th', positions: ['X', 0, 2, 1, 1, 0], fingers: [0, 0, 2, 1, 1, 0] },
   'EmM7': { name: 'E Minor Major 7th', positions: [0, 2, 1, 0, 0, 0], fingers: [0, 2, 1, 0, 0, 0] },
   
   // 7#9 chords
+  'A7#9': { name: 'A Dominant 7#9', positions: ['X', 0, 2, 3, 2, 5], fingers: [0, 0, 1, 2, 1, 4] },
   'E7#9': { name: 'E Dominant 7#9', positions: ['X', 'X', 2, 4, 3, 5], fingers: [0, 0, 1, 3, 2, 4] }
 };
 
