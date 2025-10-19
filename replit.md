@@ -65,16 +65,38 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Updates (October 2025)
 
-### Music Theory Accuracy for Chord Generation (October 19, 2025)
-- **Genre-Specific Progressions**: Updated chord generation to follow authentic music theory for each genre
-  - **Extreme Metal**: Chromatic power chords (E5-Eb5-D5-Db5), tritone progressions (E5-Bb5), minor sequences (Em-C-G-D)
-  - **Black Metal**: Diminished sequences (Em-Eo-Fm-Eo), cyclical minor (Am-Em-F-C), atmospheric Aeolian/Harmonic Minor
-  - **Rock**: I-IV-V blues-influenced progressions, I-V-vi-IV anthemic patterns with straightforward triads
-  - **Jazz**: ii-V-I cornerstone progressions, I-vi-ii-V rhythm changes, extended 7ths/9ths/11ths/13ths
-  - **Funk**: Static dominant vamps (E9), iv-v-i minor grooves, I-IV-V with extensions, dominant 7th/9th chords
-  - **Neo-Classical**: I-IV-V-I functional harmony, La Folia patterns, circle-of-fifths voice leading
-- **Musical Accuracy**: All progressions now reference authentic examples (Slayer, Morbid Angel, James Brown, Mozart, etc.)
-- **Variation System**: Multiple progression variations per genre for authentic diversity
+### Music Theory Accuracy for Chord Generation - Band-Specific Progressions (October 19, 2025)
+- **70 Authentic Progressions**: Complete update with 10 progressions per genre from music theory analyses and song breakdowns
+- **Extreme Metal** (10 progressions):
+  - Slayer "Raining Blood" chromatic descent, Morbid Angel "God of Emptiness" tritone, Dying Fetus Aeolian melodic
+  - Sodom "Agent Orange" power drops, Nile "Sacrifice Unto Sebek" Phrygian exotic, Necrophagist diminished technical
+  - Beherit, Deicide, Dark Funeral, Archspire progressions with palm-muted aggression and dissonance
+- **Black Metal** (10 progressions):
+  - Darkthrone "Transilvanian Hunger" cyclical, Dark Funeral Andalusian descent, Dimmu Borgir symphonic
+  - Mayhem "Freezing Moon" atmospheric, Cradle of Filth diminished, Der Weg Einer Freiheit post-black modal
+  - Behemoth, 1349 augmented chaos, Nargaroth tremolo, Peste Noire folk-black with Aeolian/Harmonic Minor modes
+- **Death Metal** (10 progressions):
+  - Cannibal Corpse "Inhumane Harvest" tritone horror, "Meathook Sodomy" tremolo, Nile Phrygian exotic
+  - Suffocation diminished chaos, Vader chromatic descent, Morbid Angel "Chapel of Ghouls" harmonic minor
+  - Deicide, Entombed "Left Hand Path", Arch Enemy melodic, Sepultura "Roots Bloody Roots" groove
+- **Rock** (10 progressions):
+  - Ozzy "Crazy Train" I-IV-V, Led Zeppelin "Rock and Roll", U2 "With or Without You" anthemic
+  - System of a Down emotional build, Scorpions retro energy, Iron Maiden "The Trooper" minor hard rock
+  - Kiss, Red Hot Chili Peppers descending, Dio, Motley Crue power sequences with diatonic triads
+- **Jazz** (10 progressions):
+  - Miles Davis "Autumn Leaves" ii-V-I, John Coltrane "Blue Bossa" minor variant, Dizzy Gillespie "I Got Rhythm"
+  - Duke Ellington "Satin Doll" turnaround, Coltrane "Giant Steps" changes and ascending build
+  - Bird blues, backdoor progression, modal shift with extended 7ths/9ths/13ths and alterations
+- **Funk** (10 progressions):
+  - Parliament-Funkadelic "Give Up the Funk" static E9 vamp, Sly Stone minor-dominant alternation
+  - Tower of Power chromatic ninths, The Temptations soulful vamp, Earth Wind & Fire extended groove
+  - Bootsy Collins/Parliament dominant resolution, Marvin Gaye, Rick James, Curtis Mayfield, Zapp
+- **Classical/Neo-Classical** (10 progressions):
+  - Mozart Piano Sonata K.545 authentic cadence, Bach BWV 846 circle of fifths, Handel La Folia
+  - Bach chorales canon, Beethoven "Moonlight Sonata", Mozart "Eine Kleine Nachtmusik"
+  - Handel "Hallelujah" plagal cadence, Schubert deceptive, Chopin Andalusian, Hildegard von Bingen modal
+- **Random Selection**: Each genre randomly selects from 10 authentic progressions every dice roll for infinite variety
+- **Transposition**: All progressions automatically transpose to match the rolled key while preserving chord relationships
 
 ## Recent Updates (October 2025)
 

@@ -1,0 +1,43 @@
+Core harmonic ingredients
+
+Modes: natural minor (Aeolian), harmonic minor, Phrygian, Phrygian dominant, Dorian, Locrian for unstable color.
+Intervals: minor seconds, tritones, minor thirds, and perfect fifths; stacked 4ths and open fifths (no third) for ambiguous tonality.
+Pedals/drone notes: sustained root or drone octave under changing chords to create hypnotic tension.
+Dissonance: b5 (tritone), b2, b6 are used deliberately; diminished and augmented sonorities appear as passing or focal elements.
+Tremolo textures: arpeggiated tremolo of chord shapes (often diads or triads) makes the progression feel continuous rather than chordal.
+Common progression types and examples (written as root movement)
+
+Static modal vamp (most common)
+- i — i — i — i (Aeolian/Phrygian with melodic variation over same chord)
+- Example effect: sustained gloom, allows lead melody/atmosphere to evolve.
+Pedal + modal movement
+- i (pedal on tonic) moving upper voices: i — i(♭2) — i(♭6) — i
+- Use: keeps tonal center while introducing modal color.
+Stepwise modal descent/ascent
+- i — VII — VI — VII (Aeolian): e.g., Am — G — F — G
+- i — bII — i — bII (Phrygian oscillation): e.g., Em — F — Em — F
+- Effect: ritualistic, chant-like movement.
+Minor/Phrygian with tritone shifts
+- i — b5/i+ (root stays, chord quality shifts by augmented fourth)
+- Example: Em — E♭°/E chordal color; use dissonant passing chord sparingly.
+Power-chord fifths with suspended motion
+- i5 — iv5 — V5 — i5 (fifth-chords, no third)
+- Creates open, primitive sound; add minor second harmonic squeal on top for tension.
+Chromatic mediant and distant root shifts
+- i — ♭VI — ♭III — ♭VII (Aeolian/chromatic mediants)
+- Example: Am — F — C — G (used slower for epic sections).
+Diminished/pedal modulation device
+- i — dim(i+2) — i — VI (diminished as bridge to shift mood)
+- Diminished chords serve as tension-release pivots for modal shifts.
+Alternating diad or two-chord patterns
+- i ↔ iv or i ↔ VII (call-and-response, very common)
+- Example: Em ↔ C (Em — C — Em — C), often in blast/fast tremolo contexts.
+Suspended/add2/add9 coloring
+- i(add9) — iv(add11) — i — v(add9)
+- Adds cold, chorale-like color while preserving minor center.
+Rhythmic and arranging considerations
+
+Tremolo-picked eighths/sixteenths make harmonic rhythm feel continuous; change chords every 2–8 bars rather than every bar.
+Use long-held cinematic chords for ambient/atmospheric passages; sparse progression supports choir/pad layers.
+Layering: keep a low distorted guitar emphasizing root/octave, second guitar arpeggiates triads or runs melody lines; synth pads double modal notes for weight.
+Dynamics: black metal relies on contrast—use minimalism and sudden expansion (one new chord or instrument creates large perceived progression).
