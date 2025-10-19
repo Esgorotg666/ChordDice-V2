@@ -312,7 +312,29 @@ export const chordDiagrams: Record<string, ChordDiagram> = {
   
   // 7#9 chords
   'A7#9': { name: 'A Dominant 7#9', positions: ['X', 0, 2, 3, 2, 5], fingers: [0, 0, 1, 2, 1, 4] },
-  'E7#9': { name: 'E Dominant 7#9', positions: ['X', 'X', 2, 4, 3, 5], fingers: [0, 0, 1, 3, 2, 4] }
+  'E7#9': { name: 'E Dominant 7#9', positions: ['X', 'X', 2, 4, 3, 5], fingers: [0, 0, 1, 3, 2, 4] },
+  
+  // E Barre chords (7th fret position)
+  'E_barre': { name: 'E Major (Barre)', positions: ['X', 7, 9, 9, 9, 7], fingers: [0, 1, 3, 3, 3, 1], fret: 7 },
+  'Em_barre': { name: 'E Minor (Barre)', positions: ['X', 7, 9, 9, 8, 7], fingers: [0, 1, 3, 4, 2, 1], fret: 7 },
+  'E7_barre': { name: 'E Dominant 7th (Barre)', positions: ['X', 7, 9, 7, 9, 7], fingers: [0, 1, 3, 1, 4, 1], fret: 7 },
+  'Em7_barre': { name: 'E Minor 7th (Barre)', positions: ['X', 7, 9, 7, 8, 7], fingers: [0, 1, 3, 1, 2, 1], fret: 7 },
+  'EM7_barre': { name: 'E Major 7th (Barre)', positions: ['X', 7, 9, 8, 9, 7], fingers: [0, 1, 3, 2, 4, 1], fret: 7 },
+  'Esus_barre': { name: 'E Suspended 4th (Barre)', positions: ['X', 7, 9, 9, 10, 7], fingers: [0, 1, 2, 3, 4, 1], fret: 7 },
+  'E+_barre': { name: 'E Augmented (Barre)', positions: ['X', 7, 6, 5, 5, 'X'], fingers: [0, 4, 3, 1, 2, 0], fret: 5 },
+  'E°_barre': { name: 'E Diminished (Barre)', positions: ['X', 7, 8, 6, 8, 'X'], fingers: [0, 2, 4, 1, 3, 0], fret: 6 },
+  'Eadd9_barre': { name: 'E Add9 (Barre)', positions: ['X', 7, 9, 9, 10, 9], fingers: [0, 1, 2, 3, 4, 2], fret: 7 },
+  
+  // A Barre chords (5th fret position)
+  'A_barre': { name: 'A Major (Barre)', positions: [5, 7, 7, 6, 5, 5], fingers: [1, 3, 4, 2, 1, 1], fret: 5 },
+  'Am_barre': { name: 'A Minor (Barre)', positions: [5, 7, 7, 5, 5, 5], fingers: [1, 3, 4, 1, 1, 1], fret: 5 },
+  'A7_barre': { name: 'A Dominant 7th (Barre)', positions: [5, 7, 5, 6, 5, 5], fingers: [1, 3, 1, 2, 1, 1], fret: 5 },
+  'Am7_barre': { name: 'A Minor 7th (Barre)', positions: [5, 7, 5, 5, 5, 5], fingers: [1, 3, 1, 1, 1, 1], fret: 5 },
+  'AM7_barre': { name: 'A Major 7th (Barre)', positions: [5, 7, 6, 6, 5, 5], fingers: [1, 4, 2, 3, 1, 1], fret: 5 },
+  'Asus_barre': { name: 'A Suspended 4th (Barre)', positions: [5, 7, 7, 7, 5, 5], fingers: [1, 2, 3, 4, 1, 1], fret: 5 },
+  'A+_barre': { name: 'A Augmented (Barre)', positions: ['X', 7, 6, 6, 6, 5], fingers: [0, 4, 2, 2, 3, 1], fret: 5 },
+  'A°_barre': { name: 'A Diminished (Barre)', positions: ['X', 7, 5, 6, 5, 6], fingers: [0, 4, 1, 3, 1, 2], fret: 5 },
+  'Aadd9_barre': { name: 'A Add9 (Barre)', positions: [5, 7, 5, 6, 5, 7], fingers: [1, 3, 1, 2, 1, 4], fret: 5 }
 };
 
 // Musical Mode Definitions for advanced theory

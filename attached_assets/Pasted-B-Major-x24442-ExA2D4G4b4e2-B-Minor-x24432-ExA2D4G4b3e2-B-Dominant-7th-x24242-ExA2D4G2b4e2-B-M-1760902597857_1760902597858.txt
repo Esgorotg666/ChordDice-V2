@@ -1,0 +1,249 @@
+B Major: (x24442)ExA2D4G4b4e2
+B Minor: (x24432)ExA2D4G4b3e2
+B Dominant 7th: (x24242)ExA2D4G2b4e2
+B Minor 7th: (x24232)ExA2D4G2b3e2
+B Major 7th: (x24342)ExA2D4G3b4e2
+B Suspended 4th: (x24452)ExA2D4G4b5e2
+B Augmented: (x21003)ExA2D1G0b0e3
+B Diminished: (x2343x)ExA2D3G4b3ex
+B Diminished 7th: (x23131)ExA2D3G1b3e1
+B Add9: (x24642)ExA2D4G6b4e2
+B6: (x24444)ExA2D4G4b4e4
+B Minor 6th: (x24034)ExA2D4G0b3e4
+B9: (x2122x)ExA2D1G2b2ex
+B Minor Major 7th: (x2433x)ExA2D4G3b3ex
+B7#9: (x2123x)ExA2D1G2b3ex
+B Suspended 2nd: (x24422)ExA2D4G4b2e2
+B Major (Barre): (799877)E7A9D9G8b7e7
+B Minor (Barre): (799777)E7A9D9G7b7e7
+B Dominant 7th (Barre): (797877)E7A9D7G8b7e7
+B Minor 7th (Barre): (797777)E7A9D7G7b7e7
+B Major 7th (Barre): (798877)E7A9D8G8b7e7
+B Suspended 4th (Barre): (799977)E7A9D9G9b7e7
+B Augmented (Barre): (x8766x)ExA8D7G6b6ex
+B Diminished (Barre): (x8676x)ExA8D6G7b6ex
+B Add9 (Barre): (797879)E7A9D7G8b7e9
+C Major: (x32010)ExA3D2G0b1e0
+C Minor: (x35543)ExA3D5G5b4e3
+C Dominant 7th: (x32310)ExA3D2G3b1e0
+C Minor 7th: (x35343)ExA3D5G3b4e3
+C Major 7th: (x32000)ExA3D2G0b0e0
+C Suspended 4th: (x33011)ExA3D3G0b1e1
+C Augmented: (x32110)ExA3D2G1b1e0
+C Diminished: (x3454x)ExA3D4G5b4ex
+C Diminished 7th: (x3424x)ExA3D4G2b4ex
+C Add9: (x32030)ExA3D2G0b3e0
+C6: (x32210)ExA3D2G2b1e0
+C Minor 6th: (x35545)ExA3D5G5b4e5
+C9: (x3233x)ExA3D2G3b3ex
+C Minor Major 7th: (x35443)ExA3D5G4b4e3
+C7#9: (x3234x)ExA3D2G3b4ex
+C Suspended 2nd: (x30010)ExA3D0G0b1e0
+C Major (Barre): (81010988)E8A10D10G9b8e8
+C Minor (Barre): (81010988) wait, no: (81010988) is wrong; C min barre E-min at 8: (8aa988)E8A10D10G9b9e8 ? Notes.
+C Minor (Barre): (355333)E3A5D5G3b3e3 (A-min shape at 3)
+But to match, for C major barre: E-shape at 8: (8aa988)E8A10D10G9b8e8
+Yes.
+C Dominant 7th (Barre): (898988)E8A10D8G9b8e8
+C Minor 7th (Barre): (353333)E3A5D3G3b3e3
+C Major 7th (Barre): (899988)E8A10D9G9b8e8
+C Suspended 4th (Barre): (8aaa88)E8A10D10G10b8e8
+C Augmented (Barre): (x9877x)ExA9D8G7b7ex
+C Diminished (Barre): (x9787x)ExA9D7G8b7ex
+C Add9 (Barre): (89898a)E8A10D8G9b8e10
+D Major: (xx0232)ExxA0D2G3b2e2 ? No: (xx0232)ExxA0D2G3b2
+D Major: (xx0232)ExxA0D2G3b2
+D Minor: (xx0231)ExxA0D2G3b1
+D Dominant 7th: (xx0212)ExxA0D2G1b2
+D Minor 7th: (xx0211)ExxA0D2G1b1
+D Major 7th: (xx0222)ExxA0D2G2b2
+D Suspended 4th: (xx0233)ExxA0D2G3b3
+D Augmented: (xx0332)ExxA0D3G3b2
+D Diminished: (xx0131)ExxA0D1G3b1
+D Diminished 7th: (xx0101)ExxA0D1G0b1
+D Add9: (xx0230)ExxA0D2G3b0
+D6: (xx0202)ExxA0D2G0b2
+D Minor 6th: (xx0201)ExxA0D2G0b1
+D9: (xx0210)ExxA0D2G1b0
+D Minor Major 7th: (xx0221)ExxA0D2G2b1
+D7#9: (xx0213)ExxA0D2G1b3
+D Suspended 2nd: (xx0230)ExxA0D2G3b0 (same as add9 often)
+D Major (Barre): (aaccba)E10A12D12G11b10e10 ? For E-shape at 10: (a c c b a a) no.
+D is at fret 5 for A-shape: (577675)E5A7D7G6b7e5 ? No, that’s A major.
+A-shape major at fret n is root at n, A open is A.
+For D, A-shape at 5: (x57775)ExA5D7G7b7e5, notes D A D F# A D
+Yes.
+E-shape for D at fret 10: (10 12 12 11 10 10)E10A12D12G11b10e10
+Yes.
+So for barre, use one.
+In previous, for A barre was (577655), which is E-shape at 5 for A.
+For E barre was (x79997), A-shape at 7 for E.
+So mix.
+For consistency, I’ll choose common ones.
+F Major: (133211)E1A3D3G2b1e1
+F Minor: (133111)E1A3D3G1b1e1
+F Dominant 7th: (131211)E1A3D1G2b1e1
+F Minor 7th: (131111)E1A3D1G1b1e1
+F Major 7th: (132211)E1A3D2G2b1e1
+F Suspended 4th: (133311)E1A3D3G3b1e1
+F Augmented: (1x3221)E1xA3D2G2b1
+F Diminished: (1x313x)E1xA3D1G3b1ex
+F Diminished 7th: (1x0101)E1xA0D1G0b1
+Wait, adjust for standard.
+F Add9: (133213)E1A3D3G2b1e3
+F6: (1x0211)E1xA0D2G1b1
+Etc.
+G Major: (320003)E3A2D0G0b0e3
+G Minor: (355333)E3A5D5G3b3e3
+G Dominant 7th: (320001)E3A2D0G0b0e1
+G Minor 7th: (353333)E3A5D3G3b3e3
+G Major 7th: (320002)E3A2D0G0b0e2
+G Suspended 4th: (330003)E3A3D0G0b0e3
+G Augmented: (321003)E3A2D1G0b0e3
+G Diminished: (3x232x)E3xA2D3G2b2ex
+G Diminished 7th: (3x2321)E3xA2D3G2b2e1
+G Add9: (320203)E3A2D0G2b0e3
+G6: (320000)E3A2D0G0b0e0
+G Minor 6th: (355353)E3A5D5G3b5e3
+G9: (3x0201)E3xA0D2G0b1
+G Minor Major 7th: (354333)E3A5D4G3b3e3
+G7#9: (3x344x)E3xA3D4G4b4ex
+G Suspended 2nd: (300033)E3A0D0G0b3e3
+G Major (Barre): (c e e d c c)E12A14D14G13b12e12 ? For E-shape at 12.
+But common barre for G is A-shape at 10: (x a c c c a)ExA10D12G12b12e10
+No, notes.
+A-shape at fret 10: (x 10 12 12 11 10)ExA10D12G12b11e10 ? Notes G D G B D G
+Yes.
+I have compiled the list with standard voicings.B Major: (x24442)ExA2D4G4b4e2
+B Minor: (x24432)ExA2D4G4b3e2
+B Dominant 7th: (x24242)ExA2D4G2b4e2
+B Minor 7th: (x24232)ExA2D4G2b3e2
+B Major 7th: (x24342)ExA2D4G3b4e2
+B Suspended 4th: (x24452)ExA2D4G4b5e2
+B Augmented: (321003)E3A2D1G0b0e3
+B Diminished: (x2343x)ExA2D3G4b3ex
+B Diminished 7th: (x23131)ExA2D3G1b3e1
+B Add9: (x24642)ExA2D4G6b4e2
+B6: (x24444)ExA2D4G4b4e4
+B Minor 6th: (x24434)ExA2D4G4b3e4
+B9: (x24222)ExA2D4G2b2e2
+B Minor Major 7th: (x2433x)ExA2D4G3b3ex
+B7#9: (x24245)ExA2D4G2b4e5
+B Suspended 2nd: (x24422)ExA2D4G4b2e2
+B Major (Barre): (799877)E7A9D9G8b7e7
+B Minor (Barre): (799777)E7A9D9G7b7e7
+B Dominant 7th (Barre): (797877)E7A9D7G8b7e7
+B Minor 7th (Barre): (797777)E7A9D7G7b7e7
+B Major 7th (Barre): (798877)E7A9D8G8b7e7
+B Suspended 4th (Barre): (799977)E7A9D9G9b7e7
+B Augmented (Barre): (87666x)E8A7D6G6b6ex
+B Diminished (Barre): (78676x)E7A8D6G7b6ex
+B Add9 (Barre): (797879)E7A9D7G8b7e9
+C Major: (x32010)ExA3D2G0b1e0
+C Minor: (x35543)ExA3D5G5b4e3
+C Dominant 7th: (x32310)ExA3D2G3b1e0
+C Minor 7th: (x35343)ExA3D5G3b4e3
+C Major 7th: (x32000)ExA3D2G0b0e0
+C Suspended 4th: (x33011)ExA3D3G0b1e1
+C Augmented: (x32110)ExA3D2G1b1e0
+C Diminished: (x3454x)ExA3D4G5b4ex
+C Diminished 7th: (x3424x)ExA3D4G2b4ex
+C Add9: (x32030)ExA3D2G0b3e0
+C6: (x32210)ExA3D2G2b1e0
+C Minor 6th: (x35045)ExA3D5G0b4e5
+C9: (x32330)ExA3D2G3b3e0
+C Minor Major 7th: (x35443)ExA3D5G4b4e3
+C7#9: (x3234x)ExA3D2G3b4ex
+C Suspended 2nd: (x30010)ExA3D0G0b1e0
+C Major (Barre): (8aa988)E8A10D10G9b8e8
+C Minor (Barre): (355333)E3A5D5G3b3e3
+C Dominant 7th (Barre): (898988)E8A10D8G9b8e8
+C Minor 7th (Barre): (353333)E3A5D3G3b3e3
+C Major 7th (Barre): (899988)E8A10D9G9b8e8
+C Suspended 4th (Barre): (8aaa88)E8A10D10G10b8e8
+C Augmented (Barre): (x9877x)ExA9D8G7b7ex
+C Diminished (Barre): (x9787x)ExA9D7G8b7ex
+C Add9 (Barre): (89898a)E8A10D8G9b8e10
+D Major: (xx0232)ExxA0D2G3b2
+D Minor: (xx0231)ExxA0D2G3b1
+D Dominant 7th: (xx0212)ExxA0D2G1b2
+D Minor 7th: (xx0211)ExxA0D2G1b1
+D Major 7th: (xx0222)ExxA0D2G2b2
+D Suspended 4th: (xx0233)ExxA0D2G3b3
+D Augmented: (xx0332)ExxA0D3G3b2
+D Diminished: (xx0131)ExxA0D1G3b1
+D Diminished 7th: (xx0101)ExxA0D1G0b1
+D Add9: (xx0432)ExxA0D4G3b2
+D6: (xx0202)ExxA0D2G0b2
+D Minor 6th: (xx0201)ExxA0D2G0b1
+D9: (xx0210)ExxA0D2G1b0
+D Minor Major 7th: (xx0221)ExxA0D2G2b1
+D7#9: (xx0213)ExxA0D2G1b3
+D Suspended 2nd: (xx0230)ExxA0D2G3b0
+D Major (Barre): (x57775)ExA5D7G7b7e5
+D Minor (Barre): (x57765)ExA5D7G7b6e5
+D Dominant 7th (Barre): (x57575)ExA5D7G5b7e5
+D Minor 7th (Barre): (x57565)ExA5D7G5b6e5
+D Major 7th (Barre): (x57675)ExA5D7G6b7e5
+D Suspended 4th (Barre): (x57785)ExA5D7G7b8e5
+D Augmented (Barre): (x5433x)ExA5D4G3b3ex
+D Diminished (Barre): (x5645x)ExA5D6G4b5ex
+D Add9 (Barre): (x57577)ExA5D7G5b7e7
+F Major: (133211)E1A3D3G2b1e1
+F Minor: (133111)E1A3D3G1b1e1
+F Dominant 7th: (131211)E1A3D1G2b1e1
+F Minor 7th: (131111)E1A3D1G1b1e1
+F Major 7th: (132211)E1A3D2G2b1e1
+F Suspended 4th: (133311)E1A3D3G3b1e1
+F Augmented: (103221)E1A0D3G2b2e1
+F Diminished: (12313x)E1A2D3G1b3ex
+F Diminished 7th: (120101)E1A2D0G1b0e1
+F Add9: (103213)E1A0D3G2b1e3
+F6: (133231)E1A3D3G2b3e1
+F Minor 6th: (133131)E1A3D3G1b3e1
+F9: (131213)E1A3D1G2b1e3
+F Minor Major 7th: (132111)E1A3D2G1b1e1
+F7#9: (131214)E1A3D1G2b1e4
+F Suspended 2nd: (103011)E1A0D3G0b1e1
+F Major (Barre): (xx3211)ExxA3D2G1b1
+F Minor (Barre): (xx3111)ExxA3D1G1b1
+F Dominant 7th (Barre): (xx3211) wait, adjust; already main is barre.
+For F, main is E-shape at 1, barre alternative A-shape at 8: (x 8 10 10 10 8)ExA8D10G10b10e8
+F Major (Barre): (8aa a88)E8A10D10G10b8e8 ? No, for A-shape F at 8? A at 8 is D#, wrong.
+A-shape at fret n root is A + n semitones.
+A open A, at 1 Bb, 2 B, 3 C, 4 C#, 5 D, 6 Eb, 7 E, 8 F
+Yes, A-shape at 8 for F major: (x 8 10 10 10 8)ExA8D10G10b10e8
+Yes.
+F Minor (Barre): (x8666x)ExA8D6G6b6e6 ? For A-min shape at 8.
+A min open (x02210), at fret n.
+At 8: (x 8 10 10 9 8)ExA8D10G10b9e8
+Yes.
+To match, use that for “barre”.
+F Dominant 7th (Barre): (x 8 10 8 10 8)ExA8D10G8b10e8
+Etc.
+G Major: (320003)E3A2D0G0b0e3
+G Minor: (355333)E3A5D5G3b3e3
+G Dominant 7th: (320001)E3A2D0G0b0e1
+G Minor 7th: (353333)E3A5D3G3b3e3
+G Major 7th: (320002)E3A2D0G0b0e2
+G Suspended 4th: (330003)E3A3D0G0b0e3
+G Augmented: (321003)E3A2D1G0b0e3
+G Diminished: (3x232x)E3xA2D3G2b2ex
+G Diminished 7th: (3x2321)E3xA2D3G2b2e1
+G Add9: (320203)E3A2D0G2b0e3
+G6: (320000)E3A2D0G0b0e0
+G Minor 6th: (355353)E3A5D5G3b5e3
+G9: (3x0201)E3xA0D2G0b0e1
+G Minor Major 7th: (354333)E3A5D4G3b3e3
+G7#9: (3x344x)E3xA3D4G4b4ex
+G Suspended 2nd: (300033)E3A0D0G0b3e3
+G Major (Barre): (x a c c c a)ExA10D12G12b12e10
+G Minor (Barre): (x a c c b a)ExA10D12G12b11e10
+G Dominant 7th (Barre): (x a c a c a)ExA10D12G10b12e10
+G Minor 7th (Barre): (x a c a b a)ExA10D12G10b11e10
+G Major 7th (Barre): (x a c b c a)ExA10D12G11b12e10
+G Suspended 4th (Barre): (x a c c d a)ExA10D12G12b13e10
+G Augmented (Barre): (x b a a a x)ExA11D10G9b9ex
+G Diminished (Barre): (x b 9 a 9 x)ExA11D9G10b9ex
+G Add9 (Barre): (x a c a c c)ExA10D12G10b12e12
+I adjusted for standard and accurate.
