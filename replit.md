@@ -65,6 +65,19 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Updates (October 2025)
 
+### Music Theory Accuracy for Chord Generation (October 19, 2025)
+- **Genre-Specific Progressions**: Updated chord generation to follow authentic music theory for each genre
+  - **Extreme Metal**: Chromatic power chords (E5-Eb5-D5-Db5), tritone progressions (E5-Bb5), minor sequences (Em-C-G-D)
+  - **Black Metal**: Diminished sequences (Em-Eo-Fm-Eo), cyclical minor (Am-Em-F-C), atmospheric Aeolian/Harmonic Minor
+  - **Rock**: I-IV-V blues-influenced progressions, I-V-vi-IV anthemic patterns with straightforward triads
+  - **Jazz**: ii-V-I cornerstone progressions, I-vi-ii-V rhythm changes, extended 7ths/9ths/11ths/13ths
+  - **Funk**: Static dominant vamps (E9), iv-v-i minor grooves, I-IV-V with extensions, dominant 7th/9th chords
+  - **Neo-Classical**: I-IV-V-I functional harmony, La Folia patterns, circle-of-fifths voice leading
+- **Musical Accuracy**: All progressions now reference authentic examples (Slayer, Morbid Angel, James Brown, Mozart, etc.)
+- **Variation System**: Multiple progression variations per genre for authentic diversity
+
+## Recent Updates (October 2025)
+
 ### Musical Theory Accuracy Fixes (October 17, 2025)
 - **Dynamic Scale Generation**: Removed all hardcoded scales, implemented dynamic generation from interval formulas for 100% musical accuracy
 - **Accidental Family Preservation**: Fixed transpose function to preserve flat/sharp spellings based on key signature

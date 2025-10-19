@@ -141,21 +141,33 @@ export default function DiceInterface({ onResult, onUpgrade }: DiceInterfaceProp
     switch (genre) {
       case 'jazz':
         if (isMinor) {
-          // ii°-V7-i for minor jazz
+          // ii°-V7-i for minor jazz (sophisticated extended harmony)
           return [
             buildChord(2, 'm7b5'), // ii° (half-diminished)
             buildChord(7, '7'),    // V7
-            buildChord(0, 'm'),    // i (minor tonic)
-            buildChord(8, '7')     // ♭VI7 (dominant)
+            buildChord(0, 'm7'),   // im7 (minor tonic)
+            buildChord(9, 'M7')    // ♭VIM7 (extended color)
           ];
         } else {
-          // ii-V-I progression with 7ths (major)
-          return [
-            buildChord(2, 'm7'),   // ii7
-            buildChord(7, '7'),    // V7
-            buildChord(0, 'M7'),   // IM7
-            buildChord(9, 'm7')    // vi7
-          ];
+          // ii-V-I or I-vi-ii-V rhythm changes (complex 7ths, 9ths, 11ths, 13ths)
+          const useRhythmChanges = Math.random() > 0.5;
+          if (useRhythmChanges) {
+            // I-vi-ii-V (rhythm changes from "I Got Rhythm")
+            return [
+              buildChord(0, 'M7'),   // IM7
+              buildChord(9, 'm7'),   // vim7
+              buildChord(2, 'm7'),   // iim7
+              buildChord(7, '7')     // V7
+            ];
+          } else {
+            // ii-V-I (cornerstone of jazz standards like "Autumn Leaves")
+            return [
+              buildChord(2, 'm7'),   // iim7
+              buildChord(7, '7'),    // V7
+              buildChord(0, 'M7'),   // IM7
+              buildChord(5, 'M7')    // IVM7 (extension)
+            ];
+          }
         }
       case 'blues':
         // Same for major/minor blues - dominant 7ths
@@ -167,21 +179,33 @@ export default function DiceInterface({ onResult, onUpgrade }: DiceInterfaceProp
         ];
       case 'rock':
         if (isMinor) {
-          // i-VII-VI-VII (minor rock)
+          // i-V-vi-IV (minor rock variant - straightforward triads/power chords)
           return [
             buildChord(0, 'm'),    // i
-            buildChord(10),        // ♭VII
-            buildChord(8),         // ♭VI
-            buildChord(10)         // ♭VII
-          ];
-        } else {
-          // I-V-vi-IV (major rock)
-          return [
-            buildChord(0),         // I
             buildChord(7),         // V
             buildChord(9, 'm'),    // vi
             buildChord(5)          // IV
           ];
+        } else {
+          // I-IV-V or I-V-vi-IV (classic rock progressions with triads)
+          const useBluesPattern = Math.random() > 0.5;
+          if (useBluesPattern) {
+            // I-IV-V pattern (blues-influenced rock)
+            return [
+              buildChord(0),         // I
+              buildChord(5),         // IV
+              buildChord(7),         // V
+              buildChord(0)          // I (return)
+            ];
+          } else {
+            // I-V-vi-IV (anthemic rock progression)
+            return [
+              buildChord(0),         // I
+              buildChord(7),         // V
+              buildChord(9, 'm'),    // vi
+              buildChord(5)          // IV
+            ];
+          }
         }
       case 'pop':
         if (isMinor) {
@@ -221,21 +245,33 @@ export default function DiceInterface({ onResult, onUpgrade }: DiceInterfaceProp
         }
       case 'funk':
         if (isMinor) {
-          // i7-iv7-i7-v7 (Dorian minor funk)
+          // iv-v-i (gritty minor 7th funk - Earth Wind & Fire style)
           return [
+            buildChord(5, 'm7'),   // ivm7
+            buildChord(7, 'm7'),   // vm7
             buildChord(0, 'm7'),   // im7
-            buildChord(5, 'm7'),   // ivm7 (Dorian characteristic)
-            buildChord(0, 'm9'),   // im9 (extension)
-            buildChord(7, '7sus4') // V7sus4 (funk staple)
+            buildChord(0, '9')     // i9 (extended for variation)
           ];
         } else {
-          // I9-IV9-I7-II7 (major funk with extensions)
-          return [
-            buildChord(0, '9'),    // I9
-            buildChord(5, '9'),    // IV9
-            buildChord(0, '7'),    // I7
-            buildChord(2, '7')     // II7 (secondary dominant)
-          ];
+          // Dominant 7th/9th chords for syncopated groove (static or simple I-IV-V)
+          const useStatic = Math.random() > 0.5;
+          if (useStatic) {
+            // Static dominant (vamped E9 throughout - James Brown style)
+            return [
+              buildChord(0, '9'),    // I9 (dominant 9th)
+              buildChord(0, '9'),    // I9 (stay on one chord for rhythmic emphasis)
+              buildChord(0, '7'),    // I7 (variation)
+              buildChord(0, '9')     // I9 (return)
+            ];
+          } else {
+            // I-IV-V with extensions (Nile Rodgers/Chic style)
+            return [
+              buildChord(0, '9'),    // I9
+              buildChord(5, '9'),    // IV9
+              buildChord(0, '7'),    // I7
+              buildChord(7, '7')     // V7
+            ];
+          }
         }
       case 'metal':
         if (isMinor) {
@@ -257,21 +293,34 @@ export default function DiceInterface({ onResult, onUpgrade }: DiceInterfaceProp
         }
       case 'neo-classical':
         if (isMinor) {
-          // i-iv-V7-i (harmonic minor, Bach-inspired)
+          // i-iv-V7-i (harmonic minor, Bach-inspired with functional harmony)
           return [
-            buildChord(0, 'm'),    // i (minor tonic)
-            buildChord(5, 'm'),    // iv (subdominant minor)
-            buildChord(7, '7'),    // V7 (dominant 7th - raised 7th degree)
-            buildChord(0, 'dim7')  // i°7 (diminished 7th for color)
+            buildChord(0, 'm'),    // i (minor tonic - stable)
+            buildChord(5, 'm'),    // iv (subdominant - builds tension)
+            buildChord(7, '7'),    // V7 (dominant - resolves)
+            buildChord(0, 'm')     // i (tonic resolution)
           ];
         } else {
-          // I-vi-IV-V (classical progression with flourishes)
-          return [
-            buildChord(0, 'M7'),   // IM7 (major 7th)
-            buildChord(9, 'm7'),   // vim7
-            buildChord(5, 'M7'),   // IVM7
-            buildChord(7, '7')     // V7
-          ];
+          // I-IV-V-I (circle-of-fifths, classical cadence - Mozart/Beethoven style)
+          const useLaFolia = Math.random() > 0.5;
+          if (useLaFolia) {
+            // La Folia pattern (i-V-i-VII - Vivaldi/Corelli Baroque style)
+            // Adapted to major key
+            return [
+              buildChord(0),         // I
+              buildChord(7),         // V
+              buildChord(0),         // I (return)
+              buildChord(10)         // ♭VII (modal borrowing)
+            ];
+          } else {
+            // I-IV-V-I (basic functional harmony cadence)
+            return [
+              buildChord(0),         // I (tonic)
+              buildChord(5),         // IV (subdominant)
+              buildChord(7),         // V (dominant)
+              buildChord(0)          // I (tonic resolution)
+            ];
+          }
         }
       case 'flamenco':
         // Spanish Flamenco uses E Phrygian mode (traditional)
@@ -293,22 +342,23 @@ export default function DiceInterface({ onResult, onUpgrade }: DiceInterfaceProp
           ];
         }
       case 'black-metal':
-        // Black metal: atmospheric, tremolo-picked minor progressions
-        if (isMinor) {
-          // i-♭VI-♭III-♭VII (dark, atmospheric)
+        // Black metal: atmospheric minor triads/power chords with diminished/augmented for dissonance
+        const useDiminished = Math.random() > 0.5;
+        if (useDiminished) {
+          // Diminished sequence (Em-Eo-Fm-Eo for tension - Burzum style)
           return [
             buildChord(0, 'm'),    // i
-            buildChord(8, '5'),    // ♭VI5 (power chord)
-            buildChord(3, '5'),    // ♭III5
-            buildChord(10, '5')    // ♭VII5
+            buildChord(0, '°'),    // i° (diminished for eerie texture)
+            buildChord(1, 'm'),    // ♭ii (chromatic shift)
+            buildChord(0, '°')     // i° (return to tension)
           ];
         } else {
-          // Convert to minor for black metal aesthetic
+          // Cyclical minor (Am-Em-F-C treated modally - Emperor style)
           return [
-            buildChord(0, 'm'),    // force minor
-            buildChord(8, '5'),    // ♭VI5
-            buildChord(3, '5'),    // ♭III5
-            buildChord(10, '5')    // ♭VII5
+            buildChord(0, 'm'),    // i (Aeolian/Harmonic Minor)
+            buildChord(7, 'm'),    // v (minor dominant)
+            buildChord(8),         // ♭VI
+            buildChord(3)          // ♭III
           ];
         }
       case 'death-metal':
@@ -331,22 +381,33 @@ export default function DiceInterface({ onResult, onUpgrade }: DiceInterfaceProp
           ];
         }
       case 'extreme-metal':
-        // Extreme metal uses aggressive diminished and chromatic patterns
-        if (isMinor) {
-          // i-♭ii-♭iii°-iv (chromatic extreme metal)
+        // Extreme metal: power chords with tritones, chromatic descents, Phrygian dominant
+        const useTritone = Math.random() > 0.33;
+        const useChromatic = Math.random() > 0.5;
+        
+        if (useTritone) {
+          // Tritone-heavy progression (E5-Bb5-E5 - Morbid Angel style dissonance)
           return [
-            buildChord(0, 'm'),    // i
-            buildChord(1, '5'),    // ♭ii5 (chromatic)
-            buildChord(3, '°'),    // ♭iii° (diminished)
-            buildChord(5, 'm')     // iv
+            buildChord(0, '5'),    // I5 (power chord)
+            buildChord(6, '5'),    // tritone (diabolus in musica - E to Bb)
+            buildChord(0, '5'),    // I5 (return)
+            buildChord(6, '5')     // tritone (sustained tension)
           ];
-        } else {
-          // I-♭ii-tritone-i (dissonant extreme metal)
+        } else if (useChromatic) {
+          // Chromatic power chord riff (E5-Eb5-D5-Db5 - Slayer "Raining Blood" style)
           return [
             buildChord(0, '5'),    // I5
-            buildChord(1, '5'),    // ♭ii5 (chromatic)
-            buildChord(6, '°'),    // tritone diminished
-            buildChord(0, 'm')     // i (modal mixture)
+            buildChord(11, '5'),   // ♭I5 (chromatic half-step descent)
+            buildChord(10, '5'),   // ♭VII5
+            buildChord(9, '5')     // ♭VI5
+          ];
+        } else {
+          // Minor-based sequence (Em-C-G-D for i-VI-III-VII - melodic death metal)
+          return [
+            buildChord(0, 'm'),    // i
+            buildChord(8),         // ♭VI
+            buildChord(3),         // ♭III
+            buildChord(10)         // ♭VII
           ];
         }
       default:

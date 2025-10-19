@@ -1901,6 +1901,407 @@ export const jazzLessons: Lesson[] = [
   }
 ];
 
+// ============================================================
+// FUNK LESSONS - 15 Progressive Lessons
+// ============================================================
+export const funkLessons: Lesson[] = [
+  {
+    id: 'funk-1',
+    difficulty: 'beginner',
+    genre: 'funk',
+    title: 'Funk Strumming - The 16th Note Groove',
+    description: 'Master the tight, percussive funk rhythm guitar foundation',
+    fretboardPatterns: [
+      { name: 'E9 Chord', positions: [0, 2, 2, 1, 3, 2], fingers: [0, 2, 3, 1, 4, 2] }
+    ],
+    scales: [],
+    subsections: [
+      {
+        id: 'funk-1-1',
+        title: 'The Funk Strum',
+        content: 'Funk is all about the MUTE. Barely release fingers after strumming. Palm mute lightly with right hand. "Chick-a" sound is the goal.',
+        technique: 'Down-up-down-up on 16th notes. But MUTE most strums. Only let 1-2 out of 16 ring. Rest are muted percussive "chick" sounds.',
+        tips: ['Right hand mutes, left hand chokes strings', 'Extreme tightness required', 'Listen to Nile Rodgers for reference']
+      },
+      {
+        id: 'funk-1-2',
+        title: 'The Rhythm Pattern',
+        content: 'Count: 1-e-and-a-2-e-and-a-3-e-and-a-4-e-and-a. Let only "and" beats ring. Mute everything else. Creates that choppy groove.',
+        technique: 'Looser wrist than rock. Right hand does most muting work. Strings barely ringing.',
+        tips: ['Play with a metronome', 'Start at 80 BPM', 'Consistency is everything']
+      }
+    ]
+  },
+  {
+    id: 'funk-2',
+    difficulty: 'beginner',
+    genre: 'funk',
+    title: 'Ninth Chords - The Funk Sound',
+    description: 'Learn the sophisticated extended chords that define funk',
+    fretboardPatterns: [
+      { name: 'E9', positions: [0, 2, 2, 1, 3, 2], fingers: [0, 2, 3, 1, 4, 2] },
+      { name: 'A9', positions: ['x', 0, 2, 4, 2, 0], fingers: [0, 0, 1, 4, 2, 0] },
+      { name: 'D9', positions: ['x', 'x', 0, 2, 1, 0], fingers: [0, 0, 0, 3, 1, 0] }
+    ],
+    scales: [],
+    subsections: [
+      {
+        id: 'funk-2-1',
+        title: 'What is a 9th Chord?',
+        content: 'Add the 9th note (same as 2nd, one octave up) to a dominant 7th chord. Root-3rd-5th-♭7th-9th. Sounds sophisticated and funky.',
+        technique: 'E9: Root E, 3rd G#, 5th B, ♭7th D, 9th F#. Rich, jazzy sound perfect for funk.',
+        tips: ['More colorful than basic triads', 'Standard in funk and R&B', 'Nile Rodgers signature']
+      },
+      {
+        id: 'funk-2-2',
+        title: 'Common Voicings',
+        content: 'E9 is easiest with open strings. A9 and D9 follow similar shapes. Practice changing between them smoothly.',
+        technique: 'Focus on fingers 1, 2, 3, 4 placement. Pinky stretches are common.',
+        tips: ['Start with E9', 'Mute unwanted strings', 'Funk needs CLEAN chords']
+      }
+    ]
+  },
+  {
+    id: 'funk-3',
+    difficulty: 'beginner',
+    genre: 'funk',
+    title: 'Single Note Funk Lines',
+    description: 'Play melodic bass-style riffs on guitar',
+    fretboardPatterns: [
+      { name: 'E Funk Riff', positions: [0, 'x', 'x', 'x', 'x', 'x'], fingers: [0, 0, 0, 0, 0, 0] }
+    ],
+    scales: [
+      { name: 'E Minor Pentatonic', pattern: 'Root-b3-4-5-b7', notes: ['E', 'G', 'A', 'B', 'D'] }
+    ],
+    subsections: [
+      {
+        id: 'funk-3-1',
+        title: 'Bass-Style Guitar Riffs',
+        content: 'Funk guitar often plays single-note lines like a bass. Low E string: 0-3-5-7. Simple but GROOVE is everything.',
+        technique: 'Palm mute HARD. Play on beat. Each note short and punchy. Opposite of sustained rock notes.',
+        tips: ['Think like a bass player', 'Groove over complexity', 'Lock with drums']
+      },
+      {
+        id: 'funk-3-2',
+        title: 'Octave Technique',
+        content: 'Play root on Low E, mute A and D, play octave on G string two frets higher. Classic funk double-stop.',
+        technique: 'E octave: Low E fret 0, mute middle strings with finger, G string fret 2. Creates thick sound.',
+        tips: ['John Scofield uses this', 'Very percussive', 'Keep it tight']
+      }
+    ]
+  },
+  {
+    id: 'funk-4',
+    difficulty: 'beginner',
+    genre: 'funk',
+    title: 'Wah Pedal Basics',
+    description: 'Add the iconic wah effect to your funk playing',
+    fretboardPatterns: [],
+    scales: [],
+    subsections: [
+      {
+        id: 'funk-4-1',
+        title: 'What is Wah?',
+        content: 'Wah-wah pedal sweeps through frequency range. Toe down = bright "wah", heel down = dark "wah". Creates vocal-like effect.',
+        technique: 'Rock pedal with rhythm. Down on downbeat, up on upbeat. "Wah-chick-wah-chick" sound.',
+        tips: ['Jimi Hendrix popularized', 'Essential funk tool', 'Practice rhythm rocking']
+      },
+      {
+        id: 'funk-4-2',
+        title: 'Auto-Wah Technique',
+        content: 'Leave wah in half-cocked position for "quack" sound. Don\'t rock it, just leave it there. Instant funk tone.',
+        technique: 'Parked wah gives midrange boost. Great for single-note riffs.',
+        tips: ['Bootsy Collins signature', 'Easier than rocking', 'Combines with muting']
+      }
+    ]
+  },
+  {
+    id: 'funk-5',
+    difficulty: 'intermediate',
+    genre: 'funk',
+    title: 'Chord Stabs - Rhythmic Accents',
+    description: 'Master the percussive chord punctuation of funk',
+    fretboardPatterns: [],
+    scales: [],
+    subsections: [
+      {
+        id: 'funk-5-1',
+        title: 'What are Stabs?',
+        content: 'Short, sharp chord hits on specific beats. Not sustained chords. Attack hard, mute immediately. "Stab" the chord.',
+        technique: 'Hit chord on "2" and "4" beats only. Immediately release pressure after hit. Creates "chick" sound.',
+        tips: ['Opposite of sustained', 'All about the attack', 'Essential funk rhythm']
+      },
+      {
+        id: 'funk-5-2',
+        title: 'Combining with Single Notes',
+        content: 'Bassline on E string, chord stab on 2 and 4. Classic funk pattern. Bassline drives, stabs accent.',
+        technique: 'Left hand shifts between bass notes and chord shape. Right hand maintains strict rhythm.',
+        tips: ['Listen to James Brown', 'Tower of Power horns', 'Practice slowly']
+      }
+    ]
+  },
+  {
+    id: 'funk-6',
+    difficulty: 'intermediate',
+    genre: 'funk',
+    title: 'Sliding Double Stops',
+    description: 'Add movement to your funk rhythm playing',
+    fretboardPatterns: [],
+    scales: [],
+    subsections: [
+      {
+        id: 'funk-6-1',
+        title: 'Double Stop Technique',
+        content: 'Play two strings simultaneously. Slide into target notes from one fret below. Classic funk embellishment.',
+        technique: 'B and high E strings: slide from fret 4 to 5. Quick slide, land on beat.',
+        tips: ['Adds melodic interest', 'Very Nile Rodgers', 'Slide smoothly']
+      },
+      {
+        id: 'funk-6-2',
+        title: 'Syncopated Slides',
+        content: 'Slide on offbeats. Adds surprise and movement. Slide up to chord on "and" beats.',
+        technique: 'Approach chord from below. Half-step slide creates tension and release.',
+        tips: ['Adds sophistication', 'Creates movement', 'Timing is critical']
+      }
+    ]
+  },
+  {
+    id: 'funk-7',
+    difficulty: 'intermediate',
+    genre: 'funk',
+    title: 'Mixolydian Mode - Funk Scale',
+    description: 'The scale behind dominant funk progressions',
+    fretboardPatterns: [],
+    scales: [
+      { name: 'E Mixolydian', pattern: '1-2-3-4-5-6-♭7', notes: ['E', 'F#', 'G#', 'A', 'B', 'C#', 'D'] }
+    ],
+    subsections: [
+      {
+        id: 'funk-7-1',
+        title: 'Mixolydian Explained',
+        content: 'Major scale with flatted 7th. Sounds funky and bluesy. Works over dominant 7th and 9th chords perfectly.',
+        technique: 'E Mixolydian: E-F#-G#-A-B-C#-D. That D natural (not D#) creates the dominant sound.',
+        tips: ['Different from major and minor', 'Funky dominant vibe', 'Great for improv']
+      },
+      {
+        id: 'funk-7-2',
+        title: 'Mixolydian Licks',
+        content: 'Emphasize the ♭7th note in your lines. That\'s the funk flavor. Resolve to root for strong endings.',
+        technique: 'Play scale up and down. Accent the D note. End phrases on E for resolution.',
+        tips: ['John Scofield uses this', 'Combines with pentatonic', 'Add chromatic passing tones']
+      }
+    ]
+  },
+  {
+    id: 'funk-8',
+    difficulty: 'intermediate',
+    genre: 'funk',
+    title: 'Hendrix Chord - The 7#9',
+    description: 'Master the "Purple Haze" chord for funk flavor',
+    fretboardPatterns: [
+      { name: 'E7#9 (Hendrix Chord)', positions: [0, 2, 1, 2, 3, 'x'], fingers: [0, 2, 1, 3, 4, 0] }
+    ],
+    scales: [],
+    subsections: [
+      {
+        id: 'funk-8-1',
+        title: 'The Dissonant Dominant',
+        content: 'Dominant 7th with BOTH major 3rd AND #9 (same as ♭3). Creates tension and dissonance. Sounds aggressive and funky.',
+        technique: 'E7#9: Contains both G# (major 3rd) and G (♭3/#9). Clashing intervals create that gritty sound.',
+        tips: ['Jimi Hendrix signature', 'Used in funk, blues, rock', 'Sounds edgy and cool']
+      },
+      {
+        id: 'funk-8-2',
+        title: 'Funk Applications',
+        content: 'Use on I chord in funk progressions. Creates instant attitude. Sounds better with distortion.',
+        technique: 'Don\'t strum - play short stabs. Let the dissonance bite, then move on.',
+        tips: ['Bootsy Collins uses this', 'Pairs with wah pedal', 'Don\'t overuse']
+      }
+    ]
+  },
+  {
+    id: 'funk-9',
+    difficulty: 'intermediate',
+    genre: 'funk',
+    title: 'Slap Guitar Technique',
+    description: 'Percussive thumb slapping for funk rhythm',
+    fretboardPatterns: [],
+    scales: [],
+    subsections: [
+      {
+        id: 'funk-9-1',
+        title: 'The Thumb Slap',
+        content: 'Use thumb to strike strings like a drum. Bounce thumb off strings immediately. Creates percussive "thump" sound.',
+        technique: 'Rotate wrist to slap with thumb flesh. Don\'t use fingernail. Quick bounce, don\'t rest.',
+        tips: ['More common on bass', 'Works on guitar too', 'Very Larry Graham']
+      },
+      {
+        id: 'funk-9-2',
+        title: 'Pop Technique',
+        content: 'After thumb slap, "pop" higher strings by pulling with fingers. Slap low, pop high. Creates funky conversation.',
+        technique: 'Thumb hits low E, index finger pops G string. Alternating pattern.',
+        tips: ['Extremely percussive', 'Takes months to develop', 'Very impressive']
+      }
+    ]
+  },
+  {
+    id: 'funk-10',
+    difficulty: 'intermediate',
+    genre: 'funk',
+    title: 'Minor 7th Chords',
+    description: 'Add smooth minor sounds to funk progressions',
+    fretboardPatterns: [
+      { name: 'Am7', positions: ['x', 0, 2, 0, 1, 0], fingers: [0, 0, 2, 0, 1, 0] },
+      { name: 'Dm7', positions: ['x', 'x', 0, 2, 1, 1], fingers: [0, 0, 0, 3, 1, 2] },
+      { name: 'Em7', positions: [0, 2, 2, 0, 3, 0], fingers: [0, 2, 3, 0, 4, 0] }
+    ],
+    scales: [],
+    subsections: [
+      {
+        id: 'funk-10-1',
+        title: 'Minor 7th Voicings',
+        content: 'Smooth, jazzy minor chords. Root-♭3-5-♭7. Less aggressive than minor triads, more sophisticated.',
+        technique: 'Am7: A-C-E-G. The G (♭7) makes it smooth instead of sad.',
+        tips: ['Very common in funk', 'Smoother than basic minor', 'Essential voicing']
+      },
+      {
+        id: 'funk-10-2',
+        title: 'ii-V-I Funk Progression',
+        content: 'Dm7 - G9 - Cmaj7. Classic jazz progression used heavily in funk. Learn in all keys.',
+        technique: 'Minor 7th sets up dominant 9th which resolves to major 7th. Smooth harmonic motion.',
+        tips: ['Foundation of sophisticated funk', 'Combine with rhythm muting', 'Herbie Hancock vibes']
+      }
+    ]
+  },
+  {
+    id: 'funk-11',
+    difficulty: 'mastery',
+    genre: 'funk',
+    title: 'Chicken Picking',
+    description: 'Hybrid picking technique for percussive funk',
+    fretboardPatterns: [],
+    scales: [],
+    subsections: [
+      {
+        id: 'funk-11-1',
+        title: 'Hybrid Technique',
+        content: 'Use pick AND fingers simultaneously. Pick plays bass notes, fingers pluck higher strings. Creates complexity.',
+        technique: 'Pick downstrokes on Low E and A. Middle and ring fingers pluck B and high E.',
+        tips: ['Very Albert Lee', 'Country-funk crossover', 'Difficult to master']
+      },
+      {
+        id: 'funk-11-2',
+        title: 'The "Cluck" Sound',
+        content: 'Fingers snap off strings creating percussive attack. Combined with pick bass notes. Creates "chicken" sound.',
+        technique: 'Rest fingers on strings. Pull quickly so they snap against fretboard.',
+        tips: ['Extremely percussive', 'Takes months to develop', 'Impressive technique']
+      }
+    ]
+  },
+  {
+    id: 'funk-12',
+    difficulty: 'mastery',
+    genre: 'funk',
+    title: 'Chord Inversions for Movement',
+    description: 'Create smooth bass motion in funk progressions',
+    fretboardPatterns: [],
+    scales: [],
+    subsections: [
+      {
+        id: 'funk-12-1',
+        title: 'Voice Leading',
+        content: 'Don\'t just play root position chords. Use inversions so bass note walks smoothly. Creates sophisticated movement.',
+        technique: 'C - C/E - F - F/A. Bass walks up: C-E-F-A. Much smoother than all root positions.',
+        tips: ['Very Steely Dan', 'Adds sophistication', 'Study bass motion']
+      },
+      {
+        id: 'funk-12-2',
+        title: 'Slash Chord Funk',
+        content: 'Play different chord over different bass note. Dm7/G creates tension. Very sophisticated harmony.',
+        technique: 'Left hand plays bass note, right hand strums chord above.',
+        tips: ['Advanced harmony', 'Creates rich textures', 'Study Tower of Power']
+      }
+    ]
+  },
+  {
+    id: 'funk-13',
+    difficulty: 'mastery',
+    genre: 'funk',
+    title: 'Chromatic Approach Notes',
+    description: 'Add sophisticated jazz-funk embellishments',
+    fretboardPatterns: [],
+    scales: [],
+    subsections: [
+      {
+        id: 'funk-13-1',
+        title: 'Approach Tones',
+        content: 'Approach chord tones from one fret above or below. Adds melodic interest and tension.',
+        technique: 'Landing on G? Approach from F# or G#. Half-step slide into target.',
+        tips: ['Very jazzy', 'Creates movement', 'Study George Benson']
+      },
+      {
+        id: 'funk-13-2',
+        title: 'Chromatic Bass Lines',
+        content: 'Walk bass chromatically between chord changes. E to A? Play E-F-F#-G-G#-A.',
+        technique: 'Smooth chromatic motion connects distant chords. Creates forward momentum.',
+        tips: ['James Jamerson technique', 'Sophisticated funk', 'Practice with metronome']
+      }
+    ]
+  },
+  {
+    id: 'funk-14',
+    difficulty: 'mastery',
+    genre: 'funk',
+    title: 'Extended Chord Voicings',
+    description: 'Master 11th and 13th chords for rich harmony',
+    fretboardPatterns: [
+      { name: 'E13', positions: [0, 2, 2, 1, 2, 2], fingers: [0, 2, 3, 1, 4, 4] }
+    ],
+    scales: [],
+    subsections: [
+      {
+        id: 'funk-14-1',
+        title: 'The 13th Chord',
+        content: 'Stacks root-3rd-5th-♭7th-9th-11th-13th. Rich, sophisticated jazz-funk sound.',
+        technique: 'Can\'t play all notes on guitar. Imply harmony by selecting key notes.',
+        tips: ['Very complex', 'Study voicing charts', 'Sounds amazing']
+      },
+      {
+        id: 'funk-14-2',
+        title: 'Sus4 and Add9 Colors',
+        content: 'Suspended 4th and added 9th create ambiguous, floating sounds. Great for funk.',
+        technique: 'Esus4: E-A-B. No 3rd, creates tension. E add9: E-G#-B-F#. Adds color.',
+        tips: ['Creates movement', 'Ambiguous harmony', 'Combine with rhythm']
+      }
+    ]
+  },
+  {
+    id: 'funk-15',
+    difficulty: 'mastery',
+    genre: 'funk',
+    title: 'The Pocket - Locking with the Drummer',
+    description: 'Develop tight rhythmic ensemble playing',
+    fretboardPatterns: [],
+    scales: [],
+    subsections: [
+      {
+        id: 'funk-15-1',
+        title: 'What is "The Pocket"?',
+        content: 'Perfect synchronization with drums and bass. Everyone plays rhythm AS ONE. The groove "locks in".',
+        technique: 'Listen to hi-hat. Match your 16th notes EXACTLY. Not ahead, not behind. Perfect sync.',
+        tips: ['Holy grail of funk', 'Requires deep listening', 'Study The Meters']
+      },
+      {
+        id: 'funk-15-2',
+        title: 'Playing "In the Cut"',
+        content: 'Lay back slightly behind the beat. Creates lazy, deep groove. Opposite of rock\'s urgency.',
+        technique: 'Intentionally play milliseconds late. Creates tension and release. Feels relaxed.',
+        tips: ['D\'Angelo signature', 'Requires feel not timing', 'Years to master']
+      }
+    ]
+  }
+];
+
 // Legacy exports for backward compatibility
 export const beginnerLessons: Lesson[] = generalBeginnerLessons;
 export const intermediateLessons: Lesson[] = [];

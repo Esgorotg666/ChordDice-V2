@@ -1,0 +1,42 @@
+Extreme Metal
+Extreme metal, encompassing subgenres like death metal, thrash, and grindcore, prioritizes aggression, speed, and dissonance. Chord structures often rely on power chords (root note plus perfect fifth, e.g., E5 consisting of E and B) for their heavy, palm-muted sound on distorted guitars, avoiding full triads to emphasize raw power. ￼ These are frequently augmented with tritones (diabolus in musica, e.g., E to Bb) or diminished intervals for tension. ￼ Extended or altered chords are rare, as the focus is on riff-based harmony rather than lush voicings.
+Common progressions include chromatic descents (half-step movements for intensity) and modal sequences like those derived from the Phrygian dominant scale (e.g., i - bII - VII). ￼ ￼ A descending bass progression like I - Vb - vi - V - IV - Ib - ii - V (e.g., in E: E - Bb - C#m - B - A - Eb - F#m - B) adds complexity in thrash styles. ￼
+Examples:
+•  Chromatic power chord riff: E5 - Eb5 - D5 - Db5 (common in Slayer’s “Raining Blood” for building frenzy).
+•  Tritone-heavy progression: E5 - Bb5 - E5 (evoking dissonance, as in early Morbid Angel tracks).
+•  Minor-based sequence: Em - C - G - D (i - VI - III - VII, heard in Cannibal Corpse riffs for melodic death metal). ￼
+Black Metal
+Black metal, a subset of extreme metal, emphasizes atmosphere, rawness, and often pagan or occult themes. Chord structures favor minor triads and power chords, but incorporate diminished (e.g., Eo: E-G-Bb) or augmented chords (e.g., Eaug: E-G#-C) to create eerie, dissonant textures. ￼ Tremolo picking on these chords amplifies the “wall of sound” effect, with less emphasis on clean voicings and more on harmonic ambiguity.
+Progressions often draw from minor modes like Aeolian or Harmonic Minor, using sequences that evoke despair or grandeur, such as descending or cyclical patterns. ￼ Common ones include i - v - iv - III or variations with chromatic shifts. ￼
+Examples:
+•  Minor progression with augmentation: C#m - Dm - Am - Bbm (i - ii - vi - vii in C# minor, as in Ancient’s “From Behind Comes the Sword”). ￼
+•  Diminished sequence: Em - Eo - Fm - Eo (creating tension, similar to Burzum’s atmospheric riffs).
+•  Cyclical minor: Am - Em - F - C (vi - iii - IV - I in C major, but treated modally, as in Emperor’s “I Am the Black Wizards”).
+Rock
+Rock music, spanning classic to hard rock, uses straightforward chord structures for accessibility and energy. Triads (major/minor) and power chords dominate, especially in electric guitar contexts, with open voicings for acoustic styles. ￼ Seventh chords appear occasionally for bluesy flavor (e.g., G7: G-B-D-F).
+Progressions are often diatonic and repetitive, rooted in blues influences like the I-IV-V (tonic-subdominant-dominant). ￼ The I-V-vi-IV is ubiquitous for anthemic feel. ￼
+Examples:
+•  I-IV-V: C - F - G (in C major, as in Chuck Berry’s “Johnny B. Goode” or the 12-bar blues structure in many rock songs). ￼
+•  I-V-vi-IV: C - G - Am - F (heard in Journey’s “Don’t Stop Believin’” or countless pop-rock hits).
+•  Minor variant: Em - B - C#m - A (i - V - vi - IV in E minor, common in hard rock like AC/DC’s “Back in Black”).
+Jazz
+Jazz harmony is complex and sophisticated, featuring extended chord structures like seventh chords (e.g., Cmaj7: C-E-G-B), ninths (C9: C-E-G-Bb-D), elevenths, and thirteenths, often with alterations (e.g., G7#9: G-B-D-F-A#) for color and tension. ￼ ￼ Voicings are dense, with drop-2 or shell voicings on guitar/piano.
+Progressions emphasize functional harmony, with the ii-V-I as the cornerstone for resolution. ￼ ￼ Others include rhythm changes (I-vi-ii-V cycles) and blues forms. ￼
+Examples:
+•  ii-V-I: Dm7 - G7 - Cmaj7 (in C major, core of standards like “Autumn Leaves”). ￼
+•  Extended blues: C7 - F7 - C7 - G7alt (with alterations, as in Miles Davis’ “All Blues”).
+•  I-vi-ii-V: Cmaj7 - Am7 - Dm7 - G7 (rhythm changes, in “I Got Rhythm” by George Gershwin). ￼
+Funk
+Funk focuses on groove and rhythm, with chord structures centered on dominant seventh (e.g., E7: E-G#-B-D) and ninth chords (E9: E-G#-B-D-F#) for a gritty, syncopated feel. ￼ Minor seventh chords (e.g., Em7: E-G-B-D) are common, often stabbed or vamped rather than strummed fully.
+Progressions are frequently static or simple, lingering on one chord for rhythmic emphasis, or using I-IV-V with extensions. ￼ ￼ Variations like iv-v-i add tension.
+Examples:
+•  Static dominant: E9 (vamped throughout, as in James Brown’s “Sex Machine”). ￼
+•  iv-v-i: Am7 - Bm7 - Em7 (in E minor, similar to Earth, Wind & Fire’s “Let’s Groove”). ￼
+•  Jazz-funk sequence: Em7 - Am7 - B7#5b9 (altered dominant, as in Herbie Hancock’s fusion tracks). ￼
+Classical
+Classical music (broadly spanning Baroque to Romantic eras) employs triadic structures like major/minor chords (e.g., C: C-E-G) and seventh chords (e.g., G7) within functional harmony, where chords serve roles: tonic (stable), subdominant (builds tension), dominant (resolves). ￼ Diminished seventh chords (e.g., Bo7: B-D-F-Ab) add drama in Romantic works.
+Progressions follow circle-of-fifths logic (root movement by fifths) for smooth voice leading. ￼ Common ones include I-IV-V-I or the “La Folia” ground bass. ￼ ￼
+Examples:
+•  I-IV-V-I: C - F - G - C (in C major, basic cadence in Mozart’s sonatas).
+•  La Folia: Dm - A7 - Dm - C - F - C - Dm - A7 (i - V - i - VII - III - VII - i - V, used in Vivaldi’s variations and Corelli’s Sonata Op. 5 No. 12). ￼
+•  Circle progression: Am - Dm - G - C - F - Bdim - E - Am (vi-ii-V-I-IV-vii°-III-vi, in Bach’s chorales or Beethoven’s “Moonlight Sonata” movements).

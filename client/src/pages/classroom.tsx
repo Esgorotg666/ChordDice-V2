@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Lock, ChevronRight, ChevronLeft, Crown, BookOpen, GraduationCap, Trophy, Music, Zap, Flame, Guitar as GuitarIcon } from 'lucide-react';
-import { generalBeginnerLessons, rockLessons, metalLessons, bluesLessons, jazzLessons, Lesson } from '@/lib/comprehensive-lessons';
+import { generalBeginnerLessons, rockLessons, metalLessons, bluesLessons, jazzLessons, funkLessons, Lesson } from '@/lib/comprehensive-lessons';
 import { useSubscription } from '@/hooks/useSubscription';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import FretboardDisplay from '@/components/fretboard-display';
@@ -82,6 +82,8 @@ export default function Classroom() {
         return <Music className="h-5 w-5 text-purple-500" />;
       case 'jazz':
         return <Zap className="h-5 w-5 text-yellow-500" />;
+      case 'funk':
+        return <Zap className="h-5 w-5 text-green-500" />;
       default:
         return <Music className="h-5 w-5 text-primary" />;
     }
@@ -99,6 +101,8 @@ export default function Classroom() {
         return 'Bending, 12-bar blues, and soulful expression';
       case 'jazz':
         return 'Complex chords, improvisation, and theory';
+      case 'funk':
+        return 'Rhythm, groove, and percussive techniques';
       default:
         return 'Learn guitar techniques';
     }
@@ -318,7 +322,7 @@ export default function Classroom() {
         </div>
 
         {/* Genre-based collapsible sections */}
-        <Accordion type="multiple" defaultValue={['general', 'rock', 'metal', 'blues', 'jazz']} className="space-y-4">
+        <Accordion type="multiple" defaultValue={['general', 'rock', 'metal', 'blues', 'jazz', 'funk']} className="space-y-4">
           <AccordionItem value="general" className="border border-border rounded-lg px-6 bg-card/50">
             <AccordionTrigger className="hover:no-underline" data-testid="accordion-general">
               <div className="flex items-center gap-3">
@@ -391,6 +395,21 @@ export default function Classroom() {
             </AccordionTrigger>
             <AccordionContent className="pt-4 pb-6">
               {renderLessonCards(jazzLessons)}
+            </AccordionContent>
+          </AccordionItem>
+
+          <AccordionItem value="funk" className="border border-border rounded-lg px-6 bg-card/50">
+            <AccordionTrigger className="hover:no-underline" data-testid="accordion-funk">
+              <div className="flex items-center gap-3">
+                {getGenreIcon('funk')}
+                <div className="text-left">
+                  <h2 className="text-xl font-bold">Funk</h2>
+                  <p className="text-sm text-muted-foreground">{funkLessons.length} lessons - {getGenreDescription('funk')}</p>
+                </div>
+              </div>
+            </AccordionTrigger>
+            <AccordionContent className="pt-4 pb-6">
+              {renderLessonCards(funkLessons)}
             </AccordionContent>
           </AccordionItem>
         </Accordion>
