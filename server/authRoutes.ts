@@ -371,30 +371,6 @@ router.post('/resend-verification', createRateLimitMiddleware(mutationRateLimite
   }
 });
 
-// Get current user endpoint  
-router.get('/user', async (req, res) => {
-  try {
-    const userId = (req.session as any)?.userId;
-    
-    if (!userId) {
-      return res.status(401).json({ message: 'Not authenticated' });
-    }
-    
-    const user = await storage.getUser(userId);
-    
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
-    }
-    
-    // Return user without sensitive data
-    const { password, emailVerificationToken, passwordResetToken, ...safeUser } = user;
-    res.json(safeUser);
-    
-  } catch (error) {
-    console.error('Get user error:', error);
-    res.status(500).json({ message: 'Failed to get user information' });
-  }
-});
 
 // Account deletion endpoint
 router.delete('/account', createRateLimitMiddleware(mutationRateLimiter, "account_deletion"), csrfProtection, async (req, res) => {
