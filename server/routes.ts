@@ -102,12 +102,22 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get('/api/subscription/status', isAuthenticated, async (req: any, res) => {
     try {
       const userId = req.userId;
+      console.log('[DEBUG] Subscription status check - userId:', userId);
+      
       const user = await storage.getUser(userId);
+      console.log('[DEBUG] User subscription data:', {
+        userId: user?.id,
+        subscriptionStatus: user?.subscriptionStatus,
+        subscriptionExpiry: user?.subscriptionExpiry,
+        isTestUser: user?.isTestUser
+      });
       
       const now = new Date();
       const isActive = user?.subscriptionStatus === 'active' && 
                      user?.subscriptionExpiry && 
                      new Date(user.subscriptionExpiry) > now;
+      
+      console.log('[DEBUG] Subscription check result - isActive:', isActive, 'now:', now.toISOString(), 'expiry:', user?.subscriptionExpiry);
       
       res.json({
         hasActiveSubscription: isActive,

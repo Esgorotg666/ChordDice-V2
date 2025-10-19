@@ -49,12 +49,11 @@ router.post('/register', createRateLimitMiddleware(mutationRateLimiter, "registr
     const saltRounds = 12;
     const hashedPassword = await bcrypt.hash(userData.password!, saltRounds);
     
-    // Create user
+    // Create user (authProvider defaults to 'local' in schema)
     const user = await storage.createUser({
       username: userData.username,
       email: userData.email,
       password: hashedPassword,
-      authProvider: 'local',
     });
     
     // Generate email verification token

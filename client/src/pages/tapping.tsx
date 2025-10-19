@@ -70,7 +70,7 @@ const getRandomTappingCombination = (): TappingCombination => {
 
 export default function TappingPage() {
   const { user, isAuthenticated, isLoading } = useAuthContext();
-  const { hasActiveSubscription } = useSubscription();
+  const { hasActiveSubscription, isLoading: subscriptionLoading } = useSubscription();
   
   const [leftHandChord, setLeftHandChord] = useState<string | null>(null);
   const [rightHandChord, setRightHandChord] = useState<string | null>(null);
@@ -190,8 +190,8 @@ export default function TappingPage() {
     }, 1000);
   };
 
-  // Show loading state
-  if (isLoading) {
+  // Show loading state - wait for both auth and subscription to load
+  if (isLoading || subscriptionLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="text-center">

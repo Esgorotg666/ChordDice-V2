@@ -28,10 +28,11 @@ export function useSubscription() {
   }
 
   // Regular authenticated users: return API subscription status
+  // Show loading until both auth and subscription queries complete
   return {
     hasActiveSubscription: subscription?.hasActiveSubscription ?? false,
     subscriptionStatus: subscription?.subscriptionStatus ?? 'free',
     subscriptionExpiry: subscription?.subscriptionExpiry,
-    isLoading: isLoading && isAuthenticated,
+    isLoading: isLoading || !isAuthenticated,
   };
 }

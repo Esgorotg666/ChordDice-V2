@@ -283,12 +283,29 @@ export const chordDiagrams: Record<string, ChordDiagram> = {
   // Diminished chords
   'C°': { name: 'C Diminished', positions: ['X', 3, 4, 2, 4, 2], fingers: [0, 2, 4, 1, 3, 1] },
   'D°': { name: 'D Diminished', positions: ['X', 'X', 0, 1, 0, 1], fingers: [0, 0, 0, 1, 0, 2] },
+  'E°': { name: 'E Diminished', positions: ['X', 'X', 2, 3, 2, 3], fingers: [0, 0, 1, 3, 2, 4] },
   'F#°': { name: 'F# Diminished', positions: [2, 'X', 1, 2, 1, 'X'], fingers: [2, 0, 1, 3, 1, 0] },
 
   // Augmented chords  
   'C+': { name: 'C Augmented', positions: ['X', 3, 2, 1, 1, 0], fingers: [0, 4, 3, 1, 2, 0] },
+  'E+': { name: 'E Augmented', positions: [0, 3, 2, 1, 1, 0], fingers: [0, 4, 3, 1, 2, 0] },
   'F#+': { name: 'F# Augmented', positions: [2, 'X', 4, 3, 3, 'X'], fingers: [1, 0, 4, 2, 3, 0] },
-  'G+': { name: 'G Augmented', positions: [3, 2, 1, 0, 0, 3], fingers: [4, 3, 2, 0, 0, 1] }
+  'G+': { name: 'G Augmented', positions: [3, 2, 1, 0, 0, 3], fingers: [4, 3, 2, 0, 0, 1] },
+  
+  // Add9 chords
+  'Eadd9': { name: 'E Add9', positions: [0, 2, 4, 1, 0, 0], fingers: [0, 2, 4, 1, 0, 0] },
+  
+  // Suspended 2nd chords
+  'Esus2': { name: 'E Suspended 2nd', positions: [0, 0, 2, 2, 0, 0], fingers: [0, 0, 1, 2, 0, 0] },
+  
+  // Diminished 7th chords
+  'E°7': { name: 'E Diminished 7th', positions: [0, 1, 2, 0, 2, 0], fingers: [0, 1, 3, 0, 4, 0] },
+  
+  // Minor Major 7th chords
+  'EmM7': { name: 'E Minor Major 7th', positions: [0, 2, 1, 0, 0, 0], fingers: [0, 2, 1, 0, 0, 0] },
+  
+  // 7#9 chords
+  'E7#9': { name: 'E Dominant 7#9', positions: ['X', 'X', 2, 4, 3, 5], fingers: [0, 0, 1, 3, 2, 4] }
 };
 
 // Musical Mode Definitions for advanced theory
