@@ -351,28 +351,28 @@ export default function DiceInterface({ onResult, onUpgrade }: DiceInterfaceProp
           ];
         }
       case 'black-metal':
-        // 10 authentic black metal progressions from Darkthrone, Mayhem, Dimmu Borgir, etc.
+        // 10 authentic black metal progressions - modal, atmospheric, tremolo-based
         const blackMetalProgressions = [
-          // 1. Darkthrone "Transilvanian Hunger" - Haunting cyclical
-          [buildChord(0, 'm'), buildChord(8), buildChord(5, 'm'), buildChord(3)],
-          // 2. Dark Funeral "The Secrets of the Black Arts" - Andalusian descent
-          [buildChord(0, 'm'), buildChord(8), buildChord(5, 'm'), buildChord(7)],
-          // 3. Dimmu Borgir "Progenies of the Great Apocalypse" - Symphonic dissonance
+          // 1. Static modal vamp i-i-i-i (sustained gloom, melodic variation)
+          [buildChord(0, 'm'), buildChord(0, 'm'), buildChord(0, 'm'), buildChord(0, 'm')],
+          // 2. Stepwise Aeolian i-VII-VI-VII (ritualistic Am-G-F-G)
+          [buildChord(0, 'm'), buildChord(10), buildChord(8), buildChord(10)],
+          // 3. Phrygian oscillation i-bII-i-bII (chant-like Em-F-Em-F)
+          [buildChord(0, 'm'), buildChord(1), buildChord(0, 'm'), buildChord(1)],
+          // 4. Chromatic mediant i-bVI-bIII-bVII (epic/cinematic)
           [buildChord(0, 'm'), buildChord(8), buildChord(3), buildChord(10)],
-          // 4. Mayhem "Freezing Moon" - Harmonic minor atmospheric
-          [buildChord(0, 'm'), buildChord(10), buildChord(8, 'm'), buildChord(9)],
-          // 5. Cradle of Filth "Her Ghost in the Fog" - Eerie diminished
-          [buildChord(0, 'm'), buildChord(11, '°'), buildChord(0, 'm'), buildChord(11, '°')],
-          // 6. Der Weg Einer Freiheit "Noktvrn" - Post-black modal
-          [buildChord(0, 'm'), buildChord(7, 'm'), buildChord(8), buildChord(3)],
-          // 7. Behemoth "O Father O Satan O Sun!" - Epic minor with major
-          [buildChord(0, 'm'), buildChord(10), buildChord(5), buildChord(9)],
-          // 8. 1349 "I Am Abomination" - Augmented chaos
-          [buildChord(0, 'm'), buildChord(8, '+'), buildChord(3), buildChord(10)],
-          // 9. Nargaroth "Black Metal Ist Krieg" - Tremolo cycling
-          [buildChord(0, 'm'), buildChord(8), buildChord(3), buildChord(7)],
-          // 10. Peste Noire "Le Dernier Putsch" - Folk-black despairing
-          [buildChord(0, 'm'), buildChord(3), buildChord(10), buildChord(8)]
+          // 5. Alternating diad i-iv (call-response tremolo Em-Am)
+          [buildChord(0, 'm'), buildChord(5, 'm'), buildChord(0, 'm'), buildChord(5, 'm')],
+          // 6. Diminished pivot i-dim-i-VI (modal shift device)
+          [buildChord(0, 'm'), buildChord(2, '°'), buildChord(0, 'm'), buildChord(8)],
+          // 7. Suspended color i(add9)-iv(add9)-i(add9)-v(add9) (cold chorale)
+          [buildChord(0, 'add9'), buildChord(5, 'add9'), buildChord(0, 'add9'), buildChord(7, 'add9')],
+          // 8. Harmonic minor i-bII-V-i (raised 7th for tension)
+          [buildChord(0, 'm'), buildChord(1), buildChord(7), buildChord(0, 'm')],
+          // 9. Power fifth ambiguity i5-iv5-i5-VII5 (no third)
+          [buildChord(0, '5'), buildChord(5, '5'), buildChord(0, '5'), buildChord(10, '5')],
+          // 10. Locrian unstable i°-bII-bIII-iv (dissonant b5 tonic)
+          [buildChord(0, '°'), buildChord(1), buildChord(3), buildChord(5, 'm')]
         ];
         return blackMetalProgressions[randomIndex];
       case 'death-metal':
@@ -401,28 +401,28 @@ export default function DiceInterface({ onResult, onUpgrade }: DiceInterfaceProp
         ];
         return deathMetalProgressions[randomIndex];
       case 'extreme-metal':
-        // 10 authentic extreme metal progressions from Slayer, Morbid Angel, Nile, etc.
+        // 10 authentic extreme metal progressions - modal, dissonant, power chord-based
         const extremeMetalProgressions = [
-          // 1. Slayer "Raining Blood" - Chromatic power chord descent
+          // 1. Chromatic power chord descent (Slayer style)
           [buildChord(0, '5'), buildChord(11, '5'), buildChord(10, '5'), buildChord(9, '5')],
-          // 2. Morbid Angel "God of Emptiness" - Tritone dissonance
+          // 2. Tritone oscillation i-b5 (Morbid Angel dissonance)
           [buildChord(0, 'm'), buildChord(6, '5'), buildChord(0, 'm'), buildChord(6, '5')],
-          // 3. Dying Fetus "Your Blood Is My Wine" - Aeolian melodic
+          // 3. Aeolian i-VI-III-VII (natural minor descent)
           [buildChord(0, 'm'), buildChord(8), buildChord(3), buildChord(10)],
-          // 4. Sodom "Agent Orange" - Chromatic drop power chords
-          [buildChord(0, '5'), buildChord(10, '5'), buildChord(9, '5'), buildChord(8, '5')],
-          // 5. Nile "Sacrifice Unto Sebek" - Phrygian ascent exotic
-          [buildChord(0, '5'), buildChord(1, '5'), buildChord(3, '5'), buildChord(4, '5')],
-          // 6. Necrophagist "Fermented Offal Discharge" - Diminished technical
-          [buildChord(11, '°'), buildChord(0), buildChord(2, 'm'), buildChord(0)],
-          // 7. Beherit "The Gate of Nanna" - Diminished interruption
-          [buildChord(0, 'm'), buildChord(11, '°'), buildChord(0, 'm'), buildChord(11, '°')],
-          // 8. Deicide "Dead by Dawn" - Descending minor resolution
-          [buildChord(0, 'm'), buildChord(10), buildChord(8), buildChord(7)],
-          // 9. Dark Funeral "Open the Gates" - Aeolian chromatic tremolo
-          [buildChord(0, 'm'), buildChord(8), buildChord(3), buildChord(10)],
-          // 10. Archspire "Drone Corpse Aviator" - Cyclical technical
-          [buildChord(0, 'm'), buildChord(8), buildChord(3), buildChord(7)]
+          // 4. Phrygian i-bII oscillation (ritualistic minor second)
+          [buildChord(0, '5'), buildChord(1, '5'), buildChord(0, '5'), buildChord(1, '5')],
+          // 5. Harmonic minor i-bII-V (exotic Egyptian scale - Nile)
+          [buildChord(0, 'm'), buildChord(1), buildChord(7), buildChord(0, 'm')],
+          // 6. Power fifth i5-iv5-V5 (open, primitive ambiguity)
+          [buildChord(0, '5'), buildChord(5, '5'), buildChord(7, '5'), buildChord(0, '5')],
+          // 7. Diminished pivot i-dim-i-VI (tension bridge)
+          [buildChord(0, 'm'), buildChord(2, '°'), buildChord(0, 'm'), buildChord(8)],
+          // 8. Dorian i-IV alternation (call-response tremolo, raised 6th)
+          [buildChord(0, 'm'), buildChord(5), buildChord(0, 'm'), buildChord(5)],
+          // 9. Phrygian dominant i-bII-bIII-bVII (Spanish/exotic)
+          [buildChord(0, '5'), buildChord(1, '5'), buildChord(3, '5'), buildChord(10, '5')],
+          // 10. Chromatic mediant i-bVI-bIII-bVII (epic slower sections)
+          [buildChord(0, 'm'), buildChord(8), buildChord(3), buildChord(10)]
         ];
         return extremeMetalProgressions[randomIndex];
       default:

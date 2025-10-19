@@ -67,14 +67,20 @@ Preferred communication style: Simple, everyday language.
 
 ### Music Theory Accuracy for Chord Generation - Band-Specific Progressions (October 19, 2025)
 - **70 Authentic Progressions**: Complete update with 10 progressions per genre from music theory analyses and song breakdowns
-- **Extreme Metal** (10 progressions):
-  - Slayer "Raining Blood" chromatic descent, Morbid Angel "God of Emptiness" tritone, Dying Fetus Aeolian melodic
-  - Sodom "Agent Orange" power drops, Nile "Sacrifice Unto Sebek" Phrygian exotic, Necrophagist diminished technical
-  - Beherit, Deicide, Dark Funeral, Archspire progressions with palm-muted aggression and dissonance
-- **Black Metal** (10 progressions):
-  - Darkthrone "Transilvanian Hunger" cyclical, Dark Funeral Andalusian descent, Dimmu Borgir symphonic
-  - Mayhem "Freezing Moon" atmospheric, Cradle of Filth diminished, Der Weg Einer Freiheit post-black modal
-  - Behemoth, 1349 augmented chaos, Nargaroth tremolo, Peste Noire folk-black with Aeolian/Harmonic Minor modes
+- **Extreme Metal** (10 modal progressions):
+  - Chromatic power chord descent, tritone oscillation i-b5, Aeolian i-VI-III-VII natural minor
+  - Phrygian i-bII oscillation (ritualistic minor second), harmonic minor i-bII-V (Egyptian exotic)
+  - Power fifth i5-iv5-V5 (open ambiguity), diminished pivot, Dorian i-iv call-response tremolo
+  - Phrygian dominant i-bII-bIII-bVII (Spanish exotic), chromatic mediant epic progressions
+  - **Modes**: Natural minor (Aeolian), harmonic minor, Phrygian, Phrygian dominant, Dorian
+  - **Intervals**: Minor seconds, tritones, minor thirds, perfect fifths, power chords (no third)
+- **Black Metal** (10 atmospheric progressions):
+  - Static modal vamp i-i-i-i (sustained gloom), stepwise Aeolian i-VII-VI-VII (ritualistic)
+  - Phrygian oscillation i-bII-i-bII (chant-like), chromatic mediant i-bVI-bIII-bVII (epic/cinematic)
+  - Alternating diad i-iv (call-response tremolo), diminished pivot i-dim-i-VI (modal shift)
+  - Suspended color cold chorale, harmonic minor i-bII-V-i, power fifth ambiguity, Locrian unstable
+  - **Modes**: Aeolian, Phrygian, harmonic minor, Locrian for unstable color
+  - **Techniques**: Tremolo picking, pedal/drone notes, dissonance (b5, b2, b6), modal vamps
 - **Death Metal** (10 progressions):
   - Cannibal Corpse "Inhumane Harvest" tritone horror, "Meathook Sodomy" tremolo, Nile Phrygian exotic
   - Suffocation diminished chaos, Vader chromatic descent, Morbid Angel "Chapel of Ghouls" harmonic minor
