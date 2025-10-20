@@ -145,9 +145,16 @@ router.post('/login', createRateLimitMiddleware(mutationRateLimiter, "login"), a
       }
       
       console.log('[LOGIN] Session saved successfully, sessionID:', req.sessionID);
+      console.log('[LOGIN] Session data:', req.session);
       
       // Return user data (excluding password)
       const { password: _, ...userWithoutPassword } = user;
+      
+      // Log response headers
+      res.on('finish', () => {
+        console.log('[LOGIN] Response headers:', res.getHeaders());
+      });
+      
       res.json({ 
         message: 'Login successful',
         user: userWithoutPassword 

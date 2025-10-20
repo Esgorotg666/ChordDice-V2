@@ -35,36 +35,45 @@ export default function AuthGate({ isOpen, onClose }: AuthGateProps) {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="w-[90vw] max-w-sm p-0 overflow-hidden border border-red-900/50" data-testid="auth-gate-modal">
+      <DialogContent className="w-[90vw] max-w-md p-0 overflow-hidden border-2 border-[#D4AF37]/30 bg-black" data-testid="auth-gate-modal">
+        {/* Animated Background Effects */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-0 left-0 w-32 h-32 bg-[#D4AF37]/10 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-0 right-0 w-40 h-40 bg-[#D4AF37]/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+        </div>
+
         {/* Header Section */}
-        <div className="bg-gradient-to-r from-red-700 to-red-900 text-white p-6">
-          <DialogHeader className="text-center space-y-3">
+        <div className="relative bg-gradient-to-br from-black via-zinc-950 to-black border-b border-[#D4AF37]/20 p-8">
+          <DialogHeader className="text-center space-y-4">
             <div className="flex justify-center">
-              <div className="bg-black/40 border border-red-800 p-3">
-                <Music className="h-10 w-10" />
+              <div className="relative">
+                <div className="absolute inset-0 bg-[#D4AF37]/20 rounded-lg blur-xl animate-pulse"></div>
+                <div className="relative bg-gradient-to-br from-zinc-900 to-black border-2 border-[#D4AF37] p-4 rounded-lg shadow-xl shadow-[#D4AF37]/20">
+                  <Music className="h-12 w-12 text-[#D4AF37]" />
+                </div>
               </div>
             </div>
-            <DialogTitle className="text-2xl font-bold">
-              Chord Dice
+            <DialogTitle className="text-3xl font-bold bg-gradient-to-r from-[#D4AF37] via-yellow-400 to-[#D4AF37] bg-clip-text text-transparent">
+              Guitar Dice
             </DialogTitle>
-            <DialogDescription className="text-primary-foreground/90">
-              Sign in to start creating chord progressions
+            <DialogDescription className="text-zinc-400 text-base">
+              Create epic chord progressions with virtual dice
             </DialogDescription>
           </DialogHeader>
         </div>
 
-        {/* Content Section - No scrolling */}
-        <div className="p-6 space-y-4">
+        {/* Content Section */}
+        <div className="relative p-8 space-y-5 bg-gradient-to-b from-zinc-950 to-black">
           {/* Sign Up Button */}
           <Button 
-            className="w-full py-6 text-lg font-semibold" 
+            className="w-full py-7 text-lg font-bold bg-gradient-to-r from-[#D4AF37] to-yellow-600 hover:from-yellow-600 hover:to-[#D4AF37] text-black shadow-lg shadow-[#D4AF37]/30 transition-all duration-300 hover:shadow-xl hover:shadow-[#D4AF37]/40 hover:scale-105" 
             onClick={handleSignUp}
             disabled={isSigningUp}
             data-testid="button-sign-up"
           >
             {isSigningUp ? (
               <>
-                <div className="animate-spin w-5 h-5 border-2 border-white/20 border-t-white rounded-full mr-2" />
+                <div className="animate-spin w-5 h-5 border-3 border-black/20 border-t-black rounded-full mr-2" />
                 Redirecting...
               </>
             ) : (
@@ -78,12 +87,17 @@ export default function AuthGate({ isOpen, onClose }: AuthGateProps) {
           {/* Sign In Button */}
           <Button 
             variant="outline" 
-            className="w-full py-6 text-lg font-semibold"
+            className="w-full py-7 text-lg font-bold border-2 border-[#D4AF37]/50 text-[#D4AF37] hover:bg-[#D4AF37]/10 hover:border-[#D4AF37] hover:scale-105 transition-all duration-300 bg-black/50 backdrop-blur-sm shadow-md"
             onClick={() => setLocation('/login')}
             data-testid="button-login"
           >
             Sign In
           </Button>
+
+          {/* Tagline */}
+          <p className="text-center text-zinc-600 text-sm pt-2">
+            Free tier • Roll the dice for killer riffs
+          </p>
         </div>
       </DialogContent>
     </Dialog>
