@@ -1,8 +1,21 @@
 import express, { type Request, Response, NextFunction } from "express";
+import cors from "cors";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 
 const app = express();
+
+// Trust proxy - CRITICAL for secure cookies behind Replit's HTTPS proxy
+app.set("trust proxy", 1);
+
+// CORS configuration - must be before other middleware
+app.use(cors({
+  origin: true, // Allow all origins in development (Vite dev server)
+  credentials: true, // Allow cookies to be sent
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-CSRF-Token'],
+}));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
