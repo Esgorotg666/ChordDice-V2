@@ -76,6 +76,60 @@ export const getTappingCombinationsForChord = (baseChord: string): TappingVoicin
   return Object.values(tappingCombinations).filter(combo => combo.baseChord === baseChord);
 };
 
+// Exotic chord types mapping (dice roll number to chord type)
+export const exoticNumbers: Record<number, string> = {
+  1: 'Diminished',
+  2: 'Augmented',
+  3: 'Suspended',
+  4: 'Major 7th',
+  5: '9th',
+  6: 'Maj',
+  7: 'Maj',
+  8: 'Maj'
+};
+
+// Chord types for the basic chord grid
+export const chordTypes = [
+  'Major',
+  'Minor',
+  '6th',
+  '7th',
+  '9th',
+  'Minor 6th',
+  'Minor 7th',
+  'Major 7th',
+  'Diminished',
+  'Augmented',
+  'Suspended'
+];
+
+// Exotic/Premium chord types
+export const exoticChordTypes = [
+  '11th',
+  '13th',
+  'Minor 9th',
+  'Add9',
+  '6/9',
+  'Diminished 7th',
+  'Half-diminished',
+  'Augmented 7th'
+];
+
+// Color groups for chord grid (12 musical keys organized by groups)
+export const colorGroups = [
+  { name: 'Purple', keys: ['E', 'F#', 'G#', 'A#'] },
+  { name: 'Orange', keys: ['F', 'G', 'A', 'B'] },
+  { name: 'Blue', keys: ['C', 'D', 'E♭', 'F#'] },
+  { name: 'Green', keys: ['C#', 'D#', 'G', 'A'] },
+  { name: 'Red', keys: ['D', 'E', 'F', 'G#'] },
+  { name: 'Yellow', keys: ['A♭', 'B♭', 'C', 'D'] }
+];
+
+// Get all musical keys
+export const getAllKeys = (): string[] => {
+  return musicalKeys;
+};
+
 // Complete Guitar Chord Library - 480 Chords (12 keys × 40 variations)
 export const chordDiagrams: Record<string, ChordDiagram> = {
   // A Root Chords (40 variations)
@@ -772,4 +826,81 @@ export const getChordsForRoot = (root: string): ChordDiagram[] => {
     }
   });
   return chords;
+};
+
+// Alias for backward compatibility
+export const NOTES = chromaticNotes;
+export const buildScaleByIntervals = generateScale;
+
+// Generate related scales for a mode
+export interface RelatedScale {
+  mode: ModeDef;
+  root: string;
+  notes: string[];
+}
+
+export const generateRelatedScales = (mode: ModeDef, root: string): RelatedScale[] => {
+  const relatedScales: RelatedScale[] = [];
+  const preferFlats = mode.preferFlats || false;
+  
+  // Generate the primary scale
+  const notes = generateScale(root, mode.intervals, preferFlats);
+  relatedScales.push({ mode, root, notes });
+  
+  return relatedScales;
+};
+
+// Get random compatible scales for a chord progression
+export interface CompatibleScale {
+  mode: ModeDef;
+  root: string;
+  notes: string[];
+  matchScore: number;
+}
+
+export const getRandomCompatibleScales = (
+  chordProgression: string[],
+  count: number = 3
+): CompatibleScale[] => {
+  const compatibleScales: CompatibleScale[] = [];
+  
+  // For now, return a basic compatible scale based on the first chord
+  if (chordProgression.length > 0) {
+    const firstChord = chordProgression[0];
+    const rootMatch = firstChord.match(/^([A-G][#b♭♯]?)/);
+    if (rootMatch) {
+      const root = rootMatch[1];
+      
+      // Determine if the chord is major or minor
+      const isMinor = firstChord.includes('m') && !firstChord.includes('maj');
+      const preferredMode = isMinor ? modes.find(m => m.id === 'aeolian') : modes.find(m => m.id === 'ionian');
+      
+      if (preferredMode) {
+        const notes = generateScale(root, preferredMode.intervals, preferredMode.preferFlats);
+        compatibleScales.push({
+          mode: preferredMode,
+          root,
+          notes,
+          matchScore: 1.0
+        });
+      }
+      
+      // Add additional compatible modes
+      const additionalModes = isMinor 
+        ? modes.filter(m => m.quality === 'minor' && m.id !== 'aeolian').slice(0, count - 1)
+        : modes.filter(m => m.quality === 'major' && m.id !== 'ionian').slice(0, count - 1);
+      
+      additionalModes.forEach(mode => {
+        const notes = generateScale(root, mode.intervals, mode.preferFlats);
+        compatibleScales.push({
+          mode,
+          root,
+          notes,
+          matchScore: 0.8
+        });
+      });
+    }
+  }
+  
+  return compatibleScales.slice(0, count);
 };
