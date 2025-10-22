@@ -1,0 +1,507 @@
+# All Guitar Chords - 480 Chords Across 12 Root Notes
+# Format: Chord Name (Abbreviation): (fret numbers)E<fret>A<fret>D<fret>G<fret>b<fret>e<fret>
+# Generated on October 22, 2025, 06:10 AM PDT
+
+## A Root Chords
+A Major (A): (x02220)ExA0D2G2b2e0
+A Minor (Am): (x02210)ExA0D2G2b1e0
+A Dominant 7th (A7): (x02020)ExA0D2G0b2e0
+A Minor 7th (Am7): (x02010)ExA0D2G0b1e0
+A Major 7th (Amaj7): (x02120)ExA0D2G1b2e0
+A Suspended 4th (Asus4): (x02230)ExA0D2G2b3e0
+A Suspended 2nd (Asus2): (x02200)ExA0D2G2b0e0
+A Augmented (Aaug): (x03221)ExA0D3G2b2e1
+A Diminished (Adim): (x02323)ExA0D2G3b2e3
+A Diminished 7th (Adim7): (x01212)ExA0D1G2b1e2
+A Add9 (Aadd9): (x02420)ExA0D2G4b2e0
+A6 (A6): (x02222)ExA0D2G2b2e2
+A Minor 6th (Am6): (x02212)ExA0D2G2b1e2
+A9 (A9): (x02423)ExA0D2G4b2e3
+A Minor Major 7th (Ammaj7): (x02110)ExA0D2G1b1e0
+A7#9 (A7#9): (x02325)ExA0D2G3b2e5
+A Major 9th (Amaj9): (x02100)ExA0D2G1b0e0
+A Minor 9th (Am9): (x05557)ExA0D5G5b5e7
+A7b9 (A7b9): (x02324)ExA0D2G3b2e4
+A7#5 (A7#5): (x03021)ExA0D3G0b2e1
+A7b5 (A7b5): (x01023)ExA0D1G2b2e3
+A11 (A11): (x00000)ExA0D0G0b0e0
+A Minor 11th (Am11): (x05555)ExA0D5G5b5e5
+A13 (A13): (x04022)ExA0D4G0b2e2
+A Minor 13th (Am13): (x05057)ExA0D5G0b5e7
+A Major Barre (A): (577655)E5A7D7G6b5e5
+A Minor Barre (Am): (577555)E5A7D7G5b5e5
+A Dominant 7th Barre (A7): (575655)E5A7D5G6b5e5
+A Minor 7th Barre (Am7): (575555)E5A7D5G5b5e5
+A Major 7th Barre (Amaj7): (576655)E5A7D6G6b5e5
+A Suspended 4th Barre (Asus4): (577755)E5A7D7G7b5e5
+A Suspended 2nd Barre (Asus2): (577055)E5A7D7G0b5e5
+A Augmented Barre (Aaug): (x76665)ExA7D6G6b6e5
+A Diminished Barre (Adim): (x75656)ExA7D5G6b5e6
+A Diminished 7th Barre (Adim7): (x75675)ExA7D5G6b7e5
+A Add9 Barre (Aadd9): (575657)E5A7D5G6b5e7
+A6 Barre (A6): (575675)E5A7D5G6b7e5
+A Minor 6th Barre (Am6): (575565)E5A7D5G5b6e5
+A9 Barre (A9): (575677)E5A7D5G6b7e7
+A7#9 Barre (A7#9): (575678)E5A7D5G6b7e8
+
+## Bb Root Chords
+Bb Major (Bb): (x13331)ExA1D3G3b3e1
+Bb Minor (Bbm): (x13321)ExA1D3G3b2e1
+Bb Dominant 7th (Bb7): (x13131)ExA1D3G1b3e1
+Bb Minor 7th (Bbm7): (x13121)ExA1D3G1b2e1
+Bb Major 7th (Bbmaj7): (x13231)ExA1D3G2b3e1
+Bb Suspended 4th (Bbsus4): (x13341)ExA1D3G3b4e1
+Bb Suspended 2nd (Bbsus2): (x13311)ExA1D3G3b1e1
+Bb Augmented (Bbaug): (x10332)ExA1D0G3b3e2
+Bb Diminished (Bbdim): (x1202x)ExA1D2G0b2ex
+Bb Diminished 7th (Bbdim7): (x12020)ExA1D2G0b2e0
+Bb Add9 (Bbadd9): (x13531)ExA1D3G5b3e1
+Bb6 (Bb6): (x1303x)ExA1D3G0b3ex
+Bb Minor 6th (Bbm6): (x1302x)ExA1D3G0b2ex
+Bb9 (Bb9): (x10111)ExA1D0G1b1e1
+Bb Minor Major 7th (Bbmmaj7): (x13221)ExA1D3G2b2e1
+Bb7#9 (Bb7#9): (x13134)ExA1D3G1b3e4
+Bb Major 9th (Bbmaj9): (x10100)ExA1D0G1b0e0
+Bb Minor 9th (Bbm9): (x13123)ExA1D3G1b2e3
+Bb7b9 (Bb7b9): (x10112)ExA1D0G1b1e2
+Bb7#5 (Bb7#5): (x14132)ExA1D4G1b3e2
+Bb7b5 (Bb7b5): (x1213x)ExA1D2G1b3ex
+Bb11 (Bb11): (x11111)ExA1D1G1b1e1
+Bb Minor 11th (Bbm11): (x11113)ExA1D1G1b1e3
+Bb13 (Bb13): (x15133)ExA1D5G1b3e3
+Bb Minor 13th (Bbm13): (x13135)ExA1D3G1b3e5
+Bb Major Barre (Bb): (688766)E6A8D8G7b6e6
+Bb Minor Barre (Bbm): (688666)E6A8D8G6b6e6
+Bb Dominant 7th Barre (Bb7): (686766)E6A8D6G7b6e6
+Bb Minor 7th Barre (Bbm7): (686666)E6A8D6G6b6e6
+Bb Major 7th Barre (Bbmaj7): (687766)E6A8D7G7b6e6
+Bb Suspended 4th Barre (Bbsus4): (688866)E6A8D8G8b6e6
+Bb Suspended 2nd Barre (Bbsus2): (688166)E6A8D8G1b6e6
+Bb Augmented Barre (Bbaug): (x87776)ExA8D7G7b7e6
+Bb Diminished Barre (Bbdim): (x86767)ExA8D6G7b6e7
+Bb Diminished 7th Barre (Bbdim7): (x86786)ExA8D6G7b8e6
+Bb Add9 Barre (Bbadd9): (686768)E6A8D6G7b6e8
+Bb6 Barre (Bb6): (686786)E6A8D6G7b8e6
+Bb Minor 6th Barre (Bbm6): (686676)E6A8D6G6b7e6
+Bb9 Barre (Bb9): (686788)E6A8D6G7b8e8
+Bb7#9 Barre (Bb7#9): (686789)E6A8D6G7b8e9
+
+## B Root Chords
+B Major (B): (x24442)ExA2D4G4b4e2
+B Minor (Bm): (x24432)ExA2D4G4b3e2
+B Dominant 7th (B7): (x24242)ExA2D4G2b4e2
+B Minor 7th (Bm7): (x24232)ExA2D4G2b3e2
+B Major 7th (Bmaj7): (x24342)ExA2D4G3b4e2
+B Suspended 4th (Bsus4): (x24452)ExA2D4G4b5e2
+B Suspended 2nd (Bsus2): (x24422)ExA2D4G4b2e2
+B Augmented (Baug): (x21003)ExA2D1G0b0e3
+B Diminished (Bdim): (x2343x)ExA2D3G4b3ex
+B Diminished 7th (Bdim7): (x23131)ExA2D3G1b3e1
+B Add9 (Badd9): (x24642)ExA2D4G6b4e2
+B6 (B6): (x24444)ExA2D4G4b4e4
+B Minor 6th (Bm6): (x24434)ExA2D4G4b3e4
+B9 (B9): (x24222)ExA2D4G2b2e2
+B Minor Major 7th (Bmmaj7): (x2433x)ExA2D4G3b3ex
+B7#9 (B7#9): (x24245)ExA2D4G2b4e5
+B Major 9th (Bmaj9): (x2132x)ExA2D1G3b2ex
+B Minor 9th (Bm9): (x24224)ExA2D4G2b2e4
+B7b9 (B7b9): (x2121x)ExA2D1G2b1ex
+B7#5 (B7#5): (x2524x)ExA2D5G2b4ex
+B7b5 (B7b5): (x2324x)ExA2D3G2b4ex
+B11 (B11): (x22222)ExA2D2G2b2e2
+B Minor 11th (Bm11): (x22224)ExA2D2G2b2e4
+B13 (B13): (x26244)ExA2D6G2b4e4
+B Minor 13th (Bm13): (x24246)ExA2D4G2b4e6
+B Major Barre (B): (799877)E7A9D9G8b7e7
+B Minor Barre (Bm): (799777)E7A9D9G7b7e7
+B Dominant 7th Barre (B7): (797877)E7A9D7G8b7e7
+B Minor 7th Barre (Bm7): (797777)E7A9D7G7b7e7
+B Major 7th Barre (Bmaj7): (798877)E7A9D8G8b7e7
+B Suspended 4th Barre (Bsus4): (799977)E7A9D9G9b7e7
+B Suspended 2nd Barre (Bsus2): (799277)E7A9D9G2b7e7
+B Augmented Barre (Baug): (87666x)E8A7D6G6b6ex
+B Diminished Barre (Bdim): (78676x)E7A8D6G7b6ex
+B Diminished 7th Barre (Bdim7): (787676)E7A8D6G7b7e6
+B Add9 Barre (Badd9): (797879)E7A9D7G8b7e9
+B6 Barre (B6): (797897)E7A9D7G8b9e7
+B Minor 6th Barre (Bm6): (797787)E7A9D7G7b8e7
+B9 Barre (B9): (797899)E7A9D7G8b9e9
+B7#9 Barre (B7#9): (79789a)E7A9D7G8b9e10
+
+## C Root Chords
+C Major (C): (x32010)ExA3D2G0b1e0
+C Minor (Cm): (x35543)ExA3D5G5b4e3
+C Dominant 7th (C7): (x32310)ExA3D2G3b1e0
+C Minor 7th (Cm7): (x35343)ExA3D5G3b4e3
+C Major 7th (Cmaj7): (x32000)ExA3D2G0b0e0
+C Suspended 4th (Csus4): (x33011)ExA3D3G0b1e1
+C Suspended 2nd (Csus2): (x30010)ExA3D0G0b1e0
+C Augmented (Caug): (x32110)ExA3D2G1b1e0
+C Diminished (Cdim): (x3454x)ExA3D4G5b4ex
+C Diminished 7th (Cdim7): (x3424x)ExA3D4G2b4ex
+C Add9 (Cadd9): (x32030)ExA3D2G0b3e0
+C6 (C6): (x32210)ExA3D2G2b1e0
+C Minor 6th (Cm6): (x35045)ExA3D5G0b4e5
+C9 (C9): (x32330)ExA3D2G3b3e0
+C Minor Major 7th (Cmmaj7): (x35443)ExA3D5G4b4e3
+C7#9 (C7#9): (x3234x)ExA3D2G3b4ex
+C Major 9th (Cmaj9): (x3243x)ExA3D2G4b3ex
+C Minor 9th (Cm9): (x31333)ExA3D1G3b3e3
+C7b9 (C7b9): (x3232x)ExA3D2G3b2ex
+C7#5 (C7#5): (x3435x)ExA3D4G3b5ex
+C7b5 (C7b5): (x3434x)ExA3D4G3b4ex
+C11 (C11): (x33333)ExA3D3G3b3e3
+C Minor 11th (Cm11): (x33335)ExA3D3G3b3e5
+C13 (C13): (x35355)ExA3D5G3b5e5
+C Minor 13th (Cm13): (x35357)ExA3D5G3b5e7
+C Major Barre (C): (8aa988)E8A10D10G9b8e8
+C Minor Barre (Cm): (355333)E3A5D5G3b3e3
+C Dominant 7th Barre (C7): (898988)E8A10D8G9b8e8
+C Minor 7th Barre (Cm7): (353333)E3A5D3G3b3e3
+C Major 7th Barre (Cmaj7): (899988)E8A10D9G9b8e8
+C Suspended 4th Barre (Csus4): (8aaa88)E8A10D10G10b8e8
+C Suspended 2nd Barre (Csus2): (8a3988)E8A10D3G9b8e8
+C Augmented Barre (Caug): (x9877x)ExA9D8G7b7ex
+C Diminished Barre (Cdim): (x9787x)ExA9D7G8b7ex
+C Diminished 7th Barre (Cdim7): (x9786x)ExA9D7G8b6ex
+C Add9 Barre (Cadd9): (89898a)E8A10D8G9b8e10
+C6 Barre (C6): (8989a8)E8A10D8G9b10e8
+C Minor 6th Barre (Cm6): (898798)E8A10D8G7b9e8
+C9 Barre (C9): (8989aa)E8A10D8G9b10e10
+C7#9 Barre (C7#9): (8989ab)E8A10D8G9b10e11
+
+## C# Root Chords
+C# Major (C#): (x46664)ExA4D6G6b6e4
+C# Minor (C#m): (x46654)ExA4D6G6b5e4
+C# Dominant 7th (C#7): (x46464)ExA4D6G4b6e4
+C# Minor 7th (C#m7): (x46454)ExA4D6G4b5e4
+C# Major 7th (C#maj7): (x46564)ExA4D6G5b6e4
+C# Suspended 4th (C#sus4): (x46674)ExA4D6G6b7e4
+C# Suspended 2nd (C#sus2): (x46644)ExA4D6G6b4e4
+C# Augmented (C#aug): (x4322x)ExA4D3G2b2ex
+C# Diminished (C#dim): (x4565x)ExA4D5G6b5ex
+C# Diminished 7th (C#dim7): (x45353)ExA4D5G3b5e3
+C# Add9 (C#add9): (x46864)ExA4D6G8b6e4
+C#6 (C#6): (x46666)ExA4D6G6b6e6
+C# Minor 6th (C#m6): (x46656)ExA4D6G6b5e6
+C#9 (C#9): (x43444)ExA4D3G4b4e4
+C# Minor Major 7th (C#mmaj7): (x46554)ExA4D6G5b5e4
+C#7#9 (C#7#9): (x46467)ExA4D6G4b6e7
+C# Major 9th (C#maj9): (x4133x)ExA4D1G3b3ex
+C# Minor 9th (C#m9): (x42444)ExA4D2G4b4e4
+C#7b9 (C#7b9): (x4343x)ExA4D3G4b3ex
+C#7#5 (C#7#5): (x4746x)ExA4D7G4b6ex
+C#7b5 (C#7b5): (x4545x)ExA4D5G4b5ex
+C#11 (C#11): (x44444)ExA4D4G4b4e4
+C# Minor 11th (C#m11): (x44446)ExA4D4G4b4e6
+C#13 (C#13): (x46466)ExA4D6G4b6e6
+C# Minor 13th (C#m13): (x46468)ExA4D6G4b6e8
+C# Major Barre (C#): (91111999)E9A11D11G10b9e9
+C# Minor Barre (C#m): (91111899)E9A11D11G10b8e9
+C# Dominant 7th Barre (C#7): (9b9 a 9 9)E9A11D9G10b9e9
+C# Minor 7th Barre (C#m7): (9b8 a 9 9)E9A11D9G10b8e9
+C# Major 7th Barre (C#maj7): (9ba a 9 9)E9A11D10G10b9e9
+C# Suspended 4th Barre (C#sus4): (9bb b 9 9)E9A11D11G11b9e9
+C# Suspended 2nd Barre (C#sus2): (9b4 a 9 9)E9A11D4G10b9e9
+C# Augmented Barre (C#aug): (xa988x)ExA10D9G8b8ex
+C# Diminished Barre (C#dim): (x9a8ax)ExA9D10G8b10ex
+C# Diminished 7th Barre (C#dim7): (x9a79x)ExA9D10G7b9ex
+C# Add9 Barre (C#add9): (9b9 ab b)E9A11D9G10b11e9
+C#6 Barre (C#6): (9b9 a 9 b)E9A11D9G10b9e11
+C# Minor 6th Barre (C#m6): (9b9 a 8 b)E9A11D9G10b8e11
+C#9 Barre (C#9): (9b9 a 9 c)E9A11D9G10b9e12
+C#7#9 Barre (C#7#9): (9b9 a 9 d)E9A11D9G10b9e13
+
+## D Root Chords
+D Major (D): (xx0232)ExxA0D2G3b2
+D Minor (Dm): (xx0231)ExxA0D2G3b1
+D Dominant 7th (D7): (xx0212)ExxA0D2G1b2
+D Minor 7th (Dm7): (xx0211)ExxA0D2G1b1
+D Major 7th (Dmaj7): (xx0222)ExxA0D2G2b2
+D Suspended 4th (Dsus4): (xx0233)ExxA0D2G3b3
+D Suspended 2nd (Dsus2): (xx0230)ExxA0D2G3b0
+D Augmented (Daug): (xx0332)ExxA0D3G3b2
+D Diminished (Ddim): (xx0131)ExxA0D1G3b1
+D Diminished 7th (Ddim7): (xx0101)ExxA0D1G0b1
+D Add9 (Dadd9): (xx0432)ExxA0D4G3b2
+D6 (D6): (xx0202)ExxA0D2G0b2
+D Minor 6th (Dm6): (xx0201)ExxA0D2G0b1
+D9 (D9): (xx0210)ExxA0D2G1b0
+D Minor Major 7th (Dmmaj7): (xx0221)ExxA0D2G2b1
+D7#9 (D7#9): (xx0213)ExxA0D2G1b3
+D Major 9th (Dmaj9): (xx0220)ExxA0D2G2b0
+D Minor 9th (Dm9): (xx0213)ExxA0D2G1b3
+D7b9 (D7b9): (xx0211)ExxA0D2G1b1
+D7#5 (D7#5): (xx0312)ExxA0D3G1b2
+D7b5 (D7b5): (xx0112)ExxA0D1G1b2
+D11 (D11): (xx3333)ExxA0D3G3b3
+D Minor 11th (Dm11): (xx3335)ExxA0D3G3b5
+D13 (D13): (xx3535)ExxA0D5G3b5
+D Minor 13th (Dm13): (xx3537)ExxA0D5G3b7
+D Major Barre (D): (x57775)ExA5D7G7b7e5
+D Minor Barre (Dm): (x57765)ExA5D7G7b6e5
+D Dominant 7th Barre (D7): (x57575)ExA5D7G5b7e5
+D Minor 7th Barre (Dm7): (x57565)ExA5D7G5b6e5
+D Major 7th Barre (Dmaj7): (x57675)ExA5D7G6b7e5
+D Suspended 4th Barre (Dsus4): (x57785)ExA5D7G7b8e5
+D Suspended 2nd Barre (Dsus2): (x57075)ExA5D7G0b7e5
+D Augmented Barre (Daug): (x5433x)ExA5D4G3b3ex
+D Diminished Barre (Ddim): (x5645x)ExA5D6G4b5ex
+D Diminished 7th Barre (Ddim7): (x5646x)ExA5D6G4b6ex
+D Add9 Barre (Dadd9): (x57577)ExA5D7G5b7e7
+D6 Barre (D6): (x57557)ExA5D7G5b5e7
+D Minor 6th Barre (Dm6): (x57556)ExA5D7G5b5e6
+D9 Barre (D9): (x57557)ExA5D7G5b5e7
+D7#9 Barre (D7#9): (x57558)ExA5D7G5b5e8
+
+## Eb Root Chords
+Eb Major (Eb): (x68886)ExA6D8G8b8e6
+Eb Minor (Ebm): (x68876)ExA6D8G8b7e6
+Eb Dominant 7th (Eb7): (x68686)ExA6D8G6b8e6
+Eb Minor 7th (Ebm7): (x68676)ExA6D8G6b7e6
+Eb Major 7th (Ebmaj7): (x68786)ExA6D8G7b8e6
+Eb Suspended 4th (Ebsus4): (x68896)ExA6D8G8b9e6
+Eb Suspended 2nd (Ebsus2): (x68866)ExA6D8G8b6e6
+Eb Augmented (Ebaug): (x6544x)ExA6D5G4b4ex
+Eb Diminished (Ebdim): (x6756x)ExA6D7G5b6ex
+Eb Diminished 7th (Ebdim7): (x67575)ExA6D7G5b7e5
+Eb Add9 (Ebadd9): (x68888)ExA6D8G8b8e8
+Eb6 (Eb6): (x68888)ExA6D8G8b8e8
+Eb Minor 6th (Ebm6): (x68878)ExA6D8G8b7e8
+Eb9 (Eb9): (x65666)ExA6D5G6b6e6
+Eb Minor Major 7th (Ebmmaj7): (x68776)ExA6D8G7b7e6
+Eb7#9 (Eb7#9): (x68689)ExA6D8G6b8e9
+Eb Major 9th (Ebmaj9): (x6578x)ExA6D5G7b8ex
+Eb Minor 9th (Ebm9): (x64666)ExA6D4G6b6e6
+Eb7b9 (Eb7b9): (x6565x)ExA6D5G6b5ex
+Eb7#5 (Eb7#5): (x6968x)ExA6D9G6b8ex
+Eb7b5 (Eb7b5): (x6767x)ExA6D7G6b7ex
+Eb11 (Eb11): (x66666)ExA6D6G6b6e6
+Eb Minor 11th (Ebm11): (x66668)ExA6D6G6b6e8
+Eb13 (Eb13): (x68688)ExA6D8G6b8e8
+Eb Minor 13th (Ebm13): (x6868a)ExA6D8G6b8e10
+Eb Major Barre (Eb): (acccba)E11A13D13G12b11e11
+Eb Minor Barre (Ebm): (acccaa)E11A13D13G11b11e11
+Eb Dominant 7th Barre (Eb7): (acacba)E11A13D11G12b11e11
+Eb Minor 7th Barre (Ebm7): (acacaa)E11A13D11G11b11e11
+Eb Major 7th Barre (Ebmaj7): (acc cba)E11A13D12G12b11e11
+Eb Suspended 4th Barre (Ebsus4): (acccca)E11A13D13G13b11e11
+Eb Suspended 2nd Barre (Ebsus2): (acc5ba)E11A13D5G12b11e11
+Eb Augmented Barre (Ebaug): (x b a a a x)ExA11D10G9b9ex
+Eb Diminished Barre (Ebdim): (x b 9 a 9 x)ExA11D9G10b9ex
+Eb Diminished 7th Barre (Ebdim7): (x b 9 8 a x)ExA11D9G10b8ex
+Eb Add9 Barre (Ebadd9): (acacbc)E11A13D11G12b11e13
+Eb6 Barre (Eb6): (acaccc)E11A13D11G12b12e11
+Eb Minor 6th Barre (Ebm6): (acacac)E11A13D11G12b10e11
+Eb9 Barre (Eb9): (acaccc)E11A13D11G12b12e11
+Eb7#9 Barre (Eb7#9): (acac cd)E11A13D11G12b12e13
+
+## E Root Chords
+E Major (E): (022100)E0A2D2G1b0e0
+E Minor (Em): (022000)E0A2D2G0b0e0
+E Dominant 7th (E7): (020100)E0A2D0G1b0e0
+E Minor 7th (Em7): (020000)E0A2D0G0b0e0
+E Major 7th (Emaj7): (021100)E0A2D1G1b0e0
+E Suspended 4th (Esus4): (022200)E0A2D2G2b0e0
+E Suspended 2nd (Esus2): (002200)E0A0D2G2b0e0
+E Augmented (Eaug): (032110)E0A3D2G1b1e0
+E Diminished (Edim): (xx2323)ExxA2D3G2b3e3
+E Diminished 7th (Edim7): (012020)E0A1D2G0b2e0
+E Add9 (Eadd9): (024100)E0A2D4G1b0e0
+E6 (E6): (022120)E0A2D2G1b2e0
+E Minor 6th (Em6): (022020)E0A2D2G0b2e0
+E9 (E9): (020102)E0A2D0G1b0e2
+E Minor Major 7th (Emmaj7): (021000)E0A2D1G0b0e0
+E7#9 (E7#9): (xx2435)ExxA2D4G3b5ex
+E Major 9th (Emaj9): (021102)E0A2D1G1b0e2
+E Minor 9th (Em9): (020002)E0A2D0G0b0e2
+E7b9 (E7b9): (020101)E0A2D0G1b0e1
+E7#5 (E7#5): (030120)E0A3D0G1b2e0
+E7b5 (E7b5): (0101xx)E0A1D0G1bxxex
+E11 (E11): (022222)E0A2D2G2b2e2
+E Minor 11th (Em11): (022224)E0A2D2G2b2e4
+E13 (E13): (042244)E0A4D2G2b4e4
+E Minor 13th (Em13): (042246)E0A4D2G2b4e6
+E Major Barre (E): (x79997)ExA7D9G9b9e7
+E Minor Barre (Em): (x79987)ExA7D9G9b8e7
+E Dominant 7th Barre (E7): (x79797)ExA7D9G7b9e7
+E Minor 7th Barre (Em7): (x79787)ExA7D9G7b8e7
+E Major 7th Barre (Emaj7): (x79897)ExA7D9G8b9e7
+E Suspended 4th Barre (Esus4): (x799a7)ExA7D9G9b10e7
+E Suspended 2nd Barre (Esus2): (x79297)ExA7D9G2b9e7
+E Augmented Barre (Eaug): (x8766x)ExA8D7G6b6ex
+E Diminished Barre (Edim): (x8676x)ExA8D6G7b6ex
+E Diminished 7th Barre (Edim7): (x8675x)ExA8D6G7b5ex
+E Add9 Barre (Eadd9): (x799a9)ExA7D9G9b10e9
+E6 Barre (E6): (x79979)ExA7D9G7b9e7
+E Minor 6th Barre (Em6): (x79978)ExA7D9G7b8e7
+E9 Barre (E9): (x7997a)ExA7D9G7b9e10
+E7#9 Barre (E7#9): (x7997b)ExA7D9G7b9e11
+
+## F Root Chords
+F Major (F): (133211)E1A3D3G2b1e1
+F Minor (Fm): (133111)E1A3D3G1b1e1
+F Dominant 7th (F7): (131211)E1A3D1G2b1e1
+F Minor 7th (Fm7): (131111)E1A3D1G1b1e1
+F Major 7th (Fmaj7): (132211)E1A3D2G2b1e1
+F Suspended 4th (Fsus4): (133311)E1A3D3G3b1e1
+F Suspended 2nd (Fsus2): (103011)E1A0D3G0b1e1
+F Augmented (Faug): (103221)E1A0D3G2b2e1
+F Diminished (Fdim): (12313x)E1A2D3G1b3ex
+F Diminished 7th (Fdim7): (120101)E1A2D0G1b0e1
+F Add9 (Fadd9): (103213)E1A0D3G2b1e3
+F6 (F6): (133231)E1A3D3G2b3e1
+F Minor 6th (Fm6): (133131)E1A3D3G1b3e1
+F9 (F9): (131213)E1A3D1G2b1e3
+F Minor Major 7th (Fmmaj7): (132111)E1A3D2G1b1e1
+F7#9 (F7#9): (131214)E1A3D1G2b1e4
+F Major 9th (Fmaj9): (130210)E1A3D0G2b1e0
+F Minor 9th (Fm9): (131113)E1A3D1G1b1e3
+F7b9 (F7b9): (131212)E1A3D1G2b1e2
+F7#5 (F7#5): (141312)E1A4D1G3b2e1
+F7b5 (F7b5): (1x1201)E1xA2D0G1b1
+F11 (F11): (133333)E1A3D3G3b3e3
+F Minor 11th (Fm11): (133335)E1A3D3G3b3e5
+F13 (F13): (153355)E1A5D3G3b5e5
+F Minor 13th (Fm13): (153357)E1A5D3G3b5e7
+F Major Barre (F): (x8aa a8)ExA8D10G10b10e8
+F Minor Barre (Fm): (x8aa98)ExA8D10G10b9e8
+F Dominant 7th Barre (F7): (x8a8 a8)ExA8D10G8b10e8
+F Minor 7th Barre (Fm7): (x8a898)ExA8D10G8b9e8
+F Major 7th Barre (Fmaj7): (x8a9 a8)ExA8D10G9b10e8
+F Suspended 4th Barre (Fsus4): (x8aa b8)ExA8D10G10b11e8
+F Suspended 2nd Barre (Fsus2): (x8a5 a8)ExA8D10G5b10e8
+F Augmented Barre (Faug): (x9877x)ExA9D8G7b7ex
+F Diminished Barre (Fdim): (x9787x)ExA9D7G8b7ex
+F Diminished 7th Barre (Fdim7): (x9786x)ExA9D7G8b6ex
+F Add9 Barre (Fadd9): (x8a8 aa)ExA8D10G8b10e10
+F6 Barre (F6): (x8a8 a8)ExA8D10G8b10e8
+F Minor 6th Barre (Fm6): (x8a8 98)ExA8D10G8b9e8
+F9 Barre (F9): (x8a8 aa)ExA8D10G8b10e10
+F7#9 Barre (F7#9): (x8a8 ab)ExA8D10G8b10e11
+
+## F# Root Chords
+F# Major (F#): (244322)E2A4D4G3b2e2
+F# Minor (F#m): (244222)E2A4D4G2b2e2
+F# Dominant 7th (F#7): (242322)E2A4D2G3b2e2
+F# Minor 7th (F#m7): (242222)E2A4D2G2b2e2
+F# Major 7th (F#maj7): (243322)E2A4D3G3b2e2
+F# Suspended 4th (F#sus4): (244422)E2A4D4G4b2e2
+F# Suspended 2nd (F#sus2): (244122)E2A4D4G1b2e2
+F# Augmented (F#aug): (2x4332)E2xA4D3G3b2
+F# Diminished (F#dim): (2x434x)E2xA4D3G4b4ex
+F# Diminished 7th (F#dim7): (2x232x)E2xA4D2G3b2ex
+F# Add9 (F#add9): (244324)E2A4D4G3b2e4
+F#6 (F#6): (244342)E2A4D4G3b4e2
+F# Minor 6th (F#m6): (244232)E2A4D4G2b3e2
+F#9 (F#9): (242324)E2A4D2G3b2e4
+F# Minor Major 7th (F#mmaj7): (243222)E2A4D3G2b2e2
+F#7#9 (F#7#9): (242325)E2A4D2G3b2e5
+F# Major 9th (F#maj9): (2412xx)E2A4D1G2bxxex
+F# Minor 9th (F#m9): (242224)E2A4D2G2b2e4
+F#7b9 (F#7b9): (242323)E2A4D2G3b2e3
+F#7#5 (F#7#5): (2524xx)E2A5D2G4bxxex
+F#7b5 (F#7b5): (2x231x)E2xA4D2G3b1ex
+F#11 (F#11): (244444)E2A4D4G4b4e4
+F# Minor 11th (F#m11): (244446)E2A4D4G4b4e6
+F#13 (F#13): (264466)E2A6D4G4b6e6
+F# Minor 13th (F#m13): (264468)E2A6D4G4b6e8
+F# Major Barre (F#): (abbba9)E10A12D12G11b10e10
+F# Minor Barre (F#m): (abba a9)E10A12D12G11b10e9
+F# Dominant 7th Barre (F#7): (ab9 b a 9)E10A12D9G11b10e9
+F# Minor 7th Barre (F#m7): (ab9 a a 9)E10A12D9G10b10e9
+F# Major 7th Barre (F#maj7): (aba b a 9)E10A12D10G11b10e9
+F# Suspended 4th Barre (F#sus4): (abb c a 9)E10A12D12G12b10e9
+F# Suspended 2nd Barre (F#sus2): (abb6 a 9)E10A12D6G11b10e9
+F# Augmented Barre (F#aug): (xa988x)ExA10D9G8b8ex
+F# Diminished Barre (F#dim): (x9a8ax)ExA9D10G8b10ex
+F# Diminished 7th Barre (F#dim7): (x9a79x)ExA9D10G7b9ex
+F# Add9 Barre (F#add9): (ab9 ab b)E10A12D9G10b11e9
+F#6 Barre (F#6): (ab9 a 9 b)E10A12D9G10b9e11
+F# Minor 6th Barre (F#m6): (ab9 a 8 b)E10A12D9G10b8e11
+F#9 Barre (F#9): (ab9 a 9 c)E10A12D9G10b9e12
+F#7#9 Barre (F#7#9): (ab9 a 9 d)E10A12D9G10b9e13
+
+## G Root Chords
+G Major (G): (320003)E3A2D0G0b0e3
+G Minor (Gm): (355333)E3A5D5G3b3e3
+G Dominant 7th (G7): (320001)E3A2D0G0b0e1
+G Minor 7th (Gm7): (353333)E3A5D3G3b3e3
+G Major 7th (Gmaj7): (320002)E3A2D0G0b0e2
+G Suspended 4th (Gsus4): (330003)E3A3D0G0b0e3
+G Suspended 2nd (Gsus2): (300033)E3A0D0G0b3e3
+G Augmented (Gaug): (321003)E3A2D1G0b0e3
+G Diminished (Gdim): (3x232x)E3xA2D3G2b2ex
+G Diminished 7th (Gdim7): (3x2321)E3xA2D3G2b2e1
+G Add9 (Gadd9): (320203)E3A2D0G2b0e3
+G6 (G6): (320000)E3A2D0G0b0e0
+G Minor 6th (Gm6): (355353)E3A5D5G3b5e3
+G9 (G9): (3x0201)E3xA0D2G0b0e1
+G Minor Major 7th (Gmmaj7): (354333)E3A5D4G3b3e3
+G7#9 (G7#9): (3x344x)E3xA3D4G4b4ex
+G Major 9th (Gmaj9): (3x0002)E3xA0D0G0b2
+G Minor 9th (Gm9): (353335)E3A5D3G3b3e5
+G7b9 (G7b9): (3x343x)E3xA3D4G3b4ex
+G7#5 (G7#5): (3x342x)E3xA3D4G2b4ex
+G7b5 (G7b5): (3x231x)E3xA2D3G1b2ex
+G11 (G11): (3x3333)E3xA3D3G3b3
+G Minor 11th (Gm11): (3x3335)E3xA3D3G3b5
+G13 (G13): (3x5355)E3xA5D3G5b5
+G Minor 13th (Gm13): (3x5357)E3xA5D3G5b7
+G Major Barre (G): (xacc ca)ExA10D12G12b12e10
+G Minor Barre (Gm): (xacc ba)ExA10D12G12b11e10
+G Dominant 7th Barre (G7): (xaca ca)ExA10D12G10b12e10
+G Minor 7th Barre (Gm7): (xaca ba)ExA10D12G10b11e10
+G Major 7th Barre (Gmaj7): (xacc ba)ExA10D12G11b12e10
+G Suspended 4th Barre (Gsus4): (xacc da)ExA10D12G12b13e10
+G Suspended 2nd Barre (Gsus2): (xac7 ca)ExA10D12G7b12e10
+G Augmented Barre (Gaug): (x b a a a x)ExA11D10G9b9ex
+G Diminished Barre (Gdim): (x b 9 a 9 x)ExA11D9G10b9ex
+G Diminished 7th Barre (Gdim7): (x b 9 8 a x)ExA11D9G10b8ex
+G Add9 Barre (Gadd9): (xaca cc)ExA10D12G10b12e12
+G6 Barre (G6): (xaca ca)ExA10D12G10b12e10
+G Minor 6th Barre (Gm6): (xaca ba)ExA10D12G10b11e10
+G9 Barre (G9): (xaca cc)ExA10D12G10b12e12
+G7#9 Barre (G7#9): (xaca cd)ExA10D12G10b12e13
+
+## Ab Root Chords
+Ab Major (Ab): (466544)E4A6D6G5b4e4
+Ab Minor (Abm): (466444)E4A6D6G4b4e4
+Ab Dominant 7th (Ab7): (464544)E4A6D4G5b4e4
+Ab Minor 7th (Abm7): (464444)E4A6D4G4b4e4
+Ab Major 7th (Abmaj7): (465544)E4A6D5G5b4e4
+Ab Suspended 4th (Absus4): (466644)E4A6D6G6b4e4
+Ab Suspended 2nd (Absus2): (466344)E4A6D6G3b4e4
+Ab Augmented (Abaug): (4x2110)E4xA2D1G1b0
+Ab Diminished (Abdim): (4x545x)E4xA5D4G5b5ex
+Ab Diminished 7th (Abdim7): (4x343x)E4xA5D3G4b3ex
+Ab Add9 (Abadd9): (466546)E4A6D6G5b4e6
+Ab6 (Ab6): (466564)E4A6D6G5b6e4
+Ab Minor 6th (Abm6): (466454)E4A6D6G4b5e4
+Ab9 (Ab9): (464546)E4A6D4G5b4e6
+Ab Minor Major 7th (Abmmaj7): (465444)E4A6D5G4b4e4
+Ab7#9 (Ab7#9): (464547)E4A6D4G5b4e7
+Ab Major 9th (Abmaj9): (4x314x)E4xA3D1G4b4ex
+Ab Minor 9th (Abm9): (464446)E4A6D4G4b4e6
+Ab7b9 (Ab7b9): (464545)E4A6D4G5b4e5
+Ab7#5 (Ab7#5): (474546)E4A7D4G5b4e6
+Ab7b5 (Ab7b5): (4x454x)E4xA5D4G5b4ex
+Ab11 (Ab11): (464444)E4A6D4G4b4e4
+Ab Minor 11th (Abm11): (464446)E4A6D4G4b4e6
+Ab13 (Ab13): (484466)E4A8D4G6b6e6
+Ab Minor 13th (Abm13): (484468)E4A8D4G6b6e8
+Ab Major Barre (Ab): (466544)E4A6D6G5b4e4
+Ab Minor Barre (Abm): (466444)E4A6D6G4b4e4
+Ab Dominant 7th Barre (Ab7): (464544)E4A6D4G5b4e4
+Ab Minor 7th Barre (Abm7): (464444)E4A6D4G4b4e4
+Ab Major 7th Barre (Abmaj7): (465544)E4A6D5G5b4e4
+Ab Suspended 4th Barre (Absus4): (466644)E4A6D6G6b4e4
+Ab Suspended 2nd Barre (Absus2): (466344)E4A6D6G3b4e4
+Ab Augmented Barre (Abaug): (4x5544)E4xA5D5G4b4
+Ab Diminished Barre (Abdim): (4x545x)E4xA5D4G5b5ex
+Ab Diminished 7th Barre (Abdim7): (4x546x)E4xA5D4G5b6ex
+Ab Add9 Barre (Abadd9): (464546)E4A6D4G5b4e6
+Ab6 Barre (Ab6): (464564)E4A6D4G5b6e4
+Ab Minor 6th Barre (Abm6): (464454)E4A6D4G4b5e4
+Ab9 Barre (Ab9): (464566)E4A6D4G5b6e6
+Ab7#9 Barre (Ab7#9): (464567)E4A6D4G5b6e7
