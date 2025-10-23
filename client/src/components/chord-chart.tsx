@@ -1,6 +1,7 @@
 import { chordTypes, exoticChordTypes, getAllKeys, colorGroups } from "@/lib/music-data";
 import { useSubscription } from "@/hooks/useSubscription";
 import { Lock, Crown } from "lucide-react";
+import { trackEvent } from "@/lib/analytics";
 
 interface ChordChartProps {
   onChordSelect?: (chord: string) => void;
@@ -105,6 +106,7 @@ export default function ChordChart({ onChordSelect }: ChordChartProps) {
 
   const handleChordClick = (chord: string) => {
     console.log('Selected chord:', chord);
+    trackEvent('chord_click', 'ChordChart', chord, 1);
     onChordSelect?.(chord);
   };
 

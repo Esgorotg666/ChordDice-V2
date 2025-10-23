@@ -35,7 +35,7 @@ interface GeneratedResult {
 
 export default function Home() {
   const [, setLocation] = useLocation();
-  const { user, isAuthenticated, isLoading, isDemoMode, exitDemoMode } = useAuthContext();
+  const { user, isAuthenticated, isLoading } = useAuthContext();
   const { hasActiveSubscription } = useSubscription();
   const { toast } = useToast();
   
@@ -68,16 +68,16 @@ export default function Home() {
     },
   });
 
-  // Process pending referral code after authentication (skip in demo mode)
+  // Process pending referral code after authentication
   useEffect(() => {
-    if (isAuthenticated && !isLoading && !isDemoMode) {
+    if (isAuthenticated && !isLoading) {
       const pendingReferralCode = sessionStorage.getItem('pendingReferralCode');
       if (pendingReferralCode && !applyReferralMutation.isPending) {
         // Apply the referral code (don't clear until success)
         applyReferralMutation.mutate(pendingReferralCode);
       }
     }
-  }, [isAuthenticated, isLoading, isDemoMode]);
+  }, [isAuthenticated, isLoading]);
 
   const handleDiceResult = (result: GeneratedResult) => {
     setResult(result);
@@ -145,19 +145,8 @@ export default function Home() {
             </div>
             
             <div className="flex items-center space-x-2">
-              {/* Demo Mode Badge */}
-              {isDemoMode && (
-                <Badge 
-                  variant="outline"
-                  className="bg-amber-50 text-amber-800 border-amber-200 dark:bg-amber-900/20 dark:text-amber-200 dark:border-amber-800"
-                  data-testid="badge-demo-mode"
-                >
-                  Demo Mode
-                </Badge>
-              )}
-              
               {/* Subscription Status Badge */}
-              {isAuthenticated && !isDemoMode && (
+              {isAuthenticated && (
                 <Badge 
                   variant={hasActiveSubscription ? "default" : "secondary"}
                   className={hasActiveSubscription ? "bg-primary text-primary-foreground" : ""}
@@ -199,26 +188,22 @@ export default function Home() {
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end" className="w-48">
-                      {!isDemoMode && (
-                        <>
-                          <DropdownMenuItem 
-                            onClick={() => setLocation('/delete-account')}
-                            className="text-red-600 focus:text-red-600 cursor-pointer"
-                            data-testid="menu-delete-account"
-                          >
-                            <Trash2 className="h-4 w-4 mr-2" />
-                            Delete Account
-                          </DropdownMenuItem>
-                          <DropdownMenuSeparator />
-                        </>
-                      )}
                       <DropdownMenuItem 
-                        onClick={isDemoMode ? exitDemoMode : () => window.location.href = '/api/logout'}
+                        onClick={() => setLocation('/delete-account')}
+                        className="text-red-600 focus:text-red-600 cursor-pointer"
+                        data-testid="menu-delete-account"
+                      >
+                        <Trash2 className="h-4 w-4 mr-2" />
+                        Delete Account
+                      </DropdownMenuItem>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem 
+                        onClick={() => window.location.href = '/api/logout'}
                         className="cursor-pointer"
-                        data-testid={isDemoMode ? "menu-exit-demo" : "menu-logout"}
+                        data-testid="menu-logout"
                       >
                         <LogOut className="h-4 w-4 mr-2" />
-                        {isDemoMode ? 'Exit Demo' : 'Logout'}
+                        Logout
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>

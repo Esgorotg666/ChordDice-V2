@@ -7,6 +7,7 @@ import { colorGroups, exoticNumbers } from "@/lib/music-data";
 import { useAuthContext } from "@/contexts/AuthContext";
 import { useSubscription } from "@/hooks/useSubscription";
 import { useUsageTracking } from "@/hooks/useUsageTracking";
+import { trackEvent } from "@/lib/analytics";
 
 // Import genre-specific background images - Professional guitar photos
 import metalBg1 from "@assets/stock_images/bc_rich_warlock_elec_12e0db25.jpg";
@@ -600,10 +601,12 @@ export default function DiceInterface({ onResult, onUpgrade }: DiceInterfaceProp
         if (currentMode === 'random') {
           // Random mode - generate completely random chord progression
           const progression = generateRandomChords();
+          trackEvent('dice_roll', 'Dice', `${currentMode}-${selectedGenre}`, 1);
           onResult({ type: 'riff', progression });
         } else if (currentMode === 'tapping') {
           // Tapping mode - generate double hand tapping chord combinations
           const progression = generateTappingChords();
+          trackEvent('dice_roll', 'Dice', `${currentMode}-${selectedGenre}`, 1);
           onResult({ type: 'riff', progression });
         } else {
           // Normal dice-based generation
@@ -629,9 +632,11 @@ export default function DiceInterface({ onResult, onUpgrade }: DiceInterfaceProp
           const { chord, colorName } = generateChord(colorRoll, numberRoll);
 
           if (currentMode === 'single') {
+            trackEvent('dice_roll', 'Dice', `${currentMode}-${selectedGenre}-${chord}`, 1);
             onResult({ type: 'single', chord, colorName });
           } else {
             const progression = generateRiff(colorRoll, numberRoll);
+            trackEvent('dice_roll', 'Dice', `${currentMode}-${selectedGenre}`, 1);
             onResult({ type: 'riff', progression });
           }
         }
@@ -726,7 +731,7 @@ export default function DiceInterface({ onResult, onUpgrade }: DiceInterfaceProp
         {/* Color Die */}
         <div className="text-center">
           <div 
-            className={`w-16 h-16 rounded-lg flex items-center justify-center mb-2 border-2 border-gray-600 ${colorGroup.class} ${isRolling ? 'animate-dice-roll' : ''}`}
+            className={`w-16 h-16 rounded-lg flex items-center justify-center mb-2 border-2 border-gray-600 bg-purple-600 ${isRolling ? 'animate-dice-roll' : ''}`}
             data-testid="dice-color"
           >
             <span className="text-xl font-bold text-white drop-shadow-lg">{colorDiceValue}</span>

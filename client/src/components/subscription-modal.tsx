@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Crown, Check, Music, Guitar, Zap } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
+import { trackEvent } from "@/lib/analytics";
 
 interface SubscriptionModalProps {
   open: boolean;
@@ -19,6 +20,8 @@ export default function SubscriptionModal({ open, onOpenChange }: SubscriptionMo
   const handleUpgrade = async () => {
     setIsLoading(true);
     try {
+      trackEvent('begin_checkout', 'Subscription', 'Premium $4.99/month', 4.99);
+      
       const response = await apiRequest('POST', '/api/subscription/create-checkout', {});
       
       if (!response.ok) {
