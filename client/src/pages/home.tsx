@@ -22,9 +22,11 @@ import {
 import { useToast } from "@/hooks/use-toast";
 import { useAuthContext } from "@/contexts/AuthContext";
 import { useSubscription } from "@/hooks/useSubscription";
+import { useStreak } from "@/hooks/useStreak";
 import { getChordDiagram } from "@/lib/music-data";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
+import StreakDisplay from "@/components/streak-display";
 
 interface GeneratedResult {
   type: 'single' | 'riff';
@@ -37,6 +39,7 @@ export default function Home() {
   const [, setLocation] = useLocation();
   const { user, isAuthenticated, isLoading } = useAuthContext();
   const { hasActiveSubscription } = useSubscription();
+  const { currentStreak, longestStreak, isPracticedToday, updateStreak } = useStreak();
   const { toast } = useToast();
   
   const [result, setResult] = useState<GeneratedResult | null>(null);
@@ -84,6 +87,11 @@ export default function Home() {
     // Close any existing modals first
     setShowRiffModal(false);
     setShowFretboardModal(false);
+    
+    // Update practice streak when user rolls the dice
+    if (isAuthenticated) {
+      updateStreak();
+    }
     
     if (result.type === 'riff') {
       // Small delay to ensure clean state transition
@@ -145,6 +153,16 @@ export default function Home() {
             </div>
             
             <div className="flex items-center space-x-2">
+              {/* Practice Streak Badge */}
+              {isAuthenticated && currentStreak > 0 && (
+                <StreakDisplay 
+                  currentStreak={currentStreak}
+                  longestStreak={longestStreak}
+                  isPracticedToday={isPracticedToday}
+                  compact={true}
+                />
+              )}
+              
               {/* Subscription Status Badge */}
               {isAuthenticated && (
                 <Badge 

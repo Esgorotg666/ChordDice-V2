@@ -50,6 +50,11 @@ export const users = pgTable("users", {
   referralCode: varchar("referral_code", { length: 20 }).unique(),
   referredBy: varchar("referred_by", { length: 20 }),
   referralRewardsEarned: integer("referral_rewards_earned").default(0),
+  // Practice streak system (gamification)
+  currentStreak: integer("current_streak").default(0), // Consecutive days practiced
+  longestStreak: integer("longest_streak").default(0), // Personal record
+  lastPracticeDate: timestamp("last_practice_date"), // Last day user practiced (rolled dice)
+  streakBonusTokens: integer("streak_bonus_tokens").default(0), // Bonus tokens from maintaining streaks
   // Testing access
   isTestUser: boolean("is_test_user").default(false), // Complete access bypass for testers
   // Timestamps
