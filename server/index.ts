@@ -10,10 +10,14 @@ app.set("trust proxy", 1);
 
 // CORS configuration - must be before other middleware
 app.use(cors({
-  origin: true, // Allow all origins in development (Vite dev server)
+  origin: (origin, callback) => {
+    // Allow all origins in development for Vite HMR and Replit preview
+    callback(null, true);
+  },
   credentials: true, // Allow cookies to be sent
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-CSRF-Token'],
+  exposedHeaders: ['Set-Cookie'], // Expose Set-Cookie header
 }));
 
 app.use(express.json());

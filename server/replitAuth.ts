@@ -40,7 +40,7 @@ export function getSession() {
       httpOnly: true,
       secure: true, // Always true - Replit uses HTTPS in both dev and prod
       maxAge: sessionTtl,
-      sameSite: 'lax', // CSRF protection
+      sameSite: 'none', // Changed to 'none' for cross-origin cookies in Replit environment
     },
     name: 'connect.sid', // Use default session name for compatibility
   });
