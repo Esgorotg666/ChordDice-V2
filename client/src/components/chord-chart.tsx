@@ -30,7 +30,24 @@ export default function ChordChart({ onChordSelect }: ChordChartProps) {
     return 'bg-gray-600';
   };
 
-  const formatChordDisplay = (key: string, chordType: string) => {
+  const normalizeChordKey = (key: string, chordType: string): string => {
+    // Step 1: Convert Unicode symbols to ASCII
+    let normalizedKey = key
+      .replace(/♭/g, 'b')
+      .replace(/♯/g, '#');
+    
+    // Step 2: Map enharmonic equivalents to match chordDiagrams keys
+    const enharmonicMap: Record<string, string> = {
+      'A#': 'Bb',
+      'D#': 'Eb',
+      'G#': 'Ab'
+    };
+    
+    if (enharmonicMap[normalizedKey]) {
+      normalizedKey = enharmonicMap[normalizedKey];
+    }
+    
+    // Step 3: Add suffix based on chord type (matching chordDiagrams keys exactly)
     const suffixes: Record<string, string> = {
       'Major': '',
       'Minor': 'm',
@@ -39,29 +56,26 @@ export default function ChordChart({ onChordSelect }: ChordChartProps) {
       '9th': '9',
       'Minor 6th': 'm6',
       'Minor 7th': 'm7',
-      'Major 7th': 'M7',
-      'Diminished': '°',
-      'Augmented': '+',
+      'Major 7th': 'maj7',     // Fixed: was 'M7'
+      'Diminished': 'dim',      // Fixed: was '°'
+      'Augmented': 'aug',       // Fixed: was '+'
       'Suspended': 'sus4',
       '11th': '11',
       '13th': '13',
       'Minor 9th': 'm9',
       'Add9': 'add9',
       '6/9': '6/9',
-      'Diminished 7th': '°7',
-      'Half-diminished': 'ø7',
-      'Augmented 7th': '+7'
+      'Diminished 7th': 'dim7',   // Fixed: was '°7'
+      'Half-diminished': 'm7b5',  // Fixed: was 'ø7'
+      'Augmented 7th': '7#5'      // Fixed: was '+7'
     };
-
-    if (chordType === 'Minor') {
-      return key.includes('m') ? key : key + 'm';
-    }
     
-    if (chordType === 'Major') {
-      return key.replace('m', '');
-    }
+    const suffix = suffixes[chordType] || '';
+    return normalizedKey + suffix;
+  };
 
-    return key + (suffixes[chordType] || '');
+  const formatChordDisplay = (key: string, chordType: string) => {
+    return normalizeChordKey(key, chordType);
   };
 
   const getAbbreviation = (chordType: string): string => {
