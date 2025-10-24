@@ -66,6 +66,39 @@ Preferred communication style: Simple, everyday language.
 - **Analytics Tracking**: Comprehensive event tracking via Google Analytics 4 for user behavior, dice rolls, chord interactions, subscription conversions, and streak milestones.
 - **Affiliate Marketing System**: Music gear affiliate programs integrated throughout app with geo-detection (Sweetwater 5% US, Thomann 5% EU, Guitar Center/zZounds/Musician's Friend 3-5%). Strategic placements after dice rolls, in riff modal, exercises page, and classroom. Context-aware recommendations (e.g., BC Rich Warlock for metal genres, metronomes for exercises).
 
+# Android Deployment
+
+## Build Configuration
+- **App ID**: `com.chorddice.app`
+- **App Name**: Guitar Dice
+- **Current Version**: 1.7.0 (versionCode: 27)
+- **Framework**: Capacitor 7.4.3
+- **Keystore**: Pre-configured upload keystore for Play Store signing
+- **Build Output**: `dist/public` → Android WebView
+
+## GitHub Actions Workflows
+1. **android-build.yml**: Full deployment with auto-upload to Play Store Internal Testing
+   - Triggers on version tags (e.g., `v1.8.0`)
+   - Builds signed APK and AAB
+   - Uploads to Google Play Store automatically
+2. **build-android.yml**: CI testing workflow for pull requests and main branch
+
+## Required GitHub Secrets
+- `KEYSTORE_BASE64`: Base64-encoded keystore (see `android/keystore_base64.txt`)
+- `KEYSTORE_PASSWORD`: Keystore password
+- `KEY_ALIAS`: Signing key alias (default: `upload`)
+- `KEY_PASSWORD`: Key password
+- `SERVICE_ACCOUNT_JSON`: Google Play Console API service account
+
+## Deployment Process
+1. Update version in `android/app/build.gradle`
+2. Commit changes
+3. Create and push version tag: `git tag v1.8.0 && git push origin v1.8.0`
+4. GitHub Actions automatically builds and uploads to Play Store Internal Testing
+5. Promote through tracks: Internal → Alpha → Beta → Production
+
+For detailed instructions, see `DEPLOYMENT.md` and `GITHUB_SECRETS.md`.
+
 # External Dependencies
 
 - **Database**: Neon Database (PostgreSQL).
@@ -75,3 +108,4 @@ Preferred communication style: Simple, everyday language.
 - **Analytics**: Google Analytics 4.
 - **Fonts**: Google Fonts (Inter, Architects Daughter, DM Sans, Fira Code).
 - **Development Tools**: TypeScript, ESLint, Prettier.
+- **Mobile Framework**: Capacitor for Android builds.
