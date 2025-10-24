@@ -917,44 +917,26 @@ export default function DiceInterface({ onResult, onUpgrade }: DiceInterfaceProp
                 </div>
               )}
               
-              {/* Ad watch section */}
+              {/* Ad watch section - Temporarily disabled */}
               {remainingRolls <= 2 && !hasWatchedMaxAds && (
                 <div className="mt-3 space-y-2">
                   <div className="flex items-center justify-between">
                     <span className="text-xs text-muted-foreground">Get more rolls</span>
-                    <span className="text-xs text-muted-foreground">{usageStatus?.adsWatchedCount || 0}/5 ads today</span>
+                  </div>
+                  <div className="text-xs text-muted-foreground bg-muted/50 border border-border rounded p-3">
+                    <p className="font-medium mb-1">Ad system temporarily unavailable</p>
+                    <p>We're improving the ad experience. Upgrade to Premium for unlimited rolls!</p>
                   </div>
                   <Button
-                    onClick={async () => {
-                      try {
-                        await watchAd();
-                      } catch (error) {
-                        console.error('Error watching ad:', error);
-                      }
-                    }}
-                    disabled={isWatchingAd || hasWatchedMaxAds}
-                    variant="outline"
+                    onClick={onUpgrade}
+                    variant="default"
                     size="sm"
                     className="w-full"
-                    data-testid="button-watch-ad"
+                    data-testid="button-upgrade-from-ads"
                   >
-                    {isWatchingAd ? (
-                      <>
-                        <Play className="h-3 w-3 mr-1 animate-pulse" />
-                        Watching Ad...
-                      </>
-                    ) : (
-                      <>
-                        <Eye className="h-3 w-3 mr-1" />
-                        Watch Ad (+1 Roll)
-                      </>
-                    )}
+                    <Crown className="h-3 w-3 mr-1" />
+                    Upgrade to Premium
                   </Button>
-                  {adError && (
-                    <div className="text-xs text-red-600 dark:text-red-400">
-                      Error: {adError}
-                    </div>
-                  )}
                 </div>
               )}
               
