@@ -1,9 +1,10 @@
 import { useState } from 'react';
+import { Link } from 'wouter';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { Lock, ChevronRight, ChevronLeft, Crown, BookOpen, GraduationCap, Trophy, Music, Zap, Flame, Guitar as GuitarIcon } from 'lucide-react';
+import { Lock, ChevronRight, ChevronLeft, Crown, BookOpen, GraduationCap, Trophy, Music, Zap, Flame, Guitar as GuitarIcon, Home } from 'lucide-react';
 import { generalBeginnerLessons, rockLessons, metalLessons, bluesLessons, jazzLessons, funkLessons, Lesson } from '@/lib/comprehensive-lessons';
 import { useSubscription } from '@/hooks/useSubscription';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
@@ -314,6 +315,17 @@ export default function Classroom() {
   return (
     <div className="min-h-screen bg-background p-4 md:p-8">
       <div className="max-w-6xl mx-auto">
+        <Link href="/">
+          <Button
+            variant="ghost"
+            className="mb-4"
+            data-testid="button-home"
+          >
+            <Home className="h-4 w-4 mr-2" />
+            Home
+          </Button>
+        </Link>
+
         <div className="mb-8">
           <h1 className="text-3xl md:text-4xl font-bold mb-3">Guitar Classroom</h1>
           <p className="text-muted-foreground">
