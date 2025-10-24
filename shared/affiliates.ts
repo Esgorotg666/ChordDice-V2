@@ -191,7 +191,32 @@ export function buildAffiliateLink(
   program: AffiliateProgram,
   searchTerm: string
 ): string {
-  return `${program.baseUrl}/search?query=${searchTerm}&${program.affiliateParam}`;
+  // URL encode the search term for safety
+  const encodedSearch = encodeURIComponent(searchTerm);
+  
+  // Customize search paths per retailer (based on their actual URL structures)
+  let searchPath: string;
+  switch (program.id) {
+    case 'sweetwater':
+      searchPath = `/store/search.php?s=${encodedSearch}`;
+      break;
+    case 'guitar-center':
+      searchPath = `/search?Ntt=${encodedSearch}`;
+      break;
+    case 'thomann':
+      searchPath = `/search_dir.html?sw=${encodedSearch}`;
+      break;
+    case 'zzounds':
+      searchPath = `/search?form=search&query=${encodedSearch}`;
+      break;
+    case 'musicians-friend':
+      searchPath = `/search?Ntt=${encodedSearch}`;
+      break;
+    default:
+      searchPath = `/search?query=${encodedSearch}`;
+  }
+  
+  return `${program.baseUrl}${searchPath}&${program.affiliateParam}`;
 }
 
 // Helper to get recommended affiliate program based on user location

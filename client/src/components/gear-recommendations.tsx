@@ -26,10 +26,18 @@ export default function GearRecommendations({
 }: GearRecommendationsProps) {
   const [isEU, setIsEU] = useState(false);
 
-  // Detect user region (simplified - you could use a geolocation API)
+  // Detect user region based on timezone
   useEffect(() => {
     const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    const euTimezones = ['Europe/', 'Africa/', 'Asia/Istanbul'];
+    // Only European timezones qualify as EU (not Africa, Asia, etc.)
+    const euTimezones = [
+      'Europe/', 
+      'Atlantic/Reykjavik', 
+      'Atlantic/Faroe', 
+      'Atlantic/Madeira',
+      'Atlantic/Canary', 
+      'Atlantic/Azores'
+    ];
     setIsEU(euTimezones.some(tz => timezone.startsWith(tz)));
   }, []);
 
@@ -48,7 +56,21 @@ export default function GearRecommendations({
 
   if (displayedGear.length === 0) return null;
 
-  const affiliateProgram = getRecommendedProgram(isEU);
+  // Rotate through ALL affiliate programs (not just Sweetwater/Thomann)
+  const availablePrograms = isEU 
+    ? AFFILIATE_PROGRAMS.filter(p => p.id === 'thomann' || p.id === 'sweetwater')
+    : AFFILIATE_PROGRAMS.filter(p => 
+        p.id === 'sweetwater' || 
+        p.id === 'guitar-center' || 
+        p.id === 'zzounds' ||
+        p.id === 'musicians-friend'
+      );
+  
+  // Rotate randomly to give all programs exposure
+  // Defensive fallback: if no programs match, use getRecommendedProgram
+  const affiliateProgram = availablePrograms.length > 0
+    ? availablePrograms[Math.floor(Math.random() * availablePrograms.length)]
+    : getRecommendedProgram(isEU);
 
   if (compact) {
     return (

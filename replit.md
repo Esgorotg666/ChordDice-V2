@@ -58,6 +58,7 @@ Preferred communication style: Simple, everyday language.
 ### Engagement Features
 - **Daily Practice Streak System**: Tracks consecutive days of dice rolls, offers milestone rewards (bonus tokens), and displays visual streak indicators.
 - **Analytics Tracking**: Comprehensive event tracking via Google Analytics 4 for user behavior, dice rolls, chord interactions, subscription conversions, and streak milestones.
+- **Affiliate Marketing System**: Music gear affiliate programs integrated throughout app with geo-detection (Sweetwater 5% US, Thomann 5% EU, Guitar Center/zZounds/Musician's Friend 3-5%). Strategic placements after dice rolls, in riff modal, exercises page, and classroom. Context-aware recommendations (e.g., BC Rich Warlock for metal genres, metronomes for exercises).
 
 # External Dependencies
 
