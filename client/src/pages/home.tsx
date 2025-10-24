@@ -183,7 +183,7 @@ export default function Home() {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <i className="fas fa-music text-primary text-xl"></i>
-              <h1 className="text-lg font-semibold text-foreground">Chord Riff Generator</h1>
+              <h1 className="text-lg font-semibold text-foreground">Guitar Dice</h1>
             </div>
             
             <div className="flex items-center space-x-2">
@@ -219,12 +219,19 @@ export default function Home() {
                 <div className="animate-spin w-5 h-5 border-2 border-muted border-t-primary rounded-full" />
               ) : isAuthenticated ? (
                 <div className="flex items-center space-x-2">
-                  {user?.profileImageUrl && (
-                    <img 
-                      src={user.profileImageUrl} 
-                      alt="Profile" 
-                      className="w-6 h-6 rounded-full object-cover"
-                    />
+                  {user && (
+                    <div className="flex items-center space-x-2">
+                      {user.profileImageUrl && (
+                        <img 
+                          src={user.profileImageUrl} 
+                          alt="Profile" 
+                          className="w-6 h-6 rounded-full object-cover"
+                        />
+                      )}
+                      <span className="text-sm font-medium text-foreground hidden sm:inline" data-testid="text-username">
+                        {user.firstName || user.username || user.email?.split('@')[0] || 'User'}
+                      </span>
+                    </div>
                   )}
                   
                   {/* User Menu Dropdown */}
