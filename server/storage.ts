@@ -34,6 +34,9 @@ export interface IStorage {
   updateSubscriptionStatus(userId: string, status: string, expiry?: Date): Promise<User | undefined>;
   getUserByStripeCustomer(customerId: string): Promise<[User | undefined]>;
   
+  // User preferences methods
+  updateUserPreferences(userId: string, preferences: { preferredGenre?: string; playingStyle?: string; skillLevel?: string; hasCompletedOnboarding?: boolean; }): Promise<User | undefined>;
+  
   // Usage tracking methods
   incrementDiceRoll(userId: string): Promise<User | undefined>;
   canUseDiceRoll(userId: string): Promise<boolean>;
@@ -231,6 +234,24 @@ export class DatabaseStorage implements IStorage {
   async getUserByStripeCustomer(customerId: string): Promise<[User | undefined]> {
     const [user] = await db.select().from(users).where(eq(users.stripeCustomerId, customerId));
     return [user];
+  }
+
+  // User preferences methods
+  async updateUserPreferences(userId: string, preferences: { 
+    preferredGenre?: string; 
+    playingStyle?: string; 
+    skillLevel?: string; 
+    hasCompletedOnboarding?: boolean; 
+  }): Promise<User | undefined> {
+    const [user] = await db
+      .update(users)
+      .set({
+        ...preferences,
+        updatedAt: new Date(),
+      })
+      .where(eq(users.id, userId))
+      .returning();
+    return user;
   }
 
   // Usage tracking methods

@@ -2,7 +2,7 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { Server as SocketIOServer } from "socket.io";
 import { storage } from "./storage";
-import { insertChordProgressionSchema } from "@shared/schema";
+import { insertChordProgressionSchema, userPreferencesSchema } from "@shared/schema";
 import { getSession } from "./replitAuth";
 import authRoutes from "./authRoutes";
 import { createRateLimitMiddleware, mutationRateLimiter, referralRateLimiter, socketConnectionLimiter, socketEventLimiter } from "./middleware/rateLimiter";
@@ -190,6 +190,56 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Error checking usage status:", error);
       res.status(500).json({ message: "Failed to check usage status" });
+    }
+  });
+
+  // User preferences routes
+  app.get('/api/preferences', isAuthenticated, async (req: any, res) => {
+    try {
+      const userId = req.userId;
+      const user = await storage.getUser(userId);
+      
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+      
+      res.json({
+        preferredGenre: user.preferredGenre,
+        playingStyle: user.playingStyle,
+        skillLevel: user.skillLevel,
+        hasCompletedOnboarding: user.hasCompletedOnboarding
+      });
+    } catch (error) {
+      console.error("Error getting user preferences:", error);
+      res.status(500).json({ message: "Failed to get user preferences" });
+    }
+  });
+
+  app.post('/api/preferences', isAuthenticated, csrfProtection, async (req: any, res) => {
+    try {
+      const userId = req.userId;
+      const validation = userPreferencesSchema.safeParse(req.body);
+      
+      if (!validation.success) {
+        return res.status(400).json({ 
+          message: "Invalid preferences data", 
+          errors: validation.error.errors 
+        });
+      }
+      
+      const { preferredGenre, playingStyle, skillLevel } = validation.data;
+      
+      await storage.updateUserPreferences(userId, {
+        preferredGenre,
+        playingStyle,
+        skillLevel,
+        hasCompletedOnboarding: true
+      });
+      
+      res.json({ message: "Preferences updated successfully" });
+    } catch (error) {
+      console.error("Error updating user preferences:", error);
+      res.status(500).json({ message: "Failed to update user preferences" });
     }
   });
 
