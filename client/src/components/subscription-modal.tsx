@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { useLocation } from "wouter";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Crown, Check, Music, Guitar, Zap } from "lucide-react";
+import { Crown, Check, Music, Guitar, Zap, LogIn } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useAuthContext } from "@/contexts/AuthContext";
 import { apiRequest } from "@/lib/queryClient";
 import { trackEvent } from "@/lib/analytics";
 
@@ -16,8 +18,22 @@ interface SubscriptionModalProps {
 export default function SubscriptionModal({ open, onOpenChange }: SubscriptionModalProps) {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
+  const { isAuthenticated } = useAuthContext();
+  const [, setLocation] = useLocation();
 
   const handleUpgrade = async () => {
+    // Check if user is authenticated
+    if (!isAuthenticated) {
+      toast({
+        title: "Login Required",
+        description: "Please log in to upgrade to Premium.",
+      });
+      onOpenChange(false);
+      // Navigate to account/login page
+      setLocation('/account');
+      return;
+    }
+
     setIsLoading(true);
     try {
       trackEvent('begin_checkout', 'Subscription', 'Premium $4.99/month', 4.99);
@@ -116,10 +132,12 @@ export default function SubscriptionModal({ open, onOpenChange }: SubscriptionMo
           >
             {isLoading ? (
               <div className="animate-spin w-4 h-4 border-2 border-primary-foreground border-t-transparent rounded-full mr-2" />
+            ) : !isAuthenticated ? (
+              <LogIn className="mr-2 h-4 w-4" />
             ) : (
               <Crown className="mr-2 h-4 w-4" />
             )}
-            {isLoading ? "Processing..." : "Upgrade Now"}
+            {isLoading ? "Processing..." : !isAuthenticated ? "Log In to Upgrade" : "Upgrade Now"}
           </Button>
 
           <div className="text-center pt-1">
