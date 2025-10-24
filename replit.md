@@ -46,7 +46,10 @@ Preferred communication style: Simple, everyday language.
 ### Freemium Business Model
 - **Modes**: Demo/Guest mode (full premium access), Free Tier (limited access, 5 free riff generations), Premium Tier (unlimited features).
 - **Authentication**: Replit Auth for saving progress.
-- **Monetization**: Ad-supported token earning system, premium subscription ($4.99/month) via Stripe for full access to exotic chords, advanced genres, scales, and exercises.
+- **Monetization**: 
+  - **Ad-supported token earning system**: Google AdMob rewarded video ads (max 5 per day) grant +1 dice roll token per ad watched.
+  - **Premium subscription**: $4.99/month via Stripe for unlimited access to exotic chords, advanced genres, scales, and exercises.
+  - **AdMob Integration**: App ID `ca-app-pub-4798049989357665~2334475752`, Ad Unit ID `ca-app-pub-4798049989357665/6660733578`. Cross-platform support (web simulation, native Android/iOS via Capacitor plugin).
 
 ### Referral Program
 - **Mechanism**: Unique collision-resistant referral codes.
@@ -107,6 +110,7 @@ For detailed instructions, see `DEPLOYMENT.md` and `GITHUB_SECRETS.md`.
 - **Payment Processing**: Stripe.
 - **Authentication**: Replit Auth.
 - **Analytics**: Google Analytics 4.
+- **Ads**: Google AdMob (`@capacitor-community/admob` v7.4.3) for rewarded video ads.
 - **Fonts**: Google Fonts (Inter, Architects Daughter, DM Sans, Fira Code).
 - **Development Tools**: TypeScript, ESLint, Prettier.
 - **Mobile Framework**: Capacitor for Android builds.

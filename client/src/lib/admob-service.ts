@@ -42,9 +42,15 @@ class AdMobService {
 
         console.log('[AdMob] Initialized for native platform');
       } else {
-        // Web platform - Load Google AdSense script
-        await this.loadAdSenseScript();
-        console.log('[AdMob] Initialized for web platform');
+        // Web platform - Attempt to load AdSense script (non-blocking)
+        // Failure is non-fatal since we use simulation on web
+        this.loadAdSenseScript()
+          .then(() => console.log('[AdMob] AdSense script loaded for web platform'))
+          .catch((error) => {
+            console.warn('[AdMob] AdSense script failed to load (ad blocker or network issue), using simulation fallback:', error.message);
+          });
+        
+        console.log('[AdMob] Initialized for web platform (simulation mode)');
       }
       
       this.isInitialized = true;
@@ -62,14 +68,15 @@ class AdMobService {
         return;
       }
 
+      // Note: On web, we use simulation, so script loading failure is non-fatal
+      // In production, you would configure this with a real AdSense publisher ID
       const script = document.createElement('script');
       script.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
       script.async = true;
       script.crossOrigin = 'anonymous';
-      script.setAttribute('data-ad-client', this.appId);
       
       script.onload = () => resolve();
-      script.onerror = () => reject(new Error('Failed to load AdSense script'));
+      script.onerror = () => reject(new Error('Failed to load AdSense script (likely ad blocker or CORS)'));
       
       document.head.appendChild(script);
     });

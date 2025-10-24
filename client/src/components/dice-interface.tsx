@@ -8,6 +8,8 @@ import { useAuthContext } from "@/contexts/AuthContext";
 import { useSubscription } from "@/hooks/useSubscription";
 import { useUsageTracking } from "@/hooks/useUsageTracking";
 import { trackEvent } from "@/lib/analytics";
+import { admobService } from "@/lib/admob-service";
+import { useToast } from "@/hooks/use-toast";
 
 // Import genre-specific background images - Professional guitar photos
 import metalBg1 from "@assets/stock_images/bc_rich_warlock_elec_12e0db25.jpg";
@@ -48,6 +50,7 @@ const genres: { value: Genre; label: string; description: string; isPremium?: bo
 export default function DiceInterface({ onResult, onUpgrade }: DiceInterfaceProps) {
   const { isAuthenticated } = useAuthContext();
   const { hasActiveSubscription } = useSubscription();
+  const { toast } = useToast();
   const { 
     usageStatus, 
     canUseDiceRoll, 
@@ -917,25 +920,56 @@ export default function DiceInterface({ onResult, onUpgrade }: DiceInterfaceProp
                 </div>
               )}
               
-              {/* Ad watch section - Temporarily disabled */}
+              {/* Ad watch section */}
               {remainingRolls <= 2 && !hasWatchedMaxAds && (
                 <div className="mt-3 space-y-2">
                   <div className="flex items-center justify-between">
                     <span className="text-xs text-muted-foreground">Get more rolls</span>
-                  </div>
-                  <div className="text-xs text-muted-foreground bg-muted/50 border border-border rounded p-3">
-                    <p className="font-medium mb-1">Ad system temporarily unavailable</p>
-                    <p>We're improving the ad experience. Upgrade to Premium for unlimited rolls!</p>
+                    <span className="text-xs text-muted-foreground">{usageStatus?.adsWatchedCount || 0}/5 ads today</span>
                   </div>
                   <Button
-                    onClick={onUpgrade}
-                    variant="default"
+                    onClick={async () => {
+                      try {
+                        // Show AdMob rewarded video ad
+                        await admobService.showRewardedAd();
+                        
+                        // After ad completes, call backend to grant reward
+                        await watchAd();
+                        
+                        toast({
+                          title: "Reward earned!",
+                          description: "You received 1 bonus dice roll. Thanks for watching!",
+                        });
+                      } catch (error: any) {
+                        console.error('Error watching ad:', error);
+                        
+                        // Show user-friendly error message
+                        toast({
+                          title: "Ad not available",
+                          description: error.message?.includes('cancelled') 
+                            ? "Ad was cancelled" 
+                            : "Unable to load ad right now. Please try again later.",
+                          variant: "destructive",
+                        });
+                      }
+                    }}
+                    disabled={isWatchingAd || hasWatchedMaxAds}
+                    variant="outline"
                     size="sm"
                     className="w-full"
-                    data-testid="button-upgrade-from-ads"
+                    data-testid="button-watch-ad"
                   >
-                    <Crown className="h-3 w-3 mr-1" />
-                    Upgrade to Premium
+                    {isWatchingAd ? (
+                      <>
+                        <Play className="h-3 w-3 mr-1 animate-pulse" />
+                        Processing...
+                      </>
+                    ) : (
+                      <>
+                        <Eye className="h-3 w-3 mr-1" />
+                        Watch Ad (+1 Roll)
+                      </>
+                    )}
                   </Button>
                 </div>
               )}
