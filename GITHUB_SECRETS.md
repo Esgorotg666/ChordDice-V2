@@ -1,5 +1,9 @@
 # GitHub Secrets Configuration Guide
 
+## ⚠️ SECURITY NOTICE
+
+**IMPORTANT**: The existing keystore files in this repository have been exposed and must not be used for production. Generate a new keystore following the steps in `SECURITY_CRITICAL.md` before configuring these secrets.
+
 This guide helps you configure the required secrets for automated Android builds and Google Play Store deployments.
 
 ## Required Secrets

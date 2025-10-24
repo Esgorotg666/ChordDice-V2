@@ -1,5 +1,9 @@
 # Guitar Dice - Android Deployment Guide
 
+## ⚠️ CRITICAL SECURITY NOTICE
+
+**READ FIRST**: Before deploying, see `SECURITY_CRITICAL.md` for important security information about keystore management. The existing keystores in this repository have been exposed and must be regenerated before first deployment.
+
 ## Overview
 Guitar Dice is deployed to Google Play Store using automated GitHub Actions workflows. This guide covers the complete deployment process from development to production release.
 
