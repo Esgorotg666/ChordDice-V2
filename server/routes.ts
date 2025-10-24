@@ -235,14 +235,41 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // TEMPORARILY DISABLED: Ad endpoint has security vulnerability
-  // TODO: Implement proper ad verification with third-party SDK attestation before re-enabling
+  // Watch ad and earn reward token
   app.post('/api/usage/watch-ad-reward', isAuthenticated, csrfProtection, async (req: any, res) => {
-    res.status(503).json({ 
-      message: "Ad system temporarily disabled for security improvements. Please upgrade to Premium for unlimited generations.",
-      success: false,
-      temporarilyDisabled: true
-    });
+    try {
+      const userId = req.session.userId;
+      
+      // Use existing addAdRollReward method which handles daily limits and atomic updates
+      const updatedUser = await storage.addAdRollReward(userId);
+      
+      if (!updatedUser) {
+        return res.status(500).json({ message: "Failed to process ad reward" });
+      }
+
+      console.log(`[AdReward] User ${userId} watched ad. Tokens: ${updatedUser.extraRollTokens}, Ads today: ${updatedUser.adsWatchedCount}`);
+
+      res.json({
+        success: true,
+        message: "Ad reward granted! +1 bonus dice roll",
+        extraRollTokens: updatedUser.extraRollTokens,
+        adsWatchedCount: updatedUser.adsWatchedCount,
+        totalAdsWatched: updatedUser.totalAdsWatched
+      });
+    } catch (error: any) {
+      console.error("Error processing ad reward:", error);
+      
+      // Handle daily limit error
+      if (error.message?.includes("Daily ad limit reached")) {
+        return res.status(429).json({ 
+          message: error.message,
+          adsWatchedCount: 5,
+          maxAdsPerDay: 5
+        });
+      }
+      
+      res.status(500).json({ message: "Failed to process ad reward" });
+    }
   });
 
   // Referral routes
