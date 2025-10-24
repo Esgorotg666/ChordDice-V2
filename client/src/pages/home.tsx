@@ -100,6 +100,38 @@ export default function Home() {
     }
   };
 
+  // Normalize chord names to match chord diagram keys
+  const normalizeChordName = (chord: string): string => {
+    let normalized = chord;
+    
+    // Convert sharps to flats where database uses flats
+    // Database has: Ab, Bb, C#, Eb, F# (mixed sharp/flat notation)
+    const sharpToFlat: Record<string, string> = {
+      'A#': 'Bb',  // Database uses Bb, not A#
+      'D#': 'Eb',  // Database uses Eb, not D#
+      'G#': 'Ab'   // Database uses Ab, not G#
+      // C# and F# are kept as-is (database uses C# and F#)
+    };
+    
+    // Replace sharp notes at the start of the chord name
+    for (const [sharp, flat] of Object.entries(sharpToFlat)) {
+      if (normalized.startsWith(sharp)) {
+        normalized = normalized.replace(sharp, flat);
+        break;
+      }
+    }
+    
+    // Fix Major 7th: M7 → maj7, M9 → maj9
+    normalized = normalized.replace(/M7$/, 'maj7');
+    normalized = normalized.replace(/M9$/, 'maj9');
+    
+    // Fix power chords: remove '5' suffix (database just has 'C', 'C#', 'Bb' not 'C5', 'C#5', 'Bb5')
+    // But keep alterations like 7#5, 7b5, m7b5
+    normalized = normalized.replace(/^([A-G](?:#|b)?)5$/, '$1');
+    
+    return normalized;
+  };
+
   const handleChordSelect = (chord: string) => {
     setSelectedChord(chord);
     // Immediately show the fretboard when a chord is clicked
@@ -108,7 +140,8 @@ export default function Home() {
 
   const handleShowFretboard = (chordName?: string) => {
     // Use the provided chord, or selected chord, or generated chord as fallback
-    const chordToShow = chordName || selectedChord || result?.chord || '';
+    const rawChord = chordName || selectedChord || result?.chord || '';
+    const chordToShow = normalizeChordName(rawChord);
     setCurrentChord(chordToShow);
     setShowFretboardModal(true);
   };
