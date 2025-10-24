@@ -35,12 +35,12 @@ export function getSession() {
     secret: process.env.SESSION_SECRET!,
     store: sessionStore,
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: true, // Changed to true to ensure cookie is sent
     cookie: {
       httpOnly: true,
-      secure: true, // Always true - Replit uses HTTPS in both dev and prod
+      secure: true, // Always true - Replit uses HTTPS even in dev
       maxAge: sessionTtl,
-      sameSite: 'none', // Changed to 'none' for cross-origin cookies in Replit environment
+      sameSite: 'lax', // Use lax since we're on same-origin
     },
     name: 'connect.sid', // Use default session name for compatibility
   });
