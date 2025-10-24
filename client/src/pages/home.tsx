@@ -9,6 +9,8 @@ import ScaleCombination from "@/components/scale-combination";
 import RiffModal from "@/components/riff-modal";
 import FretboardModal from "@/components/fretboard-modal";
 import SubscriptionModal from "@/components/subscription-modal";
+import { OnboardingModal } from "@/components/onboarding-modal";
+import { SettingsModal } from "@/components/settings-modal";
 import AuthGate from "@/components/auth-gate";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -24,8 +26,8 @@ import { useAuthContext } from "@/contexts/AuthContext";
 import { useSubscription } from "@/hooks/useSubscription";
 import { useStreak } from "@/hooks/useStreak";
 import { getChordDiagram } from "@/lib/music-data";
-import { useMutation } from "@tanstack/react-query";
-import { apiRequest } from "@/lib/queryClient";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { apiRequest, queryClient } from "@/lib/queryClient";
 import StreakDisplay from "@/components/streak-display";
 import GearRecommendations from "@/components/gear-recommendations";
 
@@ -47,8 +49,24 @@ export default function Home() {
   const [showRiffModal, setShowRiffModal] = useState(false);
   const [showFretboardModal, setShowFretboardModal] = useState(false);
   const [showSubscriptionModal, setShowSubscriptionModal] = useState(false);
+  const [showOnboardingModal, setShowOnboardingModal] = useState(false);
+  const [showSettingsModal, setShowSettingsModal] = useState(false);
   const [currentChord, setCurrentChord] = useState<string>('');
   const [selectedChord, setSelectedChord] = useState<string>('');
+
+  // Fetch user preferences to check if onboarding is needed
+  const { data: preferences } = useQuery<{ hasCompletedOnboarding: boolean }>({
+    queryKey: ["/api/preferences"],
+    enabled: isAuthenticated,
+    retry: false,
+  });
+
+  // Show onboarding modal for new authenticated users who haven't completed it
+  useEffect(() => {
+    if (isAuthenticated && !isLoading && preferences && !preferences.hasCompletedOnboarding) {
+      setShowOnboardingModal(true);
+    }
+  }, [isAuthenticated, isLoading, preferences]);
 
   // Mutation to apply referral code after login
   const applyReferralMutation = useMutation({
@@ -283,6 +301,7 @@ export default function Home() {
                 variant="ghost" 
                 size="sm" 
                 className="p-2 h-auto"
+                onClick={() => setShowSettingsModal(true)}
                 data-testid="button-settings"
               >
                 <Settings className="h-4 w-4" />
@@ -451,6 +470,22 @@ export default function Home() {
         <SubscriptionModal
           open={showSubscriptionModal}
           onOpenChange={setShowSubscriptionModal}
+        />
+
+        {/* Onboarding Modal */}
+        <OnboardingModal
+          open={showOnboardingModal}
+          onComplete={() => {
+            setShowOnboardingModal(false);
+            // Refresh preferences data
+            queryClient.invalidateQueries({ queryKey: ["/api/preferences"] });
+          }}
+        />
+
+        {/* Settings Modal */}
+        <SettingsModal
+          open={showSettingsModal}
+          onOpenChange={setShowSettingsModal}
         />
       </div>
     </div>
