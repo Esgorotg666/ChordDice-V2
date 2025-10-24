@@ -6,6 +6,7 @@ import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 import FretboardDisplay from "@/components/fretboard-display";
 import { getChordDiagram } from "@/lib/music-data";
+import GearRecommendations from "@/components/gear-recommendations";
 
 interface RiffModalProps {
   isOpen: boolean;
@@ -185,7 +186,7 @@ export default function RiffModal({ isOpen, onClose, progression }: RiffModalPro
         )}
 
         {/* Action Buttons */}
-        <div className="flex flex-col sm:flex-row gap-3">
+        <div className="flex flex-col sm:flex-row gap-3 mb-4">
           <Button 
             className="flex-1 font-medium min-h-[44px]"
             onClick={handlePractice}
@@ -215,6 +216,13 @@ export default function RiffModal({ isOpen, onClose, progression }: RiffModalPro
             )}
           </Button>
         </div>
+
+        {/* Gear Recommendations */}
+        <GearRecommendations 
+          context="any"
+          compact={true}
+          maxItems={3}
+        />
       </div>
     </div>
   );

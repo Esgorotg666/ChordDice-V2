@@ -27,6 +27,7 @@ import { getChordDiagram } from "@/lib/music-data";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import StreakDisplay from "@/components/streak-display";
+import GearRecommendations from "@/components/gear-recommendations";
 
 interface GeneratedResult {
   type: 'single' | 'riff';
@@ -283,6 +284,15 @@ export default function Home() {
               </div>
             </div>
           </div>
+        )}
+
+        {/* Gear Recommendations - Shown after generating chords */}
+        {result && (
+          <GearRecommendations 
+            context="any"
+            compact={false}
+            maxItems={2}
+          />
         )}
 
         {/* Chord Chart */}

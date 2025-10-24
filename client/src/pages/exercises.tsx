@@ -16,6 +16,7 @@ import {
   type Exercise
 } from "@/lib/exercises-data";
 import { useSubscription } from "@/hooks/useSubscription";
+import GearRecommendations from "@/components/gear-recommendations";
 import {
   Select,
   SelectContent,
