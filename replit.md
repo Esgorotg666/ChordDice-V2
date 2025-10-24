@@ -41,6 +41,7 @@ Preferred communication style: Simple, everyday language.
 - **Musical Theory**: Color-coded key groups, numbered exotic chord types, 12x11 interactive chord chart, pentatonic scale guide, and dual fretboard tapping visualization.
 - **Progression Types**: Single chord generation or full riff creation with authentic, genre-specific progressions (e.g., Extreme Metal, Black Metal, Rock, Jazz, Funk, Classical) that transpose to the rolled key.
 - **Musical Accuracy**: Dynamic scale generation from interval formulas, preservation of accidental families during transposition, and correct modal accidental preferences.
+- **Fretboard Display Fix (Oct 2025)**: Chord name normalization ensures dice-generated chords (A#M7, C#5, etc.) correctly map to chord diagram database keys (Bbmaj7, C#, etc.) by converting: sharp→flat where needed (A#→Bb, D#→Eb, G#→Ab), M7/M9→maj7/maj9, and stripping power chord '5' suffix.
 
 ### Freemium Business Model
 - **Modes**: Demo/Guest mode (full premium access), Free Tier (limited access, 5 free riff generations), Premium Tier (unlimited features).
