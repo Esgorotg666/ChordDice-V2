@@ -13,13 +13,13 @@ interface OnboardingModalProps {
 }
 
 const GENRES = [
-  { value: "Metal", label: "Metal", icon: "🤘" },
-  { value: "Jazz", label: "Jazz", icon: "🎷" },
-  { value: "Funk", label: "Funk", icon: "🎸" },
-  { value: "Rock", label: "Rock", icon: "🎵" },
-  { value: "Classical", label: "Classical", icon: "🎻" },
-  { value: "Blues", label: "Blues", icon: "🎺" },
-  { value: "Country", label: "Country", icon: "🪕" }
+  { value: "metal", label: "Metal", icon: "🤘" },
+  { value: "jazz", label: "Jazz", icon: "🎷" },
+  { value: "funk", label: "Funk", icon: "🎸" },
+  { value: "rock", label: "Rock", icon: "🎵" },
+  { value: "neo-classical", label: "Neo-Classical", icon: "🎻" },
+  { value: "blues", label: "Blues", icon: "🎺" },
+  { value: "folk", label: "Folk", icon: "🪕" }
 ];
 
 const PLAYING_STYLES = [

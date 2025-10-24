@@ -15,13 +15,13 @@ interface SettingsModalProps {
 }
 
 const GENRES = [
-  { value: "Metal", label: "Metal", icon: "🤘", description: "Dark, heavy backgrounds" },
-  { value: "Jazz", label: "Jazz", icon: "🎷", description: "Smooth, sophisticated vibes" },
-  { value: "Funk", label: "Funk", icon: "🎸", description: "Groovy, colorful atmosphere" },
-  { value: "Rock", label: "Rock", icon: "🎵", description: "Classic rock aesthetics" },
-  { value: "Classical", label: "Classical", icon: "🎻", description: "Elegant, refined styling" },
-  { value: "Blues", label: "Blues", icon: "🎺", description: "Moody, soulful tones" },
-  { value: "Country", label: "Country", icon: "🪕", description: "Warm, rustic feel" }
+  { value: "metal", label: "Metal", icon: "🤘", description: "Dark, heavy backgrounds" },
+  { value: "jazz", label: "Jazz", icon: "🎷", description: "Smooth, sophisticated vibes" },
+  { value: "funk", label: "Funk", icon: "🎸", description: "Groovy, colorful atmosphere" },
+  { value: "rock", label: "Rock", icon: "🎵", description: "Classic rock aesthetics" },
+  { value: "neo-classical", label: "Neo-Classical", icon: "🎻", description: "Elegant, refined styling" },
+  { value: "blues", label: "Blues", icon: "🎺", description: "Moody, soulful tones" },
+  { value: "folk", label: "Folk", icon: "🪕", description: "Warm, rustic feel" }
 ];
 
 const PLAYING_STYLES = [

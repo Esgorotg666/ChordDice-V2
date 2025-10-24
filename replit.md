@@ -70,6 +70,13 @@ Preferred communication style: Simple, everyday language.
 - **Analytics Tracking**: Comprehensive event tracking via Google Analytics 4 for user behavior, dice rolls, chord interactions, subscription conversions, and streak milestones.
 - **Affiliate Marketing System**: Music gear affiliate programs integrated throughout app with geo-detection (Sweetwater 5% US, Thomann 5% EU, Guitar Center/zZounds/Musician's Friend 3-5%). Strategic placements after dice rolls, in riff modal, exercises page, and classroom. Context-aware recommendations (e.g., BC Rich Warlock for metal genres, metronomes for exercises).
 
+### Personalization System (Oct 2025)
+- **User Preferences**: Database schema stores playingStyle (rhythm/lead), preferredGenre (music style), skillLevel (entry/intermediate/advanced/master), and hasCompletedOnboarding flag.
+- **Onboarding Flow**: New users complete 3-step modal asking about playing style, music preferences, and skill level during first login.
+- **Settings Modal**: Accessible via gear icon, allows users to update their preferences anytime with form state hydration via useEffect.
+- **Global Background Theme**: BackgroundProvider context uses preferredGenre to apply genre-specific backgrounds (metal, rock, jazz, blues, funk, etc.) across the app. Note: preferredGenre IS the background preference - backgrounds are genre-based.
+- **Personalized Classroom**: "Recommended For You" section filters lessons by skill level mapping (entry→beginner, intermediate→beginner+intermediate, advanced→intermediate+advanced, master→advanced+mastery) and prioritizes lessons matching preferred genre via keyword matching.
+
 # Android Deployment
 
 ## Build Configuration

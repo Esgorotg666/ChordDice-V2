@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Link, useLocation } from "wouter";
 import { Settings, Crown, User, LogOut, Users, Trash2, MoreVertical, BookOpen } from "lucide-react";
 import DiceInterface from "@/components/dice-interface";
@@ -23,6 +23,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useToast } from "@/hooks/use-toast";
 import { useAuthContext } from "@/contexts/AuthContext";
+import { useBackground } from "@/contexts/background-context";
 import { useSubscription } from "@/hooks/useSubscription";
 import { useStreak } from "@/hooks/useStreak";
 import { getChordDiagram } from "@/lib/music-data";
@@ -41,6 +42,7 @@ interface GeneratedResult {
 export default function Home() {
   const [, setLocation] = useLocation();
   const { user, isAuthenticated, isLoading } = useAuthContext();
+  const { backgroundImages } = useBackground();
   const { hasActiveSubscription } = useSubscription();
   const { currentStreak, longestStreak, isPracticedToday, updateStreak } = useStreak();
   const { toast } = useToast();
@@ -53,6 +55,14 @@ export default function Home() {
   const [showSettingsModal, setShowSettingsModal] = useState(false);
   const [currentChord, setCurrentChord] = useState<string>('');
   const [selectedChord, setSelectedChord] = useState<string>('');
+
+  // Select a random background from user's preferred genre
+  // Use preferredGenre as the dependency to prevent re-randomization on every render
+  const backgroundImage = useMemo(() => {
+    if (backgroundImages.length === 0) return '';
+    const randomIndex = Math.floor(Math.random() * backgroundImages.length);
+    return backgroundImages[randomIndex];
+  }, [backgroundImages.join(',')]);
 
   // Fetch user preferences to check if onboarding is needed
   const { data: preferences } = useQuery<{ hasCompletedOnboarding: boolean }>({
@@ -184,13 +194,19 @@ export default function Home() {
   return (
     <div 
       className="bg-background text-foreground min-h-screen relative"
+      style={backgroundImage ? {
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${backgroundImage})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed'
+      } : undefined}
     >
-      {/* Background Overlay - darker aesthetic */}
-      <div className="absolute inset-0 bg-black/85 backdrop-blur-sm z-0"></div>
+      {/* Background Overlay for better readability */}
+      <div className="absolute inset-0 bg-black/20 backdrop-blur-sm z-0"></div>
       {/* Dark gold accent glow */}
       <div className="absolute inset-0 pointer-events-none z-0">
-        <div className="absolute top-20 left-20 w-96 h-96 bg-yellow-900/10 blur-3xl" />
-        <div className="absolute bottom-20 right-20 w-96 h-96 bg-yellow-800/10 blur-3xl" />
+        <div className="absolute top-20 left-20 w-96 h-96 bg-yellow-900/5 blur-3xl" />
+        <div className="absolute bottom-20 right-20 w-96 h-96 bg-yellow-800/5 blur-3xl" />
       </div>
       
       {/* Content */}

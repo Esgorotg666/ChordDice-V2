@@ -1,12 +1,13 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { Link } from 'wouter';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { Lock, ChevronRight, ChevronLeft, Crown, BookOpen, GraduationCap, Trophy, Music, Zap, Flame, Guitar as GuitarIcon, Home } from 'lucide-react';
+import { Lock, ChevronRight, ChevronLeft, Crown, BookOpen, GraduationCap, Trophy, Music, Zap, Flame, Guitar as GuitarIcon, Home, Star, Sparkles } from 'lucide-react';
 import { generalBeginnerLessons, rockLessons, metalLessons, bluesLessons, jazzLessons, funkLessons, Lesson } from '@/lib/comprehensive-lessons';
 import { useSubscription } from '@/hooks/useSubscription';
+import { useQuery } from '@tanstack/react-query';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import FretboardDisplay from '@/components/fretboard-display';
 
@@ -15,6 +16,100 @@ export default function Classroom() {
   const [currentSubsectionIndex, setCurrentSubsectionIndex] = useState(0);
   const [showUpgradeModal, setShowUpgradeModal] = useState(false);
   const { hasActiveSubscription } = useSubscription();
+
+  // Fetch user preferences for personalized recommendations
+  const { data: preferences } = useQuery<{
+    preferredGenre?: string;
+    playingStyle?: string;
+    skillLevel?: string;
+    hasCompletedOnboarding: boolean;
+  }>({
+    queryKey: ["/api/preferences"],
+    retry: false,
+  });
+
+  // Map user skill level to lesson difficulties
+  const getPreferredDifficulties = (skillLevel?: string): string[] => {
+    if (!skillLevel) return ['beginner', 'intermediate', 'advanced', 'mastery'];
+    
+    switch (skillLevel) {
+      case 'entry':
+        return ['beginner'];
+      case 'intermediate':
+        return ['beginner', 'intermediate'];
+      case 'advanced':
+        return ['intermediate', 'advanced'];
+      case 'master':
+        return ['advanced', 'mastery'];
+      default:
+        return ['beginner', 'intermediate', 'advanced', 'mastery'];
+    }
+  };
+
+  // Get recommended lessons based on user preferences
+  const recommendedLessons = useMemo(() => {
+    if (!preferences) return [];
+
+    const allLessons = [
+      ...generalBeginnerLessons,
+      ...rockLessons,
+      ...metalLessons,
+      ...bluesLessons,
+      ...jazzLessons,
+      ...funkLessons,
+    ];
+
+    const preferredDifficulties = getPreferredDifficulties(preferences.skillLevel);
+    
+    // Filter lessons by skill level and optionally by genre
+    let filtered = allLessons.filter(lesson => 
+      preferredDifficulties.includes(lesson.difficulty)
+    );
+
+    // Prioritize lessons matching preferred genre
+    if (preferences.preferredGenre) {
+      const genreKeywords: Record<string, string[]> = {
+        'metal': ['metal', 'shred', 'power', 'thrash', 'gallop'],
+        'black-metal': ['metal', 'tremolo', 'atmospheric', 'blast'],
+        'death-metal': ['metal', 'brutal', 'technical', 'growl'],
+        'extreme-metal': ['metal', 'speed', 'precision', 'aggressive'],
+        'rock': ['rock', 'power chord', 'classic', 'riff'],
+        'blues': ['blues', 'bend', '12-bar', 'shuffle'],
+        'jazz': ['jazz', 'chord', 'improvisation', 'theory'],
+        'funk': ['funk', 'groove', 'rhythm', 'slap'],
+        'folk': ['folk', 'acoustic', 'fingerstyle', 'traditional'],
+        'flamenco': ['flamenco', 'spanish', 'classical'],
+        'neo-classical': ['classical', 'arpeggio', 'sweep'],
+      };
+
+      // Normalize to lowercase to handle legacy capitalized values
+      let normalizedGenre = preferences.preferredGenre.toLowerCase();
+      
+      // Remap legacy renamed genres
+      const legacyRemap: Record<string, string> = {
+        'classical': 'neo-classical',
+        'country': 'folk'
+      };
+      normalizedGenre = legacyRemap[normalizedGenre] || normalizedGenre;
+      
+      const keywords = genreKeywords[normalizedGenre] || [];
+      
+      filtered = filtered.sort((a, b) => {
+        const aScore = keywords.some(k => 
+          a.title.toLowerCase().includes(k) || 
+          a.description.toLowerCase().includes(k)
+        ) ? 1 : 0;
+        const bScore = keywords.some(k => 
+          b.title.toLowerCase().includes(k) || 
+          b.description.toLowerCase().includes(k)
+        ) ? 1 : 0;
+        return bScore - aScore;
+      });
+    }
+
+    // Return top 6 recommendations
+    return filtered.slice(0, 6);
+  }, [preferences]);
 
   const handleLessonClick = (lesson: Lesson, isFree: boolean) => {
     // First 2 lessons in each category are free
@@ -332,6 +427,63 @@ export default function Classroom() {
             Master guitar techniques organized by genre. First lesson in each category is free!
           </p>
         </div>
+
+        {/* Recommended For You Section */}
+        {preferences && recommendedLessons.length > 0 && (
+          <div className="mb-8 bg-gradient-to-br from-primary/10 to-primary/5 border border-primary/20 rounded-lg p-6">
+            <div className="flex items-center gap-2 mb-4">
+              <Sparkles className="h-6 w-6 text-primary" />
+              <h2 className="text-2xl font-bold">Recommended For You</h2>
+            </div>
+            <p className="text-sm text-muted-foreground mb-4">
+              Based on your {preferences.skillLevel} skill level
+              {preferences.preferredGenre && ` and love for ${preferences.preferredGenre}`}
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {recommendedLessons.map((lesson, index) => {
+                const isFree = index === 0; // Only first recommended lesson is guaranteed free
+                return (
+                  <Card
+                    key={lesson.id}
+                    className={`p-4 cursor-pointer transition-all hover:border-primary/50 bg-card ${
+                      !isFree && !hasActiveSubscription ? 'opacity-75' : ''
+                    }`}
+                    onClick={() => handleLessonClick(lesson, isFree)}
+                    data-testid={`card-recommended-${lesson.id}`}
+                  >
+                    <div className="flex items-start justify-between mb-3">
+                      <Badge className={getDifficultyColor(lesson.difficulty)}>
+                        {getDifficultyIcon(lesson.difficulty)}
+                        <span className="ml-1 capitalize">{lesson.difficulty}</span>
+                      </Badge>
+                      {!isFree && !hasActiveSubscription && (
+                        <Lock className="h-4 w-4 text-muted-foreground" />
+                      )}
+                      {isFree && (
+                        <Badge variant="secondary" className="bg-green-500/10 text-green-500 border-green-500/20">
+                          FREE
+                        </Badge>
+                      )}
+                    </div>
+
+                    <h3 className="font-semibold mb-2 line-clamp-2">{lesson.title}</h3>
+                    <p className="text-sm text-muted-foreground line-clamp-2 mb-3">{lesson.description}</p>
+
+                    <div className="flex items-center justify-between text-xs text-muted-foreground">
+                      <span>{lesson.subsections.length} sections</span>
+                      {!isFree && !hasActiveSubscription && (
+                        <span className="flex items-center gap-1">
+                          <Crown className="h-3 w-3" />
+                          Premium
+                        </span>
+                      )}
+                    </div>
+                  </Card>
+                );
+              })}
+            </div>
+          </div>
+        )}
 
         {/* Genre-based collapsible sections */}
         <Accordion type="multiple" defaultValue={['general', 'rock', 'metal', 'blues', 'jazz', 'funk']} className="space-y-4">
