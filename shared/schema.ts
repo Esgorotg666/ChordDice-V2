@@ -61,6 +61,11 @@ export const users = pgTable("users", {
   exoticChordsUsed: jsonb("exotic_chords_used").default(sql`'[]'::jsonb`), // Array of exotic chord types used
   // Testing access
   isTestUser: boolean("is_test_user").default(false), // Complete access bypass for testers
+  // User preferences and personalization
+  preferredGenre: varchar("preferred_genre"), // Metal, Jazz, Funk, Rock, Classical, etc.
+  playingStyle: varchar("playing_style"), // rhythm, lead, both
+  skillLevel: varchar("skill_level"), // entry, intermediate, advanced, master
+  hasCompletedOnboarding: boolean("has_completed_onboarding").default(false),
   // Timestamps
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
@@ -160,6 +165,13 @@ export const deleteAccountSchema = z.object({
   erase: z.boolean().default(true), // Complete data erasure (GDPR compliance)
 });
 
+// User preferences schema
+export const userPreferencesSchema = z.object({
+  preferredGenre: z.enum(["Metal", "Jazz", "Funk", "Rock", "Classical", "Blues", "Country"]).optional(),
+  playingStyle: z.enum(["rhythm", "lead", "both"]).optional(),
+  skillLevel: z.enum(["entry", "intermediate", "advanced", "master"]).optional(),
+});
+
 export const insertChordProgressionSchema = createInsertSchema(chordProgressions).pick({
   userId: true,
   type: true,
@@ -198,6 +210,7 @@ export type VerifyEmail = z.infer<typeof verifyEmailSchema>;
 export type ForgotPassword = z.infer<typeof forgotPasswordSchema>;
 export type ResetPassword = z.infer<typeof resetPasswordSchema>;
 export type DeleteAccountRequest = z.infer<typeof deleteAccountSchema>;
+export type UserPreferences = z.infer<typeof userPreferencesSchema>;
 export type User = typeof users.$inferSelect;
 export type InsertChordProgression = z.infer<typeof insertChordProgressionSchema>;
 export type ChordProgression = typeof chordProgressions.$inferSelect;
