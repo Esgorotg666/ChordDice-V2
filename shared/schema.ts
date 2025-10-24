@@ -55,6 +55,10 @@ export const users = pgTable("users", {
   longestStreak: integer("longest_streak").default(0), // Personal record
   lastPracticeDate: timestamp("last_practice_date"), // Last day user practiced (rolled dice)
   streakBonusTokens: integer("streak_bonus_tokens").default(0), // Bonus tokens from maintaining streaks
+  // Achievement statistics
+  totalDiceRolls: integer("total_dice_rolls").default(0), // Lifetime dice rolls
+  genresUsed: jsonb("genres_used").default(sql`'[]'::jsonb`), // Array of genres tried
+  exoticChordsUsed: jsonb("exotic_chords_used").default(sql`'[]'::jsonb`), // Array of exotic chord types used
   // Testing access
   isTestUser: boolean("is_test_user").default(false), // Complete access bypass for testers
   // Timestamps
@@ -86,6 +90,18 @@ export const referrals = pgTable("referrals", {
   rewardGrantedDate: timestamp("reward_granted_date"),
   createdAt: timestamp("created_at").defaultNow(),
 });
+
+// User achievements table - Tracks unlocked badges
+export const userAchievements = pgTable("user_achievements", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  userId: varchar("user_id").references(() => users.id).notNull(),
+  achievementId: varchar("achievement_id").notNull(), // Unique achievement identifier
+  unlockedAt: timestamp("unlocked_at").defaultNow(),
+  notificationShown: boolean("notification_shown").default(false),
+}, (table) => [
+  index("IDX_user_achievements_user").on(table.userId),
+  index("IDX_user_achievements_achievement").on(table.achievementId),
+]);
 
 // Chat messages table
 export const chatMessages = pgTable("chat_messages", {
@@ -161,6 +177,12 @@ export const insertReferralSchema = createInsertSchema(referrals).pick({
   trialCompleted: true,
 });
 
+export const insertUserAchievementSchema = createInsertSchema(userAchievements).pick({
+  userId: true,
+  achievementId: true,
+  notificationShown: true,
+});
+
 export const insertChatMessageSchema = createInsertSchema(chatMessages).pick({
   roomId: true,
   userId: true,
@@ -181,5 +203,7 @@ export type InsertChordProgression = z.infer<typeof insertChordProgressionSchema
 export type ChordProgression = typeof chordProgressions.$inferSelect;
 export type InsertReferral = z.infer<typeof insertReferralSchema>;
 export type Referral = typeof referrals.$inferSelect;
+export type InsertUserAchievement = z.infer<typeof insertUserAchievementSchema>;
+export type UserAchievement = typeof userAchievements.$inferSelect;
 export type InsertChatMessage = z.infer<typeof insertChatMessageSchema>;
 export type ChatMessage = typeof chatMessages.$inferSelect;

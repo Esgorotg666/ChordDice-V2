@@ -27,12 +27,22 @@ export function useSubscription() {
     };
   }
 
+  // Demo/Guest mode: unauthenticated users get full premium access
+  if (!isAuthenticated) {
+    return {
+      hasActiveSubscription: true,
+      subscriptionStatus: 'demo' as const,
+      subscriptionExpiry: undefined,
+      isLoading: false,
+    };
+  }
+
   // Regular authenticated users: return API subscription status
   // Show loading until both auth and subscription queries complete
   return {
     hasActiveSubscription: subscription?.hasActiveSubscription ?? false,
     subscriptionStatus: subscription?.subscriptionStatus ?? 'free',
     subscriptionExpiry: subscription?.subscriptionExpiry,
-    isLoading: isLoading || !isAuthenticated,
+    isLoading: isLoading,
   };
 }

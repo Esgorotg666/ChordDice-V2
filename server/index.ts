@@ -3,6 +3,7 @@ import cors from "cors";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 import streakRoutes from "./streakRoutes";
+import achievementRoutes from "./achievementRoutes";
 
 const app = express();
 
@@ -59,8 +60,9 @@ app.use((req, res, next) => {
 });
 
 (async () => {
-  // Register streak routes before main routes
+  // Register streak and achievement routes before main routes
   app.use(streakRoutes);
+  app.use(achievementRoutes);
   
   const server = await registerRoutes(app);
 

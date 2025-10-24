@@ -83,8 +83,9 @@ export function useUsageTracking() {
     error,
     
     // Computed values
-    canUseDiceRoll: isAuthenticated ? (usageStatus?.canUseDiceRoll ?? false) : false,
-    remainingRolls: isAuthenticated ? (usageStatus?.remainingRolls || 0) : 0,
+    // Demo/Guest mode: unauthenticated users get unlimited access
+    canUseDiceRoll: isAuthenticated ? (usageStatus?.canUseDiceRoll ?? false) : true,
+    remainingRolls: isAuthenticated ? (usageStatus?.remainingRolls || 0) : 999,
     extraTokens: usageStatus?.extraRollTokens || 0,
     hasWatchedMaxAds: (usageStatus?.adsWatchedCount || 0) >= 5,
     isTestUser: usageStatus?.isTestUser || false,
