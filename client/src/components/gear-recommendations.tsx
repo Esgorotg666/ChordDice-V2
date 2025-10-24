@@ -76,7 +76,7 @@ export default function GearRecommendations({
     return (
       <div className="space-y-2">
         <p className="text-xs text-muted-foreground">
-          🎸 Recommended Gear from {affiliateProgram.name}:
+          🎸 Recommended Gear:
         </p>
         <div className="flex flex-wrap gap-2">
           {displayedGear.map((gear) => {
@@ -106,17 +106,12 @@ export default function GearRecommendations({
   return (
     <Card className="border-primary/20 bg-card/50" data-testid="card-gear-recommendations">
       <CardHeader className="pb-3">
-        <div className="flex items-center justify-between">
-          <CardTitle className="text-lg flex items-center gap-2">
-            <ShoppingCart className="h-5 w-5" />
-            Recommended Gear
-          </CardTitle>
-          <Badge variant="secondary" className="text-xs">
-            {affiliateProgram.name} • {affiliateProgram.commissionRate}
-          </Badge>
-        </div>
+        <CardTitle className="text-lg flex items-center gap-2">
+          <ShoppingCart className="h-5 w-5" />
+          Recommended Gear
+        </CardTitle>
         <CardDescription className="text-xs">
-          Practice with the right tools. Supporting us through these links helps keep the app free!
+          Practice with the right tools to improve your playing!
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-3">
@@ -149,11 +144,6 @@ export default function GearRecommendations({
             </div>
           );
         })}
-        
-        <p className="text-[10px] text-muted-foreground pt-2 border-t border-border">
-          As an affiliate partner, we may earn a commission from qualifying purchases. 
-          This helps support Guitar Dice development at no extra cost to you.
-        </p>
       </CardContent>
     </Card>
   );
