@@ -14,6 +14,10 @@
         android:requestLegacyExternalStorage="false"
         android:localeConfig="@xml/locales_config">
         
+        <!-- AdMob App ID -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-4798049989357665~2334475752"/>
 
         <activity
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|smallestScreenSize|screenLayout|uiMode|navigation"
