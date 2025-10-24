@@ -40,7 +40,7 @@ export const AFFILIATE_PROGRAMS: AffiliateProgram[] = [
     region: 'US',
     commissionRate: '3%',
     baseUrl: 'https://www.zzounds.com',
-    affiliateParam: 'affid=YOUR_ZZOUNDS_ID', // Replace with ShareASale affiliate ID
+    affiliateParam: '3994582', // zZounds affiliate ID
   },
   {
     id: 'musicians-friend',
@@ -194,6 +194,12 @@ export function buildAffiliateLink(
   // URL encode the search term for safety
   const encodedSearch = encodeURIComponent(searchTerm);
   
+  // zZounds uses a different URL structure with affiliate ID in path
+  if (program.id === 'zzounds') {
+    // Format: https://www.zzounds.com/a--3994582/search?query=term
+    return `${program.baseUrl}/a--${program.affiliateParam}/search?query=${encodedSearch}`;
+  }
+  
   // Customize search paths per retailer (based on their actual URL structures)
   let searchPath: string;
   switch (program.id) {
@@ -205,9 +211,6 @@ export function buildAffiliateLink(
       break;
     case 'thomann':
       searchPath = `/search_dir.html?sw=${encodedSearch}`;
-      break;
-    case 'zzounds':
-      searchPath = `/search?form=search&query=${encodedSearch}`;
       break;
     case 'musicians-friend':
       searchPath = `/search?Ntt=${encodedSearch}`;
