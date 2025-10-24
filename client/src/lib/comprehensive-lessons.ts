@@ -476,9 +476,9 @@ export const rockLessons: Lesson[] = [
     title: 'Power Chords - Essential Shapes',
     description: 'Master the foundation of rock guitar with power chords',
     fretboardPatterns: [
-      { name: 'E5 Power Chord', positions: [0, 2, 2, 'x', 'x', 'x'], fingers: [0, 1, 3, 0, 0, 0] },
-      { name: 'A5 Power Chord', positions: ['x', 0, 2, 2, 'x', 'x'], fingers: [0, 0, 1, 3, 0, 0] },
-      { name: 'D5 Power Chord', positions: ['x', 'x', 0, 2, 3, 'x'], fingers: [0, 0, 0, 1, 3, 0] }
+      { name: 'E5 Power Chord (2-finger)', positions: [0, 2, 'x', 'x', 'x', 'x'], fingers: [0, 1, 0, 0, 0, 0] },
+      { name: 'A5 Power Chord (2-finger)', positions: ['x', 0, 2, 'x', 'x', 'x'], fingers: [0, 0, 1, 0, 0, 0] },
+      { name: 'E5 Power Chord (3-finger)', positions: [0, 2, 2, 'x', 'x', 'x'], fingers: [0, 1, 1, 0, 0, 0] }
     ],
     scales: [],
     subsections: [
@@ -492,8 +492,8 @@ export const rockLessons: Lesson[] = [
       {
         id: 'rock-1-2',
         title: 'Three-Finger Power Chord',
-        content: 'Add pinky one string higher, same fret as ring finger. E5: Low E open, A fret 2, D fret 2. Bigger, fuller sound.',
-        technique: 'Index-ring-pinky form a triangle. Bar ring and pinky together if easier.',
+        content: 'Add one more string, same fret as the fifth. E5: Low E open, A fret 2, D fret 2. Bigger, fuller sound.',
+        technique: 'Bar the A and D strings with your index finger at fret 2. Creates thicker tone with octave.',
         tips: ['Adds octave for thickness', 'Mute unused strings', 'Practice E5-A5-D5 progression']
       }
     ]
@@ -505,7 +505,7 @@ export const rockLessons: Lesson[] = [
     title: 'Palm Muting Technique',
     description: 'Create tight, percussive rock rhythm sounds',
     fretboardPatterns: [
-      { name: 'E5 for Muting', positions: [0, 2, 2, 'x', 'x', 'x'], fingers: [0, 1, 3, 0, 0, 0] }
+      { name: 'E5 for Muting', positions: [0, 2, 'x', 'x', 'x', 'x'], fingers: [0, 1, 0, 0, 0, 0] }
     ],
     scales: [],
     subsections: [
@@ -532,7 +532,7 @@ export const rockLessons: Lesson[] = [
     title: 'The "Smoke on the Water" Riff',
     description: 'Learn rock\'s most famous riff',
     fretboardPatterns: [
-      { name: 'Main Riff Pattern', positions: [0, 3, 5, 'x', 'x', 'x'], fingers: [0, 1, 3, 0, 0, 0] }
+      { name: 'Main Riff Pattern', positions: [0, 3, 'x', 'x', 'x', 'x'], fingers: [0, 1, 0, 0, 0, 0] }
     ],
     scales: [],
     subsections: [
