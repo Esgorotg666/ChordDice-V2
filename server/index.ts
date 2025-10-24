@@ -13,8 +13,9 @@ app.set("trust proxy", 1);
 // CORS configuration - must be before other middleware
 app.use(cors({
   origin: (origin, callback) => {
-    // Allow all origins in development for Vite HMR and Replit preview
-    callback(null, true);
+    // CRITICAL: With credentials:true, must return specific origin (not wildcard true)
+    // This allows cookies to work properly across the Replit proxy
+    callback(null, origin || '*');
   },
   credentials: true, // Allow cookies to be sent
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],

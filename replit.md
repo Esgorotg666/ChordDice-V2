@@ -21,6 +21,12 @@ Preferred communication style: Simple, everyday language.
 - **Server**: Express.js RESTful API with middleware for logging and error handling.
 - **Development**: Vite integration for Hot Module Replacement (HMR).
 - **Storage**: Abstracted storage interface (currently in-memory, with PostgreSQL session store integration).
+- **Session Management**: 
+  - **CRITICAL FIX (Oct 2025)**: Session cookies were not persisting due to two configuration issues:
+    1. `secure: true` prevented cookie transmission in Replit's HTTP→HTTPS proxy environment. Fixed by setting `secure: process.env.NODE_ENV === 'production'`.
+    2. CORS wildcard origin (`true`) prevented credentials from working. Fixed by returning specific origin (`callback(null, origin || '*')`).
+  - Uses express-session with PostgreSQL store (connect-pg-simple) for persistent sessions.
+  - Cookie config: HttpOnly, SameSite=Lax, MaxAge=7 days, Secure only in production.
 
 ## Data Storage
 - **Database**: PostgreSQL via Neon Database (serverless).

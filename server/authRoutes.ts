@@ -100,7 +100,6 @@ router.post('/register', createRateLimitMiddleware(mutationRateLimiter, "registr
 // User login endpoint
 router.post('/login', createRateLimitMiddleware(mutationRateLimiter, "login"), async (req, res) => {
   try {
-    console.log('[LOGIN] Login attempt for:', req.body.username);
     const { username, password } = loginUserSchema.parse(req.body);
     
     // Find user by username
@@ -124,9 +123,7 @@ router.post('/login', createRateLimitMiddleware(mutationRateLimiter, "login"), a
       });
     }
     
-    console.log('[LOGIN] User authenticated, setting session for userId:', user.id);
-    
-    // Set user session directly - skip regenerate to avoid session issues
+    // Set user session
     (req.session as any).userId = user.id;
     (req.session as any).user = {
       id: user.id,
@@ -135,25 +132,15 @@ router.post('/login', createRateLimitMiddleware(mutationRateLimiter, "login"), a
       isEmailVerified: user.isEmailVerified
     };
     
-    console.log('[LOGIN] Session before save:', req.session);
-    
     // Save the session explicitly
     req.session.save((saveErr) => {
       if (saveErr) {
-        console.error('[LOGIN] Session save error:', saveErr);
+        console.error('Session save error:', saveErr);
         return res.status(500).json({ message: 'Session error' });
       }
       
-      console.log('[LOGIN] Session saved successfully, sessionID:', req.sessionID);
-      console.log('[LOGIN] Session data:', req.session);
-      
       // Return user data (excluding password)
       const { password: _, ...userWithoutPassword } = user;
-      
-      // Log response headers
-      res.on('finish', () => {
-        console.log('[LOGIN] Response headers:', res.getHeaders());
-      });
       
       res.json({ 
         message: 'Login successful',
@@ -188,17 +175,10 @@ router.post('/logout', (req, res) => {
 // Get current user endpoint
 router.get('/user', async (req, res) => {
   try {
-    console.log('[GET USER] Session:', req.session);
-    console.log('[GET USER] SessionID:', req.sessionID);
-    console.log('[GET USER] Cookies:', req.headers.cookie);
-    
     const userId = (req.session as any)?.userId;
     if (!userId) {
-      console.log('[GET USER] No userId in session');
       return res.status(401).json({ message: 'Not authenticated' });
     }
-    
-    console.log('[GET USER] Found userId in session:', userId);
     
     const user = await storage.getUser(userId);
     if (!user) {

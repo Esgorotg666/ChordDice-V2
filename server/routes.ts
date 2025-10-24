@@ -69,44 +69,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Session middleware setup - Note: Session is also set up in setupAuth for OIDC
   app.use(getSession());
 
-  // Cookie test endpoint
-  app.get('/api/test-cookie', (req, res) => {
-    console.log('[COOKIE TEST] Received cookies:', req.headers.cookie);
-    console.log('[COOKIE TEST] Session BEFORE:', req.session);
-    console.log('[COOKIE TEST] SessionID:', req.sessionID);
-    
-    // Log headers after response is fully sent
-    res.on('finish', () => {
-      console.log('[COOKIE TEST] FINAL response headers after finish:');
-      const rawHeaders = (res as any)._header || 'no raw header available';
-      console.log(rawHeaders);
-    });
-    
-    // Modify session
-    (req.session as any).testData = 'Hello from session - ' + Date.now();
-    
-    // Force session to be saved
-    req.session.save((err) => {
-      if (err) {
-        console.error('[COOKIE TEST] Session save error:', err);
-        return res.status(500).json({ error: 'Session save failed' });
-      }
-      
-      console.log('[COOKIE TEST] Session AFTER save:', req.session);
-      console.log('[COOKIE TEST] Headers before send:');
-      const headers = res.getHeaders();
-      for (const [key, value] of Object.entries(headers)) {
-        console.log(`  ${key}: ${JSON.stringify(value)}`);
-      }
-      
-      res.json({ 
-        message: 'Cookie test', 
-        sessionID: req.sessionID,
-        hasSessionCookie: !!req.headers.cookie?.includes('connect.sid')
-      });
-    });
-  });
-
   // Custom auth routes
   app.use('/api/auth', authRoutes);
 
