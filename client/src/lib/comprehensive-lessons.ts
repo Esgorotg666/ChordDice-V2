@@ -416,24 +416,125 @@ export const generalBeginnerLessons: Lesson[] = [
     id: 'general-5',
     difficulty: 'beginner',
     genre: 'general',
-    title: 'Strumming Patterns - Down & Up',
-    description: 'Master basic rhythm and strumming techniques',
-    fretboardPatterns: [],
+    title: 'Basic Strumming Patterns',
+    description: 'Give rhythm to chords and build timing with essential strumming patterns',
+    fretboardPatterns: [
+      { name: 'E Minor (for practice)', positions: [0, 2, 2, 0, 0, 0], fingers: [0, 2, 3, 0, 0, 0] }
+    ],
     scales: [],
     subsections: [
       {
         id: 'general-5-1',
-        title: 'All Downstrokes',
-        content: 'Practice strumming an E chord with all downstrokes: DOWN-DOWN-DOWN-DOWN in 4/4 time. Count: 1-2-3-4.',
-        technique: 'Loose wrist, not stiff arm. Let the pick glide across strings naturally.',
-        tips: ['Start slow - 60 BPM', 'Keep consistent volume', 'Practice with metronome']
+        title: 'Why This is Important',
+        content: 'Strumming gives rhythm to chords, making songs recognizable. Learning patterns builds timing and right-hand coordination, essential for playing with others or along with music.',
       },
       {
         id: 'general-5-2',
-        title: 'Down-Up Pattern',
-        content: 'Basic pattern: DOWN-UP-DOWN-UP. This doubles the speed. Count: 1-and-2-and-3-and-4-and.',
-        technique: 'On upstroke, only hit the top 3-4 strings. Downstroke hits all strings.',
-        tips: ['Most common strumming pattern', 'Upstrokes are lighter', 'Try on G, C, D chords']
+        title: 'The D-D-U-U-D Pattern',
+        content: 'Use a simple pattern: Down, Down, Up, Up, Down (D D U U D). This is one of the most versatile strumming patterns. Hold an E minor chord and strum with a pick or thumb, keeping your wrist loose and relaxed.',
+        technique: 'Count aloud: "1, 2, 3-and, 4-and, 5" to match the pattern. Down on 1, Down on 2, Up on "3", Up on "and", Down on 4. The wrist should move like a hinge, not the whole arm.',
+        tips: [
+          'Pattern: D D U U D',
+          'Count: 1, 2, 3-and, 4-and, 5',
+          'Keep wrist loose and relaxed',
+          'Wrist moves like a hinge',
+          'Don\'t move whole arm',
+          'Use pick or thumb'
+        ]
+      },
+      {
+        id: 'general-5-3',
+        title: 'Practice with Each Chord',
+        content: 'Practice on Em for 5 minutes using the D-D-U-U-D pattern, then switch to G chord for 5 minutes, then C chord for 5 minutes. Focus on even, consistent strums with all chords.',
+        technique: 'Use a metronome at 60 BPM to keep steady. The pattern should feel natural and flowing. Watch your right hand in a mirror to check wrist motion.',
+        tips: [
+          'Em: 5 minutes of D-D-U-U-D',
+          'G: 5 minutes of D-D-U-U-D',
+          'C: 5 minutes of D-D-U-U-D',
+          'Use metronome at 60 BPM',
+          'Check wrist in mirror',
+          'Ensure even strums'
+        ]
+      },
+      {
+        id: 'general-5-4',
+        title: 'Building Speed and Consistency',
+        content: 'Start at 60 BPM and increase speed gradually as you get comfortable. The goal is smooth, even strums at any tempo. Your wrist should stay relaxed, never stiff or tense.',
+        technique: 'Practice Duration: 15 minutes daily for 2 weeks. Increase metronome by 5-10 BPM every few days once you can play cleanly.',
+        tips: [
+          'Start at 60 BPM',
+          'Increase speed gradually',
+          'Practice 15 min daily',
+          'Master over 2 weeks',
+          'Smooth wrist motion essential',
+          'Even strums more important than speed',
+          'Add 5-10 BPM when comfortable'
+        ]
+      }
+    ]
+  },
+  {
+    id: 'general-5-transitions',
+    difficulty: 'beginner',
+    genre: 'general',
+    title: 'Chord Transitions',
+    description: 'Build muscle memory for smooth chord changes',
+    fretboardPatterns: [
+      { name: 'E Minor', positions: [0, 2, 2, 0, 0, 0], fingers: [0, 2, 3, 0, 0, 0] },
+      { name: 'G Major', positions: [3, 2, 0, 0, 0, 3], fingers: [3, 2, 0, 0, 0, 4] },
+      { name: 'C Major', positions: ['x', 3, 2, 0, 1, 0], fingers: [0, 3, 2, 0, 1, 0] }
+    ],
+    scales: [],
+    subsections: [
+      {
+        id: 'general-5-transitions-1',
+        title: 'Why This is Important',
+        content: 'Smooth chord changes make songs flow naturally. This builds muscle memory and finger independence, preventing pauses that disrupt rhythm. Transitions are what separate beginners from intermediate players.',
+      },
+      {
+        id: 'general-5-transitions-2',
+        title: 'Basic Transition Exercises',
+        content: 'Use Em, G, and C from Lesson 5. Practice switching: Em to G (10 times), G to C (10 times), C to Em (10 times). Strum once per chord, then lift and move to the next chord.',
+        technique: 'Move fingers together when possible. For Em to G, shift your index and middle fingers as a unit. Watch your left hand in a mirror: fingers should lift off and land together, not one at a time.',
+        tips: [
+          'Em → G: 10 repetitions',
+          'G → C: 10 repetitions',
+          'C → Em: 10 repetitions',
+          'Strum once per chord',
+          'Lift fingers together',
+          'Land fingers together',
+          'Keep guitar stable'
+        ]
+      },
+      {
+        id: 'general-5-transitions-3',
+        title: 'Building Speed',
+        content: 'Start slow, taking 10-15 seconds per switch. Don\'t rush! Accuracy first, speed second. Aim to reduce switch time to 2-3 seconds over 2 weeks through daily practice.',
+        technique: 'Use a metronome at 60 BPM for timing. Strum on the beat, switch between beats. As you improve, strum more frequently per chord.',
+        tips: [
+          'Start: 10-15 seconds per switch',
+          'Goal: 2-3 seconds per switch',
+          'Accuracy before speed',
+          'Use metronome at 60 BPM',
+          'Progress over 2 weeks',
+          'Don\'t rush transitions',
+          'Clean sound is priority'
+        ]
+      },
+      {
+        id: 'general-5-transitions-4',
+        title: 'Practice Routine',
+        content: 'Practice 15 minutes daily for 2-3 weeks. Focus on specific transitions that give you trouble. If Em→G is hard, spend extra time on that. Ensure the guitar stays stable - your thumb behind the neck helps anchor it.',
+        technique: 'Practice Duration: 15 minutes daily for 2-3 weeks. Break it into 5-minute blocks per transition pair.',
+        tips: [
+          'Practice 15 min daily',
+          'Focus on problem transitions',
+          'Master over 2-3 weeks',
+          'Use mirror to check form',
+          'Thumb anchors guitar neck',
+          'Celebrate small improvements',
+          '5 min per transition pair'
+        ]
       }
     ]
   },
