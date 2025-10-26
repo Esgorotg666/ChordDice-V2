@@ -133,6 +133,75 @@ export const generalBeginnerLessons: Lesson[] = [
     ]
   },
   {
+    id: 'general-0-tuning',
+    difficulty: 'beginner',
+    genre: 'general',
+    title: 'Tuning Your Guitar',
+    description: 'Learn to keep your guitar in tune for great sound and ear training',
+    fretboardPatterns: [],
+    scales: [],
+    subsections: [
+      {
+        id: 'general-0-tuning-1',
+        title: 'Why This is Important',
+        content: 'An out-of-tune guitar sounds unpleasant, demotivating you and making chords or songs sound wrong. Tuning trains your ear and ensures compatibility with music or other players.',
+      },
+      {
+        id: 'general-0-tuning-2',
+        title: 'Getting a Tuner',
+        content: 'Get a clip-on tuner, app (e.g., Guitar Tuna), or online tuner. Standard tuning from low to high: E (6th, thickest), A (5th), D (4th), G (3rd), B (2nd), e (1st, thinnest).',
+        tips: [
+          'Clip-on tuners are most convenient',
+          'Phone apps work great (Guitar Tuna, etc.)',
+          'Online tuners are free alternatives',
+          'Remember: E-A-D-G-B-e (low to high)',
+          'Thickest string is low E, thinnest is high e'
+        ]
+      },
+      {
+        id: 'general-0-tuning-3',
+        title: 'How to Tune',
+        content: 'Pluck each string gently, turning tuning pegs slowly: clockwise tightens (sharpens/raises pitch), counterclockwise loosens (flattens/lowers pitch). Match the tuner\'s green light or needle center. Start with low E and move up through each string.',
+        technique: 'Picture the headstock with six tuning pegs (three per side on most guitars). The tuner\'s display shows a needle or light moving left (flat/too low) or right (sharp/too high). Adjust until centered.',
+        tips: [
+          'Pluck strings softly to avoid breakage',
+          'Turn pegs slowly - small adjustments',
+          'Clockwise = tighter = sharper (higher)',
+          'Counterclockwise = looser = flatter (lower)',
+          'Watch for green light or centered needle',
+          'Start with low E, work up to high e'
+        ]
+      },
+      {
+        id: 'general-0-tuning-4',
+        title: 'Advanced: 5th Fret Method',
+        content: 'After a week of using a tuner, try the 5th-fret method: Press fret 5 on low E string, it should match open A. Press fret 5 on A, matches open D. Fret 5 on D matches open G. Exception: Fret 4 on G matches open B. Fret 5 on B matches open high e.',
+        technique: 'This relative tuning method helps when you don\'t have a tuner. Match the pitch of the fretted note to the open string above it.',
+        tips: [
+          'Fret 5 method: E→A, A→D, D→G, B→e',
+          'Exception: G to B uses fret 4 (not 5)',
+          'Listen for "beating" when notes don\'t match',
+          'Tune one string with tuner first as reference',
+          'This trains your ear over time'
+        ]
+      },
+      {
+        id: 'general-0-tuning-5',
+        title: 'Practice Routine',
+        content: 'Practice tuning twice daily (5 minutes each). Make it part of your routine before every practice session. Guitars go out of tune from temperature, humidity, and playing. Tuning should become second nature.',
+        technique: 'Practice Duration: 5-10 minutes daily, ongoing. Eventually you\'ll tune in under a minute.',
+        tips: [
+          'Tune before every practice session',
+          'Twice daily keeps you sharp',
+          'New strings go out of tune faster',
+          'Temperature changes affect tuning',
+          'Make it a habit - like brushing teeth',
+          'Goal: Tune in under 1 minute'
+        ]
+      }
+    ]
+  },
+  {
     id: 'general-1',
     difficulty: 'beginner',
     genre: 'general',
