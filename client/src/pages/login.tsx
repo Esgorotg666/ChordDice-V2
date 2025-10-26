@@ -294,10 +294,10 @@ export default function LoginPage() {
                 name="username"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-sm">Username</FormLabel>
+                    <FormLabel className="text-sm">Username or Email</FormLabel>
                     <FormControl>
                       <Input 
-                        placeholder="Username" 
+                        placeholder="Enter your username or email" 
                         className="h-10"
                         data-testid="input-username"
                         {...field} 

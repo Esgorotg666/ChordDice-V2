@@ -102,8 +102,13 @@ router.post('/login', createRateLimitMiddleware(mutationRateLimiter, "login"), a
   try {
     const { username, password } = loginUserSchema.parse(req.body);
     
-    // Find user by username
-    const user = await storage.getUserByUsername(username);
+    // Find user by username OR email (support both for better UX)
+    let user = await storage.getUserByUsername(username);
+    if (!user && username.includes('@')) {
+      // If username looks like an email, try email lookup
+      user = await storage.getUserByEmail(username);
+    }
+    
     if (!user) {
       return res.status(401).json({ message: 'Invalid username or password' });
     }
