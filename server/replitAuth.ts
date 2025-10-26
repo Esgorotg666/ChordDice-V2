@@ -22,30 +22,35 @@ const getOidcConfig = memoize(
   { maxAge: 3600 * 1000 }
 );
 
+// Create session middleware once and reuse it everywhere
+// CRITICAL: Must be singleton to ensure all parts of app use the same session store
+const sessionTtl = 7 * 24 * 60 * 60 * 1000; // 1 week
+const pgStore = connectPg(session);
+const sessionStore = new pgStore({
+  conString: process.env.DATABASE_URL,
+  createTableIfMissing: false,
+  ttl: sessionTtl,
+  tableName: "sessions",
+});
+
+const sessionMiddleware = session({
+  secret: process.env.SESSION_SECRET!,
+  store: sessionStore,
+  resave: false,
+  saveUninitialized: false, // CRITICAL: Must be false to ensure session is saved only when modified
+  cookie: {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production', // CRITICAL: Must be false in dev for Replit's HTTP->HTTPS proxy
+    maxAge: sessionTtl,
+    sameSite: 'lax',
+    path: '/', // Explicit path for cookie
+  },
+  name: 'connect.sid',
+  rolling: true, // Refresh session expiry on each request
+});
+
 export function getSession() {
-  const sessionTtl = 7 * 24 * 60 * 60 * 1000; // 1 week
-  const pgStore = connectPg(session);
-  const sessionStore = new pgStore({
-    conString: process.env.DATABASE_URL,
-    createTableIfMissing: false,
-    ttl: sessionTtl,
-    tableName: "sessions",
-  });
-  return session({
-    secret: process.env.SESSION_SECRET!,
-    store: sessionStore,
-    resave: false,
-    saveUninitialized: false, // CRITICAL: Must be false to ensure session is saved only when modified
-    cookie: {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production', // CRITICAL: Must be false in dev for Replit's HTTP->HTTPS proxy
-      maxAge: sessionTtl,
-      sameSite: 'lax',
-      path: '/', // Explicit path for cookie
-    },
-    name: 'connect.sid',
-    rolling: true, // Refresh session expiry on each request
-  });
+  return sessionMiddleware;
 }
 
 function updateUserSession(
