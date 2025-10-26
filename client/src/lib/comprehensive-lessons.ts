@@ -280,35 +280,76 @@ export const generalBeginnerLessons: Lesson[] = [
     id: 'general-2',
     difficulty: 'beginner',
     genre: 'general',
-    title: 'Essential Open Chords - E, A, D',
-    description: 'Master the three most important beginner chords',
+    title: 'Learning Open Chords (E Minor, G Major, C Major)',
+    description: 'Master the foundation chords used in most songs for rhythm guitar',
     fretboardPatterns: [
-      { name: 'E Major', positions: [0, 2, 2, 1, 0, 0], fingers: [0, 2, 3, 1, 0, 0] },
-      { name: 'A Major', positions: ['x', 0, 2, 2, 2, 0], fingers: [0, 0, 1, 2, 3, 0] },
-      { name: 'D Major', positions: ['x', 'x', 0, 2, 3, 2], fingers: [0, 0, 0, 1, 3, 2] }
+      { name: 'E Minor (Em)', positions: [0, 2, 2, 0, 0, 0], fingers: [0, 2, 3, 0, 0, 0] },
+      { name: 'G Major', positions: [3, 2, 0, 0, 0, 3], fingers: [3, 2, 0, 0, 0, 4] },
+      { name: 'C Major', positions: ['x', 3, 2, 0, 1, 0], fingers: [0, 3, 2, 0, 1, 0] }
     ],
     scales: [],
     subsections: [
       {
         id: 'general-2-1',
-        title: 'E Major Chord',
-        content: 'This is one of the easiest chords. Place: Index on G string fret 1, Middle on A string fret 2, Ring on D string fret 2. Strum all 6 strings.',
-        technique: 'Keep fingers arched so they don\'t touch adjacent strings. Press firmly just behind the fret.',
-        tips: ['Strum slowly and listen', 'Check each string rings clearly', 'Practice switching to A chord']
+        title: 'Why This is Important',
+        content: 'Open chords are the foundation of most songs, letting you play rhythm guitar quickly. They teach finger placement, string muting, and transitions, boosting motivation through early song-playing. Em, G, and C are three of the most common chords in popular music.',
       },
       {
         id: 'general-2-2',
-        title: 'A Major Chord',
-        content: 'A is a bright, happy chord. Place all three fingers on the 2nd fret: Index on D, Middle on G, Ring on B. Don\'t play the low E string (X).',
-        technique: 'Line up your three fingers in a row on fret 2. They should be close together.',
-        tips: ['Mute low E with your thumb', 'Keep wrist relaxed', 'Practice E to A changes']
+        title: 'E Minor (Em) - The Easiest Chord',
+        content: 'Em only needs TWO fingers, making it perfect for beginners. Middle finger on A string fret 2, Ring finger on D string fret 2. Strum ALL six strings - they all ring beautifully.',
+        technique: 'Press strings firmly just behind the fret. Keep both fingers on the same fret (fret 2). Strum all strings with a pick or thumb, ensuring no buzzing.',
+        tips: [
+          'Only 2 fingers needed - easiest chord!',
+          'Both fingers on fret 2',
+          'Strum all 6 strings',
+          'All open strings ring clear',
+          'Practice 2 minutes, 4 slow downstrums',
+          'Check in mirror: curved fingers'
+        ]
       },
       {
         id: 'general-2-3',
-        title: 'D Major Chord',
-        content: 'D is essential for thousands of songs. Index on G string fret 2, Ring on B string fret 3, Middle on high E fret 2. Play only the top 4 strings.',
-        technique: 'Form a triangle shape with your fingers. Don\'t play the low E or A strings.',
-        tips: ['Strum from the D string down', 'Keep fingers curved', 'Practice D to A to E progression']
+        title: 'G Major - Building Finger Stretch',
+        content: 'G is common in thousands of songs. Ring finger (or middle) on low E string fret 3, Index on A string fret 2, Pinky (or ring) on high e string fret 3. Strum all six strings for a full, bright sound.',
+        technique: 'This chord builds finger stretch. Keep fingers arched so the middle strings (D, G, B) ring open. Some players use middle+pinky, others use index+middle+ring - both work!',
+        tips: [
+          'Stretch between low E and high e',
+          'All 6 strings should ring',
+          'Middle strings are open',
+          'Practice 2 minutes of slow strumming',
+          'Adjust if any string buzzes',
+          'Common in rock, folk, pop'
+        ]
+      },
+      {
+        id: 'general-2-4',
+        title: 'C Major - Three-Finger Placement',
+        content: 'C is incredibly versatile. Ring finger on A string fret 3, Middle on D string fret 2, Index on B string fret 1. Play 5 strings (skip low E). G, high E strings are open.',
+        technique: 'Form a diagonal line with your fingers. Don\'t play the low E string (marked X). Strum from A string down. In a mirror, ensure fingers are curved, pressing only the noted strings.',
+        tips: [
+          'Skip low E string (don\'t play it)',
+          'Three fingers in diagonal pattern',
+          'Strum from A string down',
+          'Open G and high E strings',
+          'Practice 2 minutes of strumming',
+          'Most versatile chord'
+        ]
+      },
+      {
+        id: 'general-2-5',
+        title: 'Chord Transitions Practice',
+        content: 'Switch between Em and G, then G and C. Take 10-15 seconds per switch initially. Aim for smooth transitions over 2 weeks. Practice each transition slowly, watching your fingers move.',
+        technique: 'Practice Duration: 15-20 minutes daily for 2-3 weeks. Break it down: 5 min Em, 5 min G, 5 min C, 5 min transitions.',
+        tips: [
+          'Switch Em → G (10-15 seconds)',
+          'Switch G → C (10-15 seconds)',
+          'Start slow, speed comes later',
+          'Watch fingers in mirror',
+          'Strum 4 times per chord',
+          'Smooth transitions take 2 weeks',
+          'Practice 15-20 min daily'
+        ]
       }
     ]
   },
