@@ -76,6 +76,63 @@ export const generalBeginnerLessons: Lesson[] = [
     ]
   },
   {
+    id: 'general-0-posture',
+    difficulty: 'beginner',
+    genre: 'general',
+    title: 'Proper Posture and Holding the Guitar',
+    description: 'Learn correct posture to prevent strain and build efficient playing habits',
+    fretboardPatterns: [],
+    scales: [],
+    subsections: [
+      {
+        id: 'general-0-posture-1',
+        title: 'Why This is Important',
+        content: 'Correct posture prevents strain in your back, neck, or wrists, which can discourage beginners. It ensures efficient finger movement and clear sound, avoiding bad habits that slow progress.',
+      },
+      {
+        id: 'general-0-posture-2',
+        title: 'Setting Up Your Posture',
+        content: 'Sit on a straight-backed, armless chair with feet flat and back straight. Place the guitar\'s body on your right thigh (left for left-handed players), with the neck angled slightly upward at about 45 degrees. Rest your right arm over the body with elbow near the bridge.',
+        technique: 'Use a mirror to check: no slouching, wrists straight, shoulders relaxed. A footstool under your left foot can stabilize the guitar.',
+        tips: [
+          'Sit on a straight-backed, armless chair',
+          'Feet flat on the floor',
+          'Back straight - imagine a line from head to tailbone',
+          'Guitar body on right thigh (or left for lefties)',
+          'Neck angled slightly upward (45 degrees)',
+          'Footstool under left foot helps stability'
+        ]
+      },
+      {
+        id: 'general-0-posture-3',
+        title: 'Hand Positioning',
+        content: 'Right hand: Hold a pick between thumb and index finger, arm resting over the body with elbow near the bridge. Left hand: Thumb behind the neck (not gripping), fingers curved over strings, palm NOT touching the neck.',
+        technique: 'Think of your left hand as a spider crawling over the fretboard - fingers curved, hovering ready to press strings.',
+        tips: [
+          'Left thumb stays behind the neck',
+          'Curved fingers, not flat',
+          'Palm should not touch the neck',
+          'Wrists stay straight, not bent',
+          'Hold pick gently but firmly'
+        ]
+      },
+      {
+        id: 'general-0-posture-4',
+        title: 'Practice Routine',
+        content: 'Hold this position for 2-3 minutes, then stand, shake out, and repeat. Do this 5 times daily. Use a mirror to check your form: no slouching, wrists straight, shoulders relaxed. The guitar neck should point slightly upward, not parallel to the floor.',
+        technique: 'Practice Duration: 10 minutes daily until it feels natural (typically 3-5 days).',
+        tips: [
+          'Hold position for 2-3 minutes',
+          'Stand and shake out between holds',
+          'Repeat 5 times daily',
+          'Use a mirror to check form',
+          'Practice until natural (3-5 days)',
+          'Total practice: 10 minutes daily'
+        ]
+      }
+    ]
+  },
+  {
     id: 'general-1',
     difficulty: 'beginner',
     genre: 'general',
