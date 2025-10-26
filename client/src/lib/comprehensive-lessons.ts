@@ -205,29 +205,74 @@ export const generalBeginnerLessons: Lesson[] = [
     id: 'general-1',
     difficulty: 'beginner',
     genre: 'general',
-    title: 'First Finger Exercise - Chromatic',
-    description: 'Build finger strength and dexterity with this foundational exercise',
+    title: 'Finger Strength and Dexterity Exercises',
+    description: 'Build finger strength, coordination, and independence for easier chords and melodies',
     fretboardPatterns: [
-      { name: 'Low E - Fret 1', positions: [1, 'x', 'x', 'x', 'x', 'x'], fingers: [1, 0, 0, 0, 0, 0] },
-      { name: 'Low E - Fret 2', positions: [2, 'x', 'x', 'x', 'x', 'x'], fingers: [2, 0, 0, 0, 0, 0] },
-      { name: 'Low E - Fret 3', positions: [3, 'x', 'x', 'x', 'x', 'x'], fingers: [3, 0, 0, 0, 0, 0] },
-      { name: 'Low E - Fret 4', positions: [4, 'x', 'x', 'x', 'x', 'x'], fingers: [4, 0, 0, 0, 0, 0] }
+      { name: 'Chromatic 1-2-3-4', positions: [1, 'x', 'x', 'x', 'x', 'x'], fingers: [1, 0, 0, 0, 0, 0] },
+      { name: 'Chromatic 1-2-3-4', positions: [2, 'x', 'x', 'x', 'x', 'x'], fingers: [2, 0, 0, 0, 0, 0] },
+      { name: 'Chromatic 1-2-3-4', positions: [3, 'x', 'x', 'x', 'x', 'x'], fingers: [3, 0, 0, 0, 0, 0] },
+      { name: 'Chromatic 1-2-3-4', positions: [4, 'x', 'x', 'x', 'x', 'x'], fingers: [4, 0, 0, 0, 0, 0] }
     ],
     scales: [],
     subsections: [
       {
         id: 'general-1-1',
-        title: 'One Finger Per Fret',
-        content: 'Play frets 1-2-3-4 on the low E string only: 1st fret (index), 2nd fret (middle), 3rd fret (ring), 4th fret (pinky). Then repeat on A string, then D, G, B, and high E.',
-        technique: 'Keep all fingers hovering over their assigned frets. When you press fret 1, fingers 2-3-4 should already be hovering over frets 2-3-4.',
-        tips: ['Go SLOW at first', 'Keep fingers curved', 'Press just behind the fret wire', 'Practice 5 minutes daily']
+        title: 'Why This is Important',
+        content: 'Weak fingers cause buzzing or muted notes, frustrating beginners. These exercises build strength, coordination, and finger independence, making chords and melodies easier.',
       },
       {
         id: 'general-1-2',
-        title: 'Complete Exercise',
-        content: 'Do the 1-2-3-4 pattern on ALL strings: Low E: 1-2-3-4, A: 1-2-3-4, D: 1-2-3-4, G: 1-2-3-4, B: 1-2-3-4, High E: 1-2-3-4.',
-        technique: 'Use alternate picking: down-up-down-up. Keep a steady rhythm, even if it\'s very slow.',
-        tips: ['Start at 40 BPM', 'Increase speed gradually', 'Listen for clean notes']
+        title: 'Warm Up First',
+        content: 'Always warm up before practicing: Shake your hands gently, stretch your fingers by spreading them wide and then making a fist, rotate your wrists. This prevents injury and prepares your muscles.',
+        tips: [
+          'Shake hands gently for 10 seconds',
+          'Spread fingers wide, then make a fist',
+          'Rotate wrists clockwise and counterclockwise',
+          'Never practice with cold, stiff hands',
+          'Warm-up takes just 1-2 minutes'
+        ]
+      },
+      {
+        id: 'general-1-3',
+        title: 'Chromatic Exercise (1-2-3-4)',
+        content: 'Place left-hand fingers on low E string: index (1) on fret 1, middle (2) on fret 2, ring (3) on fret 3, pinky (4) on fret 4. Pluck each note with your right thumb or pick. Play frets 1-2-3-4 across ALL six strings, then reverse (4-3-2-1) back down.',
+        technique: 'Pattern: E string (1-2-3-4), A string (1-2-3-4), D, G, B, high e. Then reverse. Use a metronome app at 60 BPM for steady timing.',
+        tips: [
+          'Start on low E string, frets 1-2-3-4',
+          'Move to A, D, G, B, high e strings',
+          'One finger per fret (index=1, middle=2, ring=3, pinky=4)',
+          'Use metronome at 60 BPM',
+          'Focus on clean, clear notes',
+          'Do 4 repetitions per string'
+        ]
+      },
+      {
+        id: 'general-1-4',
+        title: 'Spider Walk Exercise',
+        content: 'Alternate fingers in unusual patterns to build independence. Example: Index on fret 1, ring on fret 2 (skip middle), then middle on fret 1, pinky on fret 2 (skip ring). Move this pattern across all strings.',
+        technique: 'This forces each finger to work independently rather than in sequence. It feels awkward at first - that\'s the point!',
+        tips: [
+          'Alternate finger combinations (1-3, 2-4)',
+          'Skip fingers intentionally',
+          'Builds finger independence',
+          'Harder than chromatic - that\'s normal',
+          'Go very slowly at first'
+        ]
+      },
+      {
+        id: 'general-1-5',
+        title: 'Practice Routine and Safety',
+        content: 'Practice 10-15 minutes daily, focusing on clean notes over speed. STOP immediately if fingers hurt sharply (dull soreness is normal, sharp pain is not). Increase speed gradually over 2 weeks. Your goal: smooth, even notes at faster tempos.',
+        technique: 'Practice Duration: 10-15 minutes daily. Increase metronome by 5 BPM every 3 days if notes are clean.',
+        tips: [
+          'Practice 10-15 minutes daily',
+          'Stop if sharp pain occurs',
+          'Dull muscle soreness is normal',
+          'Increase speed over 2 weeks',
+          'Prioritize clean notes over speed',
+          'Add 5 BPM every few days',
+          'Rest days are important too'
+        ]
       }
     ]
   },
