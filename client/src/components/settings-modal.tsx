@@ -263,10 +263,14 @@ export function SettingsModal({ open, onOpenChange }: SettingsModalProps) {
           <Button
             onClick={handleSave}
             disabled={!hasChanges || updateMutation.isPending}
-            className="bg-gold hover:bg-gold/90 text-black"
+            className={`${
+              !hasChanges 
+                ? "bg-gray-700 text-gray-400 cursor-not-allowed" 
+                : "bg-gold hover:bg-gold/90 text-black"
+            }`}
             data-testid="button-settings-save"
           >
-            {updateMutation.isPending ? "Saving..." : "Save Changes"}
+            {updateMutation.isPending ? "Saving..." : hasChanges ? "Save Changes" : "No Changes"}
           </Button>
         </div>
       </DialogContent>
