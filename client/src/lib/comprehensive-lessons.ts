@@ -986,6 +986,70 @@ export const generalBeginnerLessons: Lesson[] = [
     id: 'general-13',
     difficulty: 'beginner',
     genre: 'general',
+    title: 'Basic Music Theory (Chord Progressions)',
+    description: 'Understand why chords work together and learn the foundational I-IV-V progression',
+    fretboardPatterns: [
+      { name: 'G Major (I)', positions: [3, 2, 0, 0, 0, 3], fingers: [3, 2, 0, 0, 0, 4] },
+      { name: 'C Major (IV)', positions: ['x', 3, 2, 0, 1, 0], fingers: [0, 3, 2, 0, 1, 0] },
+      { name: 'D Major (V)', positions: ['x', 'x', 0, 2, 3, 2], fingers: [0, 0, 0, 1, 3, 2] }
+    ],
+    scales: [],
+    subsections: [
+      {
+        id: 'general-13-1',
+        title: 'Why This is Important',
+        content: 'Understanding why chords work together helps you learn songs faster and improvise confidently. The I-IV-V progression (e.g., G-C-D) is one of the most common patterns in music, building confidence in songwriting and jamming.',
+      },
+      {
+        id: 'general-13-2',
+        title: 'Understanding I-IV-V in G Major',
+        content: 'In G major, the I-IV-V progression uses: G (I - the "home" chord), C (IV - creates tension), D (V - wants to return home). These Roman numerals represent chord positions in the scale. This progression is everywhere: rock, pop, blues, country!',
+        technique: 'Learn the I-IV-V in G major: G (I), C (IV), D (V). The progression creates a satisfying musical journey from home → away → back home.',
+        tips: [
+          'G = I (home chord)',
+          'C = IV (movement away)',
+          'D = V (tension, wants to resolve)',
+          'Most common progression in music',
+          'Foundation of songwriting',
+          'Used across all genres'
+        ]
+      },
+      {
+        id: 'general-13-3',
+        title: 'Playing the Progression',
+        content: 'Play the progression: G (4 strums), C (4 strums), D (4 strums), then repeat 10 times. Use a metronome at 60 BPM to keep rhythm. Listen for the "complete" sound when you finish on G.',
+        technique: 'Watch your chord changes in a mirror to ensure smooth transitions. Each chord should ring clearly for all 4 strums.',
+        tips: [
+          'G: 4 strums',
+          'C: 4 strums',
+          'D: 4 strums',
+          'Repeat 10 times',
+          'Metronome at 60 BPM',
+          'Listen for "complete" sound',
+          'Smooth transitions essential'
+        ]
+      },
+      {
+        id: 'general-13-4',
+        title: 'Trying Other Keys and Internalizing',
+        content: 'After a week, try the I-IV-V in C major: C (I), F (IV), G (V). Sing or hum along to internalize the sound. Practice 15 minutes daily for 2-3 weeks. Notice how the progression feels the same in any key!',
+        technique: 'Practice Duration: 15 minutes daily for 2-3 weeks. The I-IV-V pattern sounds familiar because it\'s in thousands of songs.',
+        tips: [
+          'Week 2: Try C-F-G (C major)',
+          'Same pattern, different key',
+          'Sing or hum along',
+          'Internalize the sound',
+          'Practice 15 min daily',
+          'Used in thousands of songs',
+          'Foundation of music theory'
+        ]
+      }
+    ]
+  },
+  {
+    id: 'general-14',
+    difficulty: 'beginner',
+    genre: 'general',
     title: 'F Major Chord - Your First Barre',
     description: 'Tackle the challenging F chord with proper technique',
     fretboardPatterns: [
