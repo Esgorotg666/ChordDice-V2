@@ -664,6 +664,134 @@ export const generalBeginnerLessons: Lesson[] = [
     id: 'general-8',
     difficulty: 'beginner',
     genre: 'general',
+    title: 'Playing a Simple Song',
+    description: 'Apply chords and strumming to play your first complete song',
+    fretboardPatterns: [
+      { name: 'G Major', positions: [3, 2, 0, 0, 0, 3], fingers: [3, 2, 0, 0, 0, 4] },
+      { name: 'D Major', positions: ['x', 'x', 0, 2, 3, 2], fingers: [0, 0, 0, 1, 3, 2] },
+      { name: 'A Minor', positions: ['x', 0, 2, 2, 1, 0], fingers: [0, 0, 2, 3, 1, 0] },
+      { name: 'C Major', positions: ['x', 3, 2, 0, 1, 0], fingers: [0, 3, 2, 0, 1, 0] }
+    ],
+    scales: [],
+    subsections: [
+      {
+        id: 'general-8-1',
+        title: 'Why This is Important',
+        content: 'Playing a song applies chords and strumming together, boosting motivation through real music. It teaches you to combine skills and follow song structure, making all your practice feel worthwhile.',
+      },
+      {
+        id: 'general-8-2',
+        title: 'Choosing Your First Song',
+        content: 'Choose a simple song like "Knockin\' on Heaven\'s Door" by Bob Dylan, which uses just four chords: G, D, Am, and C. These are all chords you\'ve already learned! Find a chord chart online by searching "Knockin\' on Heaven\'s Door chords".',
+        technique: 'Look for a chord chart that shows when to change chords. The song typically follows: G-D-Am, G-D-C pattern.',
+        tips: [
+          'Song uses: G, D, Am, C',
+          'Search online for chord chart',
+          'All chords already learned',
+          'Simple, beginner-friendly song',
+          'Look for lyrics with chord changes',
+          'Many versions available online'
+        ]
+      },
+      {
+        id: 'general-8-3',
+        title: 'Practice the Progression',
+        content: 'Practice the chord progression slowly: G → D → Am → C (or G → D → Am, G → D → C depending on section). Use the D-D-U-U-D strumming pattern per chord. Focus on smooth transitions between chords.',
+        technique: 'Don\'t worry about singing yet - just play the chords. Count how many strums per chord by listening to the original song.',
+        tips: [
+          'Start without the song playing',
+          'Practice chord changes slowly',
+          'Use D-D-U-U-D strumming',
+          'Focus on smooth transitions',
+          'Count strums per chord',
+          'Speed comes with practice'
+        ]
+      },
+      {
+        id: 'general-8-4',
+        title: 'Play Along with the Song',
+        content: 'Play along with a slowed-down version of the song using YouTube\'s playback speed setting (try 0.75x speed). Match your chord changes to the song. Watch your hands in a mirror to ensure chord changes align with strums.',
+        technique: 'Practice Duration: 20 minutes daily for 2-3 weeks. Listen for the song\'s beat to match your strumming. Gradually increase to normal speed.',
+        tips: [
+          'Use YouTube playback at 0.75x speed',
+          'Match chord changes to song',
+          'Listen carefully to timing',
+          'Practice 20 min daily',
+          'Increase speed gradually',
+          'Master over 2-3 weeks',
+          'Celebrate when you play along!'
+        ]
+      }
+    ]
+  },
+  {
+    id: 'general-9',
+    difficulty: 'beginner',
+    genre: 'general',
+    title: 'Basic Fingerpicking',
+    description: 'Add variety with fingerstyle technique and improve right-hand dexterity',
+    fretboardPatterns: [
+      { name: 'E Minor (for practice)', positions: [0, 2, 2, 0, 0, 0], fingers: [0, 2, 3, 0, 0, 0] },
+      { name: 'G Major', positions: [3, 2, 0, 0, 0, 3], fingers: [3, 2, 0, 0, 0, 4] },
+      { name: 'C Major', positions: ['x', 3, 2, 0, 1, 0], fingers: [0, 3, 2, 0, 1, 0] }
+    ],
+    scales: [],
+    subsections: [
+      {
+        id: 'general-9-1',
+        title: 'Why This is Important',
+        content: 'Fingerpicking adds variety to your playing beyond strumming, improving right-hand dexterity and finger independence. It prepares you for melodies, arpeggios, and acoustic fingerstyle playing.',
+      },
+      {
+        id: 'general-9-2',
+        title: 'Hand Position Setup',
+        content: 'Rest your right thumb on the low E string, index finger hovering over the G string, middle finger over the B string, and ring finger over the high e string. Your wrist should be relaxed, hand slightly curved.',
+        technique: 'Each finger has its assigned string. Thumb = E, A, D (bass strings), Index = G, Middle = B, Ring = high e. In a mirror, check that fingers pluck only their assigned strings.',
+        tips: [
+          'Thumb on low E string',
+          'Index on G string',
+          'Middle on B string',
+          'Ring on high e string',
+          'Wrist relaxed and curved',
+          'Each finger has one string'
+        ]
+      },
+      {
+        id: 'general-9-3',
+        title: 'Basic Fingerpicking Pattern',
+        content: 'Practice pattern: Thumb (E), Index (G), Middle (B), Ring (e), repeating slowly. This creates a flowing, arpeggiated sound. Start with Em chord, practice 2 minutes. Then G chord, 2 minutes. Then C chord, 2 minutes.',
+        technique: 'Use a metronome at 50 BPM, plucking one string on each beat: Thumb-Index-Middle-Ring. The pattern should be smooth and even, not jerky.',
+        tips: [
+          'Pattern: Thumb-Index-Middle-Ring',
+          'Em: 2 minutes',
+          'G: 2 minutes',
+          'C: 2 minutes',
+          'Metronome at 50 BPM',
+          'One pluck per beat',
+          'Smooth, even sound'
+        ]
+      },
+      {
+        id: 'general-9-4',
+        title: 'Building Speed and Variations',
+        content: 'Practice 15 minutes daily, ensuring each note rings clear. Don\'t rush! Once comfortable, try variations: Thumb-Middle-Index-Middle (creates different pattern). Increase metronome speed over 2 weeks as you get smoother.',
+        technique: 'Practice Duration: 15 minutes daily for 2 weeks. The goal is clean, clear notes with relaxed fingers.',
+        tips: [
+          'Practice 15 min daily',
+          'Clear notes over speed',
+          'Try pattern variations',
+          'Increase tempo gradually',
+          'Relaxed fingers essential',
+          'Master over 2 weeks',
+          'Opens door to fingerstyle'
+        ]
+      }
+    ]
+  },
+  {
+    id: 'general-10',
+    difficulty: 'beginner',
+    genre: 'general',
     title: 'F Major Chord - Your First Barre',
     description: 'Tackle the challenging F chord with proper technique',
     fretboardPatterns: [
