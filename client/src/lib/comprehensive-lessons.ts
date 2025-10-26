@@ -33,9 +33,48 @@ export interface Lesson {
 }
 
 // ============================================================
-// GENERAL BEGINNER LESSONS - 15 Progressive Lessons
+// GENERAL BEGINNER LESSONS - 16 Progressive Lessons
 // ============================================================
 export const generalBeginnerLessons: Lesson[] = [
+  {
+    id: 'general-0',
+    difficulty: 'beginner',
+    genre: 'general',
+    title: 'Understanding Guitar Anatomy',
+    description: 'Learn the essential parts of your guitar to follow tutorials and communicate effectively',
+    fretboardPatterns: [],
+    scales: [],
+    subsections: [
+      {
+        id: 'general-0-1',
+        title: 'Why This is Important',
+        content: 'Knowing the guitar\'s parts helps you follow tutorials, communicate with teachers, and handle tasks like string changes. This prevents confusion with terms like "fret" or "bridge" and avoids mishandling that could damage the instrument.',
+      },
+      {
+        id: 'general-0-2',
+        title: 'Essential Parts to Know',
+        content: 'Body (main section), Neck (long part with frets), Headstock (top with tuning pegs), Strings (six, from thickest low E to thinnest high e), Frets (metal bars on neck), Bridge (where strings anchor to body), Pickups (on electric guitars, for amplification), Nut (between neck and headstock).',
+        tips: [
+          'Touch each part while saying its name aloud 5-10 times',
+          'The body is the large curved part',
+          'The neck is the thin extension',
+          'The headstock is at the top with tuning pegs'
+        ]
+      },
+      {
+        id: 'general-0-3',
+        title: 'How to Practice',
+        content: 'Sit with your guitar and refer to a labeled diagram (search "guitar parts labeled" online if needed). Touch each part, saying its name aloud 5-10 times. Practice 5 minutes daily, quizzing yourself by covering the diagram and naming parts.',
+        technique: 'Use a systematic approach: start from the headstock and work your way down to the bridge. Point to each part while naming it.',
+        tips: [
+          'Practice 5 minutes daily',
+          'Quiz yourself by covering diagrams',
+          'Master this in about a week',
+          'Use online diagrams or pictures of your guitar'
+        ]
+      }
+    ]
+  },
   {
     id: 'general-1',
     difficulty: 'beginner',
