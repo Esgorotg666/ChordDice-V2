@@ -23,6 +23,7 @@ import VerifyEmailPage from "@/pages/verify-email";
 import DeleteAccountPage from "@/pages/deleteAccount";
 import AccountDeletionInfoPage from "@/pages/accountDeletionInfo";
 import PrivacyPolicyPage from "@/pages/privacy-policy";
+import TermsOfServicePage from "@/pages/terms-of-service";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -44,6 +45,7 @@ function Router() {
       <Route path="/delete-account" component={DeleteAccountPage} />
       <Route path="/account-deletion" component={AccountDeletionInfoPage} />
       <Route path="/privacy-policy" component={PrivacyPolicyPage} />
+      <Route path="/terms-of-service" component={TermsOfServicePage} />
       <Route path="/referrals" component={ReferralsPage} />
       <Route path="/chat" component={ChatPage} />
       <Route component={NotFound} />
