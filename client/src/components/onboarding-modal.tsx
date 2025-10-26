@@ -117,8 +117,8 @@ export function OnboardingModal({ open, onComplete }: OnboardingModalProps) {
 
   return (
     <Dialog open={open} onOpenChange={() => {}}>
-      <DialogContent className="sm:max-w-[500px] bg-black border-gold" onInteractOutside={(e) => e.preventDefault()}>
-        <DialogHeader>
+      <DialogContent className="sm:max-w-[500px] bg-black border-gold max-h-[90vh] flex flex-col" onInteractOutside={(e) => e.preventDefault()}>
+        <DialogHeader className="flex-shrink-0">
           <DialogTitle className="text-2xl font-bold text-gold flex items-center gap-2">
             {step === 1 && <Guitar className="w-6 h-6" />}
             {step === 2 && <Music className="w-6 h-6" />}
@@ -134,7 +134,7 @@ export function OnboardingModal({ open, onComplete }: OnboardingModalProps) {
           </DialogDescription>
         </DialogHeader>
 
-        <div className="py-6">
+        <div className="py-6 overflow-y-auto flex-1">
           {/* Step 1: Playing Style */}
           {step === 1 && (
             <RadioGroup value={playingStyle} onValueChange={setPlayingStyle}>
@@ -218,7 +218,7 @@ export function OnboardingModal({ open, onComplete }: OnboardingModalProps) {
         </div>
 
         {/* Progress indicator */}
-        <div className="flex justify-center gap-2 mb-4">
+        <div className="flex justify-center gap-2 mb-4 flex-shrink-0">
           {[1, 2, 3].map((s) => (
             <div
               key={s}
@@ -230,7 +230,7 @@ export function OnboardingModal({ open, onComplete }: OnboardingModalProps) {
         </div>
 
         {/* Navigation buttons */}
-        <div className="flex justify-between gap-3">
+        <div className="flex justify-between gap-3 flex-shrink-0">
           <Button
             variant="outline"
             onClick={handleBack}
