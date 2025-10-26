@@ -10,6 +10,7 @@ import { useSubscription } from '@/hooks/useSubscription';
 import { useQuery } from '@tanstack/react-query';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import FretboardDisplay from '@/components/fretboard-display';
+import GearRecommendations from '@/components/gear-recommendations';
 
 export default function Classroom() {
   const [selectedLesson, setSelectedLesson] = useState<Lesson | null>(null);
@@ -577,6 +578,15 @@ export default function Classroom() {
             </AccordionContent>
           </AccordionItem>
         </Accordion>
+      </div>
+
+      {/* Gear Recommendations */}
+      <div className="max-w-6xl mx-auto px-4 pb-8">
+        <GearRecommendations 
+          context="classroom"
+          compact={false}
+          maxItems={3}
+        />
       </div>
 
       {/* Upgrade modal */}

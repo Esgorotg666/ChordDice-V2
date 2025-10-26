@@ -165,17 +165,27 @@ router.post('/login', createRateLimitMiddleware(mutationRateLimiter, "login"), a
   }
 });
 
-// User logout endpoint
-router.post('/logout', (req, res) => {
-  req.session.destroy((err) => {
+// User logout endpoint (supports both GET and POST for browser compatibility)
+const logoutHandler = (req: any, res: any) => {
+  req.session.destroy((err: any) => {
     if (err) {
       console.error('Logout error:', err);
       return res.status(500).json({ message: 'Logout failed' });
     }
     res.clearCookie('connect.sid');
+    
+    // For GET requests (browser navigation), redirect to home
+    if (req.method === 'GET') {
+      return res.redirect('/');
+    }
+    
+    // For POST requests (API calls), return JSON
     res.json({ message: 'Logout successful' });
   });
-});
+};
+
+router.get('/logout', logoutHandler);
+router.post('/logout', logoutHandler);
 
 // Get current user endpoint
 router.get('/user', async (req, res) => {

@@ -279,6 +279,13 @@ export default function ExercisesPage() {
             </CardContent>
           </Card>
         )}
+
+        {/* Gear Recommendations */}
+        <GearRecommendations 
+          context="exercises"
+          compact={false}
+          maxItems={3}
+        />
       </div>
     </div>
   );
