@@ -792,6 +792,200 @@ export const generalBeginnerLessons: Lesson[] = [
     id: 'general-10',
     difficulty: 'beginner',
     genre: 'general',
+    title: 'Power Chords',
+    description: 'Learn simple, movable shapes used in rock and pop for fretboard navigation',
+    fretboardPatterns: [
+      { name: 'A5 Power Chord', positions: [5, 7, 'x', 'x', 'x', 'x'], fingers: [1, 3, 0, 0, 0, 0] },
+      { name: 'D5 Power Chord', positions: ['x', 5, 7, 'x', 'x', 'x'], fingers: [0, 1, 3, 0, 0, 0] },
+      { name: 'G5 Power Chord', positions: [3, 5, 'x', 'x', 'x', 'x'], fingers: [1, 3, 0, 0, 0, 0] }
+    ],
+    scales: [],
+    subsections: [
+      {
+        id: 'general-10-1',
+        title: 'Why This is Important',
+        content: 'Power chords are simple, movable shapes used in rock and pop music. They expand your song repertoire dramatically and teach fretboard navigation since you can move the same shape anywhere.',
+      },
+      {
+        id: 'general-10-2',
+        title: 'Learning A5 Power Chord',
+        content: 'Start with A5 on the low E string, fret 5. Place your index finger on fret 5 (low E string), ring finger on fret 7 (A string). Strum ONLY those two strings, avoiding the others. This is your first movable chord shape!',
+        technique: 'Mute the other strings with your strumming hand palm. Power chords use just two notes (root and fifth), giving a strong, neutral sound perfect for rock.',
+        tips: [
+          'Index on low E, fret 5',
+          'Ring on A string, fret 7',
+          'Strum only 2 strings',
+          'Mute other strings',
+          'Strong, neutral rock sound',
+          'First movable shape!'
+        ]
+      },
+      {
+        id: 'general-10-3',
+        title: 'Adding D5 Power Chord',
+        content: 'Move to D5: Same finger shape, but starting on the A string. Index on A string fret 5, ring on D string fret 7. Practice switching between A5 and D5, strumming 4 times each chord, repeat 10 times.',
+        technique: 'The shape stays the same - you just move it to different strings! This is the power of movable chords.',
+        tips: [
+          'Same shape, different strings',
+          'A5 → D5 switching',
+          'Strum 4 times each',
+          'Repeat 10 times',
+          'Shape is movable!',
+          'Foundation of rock guitar'
+        ]
+      },
+      {
+        id: 'general-10-4',
+        title: 'Expanding Your Power Chords',
+        content: 'After a week, add G5 (index on low E fret 3, ring on A fret 5). Practice 15 minutes daily. Try moving the power chord shape up and down the neck - each position is a different chord!',
+        technique: 'Practice Duration: 15 minutes daily for 2 weeks. Power chords are easiest on the neck, making them perfect for fast rock songs.',
+        tips: [
+          'Week 2: Add G5',
+          'Move shape up/down neck',
+          'Each position = different chord',
+          'Practice 15 min daily',
+          'Perfect for fast songs',
+          'Used in countless rock songs'
+        ]
+      }
+    ]
+  },
+  {
+    id: 'general-11',
+    difficulty: 'beginner',
+    genre: 'general',
+    title: 'Using a Capo',
+    description: 'Change song keys without learning new chords using a capo',
+    fretboardPatterns: [
+      { name: 'Em (with capo)', positions: [0, 2, 2, 0, 0, 0], fingers: [0, 2, 3, 0, 0, 0] },
+      { name: 'G (with capo)', positions: [3, 2, 0, 0, 0, 3], fingers: [3, 2, 0, 0, 0, 4] },
+      { name: 'D (with capo)', positions: ['x', 'x', 0, 2, 3, 2], fingers: [0, 0, 0, 1, 3, 2] },
+      { name: 'Am (with capo)', positions: ['x', 0, 2, 2, 1, 0], fingers: [0, 0, 2, 3, 1, 0] }
+    ],
+    scales: [],
+    subsections: [
+      {
+        id: 'general-11-1',
+        title: 'Why This is Important',
+        content: 'A capo changes the key of songs without learning new chords, making it easier to play along with singers or recordings. It\'s one of the most useful tools for acoustic guitar players.',
+      },
+      {
+        id: 'general-11-2',
+        title: 'Placing the Capo',
+        content: 'Place a capo on fret 2. Clip or strap it across ALL strings, pressing them down firmly against the fret. The capo acts like a movable nut, raising the pitch of all strings equally.',
+        technique: 'Check in a mirror that the capo presses all strings evenly, with no buzzing when strummed. It should be positioned just behind the fret wire, not on top of it.',
+        tips: [
+          'Place capo on fret 2',
+          'Press all strings evenly',
+          'Just behind the fret wire',
+          'Check for buzzing',
+          'Acts like movable nut',
+          'Raises all pitches equally'
+        ]
+      },
+      {
+        id: 'general-11-3',
+        title: 'Playing with Capo',
+        content: 'Play Em, G, and C from Lesson 5, but behind the capo (capo fret becomes "fret zero"). They\'ll sound higher-pitched. Your finger positions stay the same, but the key changes! Practice a song like "Wonderwall" which uses capo on fret 2 with chords Em, G, D, Am.',
+        technique: 'Strum 5 minutes per chord to get used to the sound. The chords feel the same but sound different. Count frets from the capo, not the nut.',
+        tips: [
+          'Capo becomes new "fret zero"',
+          'Same finger positions',
+          'Higher pitch sound',
+          'Try "Wonderwall": Em, G, D, Am',
+          'Practice 5 min per chord',
+          'Count frets from capo'
+        ]
+      },
+      {
+        id: 'general-11-4',
+        title: 'Experimenting with Position',
+        content: 'After a week, move the capo to fret 3 to hear the pitch change. Practice 15 minutes daily. Try different fret positions to match songs or singers. The same chords work anywhere you place the capo!',
+        technique: 'Practice Duration: 15 minutes daily for 1-2 weeks. Most songs use capo between frets 1-5.',
+        tips: [
+          'Week 2: Try capo on fret 3',
+          'Hear the pitch change',
+          'Practice 15 min daily',
+          'Same chords, different keys',
+          'Match singers or recordings',
+          'Essential acoustic tool'
+        ]
+      }
+    ]
+  },
+  {
+    id: 'general-12',
+    difficulty: 'beginner',
+    genre: 'general',
+    title: 'Basic Scales (G Major)',
+    description: 'Learn fretboard navigation and prepare for melodies with the G major scale',
+    fretboardPatterns: [
+      { name: 'G Major - Low E', positions: [3, 'x', 'x', 'x', 'x', 'x'], fingers: [1, 0, 0, 0, 0, 0] },
+      { name: 'G Major - A string', positions: ['x', 2, 'x', 'x', 'x', 'x'], fingers: [0, 1, 0, 0, 0, 0] },
+      { name: 'G Major - A string', positions: ['x', 3, 'x', 'x', 'x', 'x'], fingers: [0, 2, 0, 0, 0, 0] },
+      { name: 'G Major - A string', positions: ['x', 5, 'x', 'x', 'x', 'x'], fingers: [0, 4, 0, 0, 0, 0] },
+      { name: 'G Major - D string', positions: ['x', 'x', 2, 'x', 'x', 'x'], fingers: [0, 0, 1, 0, 0, 0] },
+      { name: 'G Major - D string', positions: ['x', 'x', 4, 'x', 'x', 'x'], fingers: [0, 0, 3, 0, 0, 0] },
+      { name: 'G Major - D string', positions: ['x', 'x', 5, 'x', 'x', 'x'], fingers: [0, 0, 4, 0, 0, 0] }
+    ],
+    scales: [
+      { name: 'G Major Scale', pattern: 'W-W-H-W-W-W-H', notes: ['G', 'A', 'B', 'C', 'D', 'E', 'F#', 'G'] }
+    ],
+    subsections: [
+      {
+        id: 'general-12-1',
+        title: 'Why This is Important',
+        content: 'Scales teach fretboard navigation and prepare you for melodies or improvisation. The G major scale is beginner-friendly and aligns with your G, C, Em, and D chords, making it perfect for practice.',
+      },
+      {
+        id: 'general-12-2',
+        title: 'Learning the G Major Scale',
+        content: 'Learn the G major scale using frets 2-5 across all strings. Pattern: Low E (fret 3), A (2-3-5), D (2-4-5), G (2-4), B (3-5), high e (3-5). The notes spell out: G-A-B-C-D-E-F#-G.',
+        technique: 'Play one note at a time, ascending (low to high) and descending (high to low). Use a pick or thumb. Each note should ring clear.',
+        tips: [
+          'Low E: 3',
+          'A: 2-3-5',
+          'D: 2-4-5',
+          'G: 2-4',
+          'B: 3-5',
+          'high e: 3-5',
+          'Ascending and descending'
+        ]
+      },
+      {
+        id: 'general-12-3',
+        title: 'Practicing with Metronome',
+        content: 'Use a metronome at 60 BPM, playing one note per beat. Start on low E fret 3, play each note cleanly up to high e, then back down. Focus on clean notes and smooth transitions between strings.',
+        technique: 'Practice Duration: 10 minutes daily. Ensure clean notes - no buzzing or muted strings.',
+        tips: [
+          'Metronome at 60 BPM',
+          'One note per beat',
+          'Ascending: E→A→D→G→B→e',
+          'Descending: e→B→G→D→A→E',
+          'Clean notes essential',
+          'Practice 10 min daily'
+        ]
+      },
+      {
+        id: 'general-12-4',
+        title: 'Applying the Scale',
+        content: 'After a week, try playing the scale along with a G chord. The scale notes will harmonize with the chord. Experiment with playing different scale notes in rhythm. This is your first step toward improvisation!',
+        technique: 'Practice Duration: 10 minutes daily for 2 weeks. The G major scale works over G, C, Em, and D chords.',
+        tips: [
+          'Week 2: Play over G chord',
+          'Scale harmonizes with chord',
+          'Experiment with rhythm',
+          'First step to improvisation',
+          'Works with G, C, Em, D',
+          'Practice 10 min daily'
+        ]
+      }
+    ]
+  },
+  {
+    id: 'general-13',
+    difficulty: 'beginner',
+    genre: 'general',
     title: 'F Major Chord - Your First Barre',
     description: 'Tackle the challenging F chord with proper technique',
     fretboardPatterns: [
