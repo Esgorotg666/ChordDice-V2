@@ -35,14 +35,16 @@ export function getSession() {
     secret: process.env.SESSION_SECRET!,
     store: sessionStore,
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false, // CRITICAL: Must be false to ensure session is saved only when modified
     cookie: {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production', // CRITICAL: Must be false in dev for Replit's HTTP->HTTPS proxy
       maxAge: sessionTtl,
       sameSite: 'lax',
+      path: '/', // Explicit path for cookie
     },
     name: 'connect.sid',
+    rolling: true, // Refresh session expiry on each request
   });
 }
 
