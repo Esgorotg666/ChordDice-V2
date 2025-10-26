@@ -117,44 +117,44 @@ export function OnboardingModal({ open, onComplete }: OnboardingModalProps) {
 
   return (
     <Dialog open={open} onOpenChange={() => {}}>
-      <DialogContent className="sm:max-w-[500px] bg-black border-gold max-h-[90vh] flex flex-col" onInteractOutside={(e) => e.preventDefault()}>
-        <DialogHeader className="flex-shrink-0">
-          <DialogTitle className="text-2xl font-bold text-gold flex items-center gap-2">
-            {step === 1 && <Guitar className="w-6 h-6" />}
-            {step === 2 && <Music className="w-6 h-6" />}
-            {step === 3 && <TrendingUp className="w-6 h-6" />}
+      <DialogContent className="sm:max-w-[500px] bg-black border-gold max-h-[85vh] flex flex-col p-4 sm:p-6 gap-3" onInteractOutside={(e) => e.preventDefault()}>
+        <DialogHeader className="flex-shrink-0 space-y-1">
+          <DialogTitle className="text-xl sm:text-2xl font-bold text-gold flex items-center gap-2">
+            {step === 1 && <Guitar className="w-5 h-5 sm:w-6 sm:h-6" />}
+            {step === 2 && <Music className="w-5 h-5 sm:w-6 sm:h-6" />}
+            {step === 3 && <TrendingUp className="w-5 h-5 sm:w-6 sm:h-6" />}
             {step === 1 && "Welcome to Guitar Dice!"}
             {step === 2 && "Your Musical Style"}
             {step === 3 && "Your Skill Level"}
           </DialogTitle>
-          <DialogDescription className="text-gray-400">
+          <DialogDescription className="text-gray-400 text-sm">
             {step === 1 && "Let's personalize your experience. What type of guitarist are you?"}
             {step === 2 && "What style of music do you prefer to play?"}
             {step === 3 && "How would you describe your current skill level?"}
           </DialogDescription>
         </DialogHeader>
 
-        <div className="py-6 overflow-y-auto flex-1">
+        <div className="overflow-y-auto flex-1 -mx-1 px-1">
           {/* Step 1: Playing Style */}
           {step === 1 && (
             <RadioGroup value={playingStyle} onValueChange={setPlayingStyle}>
-              <div className="space-y-3">
+              <div className="space-y-2">
                 {PLAYING_STYLES.map((style) => (
                   <label
                     key={style.value}
-                    className={`flex items-start space-x-3 border rounded-lg p-4 cursor-pointer transition-all ${
+                    className={`flex items-start space-x-3 border rounded-lg p-3 cursor-pointer transition-all ${
                       playingStyle === style.value
                         ? "border-gold bg-gold/10"
                         : "border-gray-700 hover:border-gray-600"
                     }`}
                     data-testid={`radio-playing-style-${style.value}`}
                   >
-                    <RadioGroupItem value={style.value} id={style.value} />
+                    <RadioGroupItem value={style.value} id={style.value} className="mt-0.5" />
                     <div className="flex-1">
-                      <Label htmlFor={style.value} className="font-semibold cursor-pointer">
+                      <Label htmlFor={style.value} className="font-semibold cursor-pointer text-sm">
                         {style.label}
                       </Label>
-                      <p className="text-sm text-gray-400 mt-1">{style.description}</p>
+                      <p className="text-xs text-gray-400 mt-0.5">{style.description}</p>
                     </div>
                   </label>
                 ))}
@@ -165,11 +165,11 @@ export function OnboardingModal({ open, onComplete }: OnboardingModalProps) {
           {/* Step 2: Preferred Genre */}
           {step === 2 && (
             <RadioGroup value={preferredGenre} onValueChange={setPreferredGenre}>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-2 gap-2">
                 {GENRES.map((genre) => (
                   <label
                     key={genre.value}
-                    className={`flex items-center space-x-3 border rounded-lg p-4 cursor-pointer transition-all ${
+                    className={`flex items-center space-x-2 border rounded-lg p-2.5 cursor-pointer transition-all ${
                       preferredGenre === genre.value
                         ? "border-gold bg-gold/10"
                         : "border-gray-700 hover:border-gray-600"
@@ -177,9 +177,9 @@ export function OnboardingModal({ open, onComplete }: OnboardingModalProps) {
                     data-testid={`radio-genre-${genre.value}`}
                   >
                     <RadioGroupItem value={genre.value} id={`genre-${genre.value}`} />
-                    <div className="flex items-center gap-2 flex-1">
-                      <span className="text-2xl">{genre.icon}</span>
-                      <Label htmlFor={`genre-${genre.value}`} className="font-semibold cursor-pointer">
+                    <div className="flex items-center gap-1.5 flex-1">
+                      <span className="text-lg">{genre.icon}</span>
+                      <Label htmlFor={`genre-${genre.value}`} className="font-semibold cursor-pointer text-xs sm:text-sm">
                         {genre.label}
                       </Label>
                     </div>
@@ -192,23 +192,23 @@ export function OnboardingModal({ open, onComplete }: OnboardingModalProps) {
           {/* Step 3: Skill Level */}
           {step === 3 && (
             <RadioGroup value={skillLevel} onValueChange={setSkillLevel}>
-              <div className="space-y-3">
+              <div className="space-y-2">
                 {SKILL_LEVELS.map((level) => (
                   <label
                     key={level.value}
-                    className={`flex items-start space-x-3 border rounded-lg p-4 cursor-pointer transition-all ${
+                    className={`flex items-start space-x-3 border rounded-lg p-3 cursor-pointer transition-all ${
                       skillLevel === level.value
                         ? "border-gold bg-gold/10"
                         : "border-gray-700 hover:border-gray-600"
                     }`}
                     data-testid={`radio-skill-${level.value}`}
                   >
-                    <RadioGroupItem value={level.value} id={level.value} />
+                    <RadioGroupItem value={level.value} id={level.value} className="mt-0.5" />
                     <div className="flex-1">
-                      <Label htmlFor={level.value} className="font-semibold cursor-pointer">
+                      <Label htmlFor={level.value} className="font-semibold cursor-pointer text-sm">
                         {level.label}
                       </Label>
-                      <p className="text-sm text-gray-400 mt-1">{level.description}</p>
+                      <p className="text-xs text-gray-400 mt-0.5">{level.description}</p>
                     </div>
                   </label>
                 ))}
@@ -218,7 +218,7 @@ export function OnboardingModal({ open, onComplete }: OnboardingModalProps) {
         </div>
 
         {/* Progress indicator */}
-        <div className="flex justify-center gap-2 mb-4 flex-shrink-0">
+        <div className="flex justify-center gap-2 flex-shrink-0">
           {[1, 2, 3].map((s) => (
             <div
               key={s}
