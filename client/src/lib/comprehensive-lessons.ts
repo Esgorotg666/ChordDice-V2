@@ -542,6 +542,128 @@ export const generalBeginnerLessons: Lesson[] = [
     id: 'general-6',
     difficulty: 'beginner',
     genre: 'general',
+    title: 'Reading Chord Charts',
+    description: 'Learn to read chord diagrams for independence in finding and playing new music',
+    fretboardPatterns: [
+      { name: 'D Major', positions: ['x', 'x', 0, 2, 3, 2], fingers: [0, 0, 0, 1, 3, 2] },
+      { name: 'A Minor', positions: ['x', 0, 2, 2, 1, 0], fingers: [0, 0, 2, 3, 1, 0] }
+    ],
+    scales: [],
+    subsections: [
+      {
+        id: 'general-6-1',
+        title: 'Why This is Important',
+        content: 'Chord charts are common in songbooks and online tabs, letting you learn songs quickly. Understanding them builds independence in finding and playing new music without needing a teacher.',
+      },
+      {
+        id: 'general-6-2',
+        title: 'Understanding Chart Layout',
+        content: 'Chord charts show the fretboard from a player\'s view. Vertical lines represent strings (low E on left, high e on right). Horizontal lines are frets. Dots show where to place fingers. Numbers indicate which finger to use: 1=index, 2=middle, 3=ring, 4=pinky.',
+        technique: 'Find a chord chart online (search "E minor chord chart"). Compare the chart to your actual guitar while holding it.',
+        tips: [
+          'Vertical lines = strings (E A D G B e)',
+          'Horizontal lines = frets',
+          'Dots = finger positions',
+          'Numbers: 1=index, 2=middle, 3=ring, 4=pinky',
+          'X = don\'t play that string',
+          'O = play open string'
+        ]
+      },
+      {
+        id: 'general-6-3',
+        title: 'Practice Reading Charts',
+        content: 'Practice reading Em, G, and C charts (from Lesson 5). Place fingers exactly as shown in the diagrams. Strum each chord 5 times, checking against the chart for accuracy. Use a mirror to confirm your finger placement matches.',
+        technique: 'Compare your hand position to the chart. Each dot should match a finger on your fretboard.',
+        tips: [
+          'Start with Em, G, C charts',
+          'Strum each 5 times',
+          'Check accuracy against chart',
+          'Use mirror to verify placement',
+          'Compare dots to your fingers',
+          'Take your time - accuracy first'
+        ]
+      },
+      {
+        id: 'general-6-4',
+        title: 'Adding New Chords',
+        content: 'After a week, add D Major and A Minor charts. D Major: Skip low E and A strings, play open D, index on G fret 2, ring on B fret 3, middle on high E fret 2. A Minor: Skip low E, middle on D fret 2, ring on G fret 2, index on B fret 1, open A and high e.',
+        technique: 'Practice Duration: 10 minutes daily for 1-2 weeks. Search online for clear chord diagrams to practice reading.',
+        tips: [
+          'Week 1: Em, G, C',
+          'Week 2: Add D major and A minor',
+          'Search online for chord diagrams',
+          'Practice 10 min daily',
+          'Build chart-reading confidence',
+          'Master in 1-2 weeks'
+        ]
+      }
+    ]
+  },
+  {
+    id: 'general-7',
+    difficulty: 'beginner',
+    genre: 'general',
+    title: 'Basic Rhythm and Timing',
+    description: 'Keep your playing in sync with music and prevent rushing or dragging',
+    fretboardPatterns: [
+      { name: 'E Minor (for practice)', positions: [0, 2, 2, 0, 0, 0], fingers: [0, 2, 3, 0, 0, 0] }
+    ],
+    scales: [],
+    subsections: [
+      {
+        id: 'general-7-1',
+        title: 'Why This is Important',
+        content: 'Rhythm keeps your playing in sync with music or other musicians. It prevents speeding up or slowing down, making songs sound polished and professional. Good timing is what separates amateur from skilled players.',
+      },
+      {
+        id: 'general-7-2',
+        title: 'Metronome Basics',
+        content: 'Use a metronome app set to 60 BPM. Strum Em with downstrums on each beat, counting aloud: "1, 2, 3, 4". This is quarter notes - one strum per beat. Listen for the metronome click and match it exactly.',
+        technique: 'Watch the metronome\'s visual pulse or listen for clicks. The click should happen exactly when your pick hits the strings. Count aloud to reinforce the rhythm.',
+        tips: [
+          'Set metronome to 60 BPM',
+          'Strum once per beat (1, 2, 3, 4)',
+          'Count aloud while playing',
+          'Match the metronome click exactly',
+          'Start with Em chord',
+          'Practice 2 minutes'
+        ]
+      },
+      {
+        id: 'general-7-3',
+        title: 'Adding Strumming Patterns',
+        content: 'After 2 minutes of quarter notes, try the D-D-U-U-D pattern from Lesson 6, aligning it with the metronome beats. This is more challenging but builds better timing. Switch to G chord, practice 2 minutes. Then C chord, 2 minutes.',
+        technique: 'Tap your foot to the beat for extra coordination. Your foot tap should match the metronome click. In a mirror, check that your strumming hand moves consistently with the beat.',
+        tips: [
+          'Start with quarter notes (2 min)',
+          'Add D-D-U-U-D pattern',
+          'Practice on Em, G, C (2 min each)',
+          'Tap foot with the beat',
+          'Watch hand motion in mirror',
+          'Stay perfectly in time'
+        ]
+      },
+      {
+        id: 'general-7-4',
+        title: 'Building Tempo',
+        content: 'Practice 15 minutes daily at 60 BPM for the first week. Once you can stay perfectly in time, increase BPM by 5 every few days. Don\'t rush! Staying steady at slower tempos is better than rushing at faster ones.',
+        technique: 'Practice Duration: 15 minutes daily for 2 weeks. The goal is rock-solid timing at any speed.',
+        tips: [
+          'Start at 60 BPM',
+          'Practice 15 min daily',
+          'Increase by 5 BPM every few days',
+          'Only increase when perfectly steady',
+          'Slow and steady beats fast and sloppy',
+          'Master over 2 weeks',
+          'Timing is everything in music'
+        ]
+      }
+    ]
+  },
+  {
+    id: 'general-8',
+    difficulty: 'beginner',
+    genre: 'general',
     title: 'F Major Chord - Your First Barre',
     description: 'Tackle the challenging F chord with proper technique',
     fretboardPatterns: [
