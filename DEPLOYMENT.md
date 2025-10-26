@@ -35,8 +35,8 @@ Configure these secrets in your GitHub repository (Settings → Secrets and vari
 ### Current Version
 - **App ID**: `com.chorddice.app`
 - **App Name**: Guitar Dice
-- **Version Code**: 27
-- **Version Name**: 1.7.0
+- **Version Code**: 28
+- **Version Name**: 1.8.0
 
 ### Version Management
 Version codes are automatically incremented during tagged releases:

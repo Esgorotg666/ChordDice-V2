@@ -82,7 +82,7 @@ Preferred communication style: Simple, everyday language.
 ## Build Configuration
 - **App ID**: `com.chorddice.app`
 - **App Name**: Guitar Dice
-- **Current Version**: 1.7.0 (versionCode: 27)
+- **Current Version**: 1.8.0 (versionCode: 28)
 - **Framework**: Capacitor 7.4.3
 - **Keystore**: Pre-configured upload keystore for Play Store signing
 - **Build Output**: `dist/public` → Android WebView
