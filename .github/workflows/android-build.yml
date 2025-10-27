@@ -168,54 +168,26 @@ jobs:
         name: chord-dice-aab
         path: android/app/build/outputs/bundle/release/app-release.aab
         
-    - name: Validate Play Store secrets
-      if: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/tags/') || (github.event_name == 'workflow_dispatch' && github.event.inputs.deploy_to_play_store == 'true') }}
-      run: |
-        if [ -z "${{ secrets.SERVICE_ACCOUNT_JSON }}" ]; then
-          echo "❌ ERROR: SERVICE_ACCOUNT_JSON secret is missing for Play Store upload"
-          exit 1
-        fi
-        echo "✅ Play Store secrets validated"
-        
-    - name: Upload to Google Play Store (Internal Testing)
-      if: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/tags/') || (github.event_name == 'workflow_dispatch' && github.event.inputs.deploy_to_play_store == 'true') }}
-      uses: r0adkll/upload-google-play@v1
-      with:
-        serviceAccountJsonPlainText: ${{ secrets.SERVICE_ACCOUNT_JSON }}
-        packageName: com.chorddice.app
-        releaseFiles: android/app/build/outputs/bundle/release/app-release.aab
-        track: internal
-        status: draft
-        inAppUpdatePriority: 2
-        releaseName: "${{ github.ref_name }} - Chord Riff Generator"
+    # NOTE: Manual upload to Play Store - download AAB from artifacts below
+    # To enable automatic upload in the future, add SERVICE_ACCOUNT_JSON secret
         
     - name: Create Release Info
       run: |
-        echo "## 📱 Chord Riff Generator - Android Release" >> $GITHUB_STEP_SUMMARY
+        echo "## 📱 Guitar Dice v1.8.0 - Android Release" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
         echo "### ✅ Build Successful!" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
         echo "- **APK**: Ready for sideloading or testing" >> $GITHUB_STEP_SUMMARY
-        echo "- **AAB**: Ready for Google Play Store upload" >> $GITHUB_STEP_SUMMARY
+        echo "- **AAB**: Ready for manual Google Play Store upload" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
-        
-        if [[ "${{ github.event_name }}" == "push" && "${{ github.ref }}" == refs/tags/* ]] || [[ "${{ github.event_name }}" == "workflow_dispatch" && "${{ github.event.inputs.deploy_to_play_store }}" == "true" ]]; then
-          echo "### 🚀 Auto-Deploy Status:" >> $GITHUB_STEP_SUMMARY
-          echo "- ✅ Uploaded to Google Play Internal Testing track" >> $GITHUB_STEP_SUMMARY
-          echo "- 🔗 Check [Google Play Console](https://play.google.com/console/) for deployment status" >> $GITHUB_STEP_SUMMARY
-          echo "- 📈 Promote through tracks: Internal → Alpha → Beta → Production" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### 📊 Version Information:" >> $GITHUB_STEP_SUMMARY
-          echo "- **Tag**: ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **Build**: #${{ github.run_number }}" >> $GITHUB_STEP_SUMMARY
-        else
-          echo "### 📋 To Deploy to Google Play Store:" >> $GITHUB_STEP_SUMMARY
-          echo "1. Create a version tag (e.g., \`git tag v1.0.0 && git push origin v1.0.0\`)" >> $GITHUB_STEP_SUMMARY
-          echo "2. Or use the 'Actions' tab → 'Build and Deploy Android App' → 'Run workflow' with deployment enabled" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### 📋 Manual Upload Alternative:" >> $GITHUB_STEP_SUMMARY
-          echo "1. Download the AAB file from the artifacts above" >> $GITHUB_STEP_SUMMARY
-          echo "2. Go to [Google Play Console](https://play.google.com/console/)" >> $GITHUB_STEP_SUMMARY
-          echo "3. Navigate to your app → Testing → Internal testing" >> $GITHUB_STEP_SUMMARY
-          echo "4. Create new release and upload the AAB file" >> $GITHUB_STEP_SUMMARY
-        fi
+        echo "### 📋 How to Upload to Google Play Store:" >> $GITHUB_STEP_SUMMARY
+        echo "1. Download the **chord-dice-aab** artifact from this workflow" >> $GITHUB_STEP_SUMMARY
+        echo "2. Extract the AAB file" >> $GITHUB_STEP_SUMMARY
+        echo "3. Go to [Google Play Console](https://play.google.com/console/)" >> $GITHUB_STEP_SUMMARY
+        echo "4. Select Guitar Dice → Test and release → Internal testing" >> $GITHUB_STEP_SUMMARY
+        echo "5. Create new release and upload the AAB file" >> $GITHUB_STEP_SUMMARY
+        echo "6. Review and roll out to testers" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### 📊 Version Information:" >> $GITHUB_STEP_SUMMARY
+        echo "- **Tag**: ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
+        echo "- **Build**: #${{ github.run_number }}" >> $GITHUB_STEP_SUMMARY
