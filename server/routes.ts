@@ -907,42 +907,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   );
 
-  // Admin route to grant test user access (for internal testing only)
-  app.post('/api/admin/grant-test-access', async (req, res) => {
-    try {
-      const { username, expiryMonths = 12 } = req.body;
-      
-      if (!username) {
-        return res.status(400).json({ message: 'Username required' });
-      }
-
-      // Find user by username
-      const user = await storage.getUserByUsername(username);
-      if (!user) {
-        return res.status(404).json({ message: 'User not found' });
-      }
-
-      // Grant premium access (option 1: set as test user for complete bypass)
-      // Option 2: Grant subscription for specific duration
-      const expiryDate = new Date();
-      expiryDate.setMonth(expiryDate.getMonth() + expiryMonths);
-      
-      await storage.updateSubscriptionStatus(user.id, 'active', expiryDate);
-      
-      res.json({ 
-        message: `Premium access granted to ${username} until ${expiryDate.toISOString()}`,
-        user: {
-          username: user.username,
-          subscriptionStatus: 'active',
-          subscriptionExpiry: expiryDate
-        }
-      });
-    } catch (error) {
-      console.error('Error granting test access:', error);
-      res.status(500).json({ message: 'Failed to grant test access' });
-    }
-  });
-
   const httpServer = createServer(app);
   
   // Initialize Socket.IO
