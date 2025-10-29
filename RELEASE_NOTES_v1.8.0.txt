@@ -1,0 +1,50 @@
+Guitar Dice v1.8.0 - Release Notes
+
+🎸 NEW FEATURES:
+
+• Complete Beginner Guitar Curriculum - 15 comprehensive lessons from basic anatomy to chord progressions, perfect for guitarists starting their musical journey
+
+• Enhanced Learning Experience - New interactive fretboard diagrams and scale visualizations throughout the classroom section
+
+• Improved Mobile Experience - Optimized onboarding flow with better touch controls and responsive design for smaller screens
+
+• Premium Subscription - Full Stripe integration for seamless premium upgrades and subscription management
+
+
+🔧 IMPROVEMENTS:
+
+• Updated legal pages with comprehensive Terms of Service
+• Enhanced session management for better login persistence
+• Performance optimizations across the app
+• Bug fixes and stability improvements
+
+
+💎 PREMIUM FEATURES:
+
+• Unlimited chord progressions and exotic chord types
+• Compatible scales with visual fretboard diagrams
+• Advanced guitar exercises (8 categories, 4 skill levels)
+• Ad-free experience with unlimited tokens
+• Access to advanced music genres (Neo-Classical, Flamenco, Metal)
+
+
+📚 WHAT'S INCLUDED:
+
+Lesson 1: Guitar Anatomy & Parts
+Lesson 2: How to Hold Your Guitar
+Lesson 3: Tuning Your Guitar
+Lesson 4: Basic Finger Exercises
+Lesson 5: Reading Chord Diagrams
+Lesson 6: Your First Chord (Em)
+Lesson 7: Second Chord (Am)
+Lesson 8: Third Chord (C Major)
+Lesson 9: Basic Strumming Patterns
+Lesson 10: Switching Between Chords
+Lesson 11: Power Chords
+Lesson 12: Reading TAB
+Lesson 13: Basic Scales
+Lesson 14: Rhythm & Timing
+Lesson 15: Music Theory - Chord Progressions
+
+
+Thank you for being part of the Guitar Dice community! Keep practicing and creating amazing music! 🎵

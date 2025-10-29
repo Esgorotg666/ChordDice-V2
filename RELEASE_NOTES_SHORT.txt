@@ -1,0 +1,21 @@
+🎸 Guitar Dice v1.8.0
+
+NEW: Complete Beginner Guitar Curriculum
+• 15 comprehensive lessons from basics to chord progressions
+• Interactive fretboard diagrams and scale visualizations
+• Perfect for starting your guitar journey
+
+IMPROVEMENTS:
+• Enhanced mobile experience with optimized onboarding
+• Premium subscription via Stripe integration
+• Updated Terms of Service
+• Bug fixes and performance improvements
+
+PREMIUM FEATURES:
+• Unlimited chord progressions & exotic chords
+• Compatible scales with visual diagrams
+• 8 exercise categories, 4 skill levels
+• Ad-free experience
+• Advanced genres (Neo-Classical, Flamenco, Metal)
+
+Keep practicing and creating amazing music! 🎵
