@@ -63,7 +63,7 @@ Preferred communication style: Simple, everyday language.
 - **Enhanced Tapping**: Dedicated page with independent dual dice for two-hand tapping practice, visualized on dual fretboards with corrected color coding and finger number labels.
 - **Optional Premium Dice**: Time Signature Dice and Metronome BPM Dice.
 - **Advanced Genres**: Neo-Classical, Spanish Flamenco, Black Metal, Death Metal, Rock, Funk, with genre-specific progressions and music theory.
-- **Guitar Classroom**: Collapsible Accordion UI for Beginner, Intermediate, and Mastery levels, featuring 45 lessons with fretboard diagrams and scale integration.
+- **Guitar Classroom**: Skill-level organized interface with 6 tiers (Beginner, Novice, Intermediate, Advanced, Expert, Master), featuring 45 lessons with fretboard diagrams and scale integration. Each skill level section includes descriptive introductory text explaining the learning focus at that tier.
 
 ### Engagement Features
 - **Daily Practice Streak System**: Tracks consecutive days of dice rolls, offers milestone rewards (bonus tokens), and displays visual streak indicators.
@@ -75,7 +75,7 @@ Preferred communication style: Simple, everyday language.
 - **Onboarding Flow**: New users complete 3-step modal asking about playing style, music preferences, and skill level during first login.
 - **Settings Modal**: Accessible via gear icon, allows users to update their preferences anytime with form state hydration via useEffect.
 - **Global Background Theme**: BackgroundProvider context uses preferredGenre to apply genre-specific backgrounds (metal, rock, jazz, blues, funk, etc.) across the app. Note: preferredGenre IS the background preference - backgrounds are genre-based.
-- **Personalized Classroom**: "Recommended For You" section filters lessons by skill level mapping (entry→beginner, intermediate→beginner+intermediate, advanced→intermediate+advanced, master→advanced+mastery) and prioritizes lessons matching preferred genre via keyword matching.
+- **Personalized Classroom**: "Recommended For You" section filters lessons by skill level mapping (entry→beginner+novice, intermediate→beginner+novice+intermediate, advanced→intermediate+advanced+expert, master→advanced+expert+master) and prioritizes lessons matching preferred genre via keyword matching. Uses LessonWithSkillLevel interface with displayDifficulty field to map original lesson difficulties to the new 6-tier skill level system.
 
 # Android Deployment
 
