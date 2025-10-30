@@ -4,7 +4,7 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { Lock, ChevronRight, ChevronLeft, Crown, BookOpen, GraduationCap, Trophy, Music, Zap, Flame, Guitar as GuitarIcon, Home, Star, Sparkles } from 'lucide-react';
+import { Lock, ChevronRight, ChevronLeft, Crown, BookOpen, GraduationCap, Trophy, Music, Zap, Flame, Guitar as GuitarIcon, Home, Star, Sparkles, Target, TrendingUp, Award } from 'lucide-react';
 import { generalBeginnerLessons, rockLessons, metalLessons, bluesLessons, jazzLessons, funkLessons, Lesson } from '@/lib/comprehensive-lessons';
 import { useSubscription } from '@/hooks/useSubscription';
 import { useQuery } from '@tanstack/react-query';
@@ -13,7 +13,7 @@ import FretboardDisplay from '@/components/fretboard-display';
 import GearRecommendations from '@/components/gear-recommendations';
 
 export default function Classroom() {
-  const [selectedLesson, setSelectedLesson] = useState<Lesson | null>(null);
+  const [selectedLesson, setSelectedLesson] = useState<LessonWithSkillLevel | null>(null);
   const [currentSubsectionIndex, setCurrentSubsectionIndex] = useState(0);
   const [showUpgradeModal, setShowUpgradeModal] = useState(false);
   const { hasActiveSubscription } = useSubscription();
@@ -28,6 +28,62 @@ export default function Classroom() {
     queryKey: ["/api/preferences"],
     retry: false,
   });
+
+  // Skill level descriptions
+  const skillLevelDescriptions = {
+    beginner: 'Foundational stage. Focus on basic open chords (e.g., E minor, A minor, C major), simple strumming patterns, reading tablature or basic notation, and tuning the instrument. Goals include playing simple songs (e.g., folk tunes) without buzzing strings; theory is minimal (e.g., understanding frets and strings).',
+    novice: 'Early consolidation. Builds on basics with power chords, basic barre chords (e.g., F major), alternate picking, simple scales (e.g., minor pentatonic in one position), and fingerstyle patterns. Can play full songs with chord progressions; introduces music theory like key signatures and basic rhythm reading.',
+    intermediate: 'Expanding versatility. Incorporates full barre chord shapes across the fretboard, modes (e.g., Dorian, Mixolydian), arpeggios, hybrid picking, bending/vibrato techniques, and genre-specific styles (e.g., blues shuffle or basic fingerpicking). Repertoire includes intermediate pieces (e.g., "Stairway to Heaven" solo intro); theory covers chord construction, intervals, and transposition.',
+    advanced: 'Technical and musical refinement. Mastery of complex techniques like sweep picking, economy picking, tapping, advanced fingerstyle (e.g., Travis picking), modal interchange, and odd time signatures. Can improvise fluently over changes, arrange pieces, and perform in ensembles; deep theory knowledge (e.g., functional harmony, voice leading) enables composition.',
+    expert: 'Professional-level execution. Virtuosic command of all techniques, seamless genre blending (e.g., fusion, classical, jazz), recording/production skills, and pedagogical ability. Repertoire spans originals and standards at concert level; theory application is intuitive for real-time analysis and innovation.',
+    master: 'Pinnacle of artistry. Transcendent musicianship with innovative contributions (e.g., new techniques or influential albums), effortless adaptation to any context, and profound expressiveness. Icons like Andrés Segovia (classical), Jimi Hendrix (rock), or Paco de Lucía (flamenco) exemplify this; involves legacy-building through teaching, recording, or performance that shapes the instrument\'s evolution.'
+  };
+
+  // Extended lesson type with display difficulty
+  type LessonWithSkillLevel = Lesson & { displayDifficulty: string };
+
+  // Organize all lessons by skill level
+  const allLessons = useMemo(() => [
+    ...generalBeginnerLessons,
+    ...rockLessons,
+    ...metalLessons,
+    ...bluesLessons,
+    ...jazzLessons,
+    ...funkLessons,
+  ], []);
+
+  const beginnerLessons = useMemo(() => {
+    const lessons = allLessons.filter(l => l.difficulty === 'beginner').slice(0, 8);
+    return lessons.map(l => ({ ...l, displayDifficulty: 'beginner' } as LessonWithSkillLevel));
+  }, [allLessons]);
+
+  const noviceLessons = useMemo(() => {
+    const lessons = allLessons.filter(l => l.difficulty === 'beginner').slice(8);
+    return lessons.map(l => ({ ...l, displayDifficulty: 'novice' } as LessonWithSkillLevel));
+  }, [allLessons]);
+
+  const intermediateLessons = useMemo(() => {
+    const lessons = allLessons.filter(l => l.difficulty === 'intermediate');
+    return lessons.map(l => ({ ...l, displayDifficulty: 'intermediate' } as LessonWithSkillLevel));
+  }, [allLessons]);
+
+  const advancedLessons = useMemo(() => {
+    const masteryLessons = allLessons.filter(l => l.difficulty === 'mastery');
+    const lessons = masteryLessons.slice(0, Math.ceil(masteryLessons.length * 0.4));
+    return lessons.map(l => ({ ...l, displayDifficulty: 'advanced' } as LessonWithSkillLevel));
+  }, [allLessons]);
+
+  const expertLessons = useMemo(() => {
+    const masteryLessons = allLessons.filter(l => l.difficulty === 'mastery');
+    const lessons = masteryLessons.slice(Math.ceil(masteryLessons.length * 0.4), Math.ceil(masteryLessons.length * 0.7));
+    return lessons.map(l => ({ ...l, displayDifficulty: 'expert' } as LessonWithSkillLevel));
+  }, [allLessons]);
+
+  const masterLessons = useMemo(() => {
+    const masteryLessons = allLessons.filter(l => l.difficulty === 'mastery');
+    const lessons = masteryLessons.slice(Math.ceil(masteryLessons.length * 0.7));
+    return lessons.map(l => ({ ...l, displayDifficulty: 'master' } as LessonWithSkillLevel));
+  }, [allLessons]);
 
   // Map user skill level to lesson difficulties
   const getPreferredDifficulties = (skillLevel?: string): string[] => {
@@ -47,24 +103,43 @@ export default function Classroom() {
     }
   };
 
+  // Map user skill level to display skill levels
+  const getPreferredSkillLevels = (skillLevel?: string): string[] => {
+    if (!skillLevel) return ['beginner', 'novice', 'intermediate', 'advanced', 'expert', 'master'];
+    
+    switch (skillLevel) {
+      case 'entry':
+        return ['beginner', 'novice'];
+      case 'intermediate':
+        return ['beginner', 'novice', 'intermediate'];
+      case 'advanced':
+        return ['intermediate', 'advanced', 'expert'];
+      case 'master':
+        return ['advanced', 'expert', 'master'];
+      default:
+        return ['beginner', 'novice', 'intermediate', 'advanced', 'expert', 'master'];
+    }
+  };
+
   // Get recommended lessons based on user preferences
   const recommendedLessons = useMemo(() => {
     if (!preferences) return [];
 
-    const allLessons = [
-      ...generalBeginnerLessons,
-      ...rockLessons,
-      ...metalLessons,
-      ...bluesLessons,
-      ...jazzLessons,
-      ...funkLessons,
+    // Combine all skill-level lessons with their displayDifficulty
+    const allSkillLevelLessons: LessonWithSkillLevel[] = [
+      ...beginnerLessons,
+      ...noviceLessons,
+      ...intermediateLessons,
+      ...advancedLessons,
+      ...expertLessons,
+      ...masterLessons,
     ];
 
-    const preferredDifficulties = getPreferredDifficulties(preferences.skillLevel);
+    const preferredSkillLevels = getPreferredSkillLevels(preferences.skillLevel);
     
-    // Filter lessons by skill level and optionally by genre
-    let filtered = allLessons.filter(lesson => 
-      preferredDifficulties.includes(lesson.difficulty)
+    // Filter lessons by skill level using displayDifficulty
+    let filtered = allSkillLevelLessons.filter(lesson => 
+      preferredSkillLevels.includes(lesson.displayDifficulty)
     );
 
     // Prioritize lessons matching preferred genre
@@ -112,7 +187,7 @@ export default function Classroom() {
     return filtered.slice(0, 6);
   }, [preferences]);
 
-  const handleLessonClick = (lesson: Lesson, isFree: boolean) => {
+  const handleLessonClick = (lesson: LessonWithSkillLevel, isFree: boolean) => {
     // First 2 lessons in each category are free
     if (!isFree && !hasActiveSubscription) {
       setShowUpgradeModal(true);
@@ -143,11 +218,17 @@ export default function Classroom() {
     switch (difficulty) {
       case 'beginner':
         return <BookOpen className="h-4 w-4" />;
+      case 'novice':
+        return <Target className="h-4 w-4" />;
       case 'intermediate':
         return <GraduationCap className="h-4 w-4" />;
       case 'advanced':
-      case 'mastery':
         return <Trophy className="h-4 w-4" />;
+      case 'expert':
+        return <TrendingUp className="h-4 w-4" />;
+      case 'master':
+      case 'mastery':
+        return <Award className="h-4 w-4" />;
       default:
         return <BookOpen className="h-4 w-4" />;
     }
@@ -157,11 +238,17 @@ export default function Classroom() {
     switch (difficulty) {
       case 'beginner':
         return 'bg-green-500/10 text-green-500 border-green-500/20';
+      case 'novice':
+        return 'bg-blue-500/10 text-blue-500 border-blue-500/20';
       case 'intermediate':
         return 'bg-yellow-500/10 text-yellow-500 border-yellow-500/20';
       case 'advanced':
-      case 'mastery':
+        return 'bg-orange-500/10 text-orange-500 border-orange-500/20';
+      case 'expert':
         return 'bg-red-500/10 text-red-500 border-red-500/20';
+      case 'master':
+      case 'mastery':
+        return 'bg-purple-500/10 text-purple-500 border-purple-500/20';
       default:
         return 'bg-gray-500/10 text-gray-500 border-gray-500/20';
     }
@@ -205,11 +292,12 @@ export default function Classroom() {
     }
   };
 
-  const renderLessonCards = (lessons: Lesson[]) => {
+  const renderLessonCards = (lessons: LessonWithSkillLevel[]) => {
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {lessons.map((lesson, index) => {
           const isFree = index <= 1; // First 2 lessons are free
+          const displayLevel = lesson.displayDifficulty || lesson.difficulty;
           return (
             <Card
               key={lesson.id}
@@ -220,9 +308,9 @@ export default function Classroom() {
               data-testid={`card-lesson-${lesson.id}`}
             >
               <div className="flex items-start justify-between mb-3">
-                <Badge className={getDifficultyColor(lesson.difficulty)}>
-                  {getDifficultyIcon(lesson.difficulty)}
-                  <span className="ml-1 capitalize">{lesson.difficulty}</span>
+                <Badge className={getDifficultyColor(displayLevel)}>
+                  {getDifficultyIcon(displayLevel)}
+                  <span className="ml-1 capitalize">{displayLevel}</span>
                 </Badge>
                 {!isFree && !hasActiveSubscription && (
                   <Lock className="h-4 w-4 text-muted-foreground" data-testid={`icon-locked-${lesson.id}`} />
@@ -256,6 +344,7 @@ export default function Classroom() {
   if (selectedLesson) {
     const currentSubsection = selectedLesson.subsections[currentSubsectionIndex];
     const isLastSubsection = currentSubsectionIndex === selectedLesson.subsections.length - 1;
+    const displayLevel = selectedLesson.displayDifficulty || selectedLesson.difficulty;
 
     return (
       <div className="min-h-screen bg-background p-4 md:p-8">
@@ -276,9 +365,9 @@ export default function Classroom() {
           <Card className="p-6 bg-card border-border">
             <div className="mb-6">
               <div className="flex items-center gap-2 mb-2">
-                <Badge className={getDifficultyColor(selectedLesson.difficulty)}>
-                  {getDifficultyIcon(selectedLesson.difficulty)}
-                  <span className="ml-1 capitalize">{selectedLesson.difficulty}</span>
+                <Badge className={getDifficultyColor(displayLevel)}>
+                  {getDifficultyIcon(displayLevel)}
+                  <span className="ml-1 capitalize">{displayLevel}</span>
                 </Badge>
               </div>
               <h1 className="text-2xl md:text-3xl font-bold mb-2">{selectedLesson.title}</h1>
@@ -425,7 +514,7 @@ export default function Classroom() {
         <div className="mb-8">
           <h1 className="text-3xl md:text-4xl font-bold mb-3">Guitar Classroom</h1>
           <p className="text-muted-foreground">
-            Master guitar techniques organized by genre. First lesson in each category is free!
+            Progressive guitar lessons organized by skill level. First 2 lessons in each level are free!
           </p>
         </div>
 
@@ -443,6 +532,7 @@ export default function Classroom() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {recommendedLessons.map((lesson, index) => {
                 const isFree = index === 0; // Only first recommended lesson is guaranteed free
+                const displayLevel = lesson.displayDifficulty || lesson.difficulty;
                 return (
                   <Card
                     key={lesson.id}
@@ -453,9 +543,9 @@ export default function Classroom() {
                     data-testid={`card-recommended-${lesson.id}`}
                   >
                     <div className="flex items-start justify-between mb-3">
-                      <Badge className={getDifficultyColor(lesson.difficulty)}>
-                        {getDifficultyIcon(lesson.difficulty)}
-                        <span className="ml-1 capitalize">{lesson.difficulty}</span>
+                      <Badge className={getDifficultyColor(displayLevel)}>
+                        {getDifficultyIcon(displayLevel)}
+                        <span className="ml-1 capitalize">{displayLevel}</span>
                       </Badge>
                       {!isFree && !hasActiveSubscription && (
                         <Lock className="h-4 w-4 text-muted-foreground" />
@@ -486,95 +576,119 @@ export default function Classroom() {
           </div>
         )}
 
-        {/* Genre-based collapsible sections */}
-        <Accordion type="multiple" defaultValue={['general', 'rock', 'metal', 'blues', 'jazz', 'funk']} className="space-y-4">
-          <AccordionItem value="general" className="border border-border rounded-lg px-6 bg-card/50">
-            <AccordionTrigger className="hover:no-underline" data-testid="accordion-general">
+        {/* Skill-level based collapsible sections */}
+        <Accordion type="multiple" defaultValue={['beginner', 'novice', 'intermediate', 'advanced', 'expert', 'master']} className="space-y-4">
+          {/* Beginner Level */}
+          <AccordionItem value="beginner" className="border border-border rounded-lg px-6 bg-card/50">
+            <AccordionTrigger className="hover:no-underline" data-testid="accordion-beginner">
               <div className="flex items-center gap-3">
-                {getGenreIcon('general')}
+                <BookOpen className="h-5 w-5 text-green-500" />
                 <div className="text-left">
-                  <h2 className="text-xl font-bold">Beginner Basics</h2>
-                  <p className="text-sm text-muted-foreground">{generalBeginnerLessons.length} lessons - {getGenreDescription('general')}</p>
+                  <h2 className="text-xl font-bold">1. Beginner</h2>
+                  <p className="text-sm text-muted-foreground">{beginnerLessons.length} lessons</p>
                 </div>
               </div>
             </AccordionTrigger>
             <AccordionContent className="pt-4 pb-6">
-              {renderLessonCards(generalBeginnerLessons)}
+              <div className="mb-4 p-4 bg-muted/30 rounded-lg border border-muted">
+                <p className="text-sm text-muted-foreground leading-relaxed">{skillLevelDescriptions.beginner}</p>
+              </div>
+              {renderLessonCards(beginnerLessons.slice(0, 8))}
             </AccordionContent>
           </AccordionItem>
 
-          <AccordionItem value="rock" className="border border-border rounded-lg px-6 bg-card/50">
-            <AccordionTrigger className="hover:no-underline" data-testid="accordion-rock">
+          {/* Novice Level */}
+          <AccordionItem value="novice" className="border border-border rounded-lg px-6 bg-card/50">
+            <AccordionTrigger className="hover:no-underline" data-testid="accordion-novice">
               <div className="flex items-center gap-3">
-                {getGenreIcon('rock')}
+                <Target className="h-5 w-5 text-blue-500" />
                 <div className="text-left">
-                  <h2 className="text-xl font-bold">Rock</h2>
-                  <p className="text-sm text-muted-foreground">{rockLessons.length} lessons - {getGenreDescription('rock')}</p>
+                  <h2 className="text-xl font-bold">2. Novice</h2>
+                  <p className="text-sm text-muted-foreground">{noviceLessons.length} lessons</p>
                 </div>
               </div>
             </AccordionTrigger>
             <AccordionContent className="pt-4 pb-6">
-              {renderLessonCards(rockLessons)}
+              <div className="mb-4 p-4 bg-muted/30 rounded-lg border border-muted">
+                <p className="text-sm text-muted-foreground leading-relaxed">{skillLevelDescriptions.novice}</p>
+              </div>
+              {renderLessonCards(noviceLessons)}
             </AccordionContent>
           </AccordionItem>
 
-          <AccordionItem value="metal" className="border border-border rounded-lg px-6 bg-card/50">
-            <AccordionTrigger className="hover:no-underline" data-testid="accordion-metal">
+          {/* Intermediate Level */}
+          <AccordionItem value="intermediate" className="border border-border rounded-lg px-6 bg-card/50">
+            <AccordionTrigger className="hover:no-underline" data-testid="accordion-intermediate">
               <div className="flex items-center gap-3">
-                {getGenreIcon('metal')}
+                <GraduationCap className="h-5 w-5 text-yellow-500" />
                 <div className="text-left">
-                  <h2 className="text-xl font-bold">Metal</h2>
-                  <p className="text-sm text-muted-foreground">{metalLessons.length} lessons - {getGenreDescription('metal')}</p>
+                  <h2 className="text-xl font-bold">3. Intermediate</h2>
+                  <p className="text-sm text-muted-foreground">{intermediateLessons.length} lessons</p>
                 </div>
               </div>
             </AccordionTrigger>
             <AccordionContent className="pt-4 pb-6">
-              {renderLessonCards(metalLessons)}
+              <div className="mb-4 p-4 bg-muted/30 rounded-lg border border-muted">
+                <p className="text-sm text-muted-foreground leading-relaxed">{skillLevelDescriptions.intermediate}</p>
+              </div>
+              {renderLessonCards(intermediateLessons)}
             </AccordionContent>
           </AccordionItem>
 
-          <AccordionItem value="blues" className="border border-border rounded-lg px-6 bg-card/50">
-            <AccordionTrigger className="hover:no-underline" data-testid="accordion-blues">
+          {/* Advanced Level */}
+          <AccordionItem value="advanced" className="border border-border rounded-lg px-6 bg-card/50">
+            <AccordionTrigger className="hover:no-underline" data-testid="accordion-advanced">
               <div className="flex items-center gap-3">
-                {getGenreIcon('blues')}
+                <Trophy className="h-5 w-5 text-orange-500" />
                 <div className="text-left">
-                  <h2 className="text-xl font-bold">Blues</h2>
-                  <p className="text-sm text-muted-foreground">{bluesLessons.length} lessons - {getGenreDescription('blues')}</p>
+                  <h2 className="text-xl font-bold">4. Advanced</h2>
+                  <p className="text-sm text-muted-foreground">{advancedLessons.length} lessons</p>
                 </div>
               </div>
             </AccordionTrigger>
             <AccordionContent className="pt-4 pb-6">
-              {renderLessonCards(bluesLessons)}
+              <div className="mb-4 p-4 bg-muted/30 rounded-lg border border-muted">
+                <p className="text-sm text-muted-foreground leading-relaxed">{skillLevelDescriptions.advanced}</p>
+              </div>
+              {renderLessonCards(advancedLessons)}
             </AccordionContent>
           </AccordionItem>
 
-          <AccordionItem value="jazz" className="border border-border rounded-lg px-6 bg-card/50">
-            <AccordionTrigger className="hover:no-underline" data-testid="accordion-jazz">
+          {/* Expert Level */}
+          <AccordionItem value="expert" className="border border-border rounded-lg px-6 bg-card/50">
+            <AccordionTrigger className="hover:no-underline" data-testid="accordion-expert">
               <div className="flex items-center gap-3">
-                {getGenreIcon('jazz')}
+                <TrendingUp className="h-5 w-5 text-red-500" />
                 <div className="text-left">
-                  <h2 className="text-xl font-bold">Jazz</h2>
-                  <p className="text-sm text-muted-foreground">{jazzLessons.length} lessons - {getGenreDescription('jazz')}</p>
+                  <h2 className="text-xl font-bold">5. Expert</h2>
+                  <p className="text-sm text-muted-foreground">{expertLessons.length} lessons</p>
                 </div>
               </div>
             </AccordionTrigger>
             <AccordionContent className="pt-4 pb-6">
-              {renderLessonCards(jazzLessons)}
+              <div className="mb-4 p-4 bg-muted/30 rounded-lg border border-muted">
+                <p className="text-sm text-muted-foreground leading-relaxed">{skillLevelDescriptions.expert}</p>
+              </div>
+              {renderLessonCards(expertLessons)}
             </AccordionContent>
           </AccordionItem>
 
-          <AccordionItem value="funk" className="border border-border rounded-lg px-6 bg-card/50">
-            <AccordionTrigger className="hover:no-underline" data-testid="accordion-funk">
+          {/* Master Level */}
+          <AccordionItem value="master" className="border border-border rounded-lg px-6 bg-card/50">
+            <AccordionTrigger className="hover:no-underline" data-testid="accordion-master">
               <div className="flex items-center gap-3">
-                {getGenreIcon('funk')}
+                <Award className="h-5 w-5 text-purple-500" />
                 <div className="text-left">
-                  <h2 className="text-xl font-bold">Funk</h2>
-                  <p className="text-sm text-muted-foreground">{funkLessons.length} lessons - {getGenreDescription('funk')}</p>
+                  <h2 className="text-xl font-bold">6. Master</h2>
+                  <p className="text-sm text-muted-foreground">{masterLessons.length} lessons</p>
                 </div>
               </div>
             </AccordionTrigger>
             <AccordionContent className="pt-4 pb-6">
-              {renderLessonCards(funkLessons)}
+              <div className="mb-4 p-4 bg-muted/30 rounded-lg border border-muted">
+                <p className="text-sm text-muted-foreground leading-relaxed">{skillLevelDescriptions.master}</p>
+              </div>
+              {renderLessonCards(masterLessons)}
             </AccordionContent>
           </AccordionItem>
         </Accordion>
