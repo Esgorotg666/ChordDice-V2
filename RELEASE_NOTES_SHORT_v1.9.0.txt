@@ -1,0 +1,23 @@
+🎸 Guitar Dice v1.9.0
+
+NEW: Enhanced Guitar Classroom Structure
+• 6 progressive skill levels: Beginner → Novice → Intermediate → Advanced → Expert → Master
+• Each level includes descriptive introduction and curated lessons
+• Smarter "Recommended For You" section based on your skill level
+• Clear learning progression from fundamentals to mastery
+
+IMPROVEMENTS:
+• Better lesson organization for easier navigation
+• Enhanced skill level mapping for personalized recommendations
+• Improved badge system with level-specific colors and icons
+• Optimized learning experience
+
+PREMIUM FEATURES:
+• Unlimited chord progressions & exotic chords
+• Compatible scales with visual diagrams
+• 8 exercise categories, 4 skill levels
+• 45 comprehensive lessons across 6 skill tiers
+• Ad-free experience
+• Advanced genres (Neo-Classical, Flamenco, Metal)
+
+Keep practicing and creating amazing music! 🎵🔥

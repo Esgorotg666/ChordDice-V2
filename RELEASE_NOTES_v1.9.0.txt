@@ -1,0 +1,92 @@
+🎸 Guitar Dice v1.9.0 - Enhanced Guitar Classroom
+
+═══════════════════════════════════════════════════════════════
+
+📚 MAJOR FEATURE: Restructured Guitar Classroom
+
+• Complete reorganization into 6 progressive skill levels:
+  - Beginner: Foundational techniques and basic theory
+  - Novice: Building confidence and consistency
+  - Intermediate: Expanding musical vocabulary
+  - Advanced: Refining technique and musicality
+  - Expert: Professional-level mastery
+  - Master: Artistic expression and innovation
+
+• Each skill level now includes:
+  - Descriptive introduction explaining the learning focus
+  - Curated lessons appropriate for that tier
+  - Progressive difficulty scaling
+  - Interactive fretboard diagrams
+
+• Enhanced "Recommended For You" section:
+  - Smarter filtering based on your skill level
+  - Genre-based lesson prioritization
+  - Personalized learning path
+
+═══════════════════════════════════════════════════════════════
+
+✨ IMPROVEMENTS:
+
+• Better lesson organization for clearer learning progression
+• Improved skill level mapping for personalized recommendations
+• Enhanced badge system with level-specific colors and icons
+• Premium feature gating preserved (first 2 lessons free per category)
+
+═══════════════════════════════════════════════════════════════
+
+🎵 What's Already Included (from previous versions):
+
+AUTHENTICATION:
+• Custom username/password authentication
+• Email verification system
+• Secure password reset functionality
+
+PERSONALIZATION:
+• User preference system (playing style, genre, skill level)
+• Dynamic genre-based backgrounds
+• Personalized onboarding experience
+• Customizable settings via gear icon
+
+CORE FEATURES:
+• Virtual dice-based chord progression generator
+• 12x11 interactive chord chart
+• Single chord and 4-chord riff generation
+• Genre-specific progressions (Metal, Rock, Jazz, Funk, Classical)
+• Accurate fretboard diagrams with 24-fret display
+
+PREMIUM FEATURES ($4.99/month):
+• Unlimited chord progressions & exotic chords
+• Compatible scales with visual diagrams
+• 8 exercise categories, 4 skill levels
+• Enhanced tapping page with dual fretboards
+• Advanced genres (Neo-Classical, Flamenco, Black/Death Metal)
+• Ad-free experience
+• Now with 6-tier Guitar Classroom structure!
+
+FREEMIUM MODEL:
+• 5 free riff generations for free users
+• Ad-supported token earning (watch ads for bonus rolls)
+• Referral program (earn free Premium months)
+• Daily practice streak system with rewards
+
+═══════════════════════════════════════════════════════════════
+
+🔧 TECHNICAL DETAILS:
+
+• LessonWithSkillLevel type system for accurate skill mapping
+• displayDifficulty field ensures correct badge display
+• Recommendation engine uses skill-level filtering
+• Preserved premium feature logic and free lesson access
+
+═══════════════════════════════════════════════════════════════
+
+🎯 WHAT'S NEXT:
+
+This release focuses on improving the educational experience with
+a clear, progressive learning path. Future updates will continue
+to enhance the learning journey with more lessons, exercises, and
+interactive features.
+
+Keep practicing and creating amazing music! 🎵🔥
+
+═══════════════════════════════════════════════════════════════
