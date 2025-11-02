@@ -91,9 +91,16 @@ jobs:
         ls -la android/app/build.gradle || echo "build.gradle not found"
       
     - name: Setup keystore for signing
-      if: ${{ (github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')) || (github.event_name == 'workflow_dispatch' && github.event.inputs.deploy_to_play_store == 'true') }}
       run: |
         echo "Creating and validating keystore..."
+        
+        # Check if KEYSTORE_BASE64 secret is set
+        if [ -z "${{ secrets.KEYSTORE_BASE64 }}" ]; then
+          echo "❌ ERROR: KEYSTORE_BASE64 secret is not set in GitHub!"
+          echo "Please add all required secrets to GitHub repository settings."
+          exit 1
+        fi
+        
         echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > android/app/keystore.jks
         
         # Check file was created and has content
@@ -109,16 +116,14 @@ jobs:
         fi
         
         # Validate keystore with keytool
-        keytool -list -v -keystore android/app/keystore.jks \
+        if ! keytool -list -v -keystore android/app/keystore.jks \
           -storepass "${{ secrets.KEYSTORE_PASSWORD }}" \
-          -alias "${{ secrets.KEY_ALIAS }}" 2>&1 | head -20
-        
-        if [ $? -eq 0 ]; then
-          echo "✅ Keystore validated successfully ($SIZE bytes)"
-        else
+          -alias "${{ secrets.KEY_ALIAS }}" 2>&1 | head -20; then
           echo "❌ Keystore validation failed - check your secrets"
           exit 1
         fi
+        
+        echo "✅ Keystore validated successfully ($SIZE bytes)"
         
     - name: Build Android APK
       env:
@@ -149,11 +154,21 @@ jobs:
         if [ -f android/app/build/outputs/apk/release/app-release.apk ]; then
           echo "✅ APK built successfully"
           # Use build-tools apksigner
-          $ANDROID_HOME/build-tools/35.0.0/apksigner verify android/app/build/outputs/apk/release/app-release.apk && echo "✅ APK is properly signed" || echo "⚠️ Could not verify APK signature"
+          if ! $ANDROID_HOME/build-tools/35.0.0/apksigner verify android/app/build/outputs/apk/release/app-release.apk; then
+            echo "❌ ERROR: APK is NOT properly signed!"
+            exit 1
+          fi
+          echo "✅ APK is properly signed"
         fi
         if [ -f android/app/build/outputs/bundle/release/app-release.aab ]; then
           echo "✅ AAB built successfully"
-          jarsigner -verify android/app/build/outputs/bundle/release/app-release.aab && echo "✅ AAB is properly signed" || echo "⚠️ Could not verify AAB signature"
+          if ! jarsigner -verify android/app/build/outputs/bundle/release/app-release.aab; then
+            echo "❌ ERROR: AAB is NOT properly signed!"
+            echo "This means the keystore setup failed or signing was skipped."
+            echo "Check that all secrets are set correctly in GitHub."
+            exit 1
+          fi
+          echo "✅ AAB is properly signed"
         fi
         
     - name: Upload APK
@@ -174,7 +189,7 @@ jobs:
         
     - name: Create Release Info
       run: |
-        echo "## 📱 Guitar Dice v1.8.0 - Android Release" >> $GITHUB_STEP_SUMMARY
+        echo "## 📱 Guitar Dice v1.9.0 - Android Release" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
         echo "### ✅ Build Successful!" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
