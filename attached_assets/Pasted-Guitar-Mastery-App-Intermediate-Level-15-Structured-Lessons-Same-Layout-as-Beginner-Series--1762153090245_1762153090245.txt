@@ -1,0 +1,381 @@
+Guitar Mastery App – Intermediate Level
+(15 Structured Lessons – Same Layout as Beginner Series)
+
+---
+
+Lesson 1: Intermediate Barre Chords – Full Shapes & Root Notes
+Objective: Master movable barre chords using E- and A-based shapes across the fretboard.
+Key Concepts:
+- E-based barre (roots on 6th string): F, F♯, G, etc.
+- A-based barre (roots on 5th string): B♭, B, C, etc.
+- Proper thumb position & wrist alignment to reduce fatigue.
+
+Practice Exercises:
+1. F Barre Chord Drill – Strum F (1st fret) 4x down, lift, repeat 10x.
+2. Chromatic Barre Shift – F → F♯ → G → G♯ (E-shape) at 1-2-3-4 frets, 1 strum each.
+3. A-Based Cycle – B♭ → B → C → C♯ (5th-string root) at 1-2-3-4 frets.
+
+Song Application: “Wonderwall” (Oasis) – Em7 → G → Dsus4 → A7sus4 with partial barre transitions.
+
+Homework: Record clean F and B♭ barre chords (no buzz) at 60 BPM.
+
+---
+
+Lesson 2: Power Chords & Palm Muting
+Objective: Build rock rhythm foundation with 5th chords and controlled muting.
+Key Concepts:
+- Two-note power chords (root + 5th, optional octave).
+- Palm mute technique: rest edge of picking hand on bridge.
+- Dynamic control: muted vs. open strums.
+
+Practice Exercises:
+1. Root 6 Power Chord Shapes – E5 (022xxx), F5 (133xxx), G5 (355xxx) – 4x downstroke each.
+2. Palm Mute Riff –
+E|------------------------|
+B|------------------------|
+G|------------------------|
+D|------0-0-3-3-5-5-3-3---|
+A|------0-0-3-3-5-5-3-3---|
+E|------0-0-3-3-5-5-3-3---|
+   PM...................
+   Play at 80 BPM, 8 reps.
+3. Accent Drill – Alternate muted 8th notes with accented open chords.
+
+Song Application: “Sweet Child O’ Mine” intro riff (D5-C5-G5).
+
+Homework: 2-minute loop of palm-muted E5 riff at 100 BPM.
+
+---
+
+Lesson 3: Pentatonic Scale Position 2 & Connecting Shapes
+Objective: Expand lead vocabulary with A minor pentatonic Position 2 and shape linking.
+Key Concepts:
+- Position 2: root on 5th string (A at 12th fret).
+- Two-notes-per-string patterns for fluid phrasing.
+- Connecting Position 1 → 2 using slides.
+
+Practice Exercises:
+1. Position 2 Ascending/Descending –
+E|----------------------12-15-|
+B|-----------------13-15------|
+G|-------------12-14----------|
+D|--------12-14---------------|
+A|---12-15--------------------|
+E|-15-------------------------|
+   4x at 60 BPM triplets.
+2. Shape Link Drill – Position 1 (5th fret) → slide to Position 2 (8th fret).
+3. Call & Response – Play 4-note phrase in Pos 1, answer in Pos 2.
+
+Song Application: Improv over “Back in Black” jam track (E minor).
+
+Homework: Memorize Position 2 pattern; record 30-sec solo linking both positions.
+
+---
+
+Lesson 4: Intermediate Fingerstyle – Travis Picking Basics
+Objective: Introduce thumb-independence pattern for folk/acoustic styles.
+Key Concepts:
+- Travis picking: alternating bass (thumb) + syncopated melody (fingers).
+- Standard pattern: Thumb (6-5-4-5) + pinch i/m on beats 2 & 4.
+
+Practice Exercises:
+1. Bass Line Drill – Thumb only:
+E|----------0-----------0----|
+B|-------1-----------1-------|
+G|-----2-----------2---------|
+D|---2-----------2-----------|
+A|-0-----------0-------------|
+E|---------------------------|
+   Repeat in G, C, D.
+2. Pinch Pattern – Add index on G string, middle on B string:
+Beat: 1  +  2  +  3  +  4  +
+Thumb: 6  5  –  5  4  –  5  –
+Fingers: –  –  i  –  –  m  –  –
+3. Full Pattern in C – 4 measures, 80 BPM.
+
+Song Application: “Dust in the Wind” intro (simplified Travis).
+
+Homework: Play 1-minute Travis pattern in G → Em → C → D.
+
+---
+
+Lesson 5: 7th Chords & Dominant Function
+Objective: Add color with maj7, min7, dom7 chords; understand V7→I resolution.
+Key Concepts:
+- Chord formulas:
+  - Maj7: 1-3-5-7
+  - Min7: 1-♭3-5-♭7
+  - Dom7: 1-3-5-♭7
+- Voice leading: common tones & smooth transitions.
+
+Practice Exercises:
+1. Open 7th Voicings –
+   - G7 (320001)
+   - Cm7 (x35343)
+   - Fmaj7 (xx3210)
+2. ii-V-I in G – Am7 → D7 → Gmaj7 (4 beats each, 70 BPM).
+3. Turnaround – | Gmaj7 | Em7 | Am7 | D7 |
+
+Song Application: “Autumn Leaves” – Cm7 → F7 → B♭maj7 → E♭maj7.
+
+Homework: Transpose ii-V-I to keys of C and D; record clean changes.
+
+---
+
+Lesson 6: Hammer-Ons, Pull-Offs & Trills
+Objective: Develop legato technique for fluid lead lines.
+Key Concepts:
+- Hammer-on: strike string with fretting finger.
+- Pull-off: pluck string while lifting finger.
+- Trill: rapid hammer/pull between two notes.
+
+Practice Exercises:
+1. Single-String Legato –
+E|----------------5h8p5---------------|
+B|------------5h8-------8p5-----------|
+G|--------5h7---------------7p5-------|
+D|----5h7-----------------------7p5---|
+A|5h7-------------------------------7-|
+   4x at 80 BPM.
+2. Pentatonic Trill Drill – Trill between notes 1 beat each (12th & 15th fret).
+3. Cross-String Legato –
+E|--------12h15p12---------|
+B|----13------------13-----|
+G|-14------------------14--|
+
+Song Application: “Stairway to Heaven” solo phrase (legato triplets).
+
+Homework: 1-minute legato phrase over Am backing track.
+
+---
+
+Lesson 7: Intermediate Blues Rhythm – Shuffle & 9th Chords
+Objective: Master shuffle feel and dominant 9th voicings.
+Key Concepts:
+- Shuffle: triplet feel (long-short-long-short).
+- Dom9 chord: 1-3-5-♭7-9 (e.g., E9: 07677x).
+
+Practice Exercises:
+1. Shuffle Strum –
+| 1 + a 2 + a 3 + a 4 + a |
+| d   u   d   u   d   u   |
+   Accent beats 2 & 4.
+2. 12-Bar Blues in A with 9ths –
+   | A9 | D9 | A9 | A9 |
+   | D9 | D9 | A9 | A9 |
+   | E9 | D9 | A9 | E9 |
+3. Turnaround Lick –
+E|-------------------------|
+B|-------------------------|
+G|-------------------------|
+D|-------5-7-5-------------|
+A|-5-6-7-------7-5---------|
+E|-----------------7-5-----|
+
+Song Application: “The Thrill Is Gone” (B.B. King).
+
+Homework: Record 12-bar blues with shuffle and 9th chords at 90 BPM.
+
+---
+
+Lesson 8: Modes Intro – Dorian & Mixolydian
+Objective: Understand and apply Dorian (minor) and Mixolydian (dominant) modes.
+Key Concepts:
+- Dorian: 1-2-♭3-4-5-6-♭7 (e.g., D Dorian over Cmaj7).
+- Mixolydian: 1-2-3-4-5-6-♭7 (e.g., G Mixo over G7).
+
+Practice Exercises:
+1. D Dorian Scale (root on 10th fret, A string):
+E|---------------------10-12-|
+B|---------------10-12-------|
+G|----------9-10-------------|
+D|----9-10-12----------------|
+A|-12------------------------|
+2. Mode Phrase – Over Am7 → D7:
+   - Am7: play D Dorian phrase.
+   - D7: switch to D Mixolydian (same notes, different root).
+3. Drone Jam – Improvise over static Am7 chord using Dorian.
+
+Song Application: “Oye Como Va” (Santana) – Am7-D7 (Dorian/Mixolydian).
+
+Homework: Write 8-bar solo alternating Dorian/Mixolydian.
+
+---
+
+Lesson 9: Alternate Picking Accuracy – Speed Bursts
+Objective: Increase picking precision and speed with economy of motion.
+Key Concepts:
+- Strict alternate picking (down-up-down-up).
+- Inside/outside picking for string changes.
+- Metronome bursts: 4 notes at target speed, rest, repeat.
+
+Practice Exercises:
+1. Single String Burst –
+E|--------------------------------|
+B|--------------------------------|
+G|-9-10-9-10-9-10-9-10-9-10-9-10--|
+D|--------------------------------|
+   4-note bursts at 120 → 140 → 160 BPM.
+2. String Crossing –
+E|-------12-------|-------10-------|
+B|----13-------13-|----12-------12-|
+G|-14-------14----|-12-------12----|
+   Down-up strict.
+3. Spider Exercise – 3-5-7-9 across strings.
+
+Song Application: “Master of Puppets” gallop riff (clean alternate picking).
+
+Homework: 2-minute alternate picking loop at 140 BPM.
+
+---
+
+Lesson 10: Intermediate Strumming – 16th Note Patterns
+Objective: Master syncopated 16th-note strums with ghost notes.
+Key Concepts:
+- 16th grid: 1 e + a 2 e + a etc.
+- Ghost strum: light upstroke, barely touching strings.
+
+Practice Exercises:
+1. Pattern 1 –
+1 e + a 2 e + a 3 e + a 4 e + a
+D     D   U   D U   U   D U
+   In Em at 90 BPM.
+2. Pattern 2 (Reggae-Inspired) –
+1 e + a 2 e + a
+  U   U     U   U
+   Upstrokes only on off-beats.
+3. Dynamic Layering – Add palm mute on downbeats.
+
+Song Application: “Santeria” (Sublime) – 16th-note upbeat strums.
+
+Homework: Record 1-minute strumming loop with 2 patterns.
+
+---
+
+Lesson 11: Hybrid Picking Basics
+Objective: Combine pick and fingers for chicken-pickin’ and arpeggios.
+Key Concepts:
+- Pick: downstrokes on lower strings.
+- Middle/ring fingers: pluck higher strings.
+
+Practice Exercises:
+1. Scale Exercise –
+E|-----------------------------------|
+B|-----------------------------------|
+G|-------7-----9---------------------|
+D|-----7-----9-----------------------|
+A|---7-----9-------------------------|
+E|-7---------------------------------|
+   p m p m p (p = pick, m = middle)
+2. Country Lick –
+E|-----------------------------------|
+B|-------12-15p12--------------------|
+G|-14b16----------14-12--------------|
+D|----------------------14-----------|
+A|-----------------------------------|
+E|-----------------------------------|
+   (pick + middle finger snap on 15)
+3. Arpeggio Pattern – Cmaj7 (pick bass, fingers treble).
+
+Song Application: “Tennessee Whiskey” hybrid intro.
+
+Homework: 1-minute hybrid picking phrase over G major.
+
+---
+
+Lesson 12: Chord Melody Basics
+Objective: Play melody and harmony simultaneously.
+Key Concepts:
+- Melody on top two strings.
+- Harmony: root or 3rd in bass, inner chord tones.
+
+Practice Exercises:
+1. “Twinkle Twinkle” in G –
+E|-3---2---0---------------0-------|
+B|-------------3-------0-3---3-0---|
+G|---------------0---0-------------|
+D|-----------------0---------------|
+A|---------------------------------|
+E|-3---------------3---------------|
+2. Shell Voicings – Root + 7th + 3rd (e.g., G7: 3x34xx).
+3. “Autumn Leaves” Phrase – Melody with inner chord hits.
+
+Song Application: “Misty” – first 8 bars in chord melody.
+
+Homework: Arrange 4-bar nursery rhyme in chord melody.
+
+---
+
+Lesson 13: Bends, Vibrato & Expressive Techniques
+Objective: Master pitch control and emotional phrasing.
+Key Concepts:
+- Bend types: half-step, whole-step, 1.5-step.
+- Vibrato: wrist/forearm, narrow vs. wide.
+- Pre-bends, release bends, unison bends.
+
+Practice Exercises:
+1. Whole-Step Bend Drill –
+E|-------------------------|
+B|-15b17---17r15-----------| (bend to G, hold, release)
+   8x at 70 BPM.
+2. Vibrato Ladder – Bend to pitch, add slow → fast vibrato.
+3. Unison Bend Lick (Pentatonic Box 1) –
+E|---------------------------------|
+B|-15b17---17---15-----------------|
+G|-------------------12---14b16----|
+
+Song Application: “Hotel California” solo bends.
+
+Homework: Record 30-sec solo focusing on expressive bends/vibrato.
+
+---
+
+Lesson 14: Intermediate Arpeggios – Swept & Tapped
+Objective: Expand arpeggio vocabulary with sweep picking and tap techniques.
+Key Concepts:
+- Sweep picking: continuous down/up motion across strings.
+- Tapping: hammer with picking hand (e.g., 8-finger tap).
+- Diminished & augmented arpeggios.
+
+Practice Exercises:
+1. Major Triad Sweep (Am) –
+E|-------12-------|
+B|-----13---13----|
+G|---14-------14--|
+D|-14-------------|
+A|----------------|
+E|----------------|
+   ↓ ↑ ↓ ↑ ↓
+2. Tap Arpeggio –
+E|-12h15p12---12h19p12---12h15p12---|
+B|----------------------------------|
+   (tap 19 with pick hand)
+3. Dim7 Sweep –
+E|-------15-------|
+B|-----14---14----|
+G|---15-------15--|
+D|-13-------------|
+A|----------------|
+E|----------------|
+
+Song Application: “Cliffs of Dover” sweep section (simplified).
+
+Homework: Clean sweep triad sequence in 3 positions.
+
+---
+
+Lesson 15: Transcribing & Ear Training
+Objective: Develop the ability to learn songs by ear and transcribe solos.
+Key Concepts:
+- Interval recognition: perfect 4th/5th, major/minor 3rd.
+- Phrase-by-phrase transcription method.
+- Slow-down software tips (e.g., 50% speed, loop 2-bar sections).
+
+Practice Exercises:
+1. Interval ID – Play random intervals on guitar; name them.
+2. Melody Transcription – Transcribe first 4 bars of “Happy Birthday” by ear.
+3. Solo Phrase – Learn 8-bar lick from “Little Wing” intro (slowed).
+
+Song Application: Transcribe main riff of “Black Dog” (Led Zeppelin).
+
+Homework: Fully transcribe a 30-second guitar solo of choice; tab it out.
