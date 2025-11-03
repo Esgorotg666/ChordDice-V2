@@ -1,0 +1,109 @@
+🔒 SECURITY FIX - Remove Keystore Files from Git
+
+═══════════════════════════════════════════════════════════════
+
+## ISSUE IDENTIFIED:
+Several keystore base64 files were accidentally committed to the Git repository.
+These files contain sensitive signing keys and should NEVER be in public version control.
+
+## FILES TO REMOVE FROM GIT TRACKING:
+- CORRECT_KEYSTORE_BASE64.txt
+- KEYSTORE_BASE64_SECRET.txt  
+- NEW_KEYSTORE_BASE64.txt
+- ORIGINAL_KEYSTORE_BASE64.txt
+
+## WHAT'S SAFE:
+✅ Your GitHub Secrets (KEYSTORE_BASE64, etc.) are SECURE and encrypted
+✅ These files will be kept on your local system as backup
+✅ .gitignore has been updated to prevent future commits
+
+═══════════════════════════════════════════════════════════════
+
+## FIX INSTRUCTIONS:
+
+### Option 1: Use Git Tool in Replit (Easiest for mobile)
+
+1. Open the **Git tool** from the Tools menu
+2. You'll see these files listed as "modified" or "staged"
+3. **DO NOT commit them yet!**
+4. Open **Shell** from Tools menu
+5. Run these commands one at a time:
+
+```bash
+git rm --cached CORRECT_KEYSTORE_BASE64.txt
+git rm --cached KEYSTORE_BASE64_SECRET.txt
+git rm --cached NEW_KEYSTORE_BASE64.txt
+git rm --cached ORIGINAL_KEYSTORE_BASE64.txt
+```
+
+6. Then commit and push:
+```bash
+git add .gitignore
+git commit -m "Security: Remove keystore files from Git tracking"
+git push origin main
+```
+
+### Option 2: All-in-One Shell Commands
+
+Open Shell and run:
+
+```bash
+# Remove sensitive files from Git tracking (keeps them locally)
+git rm --cached CORRECT_KEYSTORE_BASE64.txt
+git rm --cached KEYSTORE_BASE64_SECRET.txt
+git rm --cached NEW_KEYSTORE_BASE64.txt
+git rm --cached ORIGINAL_KEYSTORE_BASE64.txt
+
+# Stage the updated .gitignore
+git add .gitignore
+
+# Commit the security fix
+git commit -m "Security: Remove keystore files from Git tracking"
+
+# Push to GitHub
+git push origin main
+
+echo "✅ Security fix applied successfully!"
+```
+
+═══════════════════════════════════════════════════════════════
+
+## VERIFICATION:
+
+After pushing, verify the files are removed:
+
+```bash
+git ls-files | grep KEYSTORE
+```
+
+This should return NO results if successful.
+
+═══════════════════════════════════════════════════════════════
+
+## IMPORTANT NOTES:
+
+1. **Files Stay Locally**: The keystore files remain on your local Replit workspace
+   for backup purposes. They just won't be in Git anymore.
+
+2. **GitHub Secrets Are Safe**: Your encrypted GitHub Secrets are NOT affected.
+   They remain secure and will continue to work for builds.
+
+3. **Future Protection**: The updated .gitignore prevents these files from being
+   committed again in the future.
+
+4. **After This Fix**: You can proceed with deploying v1.9.0 safely!
+
+═══════════════════════════════════════════════════════════════
+
+## WHY THIS MATTERS:
+
+If someone gets your keystore, they can:
+❌ Sign malicious apps pretending to be your app
+❌ Push fake updates to users  
+❌ Steal your app's identity permanently
+
+GitHub Secrets are encrypted and safe. Repository files are public or semi-public.
+
+═══════════════════════════════════════════════════════════════
+
+After completing this fix, you're ready to deploy v1.9.0! 🚀

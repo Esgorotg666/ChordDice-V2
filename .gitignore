@@ -14,3 +14,10 @@ keystore*.txt
 android/keystore_base64.txt
 android/upload-keystore.jks
 *.pem
+
+# Keystore base64 files - NEVER commit these!
+CORRECT_KEYSTORE_BASE64.txt
+KEYSTORE_BASE64_SECRET.txt
+NEW_KEYSTORE_BASE64.txt
+ORIGINAL_KEYSTORE_BASE64.txt
+*KEYSTORE*.txt
