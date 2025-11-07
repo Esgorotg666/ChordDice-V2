@@ -215,9 +215,18 @@ export default function Home() {
         <header className="bg-card/95 backdrop-blur-md border-b border-border sticky top-0 z-50 shadow-lg">
         <div className="max-w-md mx-auto px-4 py-3">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <i className="fas fa-music text-primary text-xl"></i>
-              <h1 className="text-lg font-semibold text-foreground">Guitar Dice</h1>
+            <div className="flex flex-col">
+              <div className="flex items-center space-x-2">
+                <i className="fas fa-music text-primary text-xl"></i>
+                <h1 className="text-lg font-semibold text-foreground">Guitar Dice</h1>
+              </div>
+              <p className="text-[10px] sm:text-xs italic font-medium mt-0.5 ml-8" 
+                style={{ 
+                  color: '#D4AF37',
+                  textShadow: '0 0 8px rgba(212, 175, 55, 0.3)'
+                }}>
+                Roll the Dice, Rock the Riffs, Write the Hits!
+              </p>
             </div>
             
             <div className="flex items-center space-x-2">

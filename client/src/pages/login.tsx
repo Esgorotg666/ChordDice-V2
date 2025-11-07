@@ -258,6 +258,13 @@ export default function LoginPage() {
             }}>
             Guitar Dice
           </CardTitle>
+          <p className="text-center text-sm sm:text-base font-semibold italic tracking-wide mt-2" 
+            style={{ 
+              color: '#D4AF37',
+              textShadow: '0 0 10px rgba(212, 175, 55, 0.4)'
+            }}>
+            Roll the Dice, Rock the Riffs, Write the Hits!
+          </p>
           <p className="text-center text-sm" style={{ color: '#D4AF37' }}>Welcome back, guitarist</p>
         </CardHeader>
         <CardContent className="px-4 sm:px-6">
