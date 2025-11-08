@@ -1,0 +1,25 @@
+🎸 Guitar Dice v1.10.0 - Revolutionary 3-Dice Bridge System
+
+NEW: 3-Dice Bridge System
+• Main Chord Die: Generate your starting chord
+• Bridge Pattern Die: Create musical connections with 4 pattern types
+• Supporting Chord Die: Generate your ending chord
+• Complete musical ideas with seamless chord transitions
+• Bridge patterns include Compatible Scales, Pentatonic, Chromatic, and Arpeggios
+• Visual bridge pattern display in riff modal with detailed descriptions
+
+BRIDGE PATTERN TYPES:
+• Compatible Scale: Discovers common scales between chords
+• Pentatonic Pattern: Box patterns for smooth transitions
+• Chromatic Connection: Half-step melodic links
+• Arpeggio Bridge: Chord tone connections
+
+IMPROVEMENTS:
+• Enhanced dice interface with 3-dice layout
+• Dedicated bridge pattern visualization
+• Comprehensive musical theory integration
+• Professional-grade songwriting tool
+
+Transform your practice sessions into songwriting breakthroughs! 🎵🔥
+
+Keep rolling, keep creating! 🎲🎸
