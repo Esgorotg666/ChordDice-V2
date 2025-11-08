@@ -37,7 +37,12 @@ Preferred communication style: Simple, everyday language.
 ## Key Features
 
 ### Core Musical Features
-- **Chord Generation**: Two 8-sided dice for random chord progression generation.
+- **3-Dice Bridge System (v1.10.0 - Nov 2025)**: Revolutionary chord progression generator using three 8-sided dice:
+  - **Main Chord Die**: Generates the starting chord using color groups and chord types
+  - **Bridge Pattern Die**: Selects musical connection method (Compatible Scale, Pentatonic Pattern, Chromatic Connection, or Arpeggio Bridge)
+  - **Supporting Chord Die**: Generates the ending chord
+  - **8 Color Groups**: Purple, Orange, Blue, Green, Red, Yellow, Pink, Teal (matching 8-sided dice design)
+  - **Bridge Pattern Types**: 4 musically-accurate connection patterns that link chords using scales, pentatonic boxes, chromatic passages, or arpeggios
 - **Musical Theory**: Color-coded key groups, numbered exotic chord types, 12x11 interactive chord chart, pentatonic scale guide, and dual fretboard tapping visualization.
 - **Progression Types**: Single chord generation or full riff creation with authentic, genre-specific progressions (e.g., Extreme Metal, Black Metal, Rock, Jazz, Funk, Classical) that transpose to the rolled key.
 - **Musical Accuracy**: Dynamic scale generation from interval formulas, preservation of accidental families during transposition, and correct modal accidental preferences.
@@ -73,16 +78,23 @@ Preferred communication style: Simple, everyday language.
 ### Personalization System (Oct 2025)
 - **User Preferences**: Database schema stores playingStyle (rhythm/lead), preferredGenre (music style), skillLevel (entry/intermediate/advanced/master), and hasCompletedOnboarding flag.
 - **Onboarding Flow**: New users complete 3-step modal asking about playing style, music preferences, and skill level during first login.
+  - **CRITICAL FIX (Nov 2025 - v1.10.0)**: Added "Skip for now" button to onboarding modal with null-guard cache handling, allowing guest users and test environments to bypass onboarding without crashes.
 - **Settings Modal**: Accessible via gear icon, allows users to update their preferences anytime with form state hydration via useEffect.
 - **Global Background Theme**: BackgroundProvider context uses preferredGenre to apply genre-specific backgrounds (metal, rock, jazz, blues, funk, etc.) across the app. Note: preferredGenre IS the background preference - backgrounds are genre-based.
 - **Personalized Classroom**: "Recommended For You" section filters lessons by skill level mapping (entry→beginner+novice, intermediate→beginner+novice+intermediate, advanced→intermediate+advanced+expert, master→advanced+expert+master) and prioritizes lessons matching preferred genre via keyword matching. Uses LessonWithSkillLevel interface with displayDifficulty field to map original lesson difficulties to the new 6-tier skill level system.
+
+### Guest/Demo Mode (Nov 2025 - v1.10.0)
+- **CRITICAL FIX**: Removed AuthGate blocking from home page, enabling true Demo/Guest mode as per product specification.
+- Unauthenticated users can now access the full dice interface with all premium features.
+- Authentication is only required for persistence features (save progressions, history, streak sync).
+- Fulfills product promise of "Demo/Guest mode (full premium access)" for user acquisition and testing.
 
 # Android Deployment
 
 ## Build Configuration
 - **App ID**: `com.chorddice.app`
 - **App Name**: Guitar Dice
-- **Current Version**: 1.9.0 (versionCode: 29)
+- **Current Version**: 1.10.0 (versionCode: 30)
 - **Framework**: Capacitor 7.4.3
 - **Keystore**: Pre-configured upload keystore for Play Store signing
 - **Build Output**: `dist/public` → Android WebView
