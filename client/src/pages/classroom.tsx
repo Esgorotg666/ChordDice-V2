@@ -673,22 +673,129 @@ export default function Classroom() {
             </AccordionContent>
           </AccordionItem>
 
-          {/* Master Level */}
-          <AccordionItem value="master" className="border border-border rounded-lg px-6 bg-card/50">
+          {/* Master Level - Enhanced Elite Section */}
+          <AccordionItem value="master" className="border-2 border-purple-500/30 rounded-lg px-6 bg-gradient-to-br from-purple-900/10 via-card/50 to-amber-900/10 shadow-lg shadow-purple-500/10">
             <AccordionTrigger className="hover:no-underline" data-testid="accordion-master">
               <div className="flex items-center gap-3">
-                <Award className="h-5 w-5 text-purple-500" />
-                <div className="text-left">
-                  <h2 className="text-xl font-bold">6. Master</h2>
-                  <p className="text-sm text-muted-foreground">{masterLessons.length} lessons</p>
+                <div className="relative">
+                  <Award className="h-6 w-6 text-purple-500" />
+                  <Sparkles className="h-3 w-3 text-amber-400 absolute -top-1 -right-1 animate-pulse" />
                 </div>
+                <div className="text-left flex-1">
+                  <div className="flex items-center gap-2">
+                    <h2 className="text-xl font-bold bg-gradient-to-r from-purple-400 to-amber-400 bg-clip-text text-transparent">
+                      6. Master Level
+                    </h2>
+                    <Badge variant="outline" className="border-purple-500/30 text-purple-400 text-[10px]">
+                      ELITE
+                    </Badge>
+                  </div>
+                  <p className="text-sm text-muted-foreground">{masterLessons.length} legendary techniques</p>
+                </div>
+                <Trophy className="h-5 w-5 text-amber-500 opacity-50" />
               </div>
             </AccordionTrigger>
-            <AccordionContent className="pt-4 pb-6">
-              <div className="mb-4 p-4 bg-muted/30 rounded-lg border border-muted">
-                <p className="text-sm text-muted-foreground leading-relaxed">{skillLevelDescriptions.master}</p>
+            <AccordionContent className="pt-6 pb-8 space-y-6">
+              {/* Inspirational Header */}
+              <div className="relative overflow-hidden rounded-xl bg-gradient-to-r from-purple-900/20 via-purple-800/10 to-amber-900/20 border-2 border-purple-500/20 p-6">
+                <div className="absolute top-0 right-0 opacity-5">
+                  <GuitarIcon className="h-32 w-32 text-purple-500" />
+                </div>
+                <div className="relative z-10 space-y-4">
+                  <div className="flex items-start gap-3">
+                    <div className="flex-shrink-0 w-1 h-full bg-gradient-to-b from-purple-500 to-amber-500 rounded-full" />
+                    <div className="space-y-3">
+                      <h3 className="text-lg font-bold text-foreground flex items-center gap-2">
+                        <Flame className="h-5 w-5 text-amber-500" />
+                        Pinnacle of Artistry
+                      </h3>
+                      <p className="text-sm text-muted-foreground leading-relaxed italic">
+                        "{skillLevelDescriptions.master}"
+                      </p>
+                      <div className="flex items-center gap-4 pt-2 flex-wrap">
+                        <div className="flex items-center gap-2 text-xs text-purple-400">
+                          <Star className="h-3 w-3" />
+                          <span>Andrés Segovia</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-xs text-purple-400">
+                          <Star className="h-3 w-3" />
+                          <span>Jimi Hendrix</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-xs text-purple-400">
+                          <Star className="h-3 w-3" />
+                          <span>Paco de Lucía</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-              {renderLessonCards(masterLessons)}
+
+              {/* Master Focus Areas */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <Card className="p-4 bg-purple-500/5 border-purple-500/20">
+                  <div className="flex items-start gap-3">
+                    <Zap className="h-5 w-5 text-purple-500 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <h4 className="font-semibold text-sm mb-1">Virtuosic Technique</h4>
+                      <p className="text-xs text-muted-foreground">Economy picking, string skipping, advanced tapping</p>
+                    </div>
+                  </div>
+                </Card>
+                <Card className="p-4 bg-amber-500/5 border-amber-500/20">
+                  <div className="flex items-start gap-3">
+                    <Music className="h-5 w-5 text-amber-500 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <h4 className="font-semibold text-sm mb-1">Theoretical Mastery</h4>
+                      <p className="text-xs text-muted-foreground">Diminished scales, extended voicings, modal fusion</p>
+                    </div>
+                  </div>
+                </Card>
+                <Card className="p-4 bg-red-500/5 border-red-500/20">
+                  <div className="flex items-start gap-3">
+                    <Target className="h-5 w-5 text-red-500 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <h4 className="font-semibold text-sm mb-1">Professional Polish</h4>
+                      <p className="text-xs text-muted-foreground">Studio recording, live performance, innovation</p>
+                    </div>
+                  </div>
+                </Card>
+              </div>
+
+              {/* Master Lessons */}
+              <div className="space-y-3">
+                <div className="flex items-center gap-2 px-1">
+                  <div className="h-px flex-1 bg-gradient-to-r from-transparent via-purple-500/30 to-transparent" />
+                  <h4 className="text-sm font-semibold text-purple-400 uppercase tracking-wider">
+                    Master Techniques
+                  </h4>
+                  <div className="h-px flex-1 bg-gradient-to-r from-transparent via-purple-500/30 to-transparent" />
+                </div>
+                {renderLessonCards(masterLessons)}
+              </div>
+
+              {/* Master Achievement Message */}
+              <div className="mt-6 p-5 rounded-lg bg-gradient-to-br from-purple-950/30 to-amber-950/20 border border-purple-500/20">
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0">
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-amber-500 flex items-center justify-center">
+                      <GraduationCap className="h-6 w-6 text-white" />
+                    </div>
+                  </div>
+                  <div className="flex-1 space-y-2">
+                    <h4 className="font-bold text-foreground">Journey to Mastery</h4>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      These techniques represent decades of guitar evolution. Take your time, practice with intention, 
+                      and remember: every master was once a beginner who refused to give up. Your dedication to reaching 
+                      this level is already extraordinary.
+                    </p>
+                    <div className="flex items-center gap-2 text-xs text-purple-400 pt-2">
+                      <Sparkles className="h-3 w-3" />
+                      <span className="italic">"The beautiful thing about learning is that no one can take it away from you." - B.B. King</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </AccordionContent>
           </AccordionItem>
         </Accordion>
