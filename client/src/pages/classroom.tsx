@@ -4,7 +4,7 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { Lock, ChevronRight, ChevronLeft, Crown, BookOpen, GraduationCap, Trophy, Music, Zap, Flame, Guitar as GuitarIcon, Home, Star, Sparkles, Target, TrendingUp, Award } from 'lucide-react';
+import { Lock, ChevronRight, ChevronLeft, Crown, BookOpen, GraduationCap, Trophy, Music, Zap, Flame, Guitar as GuitarIcon, Home, Star, Sparkles, Target, TrendingUp, Award, Lightbulb } from 'lucide-react';
 import { generalBeginnerLessons, rockLessons, metalLessons, bluesLessons, jazzLessons, funkLessons, Lesson } from '@/lib/comprehensive-lessons';
 import { useSubscription } from '@/hooks/useSubscription';
 import { useQuery } from '@tanstack/react-query';
@@ -497,6 +497,9 @@ export default function Classroom() {
     );
   }
 
+  const totalLessons = allLessons.length;
+  const premiumLessons = allLessons.filter(l => l.difficulty === 'intermediate' || l.difficulty === 'mastery').length;
+
   return (
     <div className="min-h-screen bg-background p-4 md:p-8">
       <div className="max-w-6xl mx-auto">
@@ -511,11 +514,77 @@ export default function Classroom() {
           </Button>
         </Link>
 
-        <div className="mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold mb-3">Guitar Classroom</h1>
-          <p className="text-muted-foreground">
-            Progressive guitar lessons organized by skill level. First 2 lessons in each level are free!
-          </p>
+        {/* Enhanced Hero Header */}
+        <div className="mb-8 space-y-6">
+          <div className="flex items-center gap-3">
+            <div className="relative">
+              <GuitarIcon className="h-10 w-10 text-primary" />
+              <Sparkles className="h-4 w-4 text-amber-500 absolute -top-1 -right-1 animate-pulse" />
+            </div>
+            <div>
+              <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent">
+                Guitar Classroom
+              </h1>
+              <p className="text-sm text-muted-foreground mt-1">
+                Progressive lessons from beginner to master level
+              </p>
+            </div>
+          </div>
+
+          {/* Stats Cards */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            <Card className="p-3 bg-gradient-to-br from-green-500/10 to-green-500/5 border-green-500/20">
+              <div className="flex flex-col">
+                <div className="flex items-center justify-between mb-1">
+                  <p className="text-[10px] text-muted-foreground uppercase tracking-wide">Lessons</p>
+                  <BookOpen className="h-4 w-4 text-green-500/50" />
+                </div>
+                <p className="text-xl font-bold text-green-500">{totalLessons}</p>
+              </div>
+            </Card>
+            <Card className="p-3 bg-gradient-to-br from-yellow-500/10 to-yellow-500/5 border-yellow-500/20">
+              <div className="flex flex-col">
+                <div className="flex items-center justify-between mb-1">
+                  <p className="text-[10px] text-muted-foreground uppercase tracking-wide">Levels</p>
+                  <GraduationCap className="h-4 w-4 text-yellow-500/50" />
+                </div>
+                <p className="text-xl font-bold text-yellow-500">6</p>
+              </div>
+            </Card>
+            <Card className="p-3 bg-gradient-to-br from-purple-500/10 to-purple-500/5 border-purple-500/20">
+              <div className="flex flex-col">
+                <div className="flex items-center justify-between mb-1">
+                  <p className="text-[10px] text-muted-foreground uppercase tracking-wide">Premium</p>
+                  <Crown className="h-4 w-4 text-purple-500/50" />
+                </div>
+                <p className="text-xl font-bold text-purple-500">{premiumLessons}</p>
+              </div>
+            </Card>
+            <Card className="p-3 bg-gradient-to-br from-amber-500/10 to-amber-500/5 border-amber-500/20">
+              <div className="flex flex-col">
+                <div className="flex items-center justify-between mb-1">
+                  <p className="text-[10px] text-muted-foreground uppercase tracking-wide">Your Level</p>
+                  <Star className="h-4 w-4 text-amber-500/50" />
+                </div>
+                <p className="text-xl font-bold text-amber-500 capitalize">
+                  {preferences?.skillLevel || 'Entry'}
+                </p>
+              </div>
+            </Card>
+          </div>
+
+          {/* Info Banner */}
+          <div className="bg-primary/5 border border-primary/20 rounded-lg p-4">
+            <div className="flex items-start gap-3">
+              <Lightbulb className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+              <div className="flex-1">
+                <p className="text-sm text-foreground font-medium">Free to Start, Premium to Master</p>
+                <p className="text-xs text-muted-foreground mt-1">
+                  First 2 lessons in each level are free! Upgrade to Premium for unlimited access to all {totalLessons} lessons.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Recommended For You Section */}
@@ -635,39 +704,67 @@ export default function Classroom() {
             </AccordionContent>
           </AccordionItem>
 
-          {/* Advanced Level */}
-          <AccordionItem value="advanced" className="border border-border rounded-lg px-6 bg-card/50">
+          {/* Advanced Level - Enhanced */}
+          <AccordionItem value="advanced" className="border-2 border-orange-500/20 rounded-lg px-6 bg-gradient-to-br from-orange-500/5 via-card/50 to-card/50">
             <AccordionTrigger className="hover:no-underline" data-testid="accordion-advanced">
               <div className="flex items-center gap-3">
-                <Trophy className="h-5 w-5 text-orange-500" />
-                <div className="text-left">
-                  <h2 className="text-xl font-bold">4. Advanced</h2>
-                  <p className="text-sm text-muted-foreground">{advancedLessons.length} lessons</p>
+                <div className="relative">
+                  <Trophy className="h-5 w-5 text-orange-500" />
+                  <Zap className="h-3 w-3 text-yellow-400 absolute -top-1 -right-1" />
+                </div>
+                <div className="text-left flex-1">
+                  <div className="flex items-center gap-2">
+                    <h2 className="text-xl font-bold text-orange-500">4. Advanced</h2>
+                    <Badge variant="outline" className="border-orange-500/30 text-orange-400 text-[10px]">
+                      PRO
+                    </Badge>
+                  </div>
+                  <p className="text-sm text-muted-foreground">{advancedLessons.length} professional techniques</p>
                 </div>
               </div>
             </AccordionTrigger>
-            <AccordionContent className="pt-4 pb-6">
-              <div className="mb-4 p-4 bg-muted/30 rounded-lg border border-muted">
-                <p className="text-sm text-muted-foreground leading-relaxed">{skillLevelDescriptions.advanced}</p>
+            <AccordionContent className="pt-5 pb-6 space-y-4">
+              <div className="p-4 bg-gradient-to-r from-orange-500/10 to-transparent border-l-4 border-orange-500 rounded-lg">
+                <div className="flex items-start gap-3">
+                  <Flame className="h-5 w-5 text-orange-500 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <p className="text-sm font-semibold mb-1">Technical Refinement</p>
+                    <p className="text-xs text-muted-foreground leading-relaxed">{skillLevelDescriptions.advanced}</p>
+                  </div>
+                </div>
               </div>
               {renderLessonCards(advancedLessons)}
             </AccordionContent>
           </AccordionItem>
 
-          {/* Expert Level */}
-          <AccordionItem value="expert" className="border border-border rounded-lg px-6 bg-card/50">
+          {/* Expert Level - Enhanced */}
+          <AccordionItem value="expert" className="border-2 border-red-500/20 rounded-lg px-6 bg-gradient-to-br from-red-500/5 via-card/50 to-card/50">
             <AccordionTrigger className="hover:no-underline" data-testid="accordion-expert">
               <div className="flex items-center gap-3">
-                <TrendingUp className="h-5 w-5 text-red-500" />
-                <div className="text-left">
-                  <h2 className="text-xl font-bold">5. Expert</h2>
-                  <p className="text-sm text-muted-foreground">{expertLessons.length} lessons</p>
+                <div className="relative">
+                  <TrendingUp className="h-5 w-5 text-red-500" />
+                  <Star className="h-3 w-3 text-amber-400 absolute -top-1 -right-1" />
+                </div>
+                <div className="text-left flex-1">
+                  <div className="flex items-center gap-2">
+                    <h2 className="text-xl font-bold text-red-500">5. Expert</h2>
+                    <Badge variant="outline" className="border-red-500/30 text-red-400 text-[10px]">
+                      ADVANCED
+                    </Badge>
+                  </div>
+                  <p className="text-sm text-muted-foreground">{expertLessons.length} virtuosic lessons</p>
                 </div>
               </div>
             </AccordionTrigger>
-            <AccordionContent className="pt-4 pb-6">
-              <div className="mb-4 p-4 bg-muted/30 rounded-lg border border-muted">
-                <p className="text-sm text-muted-foreground leading-relaxed">{skillLevelDescriptions.expert}</p>
+            <AccordionContent className="pt-5 pb-6 space-y-4">
+              <div className="p-4 bg-gradient-to-r from-red-500/10 to-transparent border-l-4 border-red-500 rounded-lg">
+                <div className="flex items-start gap-3">
+                  <Crown className="h-5 w-5 text-red-500 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <p className="text-sm font-semibold mb-1">Professional Execution</p>
+                    <p className="text-xs text-muted-foreground leading-relaxed">{skillLevelDescriptions.expert}</p>
+                  </div>
+                </div>
               </div>
               {renderLessonCards(expertLessons)}
             </AccordionContent>
