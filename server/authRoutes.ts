@@ -49,32 +49,25 @@ router.post('/register', createRateLimitMiddleware(mutationRateLimiter, "registr
     const saltRounds = 12;
     const hashedPassword = await bcrypt.hash(userData.password!, saltRounds);
     
-    // In development mode, auto-verify if email credentials aren't configured
+    // In development mode, bypass email verification requirement
     const isDevelopment = process.env.NODE_ENV !== 'production';
-    const hasEmailConfig = !!(process.env.GMAIL_USER && process.env.GMAIL_APP_PASSWORD);
-    const autoVerify = isDevelopment && !hasEmailConfig;
     
     // Create user (authProvider defaults to 'local' in schema)
-    let user = await storage.createUser({
+    const user = await storage.createUser({
       username: userData.username,
       email: userData.email,
       password: hashedPassword,
     });
     
-    if (autoVerify) {
-      // Auto-verify user in development mode by generating and immediately verifying token
-      const verificationToken = generateVerificationToken();
-      const verificationExpiry = new Date(Date.now() + 24 * 60 * 60 * 1000);
-      await storage.setEmailVerificationToken(user.id, verificationToken, verificationExpiry);
-      user = await storage.verifyEmailWithToken(verificationToken) || user;
-      
-      console.log('[DEV MODE] Auto-verified user:', user.email);
+    // In development, allow immediate login without verification
+    if (isDevelopment) {
+      console.log('[DEV MODE] User created - can login immediately without verification:', user.email);
       res.status(201).json({ 
-        message: 'Account created successfully! You can now log in.',
+        message: 'Account created successfully! You can now log in. (Email verification not required in development mode)',
         requiresVerification: false
       });
     } else {
-      // Generate email verification token
+      // Production: require email verification
       const verificationToken = generateVerificationToken();
       const verificationExpiry = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours
       
