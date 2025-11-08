@@ -49,41 +49,60 @@ router.post('/register', createRateLimitMiddleware(mutationRateLimiter, "registr
     const saltRounds = 12;
     const hashedPassword = await bcrypt.hash(userData.password!, saltRounds);
     
+    // In development mode, auto-verify if email credentials aren't configured
+    const isDevelopment = process.env.NODE_ENV !== 'production';
+    const hasEmailConfig = !!(process.env.GMAIL_USER && process.env.GMAIL_APP_PASSWORD);
+    const autoVerify = isDevelopment && !hasEmailConfig;
+    
     // Create user (authProvider defaults to 'local' in schema)
-    const user = await storage.createUser({
+    let user = await storage.createUser({
       username: userData.username,
       email: userData.email,
       password: hashedPassword,
     });
     
-    // Generate email verification token
-    const verificationToken = generateVerificationToken();
-    const verificationExpiry = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours
-    
-    await storage.setEmailVerificationToken(user.id, verificationToken, verificationExpiry);
-    
-    // Send verification email - Use Replit public domain for external access
-    const host = req.get('host');
-    const isLocalhost = host?.includes('localhost') || host?.includes('127.0.0.1');
-    const baseUrl = isLocalhost && process.env.REPLIT_DEV_DOMAIN 
-      ? `https://${process.env.REPLIT_DEV_DOMAIN}`
-      : `${req.protocol}://${host}`;
+    if (autoVerify) {
+      // Auto-verify user in development mode by generating and immediately verifying token
+      const verificationToken = generateVerificationToken();
+      const verificationExpiry = new Date(Date.now() + 24 * 60 * 60 * 1000);
+      await storage.setEmailVerificationToken(user.id, verificationToken, verificationExpiry);
+      user = await storage.verifyEmailWithToken(verificationToken) || user;
       
-    const emailSent = await sendVerificationEmail(
-      user.email,
-      user.username || user.email.split('@')[0],
-      verificationToken,
-      baseUrl
-    );
-    
-    if (!emailSent) {
-      console.error('Failed to send verification email');
+      console.log('[DEV MODE] Auto-verified user:', user.email);
+      res.status(201).json({ 
+        message: 'Account created successfully! You can now log in.',
+        requiresVerification: false
+      });
+    } else {
+      // Generate email verification token
+      const verificationToken = generateVerificationToken();
+      const verificationExpiry = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours
+      
+      await storage.setEmailVerificationToken(user.id, verificationToken, verificationExpiry);
+      
+      // Send verification email - Use Replit public domain for external access
+      const host = req.get('host');
+      const isLocalhost = host?.includes('localhost') || host?.includes('127.0.0.1');
+      const baseUrl = isLocalhost && process.env.REPLIT_DEV_DOMAIN 
+        ? `https://${process.env.REPLIT_DEV_DOMAIN}`
+        : `${req.protocol}://${host}`;
+        
+      const emailSent = await sendVerificationEmail(
+        user.email,
+        user.username || user.email.split('@')[0],
+        verificationToken,
+        baseUrl
+      );
+      
+      if (!emailSent) {
+        console.error('Failed to send verification email');
+      }
+      
+      res.status(201).json({ 
+        message: 'Account created successfully! Please check your email to verify your account.',
+        requiresVerification: true
+      });
     }
-    
-    res.status(201).json({ 
-      message: 'Account created successfully! Please check your email to verify your account.',
-      requiresVerification: true
-    });
     
   } catch (error: any) {
     console.error('Registration error:', error);
@@ -119,13 +138,19 @@ router.post('/login', createRateLimitMiddleware(mutationRateLimiter, "login"), a
       return res.status(401).json({ message: 'Invalid username or password' });
     }
     
-    // Check if email is verified
-    if (!user.isEmailVerified) {
+    // Check if email is verified (skip verification check in development mode)
+    const isDevelopment = process.env.NODE_ENV !== 'production';
+    if (!user.isEmailVerified && !isDevelopment) {
       return res.status(403).json({ 
         message: 'Please verify your email address before logging in',
         requiresVerification: true,
         email: user.email
       });
+    }
+    
+    // Log dev mode bypass for debugging
+    if (!user.isEmailVerified && isDevelopment) {
+      console.log('[DEV MODE] Allowing unverified user to login:', user.email);
     }
     
     // Set user session

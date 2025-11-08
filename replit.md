@@ -50,7 +50,8 @@ Preferred communication style: Simple, everyday language.
 
 ### Freemium Business Model
 - **Modes**: Demo/Guest mode (full premium access), Free Tier (limited access, 5 free riff generations), Premium Tier (unlimited features).
-- **Authentication**: Replit Auth for saving progress.
+- **Authentication**: Replit Auth for saving progress, plus email/password authentication for mobile app deployment.
+  - **CRITICAL FIX (Nov 2025 - v1.10.0)**: Email verification bypass in development mode - users can login immediately without verifying email for testing purposes. Production still requires email verification for security.
 - **Monetization**: 
   - **Ad-supported token earning system**: Google AdMob rewarded video ads (max 5 per day) grant +1 dice roll token per ad watched.
   - **Premium subscription**: $4.99/month via Stripe for unlimited access to exotic chords, advanced genres, scales, and exercises.
