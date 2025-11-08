@@ -116,13 +116,16 @@ export const exoticChordTypes = [
 ];
 
 // Color groups for chord grid (12 musical keys organized by groups)
+// 8 groups to match 8-sided dice design
 export const colorGroups = [
   { name: 'Purple', keys: ['E', 'F#', 'G#', 'A#'] },
   { name: 'Orange', keys: ['F', 'G', 'A', 'B'] },
   { name: 'Blue', keys: ['C', 'D', 'E♭', 'F#'] },
   { name: 'Green', keys: ['C#', 'D#', 'G', 'A'] },
   { name: 'Red', keys: ['D', 'E', 'F', 'G#'] },
-  { name: 'Yellow', keys: ['A♭', 'B♭', 'C', 'D'] }
+  { name: 'Yellow', keys: ['A♭', 'B♭', 'C', 'D'] },
+  { name: 'Pink', keys: ['C', 'E', 'G', 'B♭'] },
+  { name: 'Teal', keys: ['C#', 'F', 'A', 'B'] }
 ];
 
 // Get all musical keys

@@ -177,13 +177,8 @@ export default function Home() {
     setShowFretboardModal(true);
   };
 
-  // Show authentication gate for non-authenticated users
-  if (!isAuthenticated && !isLoading) {
-    return <AuthGate isOpen={true} />;
-  }
-
-  // Show loading state while checking authentication
-  if (isLoading) {
+  // Show loading state while checking authentication (only for authenticated users)
+  if (isLoading && isAuthenticated) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="text-center">
@@ -193,6 +188,9 @@ export default function Home() {
       </div>
     );
   }
+  
+  // Guest/Demo Mode: Allow unauthenticated users to access the dice interface
+  // Auth will be prompted contextually for save/history/persistence features
 
   return (
     <div 

@@ -71,6 +71,24 @@ export function OnboardingModal({ open, onComplete }: OnboardingModalProps) {
     }
   };
 
+  const handleSkip = () => {
+    // Skip onboarding - mark as complete in cache and localStorage
+    queryClient.setQueryData(["/api/preferences"], (old: any) => ({
+      ...(old || {}), // Null-guard: use empty object if cache is undefined
+      hasCompletedOnboarding: true
+    }));
+    
+    // Store skip flag in localStorage for demo/test users
+    localStorage.setItem('onboarding_skipped', 'true');
+    
+    toast({
+      title: "Welcome!",
+      description: "You can set your preferences later in Settings.",
+    });
+    
+    onComplete();
+  };
+
   const handleSubmit = async () => {
     if (!skillLevel) {
       toast({
@@ -230,35 +248,48 @@ export function OnboardingModal({ open, onComplete }: OnboardingModalProps) {
         </div>
 
         {/* Navigation buttons */}
-        <div className="flex justify-between gap-3 flex-shrink-0">
-          <Button
-            variant="outline"
-            onClick={handleBack}
-            disabled={step === 1 || isSubmitting}
-            className="border-gray-700"
-            data-testid="button-onboarding-back"
-          >
-            Back
-          </Button>
+        <div className="flex flex-col gap-2 flex-shrink-0">
+          <div className="flex justify-between gap-3">
+            <Button
+              variant="outline"
+              onClick={handleBack}
+              disabled={step === 1 || isSubmitting}
+              className="border-gray-700"
+              data-testid="button-onboarding-back"
+            >
+              Back
+            </Button>
+            
+            {step < 3 ? (
+              <Button
+                onClick={handleNext}
+                className="bg-gold hover:bg-gold/90 text-black"
+                data-testid="button-onboarding-next"
+              >
+                Next
+              </Button>
+            ) : (
+              <Button
+                onClick={handleSubmit}
+                disabled={isSubmitting}
+                className="bg-gold hover:bg-gold/90 text-black"
+                data-testid="button-onboarding-complete"
+              >
+                {isSubmitting ? "Saving..." : "Get Started!"}
+              </Button>
+            )}
+          </div>
           
-          {step < 3 ? (
-            <Button
-              onClick={handleNext}
-              className="bg-gold hover:bg-gold/90 text-black"
-              data-testid="button-onboarding-next"
-            >
-              Next
-            </Button>
-          ) : (
-            <Button
-              onClick={handleSubmit}
-              disabled={isSubmitting}
-              className="bg-gold hover:bg-gold/90 text-black"
-              data-testid="button-onboarding-complete"
-            >
-              {isSubmitting ? "Saving..." : "Get Started!"}
-            </Button>
-          )}
+          {/* Skip link */}
+          <button
+            type="button"
+            onClick={handleSkip}
+            disabled={isSubmitting}
+            className="text-sm text-gray-400 hover:text-gray-300 underline transition-colors text-center"
+            data-testid="button-onboarding-skip"
+          >
+            Skip for now
+          </button>
         </div>
       </DialogContent>
     </Dialog>
