@@ -904,3 +904,102 @@ export const getRandomCompatibleScales = (
   
   return compatibleScales.slice(0, count);
 };
+
+// Bridge Pattern System - Connects two chords with musical patterns
+export type BridgePatternType = 'scale' | 'pentatonic' | 'chromatic' | 'arpeggio';
+
+export interface BridgePattern {
+  type: BridgePatternType;
+  name: string;
+  notes: string[];
+  description: string;
+  fretboardPattern?: string; // Optional fretboard pattern description
+}
+
+export const generateBridgePattern = (chord1: string, chord3: string): BridgePattern => {
+  const patterns: BridgePattern[] = [];
+  
+  // Extract root notes from both chords
+  const root1Match = chord1.match(/^([A-G][#b♭♯]?)/);
+  const root3Match = chord3.match(/^([A-G][#b♭♯]?)/);
+  
+  if (!root1Match || !root3Match) {
+    // Fallback: Chromatic pattern
+    return {
+      type: 'chromatic',
+      name: 'Chromatic Bridge',
+      notes: ['Chromatic notes'],
+      description: 'Use chromatic notes to connect the chords'
+    };
+  }
+  
+  const root1 = root1Match[1].replace('♭', 'b').replace('♯', '#');
+  const root3 = root3Match[1].replace('♭', 'b').replace('♯', '#');
+  
+  // Determine if chords are major or minor
+  const isMinor1 = chord1.includes('m') && !chord1.includes('maj');
+  const isMinor3 = chord3.includes('m') && !chord3.includes('maj');
+  
+  // Pattern 1: Compatible Scale - find a scale that works with both chords
+  const compatibility = getRandomCompatibleScales([chord1, chord3], 1);
+  if (compatibility.length > 0) {
+    const scale = compatibility[0];
+    patterns.push({
+      type: 'scale',
+      name: `${scale.root} ${scale.mode.name}`,
+      notes: scale.notes,
+      description: `${scale.mode.description}`,
+      fretboardPattern: `Play ${scale.root} ${scale.mode.name} scale between chords`
+    });
+  }
+  
+  // Pattern 2: Pentatonic - most common and user-friendly
+  const pentatonicType = (isMinor1 || isMinor3) ? 'minor' : 'major';
+  const pentatonicRoot = root1; // Use first chord's root
+  const pentatonicIntervals = pentatonicScales[pentatonicType].intervals;
+  const pentatonicNotes = generateScale(pentatonicRoot, pentatonicIntervals);
+  
+  patterns.push({
+    type: 'pentatonic',
+    name: `${pentatonicRoot} ${pentatonicScales[pentatonicType].name}`,
+    notes: pentatonicNotes,
+    description: pentatonicScales[pentatonicType].description,
+    fretboardPattern: `Box pattern at fret ${getNotePosition(pentatonicRoot)}`
+  });
+  
+  // Pattern 3: Chromatic approach - always works
+  patterns.push({
+    type: 'chromatic',
+    name: 'Chromatic Bridge',
+    notes: [`${root1} → ${root3} (chromatic)`],
+    description: 'Use chromatic notes (half-steps) to approach the next chord',
+    fretboardPattern: 'Walk chromatically from one chord to the next'
+  });
+  
+  // Pattern 4: Arpeggio - use notes from the chords
+  patterns.push({
+    type: 'arpeggio',
+    name: `${chord1} / ${chord3} Arpeggios`,
+    notes: [chord1, chord3],
+    description: 'Play arpeggios of both chords to create melodic connection',
+    fretboardPattern: 'Alternate notes from both chord shapes'
+  });
+  
+  // Randomly select one of the patterns
+  const randomIndex = Math.floor(Math.random() * patterns.length);
+  return patterns[randomIndex];
+};
+
+// Helper: Get fret position for a note (simplified, just for reference)
+const getNotePosition = (note: string): number => {
+  const basePositions: Record<string, number> = {
+    'A': 5, 'A#': 6, 'Bb': 6,
+    'B': 7,
+    'C': 8, 'C#': 9, 'Db': 9,
+    'D': 10, 'D#': 11, 'Eb': 11,
+    'E': 12,
+    'F': 1, 'F#': 2, 'Gb': 2,
+    'G': 3, 'G#': 4, 'Ab': 4
+  };
+  return basePositions[note] || 5;
+};

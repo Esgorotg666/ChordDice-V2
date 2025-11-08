@@ -26,7 +26,7 @@ import { useAuthContext } from "@/contexts/AuthContext";
 import { useBackground } from "@/contexts/background-context";
 import { useSubscription } from "@/hooks/useSubscription";
 import { useStreak } from "@/hooks/useStreak";
-import { getChordDiagram } from "@/lib/music-data";
+import { getChordDiagram, type BridgePattern } from "@/lib/music-data";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import StreakDisplay from "@/components/streak-display";
@@ -37,6 +37,9 @@ interface GeneratedResult {
   chord?: string;
   colorName?: string;
   progression?: string[];
+  bridgePattern?: BridgePattern;
+  mainChord?: string;
+  supportingChord?: string;
 }
 
 export default function Home() {
@@ -480,6 +483,9 @@ export default function Home() {
           onClose={() => setShowRiffModal(false)}
           progression={result.progression || []}
           onShowFretboard={handleShowFretboard}
+          bridgePattern={result.bridgePattern}
+          mainChord={result.mainChord}
+          supportingChord={result.supportingChord}
         />
       )}
 

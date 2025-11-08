@@ -1,11 +1,11 @@
 import { Button } from "@/components/ui/button";
-import { X, Dices } from "lucide-react";
+import { X, Dices, GitBranch } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 import FretboardDisplay from "@/components/fretboard-display";
-import { getChordDiagram } from "@/lib/music-data";
+import { getChordDiagram, type BridgePattern } from "@/lib/music-data";
 import GearRecommendations from "@/components/gear-recommendations";
 
 interface RiffModalProps {
@@ -13,9 +13,12 @@ interface RiffModalProps {
   onClose: () => void;
   progression: string[];
   onShowFretboard?: (chordName: string) => void;
+  bridgePattern?: BridgePattern;
+  mainChord?: string;
+  supportingChord?: string;
 }
 
-export default function RiffModal({ isOpen, onClose, progression }: RiffModalProps) {
+export default function RiffModal({ isOpen, onClose, progression, bridgePattern, mainChord, supportingChord }: RiffModalProps) {
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const [isSaved, setIsSaved] = useState(false);
@@ -123,6 +126,46 @@ export default function RiffModal({ isOpen, onClose, progression }: RiffModalPro
             {progression.join(' → ')}
           </div>
         </div>
+
+        {/* 3-Dice Bridge System Display */}
+        {bridgePattern && mainChord && supportingChord && (
+          <div className="mb-6 p-4 bg-gradient-to-br from-primary/10 to-primary/5 border border-primary/20 rounded-lg">
+            <div className="flex items-center gap-2 mb-3">
+              <GitBranch className="h-5 w-5 text-primary" />
+              <h4 className="font-semibold text-primary">Bridge Pattern System</h4>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {/* Main Chord */}
+              <div className="bg-purple-600/10 border border-purple-600/30 rounded-lg p-3">
+                <div className="text-xs text-muted-foreground mb-1">Dice 1: Main Chord</div>
+                <div className="text-xl font-bold text-purple-600">{mainChord}</div>
+              </div>
+              
+              {/* Bridge Pattern */}
+              <div className="bg-primary/10 border border-primary/30 rounded-lg p-3">
+                <div className="text-xs text-muted-foreground mb-1">Dice 2: Bridge</div>
+                <div className="text-lg font-bold text-primary mb-1">{bridgePattern.name}</div>
+                <div className="text-xs text-muted-foreground">{bridgePattern.description}</div>
+                {bridgePattern.notes.length > 0 && bridgePattern.notes.length <= 7 && (
+                  <div className="text-xs mt-2 text-foreground/70">
+                    Notes: {bridgePattern.notes.join(', ')}
+                  </div>
+                )}
+              </div>
+              
+              {/* Supporting Chord */}
+              <div className="bg-orange-600/10 border border-orange-600/30 rounded-lg p-3">
+                <div className="text-xs text-muted-foreground mb-1">Dice 3: Supporting</div>
+                <div className="text-xl font-bold text-orange-600">{supportingChord}</div>
+              </div>
+            </div>
+            {bridgePattern.fretboardPattern && (
+              <div className="mt-3 text-sm text-muted-foreground">
+                <strong>How to play:</strong> {bridgePattern.fretboardPattern}
+              </div>
+            )}
+          </div>
+        )}
 
         {/* Interactive Dice Grid - Click to Reveal Fretboard */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-6">

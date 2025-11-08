@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
 import { Crown, Play, Eye } from "lucide-react";
-import { colorGroups, exoticNumbers } from "@/lib/music-data";
+import { colorGroups, exoticNumbers, generateBridgePattern, type BridgePattern } from "@/lib/music-data";
 import { useAuthContext } from "@/contexts/AuthContext";
 import { useSubscription } from "@/hooks/useSubscription";
 import { useUsageTracking } from "@/hooks/useUsageTracking";
@@ -25,7 +25,15 @@ import studioBg1 from "@assets/stock_images/professional_studio__e3ee18b3.jpg";
 import studioBg2 from "@assets/stock_images/professional_studio__6f69c515.jpg";
 
 interface DiceInterfaceProps {
-  onResult: (result: { type: 'single' | 'riff'; chord?: string; colorName?: string; progression?: string[] }) => void;
+  onResult: (result: { 
+    type: 'single' | 'riff'; 
+    chord?: string; 
+    colorName?: string; 
+    progression?: string[];
+    bridgePattern?: BridgePattern;
+    mainChord?: string;
+    supportingChord?: string;
+  }) => void;
   onUpgrade?: () => void;
 }
 
@@ -72,6 +80,10 @@ export default function DiceInterface({ onResult, onUpgrade }: DiceInterfaceProp
   const [colorDiceValue, setColorDiceValue] = useState(4);
   const [numberDiceValue, setNumberDiceValue] = useState(4);
   const [chordTypeDiceValue, setChordTypeDiceValue] = useState('Maj'); // Display chord type instead of number
+  
+  // 3-Dice Bridge System
+  const [bridgeDiceValue, setbridgeDiceValue] = useState(4); // Bridge pattern selector (1-8)
+  const [supportingDiceValue, setSupportingDiceValue] = useState(4); // Supporting chord selector
   
   // Optional premium dice
   const [showTimeSignature, setShowTimeSignature] = useState(false);
@@ -612,35 +624,47 @@ export default function DiceInterface({ onResult, onUpgrade }: DiceInterfaceProp
           trackEvent('dice_roll', 'Dice', `${currentMode}-${selectedGenre}`, 1);
           onResult({ type: 'riff', progression });
         } else {
-          // Normal dice-based generation
-          const colorRoll = Math.floor(Math.random() * 8) + 1;
-          const numberRoll = Math.floor(Math.random() * 8) + 1;
+          // 3-Dice Bridge System
+          // Roll all three dice
+          const mainDiceRoll = Math.floor(Math.random() * 8) + 1;
+          const bridgeRoll = Math.floor(Math.random() * 8) + 1;
+          const supportingDiceRoll = Math.floor(Math.random() * 8) + 1;
           
-          setColorDiceValue(colorRoll);
-          setNumberDiceValue(numberRoll);
+          setColorDiceValue(mainDiceRoll);
+          setbridgeDiceValue(bridgeRoll);
+          setSupportingDiceValue(supportingDiceRoll);
           
-          // Map number to chord type label for display
-          const chordTypeLabels: Record<number, string> = {
-            1: 'Dim',   // Diminished
-            2: 'Aug',   // Augmented
-            3: 'Sus',   // Suspended
-            4: 'Maj7',  // Major 7th
-            5: '9th',   // 9th
-            6: 'Maj',   // Major (default)
-            7: 'Maj',   // Major (default)
-            8: 'Maj'    // Major (default)
-          };
-          setChordTypeDiceValue(chordTypeLabels[numberRoll] || 'Maj');
-
-          const { chord, colorName } = generateChord(colorRoll, numberRoll);
+          // Generate main chord (Dice 1)
+          const { chord: mainChord, colorName } = generateChord(mainDiceRoll, mainDiceRoll);
+          
+          // Generate supporting chord (Dice 3)
+          const { chord: supportingChord } = generateChord(supportingDiceRoll, supportingDiceRoll);
+          
+          // Generate bridge pattern (Dice 2) - connects main and supporting chords
+          const bridgePattern = generateBridgePattern(mainChord, supportingChord);
 
           if (currentMode === 'single') {
-            trackEvent('dice_roll', 'Dice', `${currentMode}-${selectedGenre}-${chord}`, 1);
-            onResult({ type: 'single', chord, colorName });
+            // Single mode: Show main chord + bridge info
+            trackEvent('dice_roll', 'Dice', `${currentMode}-${selectedGenre}-${mainChord}`, 1);
+            onResult({ 
+              type: 'single', 
+              chord: mainChord, 
+              colorName,
+              bridgePattern,
+              mainChord,
+              supportingChord
+            });
           } else {
-            const progression = generateRiff(colorRoll, numberRoll);
+            // Riff mode: Create 3-chord progression (Main → Supporting → Variation)
+            const progression = [mainChord, supportingChord, mainChord]; // Simple progression
             trackEvent('dice_roll', 'Dice', `${currentMode}-${selectedGenre}`, 1);
-            onResult({ type: 'riff', progression });
+            onResult({ 
+              type: 'riff', 
+              progression,
+              bridgePattern,
+              mainChord,
+              supportingChord
+            });
           }
         }
         
@@ -729,28 +753,39 @@ export default function DiceInterface({ onResult, onUpgrade }: DiceInterfaceProp
         </Select>
       </div>
       
-      {/* Dice Display */}
-      <div className="flex justify-center space-x-6 mb-6">
-        {/* Color Die */}
+      {/* Dice Display - 3-Dice Bridge System */}
+      <div className="flex justify-center space-x-4 mb-6 flex-wrap gap-y-4">
+        {/* Dice 1: Main Chord */}
         <div className="text-center">
           <div 
             className={`w-16 h-16 rounded-lg flex items-center justify-center mb-2 border-2 border-gray-600 bg-purple-600 ${isRolling ? 'animate-dice-roll' : ''}`}
-            data-testid="dice-color"
+            data-testid="dice-main"
           >
             <span className="text-xl font-bold text-white drop-shadow-lg">{colorDiceValue}</span>
           </div>
-          <span className="text-xs text-muted-foreground">Color Die</span>
+          <span className="text-xs text-muted-foreground font-semibold">Main Chord</span>
         </div>
         
-        {/* Chord Type Die */}
+        {/* Dice 2: Bridge Pattern */}
         <div className="text-center">
           <div 
-            className={`dice-face w-16 h-16 rounded-lg flex items-center justify-center mb-2 ${isRolling ? 'animate-dice-roll' : ''}`}
-            data-testid="dice-chord-type"
+            className={`w-16 h-16 rounded-lg flex items-center justify-center mb-2 border-2 border-primary bg-gradient-to-br from-primary/80 to-primary ${isRolling ? 'animate-dice-roll' : ''}`}
+            data-testid="dice-bridge"
           >
-            <span className="text-sm font-bold text-foreground">{chordTypeDiceValue}</span>
+            <span className="text-xl font-bold text-white drop-shadow-lg">{bridgeDiceValue}</span>
           </div>
-          <span className="text-xs text-muted-foreground">Chord Type</span>
+          <span className="text-xs text-muted-foreground font-semibold">Bridge</span>
+        </div>
+
+        {/* Dice 3: Supporting Chord */}
+        <div className="text-center">
+          <div 
+            className={`dice-face w-16 h-16 rounded-lg flex items-center justify-center mb-2 border-2 border-gray-600 bg-orange-600 ${isRolling ? 'animate-dice-roll' : ''}`}
+            data-testid="dice-supporting"
+          >
+            <span className="text-xl font-bold text-white drop-shadow-lg">{supportingDiceValue}</span>
+          </div>
+          <span className="text-xs text-muted-foreground font-semibold">Supporting</span>
         </div>
       </div>
 
