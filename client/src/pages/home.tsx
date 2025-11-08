@@ -152,6 +152,17 @@ export default function Home() {
       }
     }
     
+    // Fix chord symbols: + → aug, ° → dim, ø → m7b5
+    normalized = normalized.replace(/\+$/, 'aug');  // B+ → Baug
+    normalized = normalized.replace(/°$/, 'dim');   // G#° → G#dim (then converted to Abdim)
+    normalized = normalized.replace(/ø$/, 'm7b5'); // Half-diminished
+    
+    // Fix suspended chords: sus → sus4 (database has sus4 and sus2, not just sus)
+    normalized = normalized.replace(/sus$/, 'sus4');
+    
+    // Fix Major notation: Maj → maj (FMaj → Fmaj, then becomes F for major)
+    normalized = normalized.replace(/Maj$/, '');  // FMaj → F (major chords have no suffix)
+    
     // Fix Major 7th: M7 → maj7, M9 → maj9
     normalized = normalized.replace(/M7$/, 'maj7');
     normalized = normalized.replace(/M9$/, 'maj9');

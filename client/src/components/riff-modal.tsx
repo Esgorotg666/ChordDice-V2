@@ -24,6 +24,45 @@ export default function RiffModal({ isOpen, onClose, progression, bridgePattern,
   const [isSaved, setIsSaved] = useState(false);
   const [revealedChords, setRevealedChords] = useState<Set<number>>(new Set());
 
+  // Normalize chord names to match chord diagram keys
+  const normalizeChordName = (chord: string): string => {
+    let normalized = chord;
+    
+    // Convert sharps to flats where database uses flats
+    const sharpToFlat: Record<string, string> = {
+      'A#': 'Bb',
+      'D#': 'Eb',
+      'G#': 'Ab'
+    };
+    
+    for (const [sharp, flat] of Object.entries(sharpToFlat)) {
+      if (normalized.startsWith(sharp)) {
+        normalized = normalized.replace(sharp, flat);
+        break;
+      }
+    }
+    
+    // Fix chord symbols: + → aug, ° → dim, ø → m7b5
+    normalized = normalized.replace(/\+$/, 'aug');  // B+ → Baug
+    normalized = normalized.replace(/°$/, 'dim');   // G#° → G#dim (then converted to Abdim)
+    normalized = normalized.replace(/ø$/, 'm7b5'); // Half-diminished
+    
+    // Fix suspended chords: sus → sus4 (database has sus4 and sus2, not just sus)
+    normalized = normalized.replace(/sus$/, 'sus4');
+    
+    // Fix Major notation: Maj → maj (FMaj → Fmaj, then becomes F for major)
+    normalized = normalized.replace(/Maj$/, '');  // FMaj → F (major chords have no suffix)
+    
+    // Fix Major 7th/9th: M7 → maj7, M9 → maj9
+    normalized = normalized.replace(/M7$/, 'maj7');
+    normalized = normalized.replace(/M9$/, 'maj9');
+    
+    // Fix power chords: remove '5' suffix
+    normalized = normalized.replace(/^([A-G](?:#|b)?)5$/, '$1');
+    
+    return normalized;
+  };
+
   // Reset saved state and revealed chords when modal opens or progression changes
   useEffect(() => {
     if (isOpen) {
@@ -171,7 +210,8 @@ export default function RiffModal({ isOpen, onClose, progression, bridgePattern,
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-6">
           {progression.map((chord, index) => {
             const isRevealed = revealedChords.has(index);
-            const diagram = getChordDiagram(chord);
+            const normalizedChord = normalizeChordName(chord);
+            const diagram = getChordDiagram(normalizedChord);
             
             return (
               <div
