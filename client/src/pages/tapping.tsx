@@ -12,61 +12,23 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 
 const DICE_FACES = [1, 2, 3, 4, 5, 6, 7, 8];
 
-// Two-hand tapping combinations: Left hand (fretting lower frets) → Right hand (tapping 7th fret+)
-interface TappingCombination {
-  leftHand: { chord: string; positions: (number | 'X')[]; fingers: number[] };
-  rightHand: { chord: string; positions: (number | 'X')[]; fingers: number[] };
-  description: string;
-}
-
-const TAPPING_COMBINATIONS: TappingCombination[] = [
-  { 
-    leftHand: { chord: 'Am', positions: ['X', 0, 2, 2, 1, 0], fingers: [0, 0, 2, 3, 1, 0] },
-    rightHand: { chord: 'Cmaj7', positions: ['X', 'X', 10, 9, 8, 8], fingers: [0, 0, 4, 2, 1, 1] },
-    description: 'A minor to C major 7 tapping (high position)'
-  },
-  { 
-    leftHand: { chord: 'Em', positions: [0, 2, 2, 0, 0, 0], fingers: [0, 1, 2, 0, 0, 0] },
-    rightHand: { chord: 'Gmaj9', positions: ['X', 'X', 12, 12, 12, 10], fingers: [0, 0, 2, 3, 4, 1] },
-    description: 'E minor to G major 9 tapping (12th position)'
-  },
-  { 
-    leftHand: { chord: 'C', positions: ['X', 3, 2, 0, 1, 0], fingers: [0, 3, 2, 0, 1, 0] },
-    rightHand: { chord: 'Em9', positions: ['X', 'X', 9, 7, 8, 7], fingers: [0, 0, 3, 1, 2, 1] },
-    description: 'C major to E minor 9 tapping (9th position)'
-  },
-  { 
-    leftHand: { chord: 'G', positions: [3, 2, 0, 0, 0, 3], fingers: [2, 1, 0, 0, 0, 3] },
-    rightHand: { chord: 'Bm7', positions: ['X', 'X', 9, 7, 7, 7], fingers: [0, 0, 3, 1, 1, 1] },
-    description: 'G major to B minor 7 tapping (9th position)'
-  },
-  { 
-    leftHand: { chord: 'D', positions: ['X', 'X', 0, 2, 3, 2], fingers: [0, 0, 0, 1, 3, 2] },
-    rightHand: { chord: 'F#m7', positions: ['X', 'X', 11, 9, 10, 9], fingers: [0, 0, 3, 1, 2, 1] },
-    description: 'D major to F# minor 7 tapping (11th position)'
-  },
-  { 
-    leftHand: { chord: 'Am', positions: ['X', 0, 2, 2, 1, 0], fingers: [0, 0, 2, 3, 1, 0] },
-    rightHand: { chord: 'Dm7', positions: ['X', 'X', 10, 10, 10, 10], fingers: [0, 0, 1, 1, 1, 1] },
-    description: 'A minor to D minor 7 tapping (10th position)'
-  },
-  { 
-    leftHand: { chord: 'E', positions: [0, 2, 2, 1, 0, 0], fingers: [0, 2, 3, 1, 0, 0] },
-    rightHand: { chord: 'Amaj9', positions: ['X', 'X', 14, 13, 14, 14], fingers: [0, 0, 2, 1, 3, 4] },
-    description: 'E major to A major 9 tapping (14th position)'
-  },
-  { 
-    leftHand: { chord: 'Dm', positions: ['X', 'X', 0, 2, 3, 1], fingers: [0, 0, 0, 2, 3, 1] },
-    rightHand: { chord: 'Gmaj7', positions: ['X', 'X', 12, 12, 12, 11], fingers: [0, 0, 2, 3, 4, 1] },
-    description: 'D minor to G major 7 tapping (12th position)'
-  }
+// Open position chords (frets 0-7) - Left Hand
+const OPEN_POSITION_CHORDS = [
+  'C', 'Am', 'Em', 'G', 'D', 'A', 'E', 'Dm',
+  'F', 'Cmaj7', 'Am7', 'Em7', 'Gmaj7', 'Dmaj7', 'Amaj7', 'Emaj7',
+  'C7', 'A7', 'E7', 'G7', 'D7', 'Asus4', 'Esus4', 'Dsus4',
+  'Cadd9', 'Aadd9', 'Eadd9', 'Gadd9', 'Dadd9', 'C6', 'Am6', 'Em6'
 ];
 
-// Get a random tapping combination
-const getRandomTappingCombination = (): TappingCombination => {
-  const randomIndex = Math.floor(Math.random() * TAPPING_COMBINATIONS.length);
-  return TAPPING_COMBINATIONS[randomIndex];
-};
+// High position chords (frets 9+) - Right Hand (tapping)
+const HIGH_POSITION_CHORDS = [
+  'C_barre', 'Am_barre', 'Em_barre', 'G_barre', 'D_barre', 'A_barre', 'E_barre', 'Dm_barre',
+  'F_barre', 'Cmaj7_barre', 'Amaj7_barre', 'Emaj7_barre', 'Gmaj7_barre', 'Dmaj7_barre',
+  'C7_barre', 'A7_barre', 'E7_barre', 'G7_barre', 'D7_barre',
+  'Cm7_barre', 'Am7_barre', 'Em7_barre', 'Gm7_barre', 'Dm7_barre',
+  'Cadd9_barre', 'Aadd9_barre', 'Eadd9_barre', 'Gadd9_barre', 'Dadd9_barre',
+  'C9_barre', 'A9_barre', 'E9_barre', 'G9_barre', 'D9_barre'
+];
 
 export default function TappingPage() {
   const { user, isAuthenticated, isLoading } = useAuthContext();
@@ -160,30 +122,33 @@ export default function TappingPage() {
       setLeftDice(finalLeftDice);
       setRightDice(finalRightDice);
       
-      // Generate a random tapping combination with proper chord diagrams
-      const combination = getRandomTappingCombination();
-      setLeftHandChord(combination.leftHand.chord);
-      setRightHandChord(combination.rightHand.chord);
+      // Use dice values to select chords from database (0-based indexing)
+      const leftIndex = ((finalLeftDice[0] - 1) * 4 + (finalLeftDice[1] - 1)) % OPEN_POSITION_CHORDS.length;
+      const rightIndex = ((finalRightDice[0] - 1) * 4 + (finalRightDice[1] - 1)) % HIGH_POSITION_CHORDS.length;
       
-      // Calculate starting fret for each hand (minimum non-X, non-0 fret)
-      const getStartFret = (positions: (number | 'X')[]) => {
-        const frets = positions.filter(p => typeof p === 'number' && p > 0) as number[];
-        return frets.length > 0 ? Math.min(...frets) : 0;
-      };
+      const leftChordName = OPEN_POSITION_CHORDS[leftIndex];
+      const rightChordName = HIGH_POSITION_CHORDS[rightIndex];
       
-      // Set the chord diagrams directly with calculated fret positions
-      setLeftDiagram({
-        name: combination.leftHand.chord,
-        positions: combination.leftHand.positions,
-        fingers: combination.leftHand.fingers,
-        fret: getStartFret(combination.leftHand.positions)
-      });
-      setRightDiagram({
-        name: combination.rightHand.chord,
-        positions: combination.rightHand.positions,
-        fingers: combination.rightHand.fingers,
-        fret: getStartFret(combination.rightHand.positions)
-      });
+      setLeftHandChord(leftChordName);
+      setRightHandChord(rightChordName);
+      
+      // Get chord diagrams from database
+      const leftChordDiagram = getChordDiagram(leftChordName);
+      const rightChordDiagram = getChordDiagram(rightChordName);
+      
+      if (leftChordDiagram) {
+        setLeftDiagram(leftChordDiagram);
+      } else {
+        console.warn(`No diagram found for left hand chord: ${leftChordName}`);
+        setLeftDiagram(null);
+      }
+      
+      if (rightChordDiagram) {
+        setRightDiagram(rightChordDiagram);
+      } else {
+        console.warn(`No diagram found for right hand chord: ${rightChordName}`);
+        setRightDiagram(null);
+      }
       
       setIsRollingLeft(false);
       setIsRollingRight(false);

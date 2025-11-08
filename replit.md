@@ -66,7 +66,7 @@ Preferred communication style: Simple, everyday language.
 ### Premium Features
 - **Compatible Scales**: Identifies 2-4 musically compatible scales with fretboard visualization.
 - **Guitar Exercises**: Comprehensive practice section (8 categories, 4 skill levels) with detailed descriptions and fretboard diagrams.
-- **Enhanced Tapping**: Dedicated page with independent dual dice for two-hand tapping practice, visualized on dual fretboards with corrected color coding and finger number labels.
+- **Enhanced Tapping**: Dedicated page with independent dual dice for two-hand tapping practice. Left dice (blue) generates open position chords (frets 0-7) from 32-chord database, right dice (orange) generates high position barre chords (frets 9+) from 35-chord database. Dice values actually control chord selection via database lookup. Visualized on dual fretboards with color coding (purple=root, blue=fretting, orange=tapping) and finger number labels.
 - **Optional Premium Dice**: Time Signature Dice and Metronome BPM Dice.
 - **Advanced Genres**: Neo-Classical, Spanish Flamenco, Black Metal, Death Metal, Rock, Funk, with genre-specific progressions and music theory.
 - **Guitar Classroom**: Skill-level organized interface with 6 tiers (Beginner, Novice, Intermediate, Advanced, Expert, Master), featuring 45 lessons with fretboard diagrams and scale integration. Each skill level section includes descriptive introductory text explaining the learning focus at that tier.
