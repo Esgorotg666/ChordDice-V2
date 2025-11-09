@@ -32,6 +32,7 @@ Preferred communication style: Simple, everyday language.
 - **Database**: PostgreSQL via Neon Database (serverless).
 - **ORM**: Drizzle ORM.
 - **Schema**: Users and chord progressions tables, with JSON storage for chord arrays.
+  - **Payment Provider Tracking (v1.10.0)**: Users table includes `paymentProvider` (stripe/google_play/app_store) and `revenueCatUserId` fields to support hybrid payment system.
 - **Migrations**: Drizzle Kit.
 
 ## Key Features
@@ -53,9 +54,15 @@ Preferred communication style: Simple, everyday language.
 - **Authentication**: Replit Auth for saving progress, plus email/password authentication for mobile app deployment.
   - **CRITICAL FIX (Nov 2025 - v1.10.0)**: Email verification bypass in development mode - users can login immediately without verifying email for testing purposes. Production still requires email verification for security.
 - **Monetization**: 
+  - **Hybrid Payment System (v1.10.0)**: Platform-specific payment processing for optimal user experience and compliance:
+    - **Web Users**: Stripe payment processing (2.9% + $0.30 fees) with credit card checkout
+    - **Mobile Users (Android/iOS)**: Google Play Billing and App Store In-App Purchases via RevenueCat (15-30% platform fees)
+    - **Platform Detection**: Automatic detection using Capacitor.getPlatform() to show appropriate payment UI
+    - **Unified Backend**: Single subscription status API endpoint syncs both Stripe and RevenueCat subscriptions
   - **Ad-supported token earning system**: Google AdMob rewarded video ads (max 5 per day) grant +1 dice roll token per ad watched.
-  - **Premium subscription**: $4.99/month via Stripe for unlimited access to exotic chords, advanced genres, scales, and exercises.
+  - **Premium subscription**: $4.99/month for unlimited access to exotic chords, advanced genres, scales, and exercises.
   - **AdMob Integration**: App ID `ca-app-pub-4798049989357665~2334475752`, Ad Unit ID `ca-app-pub-4798049989357665/6660733578`. Cross-platform support (web simulation, native Android/iOS via Capacitor plugin).
+  - **RevenueCat Integration**: Capacitor plugin v11.2.11, webhook-based subscription sync, REST API v1 for subscriber verification.
 
 ### Referral Program
 - **Mechanism**: Unique collision-resistant referral codes.
