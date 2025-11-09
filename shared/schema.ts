@@ -37,6 +37,9 @@ export const users = pgTable("users", {
   stripeSubscriptionId: varchar("stripe_subscription_id"),
   subscriptionStatus: varchar("subscription_status").default("free"), // free, active, canceled, past_due
   subscriptionExpiry: timestamp("subscription_expiry"),
+  // Hybrid payment provider tracking (Stripe for web, Google Play/App Store for mobile)
+  paymentProvider: varchar("payment_provider").default("stripe"), // stripe, google_play, app_store
+  revenueCatUserId: varchar("revenuecat_user_id"), // Original app user ID from RevenueCat
   // Freemium usage tracking
   diceRollsUsed: integer("dice_rolls_used").default(0),
   diceRollsLimit: integer("dice_rolls_limit").default(5), // Base limit, never increased

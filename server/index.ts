@@ -4,6 +4,7 @@ import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 import streakRoutes from "./streakRoutes";
 import achievementRoutes from "./achievementRoutes";
+import revenuecatRoutes from "./revenuecatRoutes";
 
 const app = express();
 
@@ -61,9 +62,10 @@ app.use((req, res, next) => {
 });
 
 (async () => {
-  // Register streak and achievement routes before main routes
+  // Register streak, achievement, and RevenueCat routes before main routes
   app.use(streakRoutes);
   app.use(achievementRoutes);
+  app.use(revenuecatRoutes);
   
   const server = await registerRoutes(app);
 

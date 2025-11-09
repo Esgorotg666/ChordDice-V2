@@ -1,14 +1,16 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Crown, Check, Music, Guitar, Zap, LogIn } from "lucide-react";
+import { Crown, Check, Music, Guitar, Zap, LogIn, Smartphone, CreditCard } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useAuthContext } from "@/contexts/AuthContext";
-import { apiRequest } from "@/lib/queryClient";
+import { apiRequest, queryClient } from "@/lib/queryClient";
 import { trackEvent } from "@/lib/analytics";
+import { shouldUseRevenueCat, getPlatform, getPaymentProvider } from "@/lib/platform-utils";
+import { getRevenueCatOfferings, purchaseRevenueCatPackage, configureRevenueCat } from "@/lib/revenuecat-config";
 
 interface SubscriptionModalProps {
   open: boolean;
@@ -18,8 +20,20 @@ interface SubscriptionModalProps {
 export default function SubscriptionModal({ open, onOpenChange }: SubscriptionModalProps) {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
-  const { isAuthenticated } = useAuthContext();
+  const { isAuthenticated, user } = useAuthContext();
   const [, setLocation] = useLocation();
+  const useRevenueCat = shouldUseRevenueCat();
+  const platform = getPlatform();
+  const paymentProvider = getPaymentProvider();
+
+  // Configure RevenueCat when modal opens (mobile only)
+  useEffect(() => {
+    if (open && useRevenueCat && user) {
+      configureRevenueCat(user.id.toString()).catch(err => {
+        console.error('RevenueCat config error:', err);
+      });
+    }
+  }, [open, useRevenueCat, user]);
 
   const handleUpgrade = async () => {
     // Check if user is authenticated
@@ -35,20 +49,17 @@ export default function SubscriptionModal({ open, onOpenChange }: SubscriptionMo
     }
 
     setIsLoading(true);
+    
     try {
-      trackEvent('begin_checkout', 'Subscription', 'Premium $4.99/month', 4.99);
+      trackEvent('begin_checkout', 'Subscription', `Premium $4.99/month (${paymentProvider})`, 4.99);
       
-      const response = await apiRequest('POST', '/api/subscription/create-checkout', {});
-      
-      if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.message || 'Failed to create checkout session');
+      if (useRevenueCat) {
+        // Mobile: Use RevenueCat for Google Play / App Store billing
+        await handleRevenueCatPurchase();
+      } else {
+        // Web: Use Stripe
+        await handleStripePurchase();
       }
-      
-      const { url } = await response.json();
-      
-      // Redirect to Stripe Checkout
-      window.location.href = url;
     } catch (error: any) {
       console.error('Subscription error:', error);
       toast({
@@ -57,6 +68,57 @@ export default function SubscriptionModal({ open, onOpenChange }: SubscriptionMo
         variant: "destructive",
       });
       setIsLoading(false);
+    }
+  };
+
+  const handleStripePurchase = async () => {
+    const response = await apiRequest('POST', '/api/subscription/create-checkout', {});
+    
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message || 'Failed to create checkout session');
+    }
+    
+    const { url } = await response.json();
+    
+    // Redirect to Stripe Checkout
+    window.location.href = url;
+  };
+
+  const handleRevenueCatPurchase = async () => {
+    try {
+      const offerings = await getRevenueCatOfferings();
+      
+      if (!offerings || !offerings.availablePackages.length) {
+        throw new Error('No subscription packages available. Please try again later.');
+      }
+
+      // Use the first available package (monthly subscription)
+      const monthlyPackage = offerings.availablePackages[0];
+      
+      const customerInfo = await purchaseRevenueCatPackage(monthlyPackage.identifier);
+      
+      if (!customerInfo) {
+        // Purchase was cancelled
+        setIsLoading(false);
+        return;
+      }
+
+      // Purchase successful - invalidate subscription cache and close modal
+      await queryClient.invalidateQueries({ queryKey: ['/api/subscription/status'] });
+      
+      toast({
+        title: "Welcome to Premium!",
+        description: "Your subscription is now active. Enjoy unlimited access!",
+      });
+      
+      trackEvent('purchase_complete', 'Subscription', `Premium via ${paymentProvider}`, 4.99);
+      
+      onOpenChange(false);
+      setIsLoading(false);
+    } catch (error: any) {
+      setIsLoading(false);
+      throw error;
     }
   };
 
@@ -102,6 +164,18 @@ export default function SubscriptionModal({ open, onOpenChange }: SubscriptionMo
                   <Crown className="mr-1 h-3 w-3" />
                   Premium
                 </Badge>
+                {useRevenueCat && (
+                  <Badge variant="outline" className="text-[10px] border-blue-500/30 text-blue-400">
+                    <Smartphone className="mr-1 h-3 w-3" />
+                    {platform === 'android' ? 'Google Play' : 'App Store'}
+                  </Badge>
+                )}
+                {!useRevenueCat && (
+                  <Badge variant="outline" className="text-[10px] border-green-500/30 text-green-400">
+                    <CreditCard className="mr-1 h-3 w-3" />
+                    Stripe
+                  </Badge>
+                )}
               </CardTitle>
               <div className="text-2xl font-bold text-primary">$4.99</div>
               <CardDescription className="text-xs">per month</CardDescription>
