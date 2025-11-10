@@ -367,28 +367,28 @@ export default function DiceInterface({ onResult, onUpgrade }: DiceInterfaceProp
           ];
         }
       case 'black-metal':
-        // 10 authentic black metal progressions - modal, atmospheric, tremolo-based
+        // 10 authentic black metal progressions - power chord dominant, tritones, dissonant intervals
         const blackMetalProgressions = [
-          // 1. Static modal vamp i-i-i-i (sustained gloom, melodic variation)
-          [buildChord(0, 'm'), buildChord(0, 'm'), buildChord(0, 'm'), buildChord(0, 'm')],
-          // 2. Stepwise Aeolian i-VII-VI-VII (ritualistic Am-G-F-G)
-          [buildChord(0, 'm'), buildChord(10), buildChord(8), buildChord(10)],
-          // 3. Phrygian oscillation i-bII-i-bII (chant-like Em-F-Em-F)
-          [buildChord(0, 'm'), buildChord(1), buildChord(0, 'm'), buildChord(1)],
-          // 4. Chromatic mediant i-bVI-bIII-bVII (epic/cinematic)
-          [buildChord(0, 'm'), buildChord(8), buildChord(3), buildChord(10)],
-          // 5. Alternating diad i-iv (call-response tremolo Em-Am)
-          [buildChord(0, 'm'), buildChord(5, 'm'), buildChord(0, 'm'), buildChord(5, 'm')],
-          // 6. Diminished pivot i-dim-i-VI (modal shift device)
-          [buildChord(0, 'm'), buildChord(2, '°'), buildChord(0, 'm'), buildChord(8)],
-          // 7. Suspended color i(add9)-iv(add9)-i(add9)-v(add9) (cold chorale)
-          [buildChord(0, 'add9'), buildChord(5, 'add9'), buildChord(0, 'add9'), buildChord(7, 'add9')],
-          // 8. Harmonic minor i-bII-V-i (raised 7th for tension)
-          [buildChord(0, 'm'), buildChord(1), buildChord(7), buildChord(0, 'm')],
-          // 9. Power fifth ambiguity i5-iv5-i5-VII5 (no third)
-          [buildChord(0, '5'), buildChord(5, '5'), buildChord(0, '5'), buildChord(10, '5')],
-          // 10. Locrian unstable i°-bII-bIII-iv (dissonant b5 tonic)
-          [buildChord(0, '°'), buildChord(1), buildChord(3), buildChord(5, 'm')]
+          // 1. Classic tremolo power chord riff i5-i5-i5-i5 (sustained blastbeat foundation)
+          [buildChord(0, '5'), buildChord(0, '5'), buildChord(0, '5'), buildChord(0, '5')],
+          // 2. Tritone terror i5-tritone5-i5-tritone5 (C5-F#5 or E5-Bb5 dissonance)
+          [buildChord(0, '5'), buildChord(6, '5'), buildChord(0, '5'), buildChord(6, '5')],
+          // 3. Minor 2nd clash i5-bII5-i5-bII5 (E5-F5 chromatic horror)
+          [buildChord(0, '5'), buildChord(1, '5'), buildChord(0, '5'), buildChord(1, '5')],
+          // 4. Chromatic descent i5-bVII5-bVI5-V5 (E5-D5-C5-B5)
+          [buildChord(0, '5'), buildChord(10, '5'), buildChord(8, '5'), buildChord(7, '5')],
+          // 5. Phrygian power oscillation i5-bII5-bIII5-bII5 (E5-F5-G5-F5)
+          [buildChord(0, '5'), buildChord(1, '5'), buildChord(3, '5'), buildChord(1, '5')],
+          // 6. Power fourth ambiguity i5-iv5-i5-iv5 (E5-A5 call-response)
+          [buildChord(0, '5'), buildChord(5, '5'), buildChord(0, '5'), buildChord(5, '5')],
+          // 7. Stepwise power ascent i5-bII5-bIII5-iv5 (E5-F5-G5-A5)
+          [buildChord(0, '5'), buildChord(1, '5'), buildChord(3, '5'), buildChord(5, '5')],
+          // 8. Atmospheric minor foundation im-im(add9)-im-im(add9) (slower ambient sections)
+          [buildChord(0, 'm'), buildChord(0, 'add9'), buildChord(0, 'm'), buildChord(0, 'add9')],
+          // 9. Tritone-fifth hybrid i5-tritone5-bVII5-tritone5 (dissonant resolution)
+          [buildChord(0, '5'), buildChord(6, '5'), buildChord(10, '5'), buildChord(6, '5')],
+          // 10. Power chord Aeolian descent i5-bVII5-bVI5-bVII5 (E5-D5-C5-D5)
+          [buildChord(0, '5'), buildChord(10, '5'), buildChord(8, '5'), buildChord(10, '5')]
         ];
         return blackMetalProgressions[randomIndex];
       case 'death-metal':
