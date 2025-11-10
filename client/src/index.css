@@ -70,6 +70,16 @@
   --ring: hsl(43, 74%, 49%);
 }
 
+/* Safe area padding for mobile devices (notches, status bars, navigation bars) */
+@supports (padding: env(safe-area-inset-top)) {
+  body {
+    padding-top: env(safe-area-inset-top);
+    padding-right: env(safe-area-inset-right);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+  }
+}
+
 @layer base {
   * {
     @apply border-border;

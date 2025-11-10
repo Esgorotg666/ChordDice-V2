@@ -7,6 +7,7 @@ import { apiRequest } from "@/lib/queryClient";
 import FretboardDisplay from "@/components/fretboard-display";
 import { getChordDiagram, type BridgePattern } from "@/lib/music-data";
 import GearRecommendations from "@/components/gear-recommendations";
+import { App } from '@capacitor/app';
 
 interface RiffModalProps {
   isOpen: boolean;
@@ -84,6 +85,29 @@ export default function RiffModal({ isOpen, onClose, progression, bridgePattern,
     }
   }, [isOpen, onClose]);
 
+  // Handle Android hardware back button (only on native platforms)
+  useEffect(() => {
+    let backButtonListener: any;
+    
+    const setupBackButton = async () => {
+      // Only add listener on native platforms (Android/iOS)
+      const { Capacitor } = await import('@capacitor/core');
+      if (isOpen && Capacitor.isNativePlatform()) {
+        backButtonListener = await App.addListener('backButton', () => {
+          onClose();
+        });
+      }
+    };
+
+    setupBackButton();
+
+    return () => {
+      if (backButtonListener) {
+        backButtonListener.remove();
+      }
+    };
+  }, [isOpen, onClose]);
+
   const saveProgressionMutation = useMutation({
     mutationFn: async () => {
       return await apiRequest('POST', '/api/chord-progressions', {
@@ -151,7 +175,7 @@ export default function RiffModal({ isOpen, onClose, progression, bridgePattern,
             variant="destructive"
             size="sm"
             onClick={onClose}
-            className="bg-red-600 hover:bg-red-700 text-white p-2 h-auto min-h-[44px] min-w-[44px]"
+            className="bg-red-600 hover:bg-red-700 text-white p-2 h-auto min-h-[48px] min-w-[48px]"
             data-testid="button-close-riff-modal"
             aria-label="Close modal"
           >
@@ -173,7 +197,7 @@ export default function RiffModal({ isOpen, onClose, progression, bridgePattern,
               <GitBranch className="h-5 w-5 text-primary" />
               <h4 className="font-semibold text-primary">Bridge Pattern System</h4>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
               {/* Main Chord */}
               <div className="bg-purple-600/10 border border-purple-600/30 rounded-lg p-3">
                 <div className="text-xs text-muted-foreground mb-1">Dice 1: Main Chord</div>
@@ -207,7 +231,7 @@ export default function RiffModal({ isOpen, onClose, progression, bridgePattern,
         )}
 
         {/* Interactive Dice Grid - Click to Reveal Fretboard */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 mb-6">
           {progression.map((chord, index) => {
             const isRevealed = revealedChords.has(index);
             const normalizedChord = normalizeChordName(chord);
@@ -271,7 +295,7 @@ export default function RiffModal({ isOpen, onClose, progression, bridgePattern,
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-3 mb-4">
           <Button 
-            className="flex-1 font-medium min-h-[44px]"
+            className="flex-1 font-medium min-h-[48px]"
             onClick={handlePractice}
             data-testid="button-practice"
           >
@@ -279,7 +303,7 @@ export default function RiffModal({ isOpen, onClose, progression, bridgePattern,
           </Button>
           <Button 
             variant="secondary" 
-            className="flex-1 font-medium min-h-[44px] hover:bg-accent hover:text-accent-foreground"
+            className="flex-1 font-medium min-h-[48px] hover:bg-accent hover:text-accent-foreground"
             onClick={handleSave}
             disabled={saveProgressionMutation.isPending || isSaved}
             data-testid="button-save"
