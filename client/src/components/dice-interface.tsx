@@ -160,53 +160,53 @@ export default function DiceInterface({ onResult, onUpgrade }: DiceInterfaceProp
     switch (genre) {
       case 'jazz':
         if (isMinor) {
-          // 10 authentic minor jazz progressions
+          // 10 authentic minor jazz progressions with extended voicings
           const jazzMinorProgressions = [
-            // 1. John Coltrane "Blue Bossa" - Minor ii-V-i
-            [buildChord(2, 'm7b5'), buildChord(7, '7'), buildChord(0, 'm7'), buildChord(5, 'm7')],
-            // 2. Minor ii-V-i with extensions
-            [buildChord(2, 'm7b5'), buildChord(7, '7'), buildChord(0, 'm7'), buildChord(8, 'M7')],
-            // 3. Minor blues form
-            [buildChord(0, 'm7'), buildChord(5, 'm7'), buildChord(0, 'm7'), buildChord(7, '7')],
-            // 4. Modal minor progression
-            [buildChord(0, 'm7'), buildChord(10, '7'), buildChord(8, 'M7'), buildChord(7, '7')],
-            // 5. Minor turnaround
-            [buildChord(0, 'm7'), buildChord(9, 'm7'), buildChord(2, 'm7b5'), buildChord(7, '7')],
-            // 6. Dorian minor vamp
-            [buildChord(0, 'm7'), buildChord(5, 'm7'), buildChord(0, 'm9'), buildChord(5, 'm9')],
-            // 7. Minor with altered dominants
-            [buildChord(2, 'm7b5'), buildChord(7, '7'), buildChord(0, 'm7'), buildChord(5, 'm7')],
-            // 8. Minor backdoor progression
-            [buildChord(5, 'm7'), buildChord(8, '7'), buildChord(0, 'm7'), buildChord(7, '7')],
-            // 9. Minor Coltrane-style changes
-            [buildChord(0, 'm7'), buildChord(3, '7'), buildChord(8, 'M7'), buildChord(0, 'm7')],
-            // 10. Extended minor turnaround
-            [buildChord(4, 'm7'), buildChord(10, '7'), buildChord(0, 'm7'), buildChord(7, '7')]
+            // 1. John Coltrane "Blue Bossa" - Minor ii-V-i with extensions
+            [buildChord(2, 'm7b5'), buildChord(7, '7b9'), buildChord(0, 'm9'), buildChord(5, 'm11')],
+            // 2. Minor ii-V-i with altered dominant
+            [buildChord(2, 'm7b5'), buildChord(7, '7alt'), buildChord(0, 'm7'), buildChord(8, 'maj7')],
+            // 3. Minor blues form with 9ths
+            [buildChord(0, 'm9'), buildChord(5, 'm11'), buildChord(0, 'm9'), buildChord(7, '7#5')],
+            // 4. Modal minor progression extended
+            [buildChord(0, 'm11'), buildChord(10, '13'), buildChord(8, 'maj9'), buildChord(7, '7b9')],
+            // 5. Minor turnaround with half-diminished
+            [buildChord(0, 'm9'), buildChord(9, 'm7'), buildChord(2, 'm7b5'), buildChord(7, '7alt')],
+            // 6. Dorian minor vamp with extensions
+            [buildChord(0, 'm11'), buildChord(5, 'm11'), buildChord(0, 'm9'), buildChord(5, 'm9')],
+            // 7. Minor with diminished passing chord
+            [buildChord(0, 'm7'), buildChord(1, 'dim7'), buildChord(2, 'm7b5'), buildChord(7, '7b9')],
+            // 8. Minor backdoor with 13th
+            [buildChord(5, 'm9'), buildChord(8, '13'), buildChord(0, 'm(maj7)'), buildChord(7, '7sus4')],
+            // 9. Minor Coltrane-style with altered dominant
+            [buildChord(0, 'm9'), buildChord(3, '7#5'), buildChord(8, 'maj7'), buildChord(0, 'm(maj7)')],
+            // 10. Extended minor turnaround with 9ths
+            [buildChord(4, 'm9'), buildChord(10, '7b9'), buildChord(0, 'm11'), buildChord(7, '7alt')]
           ];
           return jazzMinorProgressions[randomIndex];
         } else {
-          // 10 authentic major jazz progressions from Miles Davis, John Coltrane, etc.
+          // 10 authentic major jazz progressions with extended chords (9ths, 11ths, 13ths)
           const jazzMajorProgressions = [
-            // 1. Miles Davis "Autumn Leaves" - ii-V-I resolution
-            [buildChord(2, 'm7'), buildChord(7, '7'), buildChord(0, 'M7'), buildChord(5, 'M7')],
-            // 2. Dizzy Gillespie "I Got Rhythm" - Rhythm changes
-            [buildChord(0, 'M7'), buildChord(9, 'm7'), buildChord(2, 'm7'), buildChord(7, '7')],
-            // 3. Miles Davis "All Blues" - Blues form
-            [buildChord(0, '7'), buildChord(5, '7'), buildChord(7, '7'), buildChord(0, '7')],
+            // 1. Miles Davis "Autumn Leaves" - ii-V-I with 9ths
+            [buildChord(2, 'm9'), buildChord(7, '13'), buildChord(0, 'maj9'), buildChord(5, '6/9')],
+            // 2. Dizzy Gillespie "I Got Rhythm" - Extended rhythm changes
+            [buildChord(0, '6/9'), buildChord(9, 'm9'), buildChord(2, 'm11'), buildChord(7, '7b9')],
+            // 3. Miles Davis "All Blues" - Blues with altered dominants
+            [buildChord(0, '9'), buildChord(5, '13'), buildChord(7, '7#5'), buildChord(0, '7sus4')],
             // 4. Duke Ellington "Satin Doll" - Extended turnaround
-            [buildChord(4, 'm7'), buildChord(9, 'm7'), buildChord(2, 'm7'), buildChord(7, '7')],
-            // 5. John Coltrane "Giant Steps" - Ascending build
-            [buildChord(0, 'M7'), buildChord(5, 'M7'), buildChord(2, 'm7'), buildChord(7, '7')],
-            // 6. Dizzy Gillespie "Blues for Alice" - Bird blues
-            [buildChord(10, '7'), buildChord(3, '7'), buildChord(8, 'M7'), buildChord(0, 'M7')],
-            // 7. John Coltrane "Giant Steps" - Coltrane changes
-            [buildChord(0, 'M7'), buildChord(3, '7'), buildChord(8, 'M7'), buildChord(11, '7')],
-            // 8. Thelonious Monk "Misty" influences - Backdoor progression
-            [buildChord(5, 'm7'), buildChord(10, '7'), buildChord(0, 'M7'), buildChord(7, '7')],
-            // 9. Billie Holiday "All the Things You Are" - Modal shift
-            [buildChord(9, 'm7'), buildChord(2, '7'), buildChord(7, 'M7'), buildChord(0, 'M7')],
-            // 10. Standard I-vi-ii-V progression
-            [buildChord(0, 'M7'), buildChord(9, 'm7'), buildChord(2, 'm7'), buildChord(7, '7')]
+            [buildChord(4, 'm11'), buildChord(9, 'm9'), buildChord(2, 'm7'), buildChord(7, '7alt')],
+            // 5. John Coltrane "Giant Steps" - Maj7#11 voicings
+            [buildChord(0, 'maj7#11'), buildChord(5, 'maj9'), buildChord(2, 'm11'), buildChord(7, '13')],
+            // 6. Dizzy Gillespie "Blues for Alice" - Bird blues extended
+            [buildChord(10, '13'), buildChord(3, '7b9'), buildChord(8, 'maj9'), buildChord(0, '6/9')],
+            // 7. John Coltrane "Giant Steps" - Coltrane changes with extensions
+            [buildChord(0, 'maj9'), buildChord(3, '7#5'), buildChord(8, 'maj7#11'), buildChord(11, '7b9')],
+            // 8. Thelonious Monk "Misty" - Backdoor with altered voicings
+            [buildChord(5, 'm11'), buildChord(10, '13'), buildChord(0, 'maj9'), buildChord(7, '7alt')],
+            // 9. Bill Evans "Waltz for Debby" - Sophisticated voicings
+            [buildChord(9, 'm9'), buildChord(2, 'm11'), buildChord(7, 'maj9'), buildChord(0, '6/9')],
+            // 10. Standard I-vi-ii-V with 9ths and 13ths
+            [buildChord(0, 'maj9'), buildChord(9, 'm9'), buildChord(2, 'm11'), buildChord(7, '13')]
           ];
           return jazzMajorProgressions[randomIndex];
         }
