@@ -144,18 +144,18 @@ export default function RiffModal({ isOpen, onClose, progression, bridgePattern,
       aria-modal="true"
       aria-labelledby="modal-title"
     >
-      <div className="bg-card rounded-lg p-4 md:p-6 max-w-6xl w-full border border-border my-4">
+      <div className="bg-card rounded-lg p-4 md:p-6 max-w-4xl w-full border border-border my-4 max-h-[90vh] overflow-y-auto">
         <div className="flex justify-between items-center mb-4">
           <h3 id="modal-title" className="text-lg md:text-xl font-semibold">Generated Riff Progression</h3>
           <Button
-            variant="ghost"
+            variant="destructive"
             size="sm"
             onClick={onClose}
-            className="text-muted-foreground hover:text-foreground p-2 h-auto min-h-[44px] min-w-[44px]"
+            className="bg-red-600 hover:bg-red-700 text-white p-2 h-auto min-h-[44px] min-w-[44px]"
             data-testid="button-close-riff-modal"
             aria-label="Close modal"
           >
-            <X className="h-5 w-5" />
+            <X className="h-6 w-6" />
           </Button>
         </div>
         
