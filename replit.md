@@ -53,6 +53,14 @@ Preferred communication style: Simple, everyday language.
 - **Modes**: Demo/Guest mode (full premium access), Free Tier (limited access, 5 free riff generations), Premium Tier (unlimited features).
 - **Authentication**: Replit Auth for saving progress, plus email/password authentication for mobile app deployment.
   - **CRITICAL FIX (Nov 2025 - v1.10.0)**: Email verification bypass in development mode - users can login immediately without verifying email for testing purposes. Production still requires email verification for security.
+  - **Signup UX Enhancement (Nov 2025 - v1.10.1)**: Completely redesigned signup success flow for Google Play Store users. After account creation, users now see a dedicated verification screen with:
+    - Clear "Check Your Email" header with success confirmation
+    - Display of exact email address where verification was sent
+    - 3-step numbered instructions for email verification process
+    - Prominent warning to check spam/junk folder
+    - "Resend Verification Email" button with loading states
+    - "Continue to Login" button for verified users
+    - Smart detection: Production shows full verification flow, development bypasses to immediate login
 - **Monetization**: 
   - **Hybrid Payment System (v1.10.0)**: Platform-specific payment processing for optimal user experience and compliance:
     - **Web Users**: Stripe payment processing (2.9% + $0.30 fees) with credit card checkout

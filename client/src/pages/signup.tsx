@@ -10,8 +10,9 @@ import { z } from "zod";
 import { type RegisterUser } from "@shared/schema";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
-import { Eye, EyeOff, Music2 } from "lucide-react";
+import { Eye, EyeOff, Music2, Mail, CheckCircle2, AlertCircle, RefreshCw } from "lucide-react";
 import { motion } from "framer-motion";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 
 export default function SignupPage() {
   const [, setLocation] = useLocation();
@@ -19,6 +20,10 @@ export default function SignupPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [signupSuccess, setSignupSuccess] = useState(false);
+  const [userEmail, setUserEmail] = useState("");
+  const [isResending, setIsResending] = useState(false);
+  const [requiresVerification, setRequiresVerification] = useState(true);
 
   // Signup form schema with validation
   const signupSchema = z.object({
@@ -43,18 +48,22 @@ export default function SignupPage() {
       const response = await apiRequest("POST", "/api/auth/register", data);
       const result = await response.json();
       
+      // Store the email for resend functionality
+      setUserEmail(data.email);
+      
+      // Check if verification is required (production) or bypassed (development)
+      setRequiresVerification(result.requiresVerification !== false);
+      
+      // Show success screen instead of redirecting immediately
+      setSignupSuccess(true);
+      
       toast({
-        title: "Account created successfully!",
-        description: "Please check your email to verify your account before logging in.",
+        title: "Account created!",
+        description: result.requiresVerification !== false 
+          ? "Check your email to verify your account."
+          : "You can now log in!",
       });
       
-      // Trigger transition animation
-      setIsTransitioning(true);
-      
-      // Navigate after animation
-      setTimeout(() => {
-        setLocation("/login");
-      }, 600);
     } catch (error: any) {
       console.error("Signup error:", error);
       
@@ -82,6 +91,39 @@ export default function SignupPage() {
       });
     } finally {
       setIsSubmitting(false);
+    }
+  };
+
+  const resendVerification = async () => {
+    if (!userEmail) return;
+    
+    try {
+      setIsResending(true);
+      
+      const response = await apiRequest("POST", "/api/auth/resend-verification", { email: userEmail });
+      const result = await response.json();
+      
+      if (response.ok) {
+        toast({
+          title: "Email sent!",
+          description: "Verification email has been resent. Check your inbox and spam folder.",
+        });
+      } else {
+        toast({
+          title: "Failed to send email",
+          description: result.message || "Please try again in a few moments.",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      console.error("Resend verification error:", error);
+      toast({
+        title: "Error",
+        description: "Could not resend verification email. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsResending(false);
     }
   };
 
@@ -169,7 +211,11 @@ export default function SignupPage() {
                 background: 'linear-gradient(135deg, #D4AF37 0%, #B8941F 50%, #D4AF37 100%)',
                 boxShadow: '0 0 30px rgba(212, 175, 55, 0.4), inset 0 2px 10px rgba(255,255,255,0.2)'
               }}>
-              <Music2 className="h-8 w-8 text-black" />
+              {signupSuccess ? (
+                <CheckCircle2 className="h-8 w-8 text-black" />
+              ) : (
+                <Music2 className="h-8 w-8 text-black" />
+              )}
               <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent" />
             </div>
           </div>
@@ -180,11 +226,125 @@ export default function SignupPage() {
               WebkitTextFillColor: 'transparent',
               textShadow: '0 0 20px rgba(212, 175, 55, 0.3)'
             }}>
-            Join Guitar Dice
+            {signupSuccess ? "Check Your Email" : "Join Guitar Dice"}
           </CardTitle>
-          <p className="text-center text-sm" style={{ color: '#D4AF37' }}>Start your musical journey</p>
+          <p className="text-center text-sm" style={{ color: '#D4AF37' }}>
+            {signupSuccess 
+              ? "One more step to rock with us!" 
+              : "Start your musical journey"}
+          </p>
         </CardHeader>
         <CardContent className="px-4 sm:px-6">
+          {signupSuccess && requiresVerification ? (
+            // Success screen with verification instructions
+            <div className="space-y-4">
+              {/* Success message */}
+              <Alert className="border-green-500/50 bg-green-500/10">
+                <CheckCircle2 className="h-4 w-4 text-green-500" />
+                <AlertDescription className="text-sm">
+                  Account created successfully!
+                </AlertDescription>
+              </Alert>
+
+              {/* Email sent confirmation with icon */}
+              <div className="flex items-start gap-3 p-4 bg-muted/50 rounded-lg border border-border">
+                <Mail className="h-5 w-5 text-[#D4AF37] mt-0.5 flex-shrink-0" />
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-semibold mb-1">Verification email sent to:</p>
+                  <p className="text-sm text-[#D4AF37] font-mono break-all">{userEmail}</p>
+                </div>
+              </div>
+
+              {/* Clear instructions */}
+              <div className="space-y-3 text-sm">
+                <div className="flex items-start gap-2">
+                  <span className="text-[#D4AF37] font-bold">1.</span>
+                  <p>Open your email inbox and look for an email from <span className="font-semibold">Guitar Dice</span></p>
+                </div>
+                <div className="flex items-start gap-2">
+                  <span className="text-[#D4AF37] font-bold">2.</span>
+                  <p>Click the <span className="font-semibold">"Verify Email Address"</span> button in the email</p>
+                </div>
+                <div className="flex items-start gap-2">
+                  <span className="text-[#D4AF37] font-bold">3.</span>
+                  <p>Return here and log in to start creating riffs!</p>
+                </div>
+              </div>
+
+              {/* Spam folder warning */}
+              <Alert className="border-amber-500/50 bg-amber-500/10">
+                <AlertCircle className="h-4 w-4 text-amber-500" />
+                <AlertDescription className="text-xs">
+                  <strong>Can't find the email?</strong> Check your spam or junk folder. 
+                  The verification link expires in 24 hours.
+                </AlertDescription>
+              </Alert>
+
+              {/* Resend button - prominent */}
+              <Button
+                onClick={resendVerification}
+                disabled={isResending}
+                className="w-full h-12 font-bold shadow-lg relative overflow-hidden group"
+                variant="outline"
+                style={{
+                  borderColor: '#D4AF37',
+                  borderWidth: '2px',
+                }}
+                data-testid="button-resend-verification"
+              >
+                <RefreshCw className={`mr-2 h-4 w-4 ${isResending ? 'animate-spin' : ''}`} />
+                {isResending ? "Sending..." : "Resend Verification Email"}
+              </Button>
+
+              {/* Continue to login button */}
+              <div className="pt-2 border-t border-border">
+                <p className="text-center text-xs text-muted-foreground mb-3">
+                  Already verified your email?
+                </p>
+                <Link href="/login">
+                  <Button 
+                    className="w-full h-11 text-black font-bold shadow-lg relative overflow-hidden group"
+                    style={{
+                      background: 'linear-gradient(135deg, #D4AF37 0%, #FFD700 50%, #D4AF37 100%)',
+                      border: '1px solid rgba(255, 215, 0, 0.3)',
+                      boxShadow: '0 0 20px rgba(212, 175, 55, 0.3), 0 4px 10px rgba(0,0,0,0.5)'
+                    }}
+                    data-testid="button-go-to-login"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 group-hover:translate-x-full transition-transform duration-700" />
+                    <span className="relative z-10">Continue to Login</span>
+                  </Button>
+                </Link>
+              </div>
+            </div>
+          ) : signupSuccess && !requiresVerification ? (
+            // Development mode - no verification needed
+            <div className="space-y-4">
+              <Alert className="border-green-500/50 bg-green-500/10">
+                <CheckCircle2 className="h-4 w-4 text-green-500" />
+                <AlertDescription>
+                  Account created! You can log in immediately.
+                </AlertDescription>
+              </Alert>
+
+              <Link href="/login">
+                <Button 
+                  className="w-full h-11 text-black font-bold shadow-lg relative overflow-hidden group"
+                  style={{
+                    background: 'linear-gradient(135deg, #D4AF37 0%, #FFD700 50%, #D4AF37 100%)',
+                    border: '1px solid rgba(255, 215, 0, 0.3)',
+                    boxShadow: '0 0 20px rgba(212, 175, 55, 0.3), 0 4px 10px rgba(0,0,0,0.5)'
+                  }}
+                  data-testid="button-go-to-login"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 group-hover:translate-x-full transition-transform duration-700" />
+                  <span className="relative z-10">Go to Login</span>
+                </Button>
+              </Link>
+            </div>
+          ) : (
+            // Original signup form
+            <>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
               <FormField
@@ -289,6 +449,8 @@ export default function SignupPage() {
               </Button>
             </Link>
           </div>
+            </>
+          )}
         </CardContent>
       </Card>
       </motion.div>
