@@ -134,7 +134,7 @@ export function OnboardingModal({ open, onComplete }: OnboardingModalProps) {
   };
 
   return (
-    <Dialog open={open} onOpenChange={() => {}}>
+    <Dialog open={open} onOpenChange={(newOpen) => !newOpen && handleSkip()}>
       <DialogContent className="sm:max-w-[500px] bg-black border-gold max-h-[85vh] flex flex-col p-4 sm:p-6 gap-3" onInteractOutside={(e) => e.preventDefault()}>
         <DialogHeader className="flex-shrink-0 space-y-1">
           <DialogTitle className="text-xl sm:text-2xl font-bold text-gold flex items-center gap-2">

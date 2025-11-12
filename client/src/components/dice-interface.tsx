@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
@@ -10,6 +10,7 @@ import { useUsageTracking } from "@/hooks/useUsageTracking";
 import { trackEvent } from "@/lib/analytics";
 import { admobService } from "@/lib/admob-service";
 import { useToast } from "@/hooks/use-toast";
+import { useQuery } from "@tanstack/react-query";
 
 // Import genre-specific background images - Professional guitar photos
 import metalBg1 from "@assets/stock_images/bc_rich_warlock_elec_12e0db25.jpg";
@@ -74,8 +75,40 @@ export default function DiceInterface({ onResult, onUpgrade }: DiceInterfaceProp
     isTestUser
   } = useUsageTracking();
   
+  // Fetch user preferences to initialize genre
+  const { data: preferences } = useQuery<{
+    preferredGenre?: string;
+    playingStyle?: string;
+    skillLevel?: string;
+    hasCompletedOnboarding: boolean;
+  }>({
+    queryKey: ["/api/preferences"],
+    enabled: isAuthenticated,
+  });
+  
   const [currentMode, setCurrentMode] = useState<'single' | 'riff' | 'random' | 'tapping'>('single');
   const [selectedGenre, setSelectedGenre] = useState<Genre>('any');
+  
+  // Initialize selectedGenre from user's preferredGenre when preferences load
+  useEffect(() => {
+    if (preferences?.preferredGenre) {
+      // Normalize to lowercase and handle legacy values
+      let normalizedGenre = preferences.preferredGenre.toLowerCase();
+      
+      // Remap legacy genre names
+      const legacyRemap: Record<string, string> = {
+        'neo classical': 'neo-classical',
+        'spanish flamenco': 'flamenco',
+      };
+      normalizedGenre = legacyRemap[normalizedGenre] || normalizedGenre;
+      
+      // Check if the genre is valid
+      const validGenre = genres.find(g => g.value === normalizedGenre);
+      if (validGenre) {
+        setSelectedGenre(normalizedGenre as Genre);
+      }
+    }
+  }, [preferences]);
   const [isRolling, setIsRolling] = useState(false);
   const [colorDiceValue, setColorDiceValue] = useState(4);
   const [numberDiceValue, setNumberDiceValue] = useState(4);
