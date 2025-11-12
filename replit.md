@@ -1,6 +1,6 @@
 # Overview
 
-Guitar Dice is a freemium web application that generates musical chord progressions for musicians. It features a 12x11 grid mapping musical keys to chord types, color-coded for major and minor contexts. Users can generate single chords or 4-chord progressions using a virtual dice system. The application incorporates a freemium business model with usage limits, ad-supported token generation, subscription upgrades, and a referral program to drive user acquisition and engagement. The business vision is to provide a comprehensive tool for musical practice and creation, leveraging a robust monetization strategy and community growth initiatives.
+Guitar Dice is a freemium web application designed to generate musical chord progressions. It provides a 12x11 grid mapping musical keys to chord types, enhanced with color-coding for major and minor contexts. The application allows users to generate single chords or 4-chord progressions using a virtual dice system. Its business model is freemium, featuring usage limits, ad-supported token generation, subscription upgrades, and a referral program to drive user acquisition. The vision is to offer a comprehensive tool for musical practice and creation, supported by a robust monetization strategy and community growth initiatives.
 
 # User Preferences
 
@@ -8,150 +8,78 @@ Preferred communication style: Simple, everyday language.
 
 # System Architecture
 
-## Frontend
-- **Framework**: React Single Page Application (SPA) with Vite.
-- **UI/UX**: `shadcn/ui` components (Radix UI, Tailwind CSS) with custom CSS variables for musical key color-coding. Mobile-first, touch-optimized design.
-- **State Management**: TanStack Query for server state, React hooks for local state.
-- **Routing**: Wouter.
-- **Theming**: Black and dark gold (#D4AF37) color scheme.
-- **Adaptive Backgrounds**: Dynamic dice interface backgrounds based on selected genre.
-- **Fretboard Diagrams**: Comprehensive, accurate fretboard diagrams across the application, with single-note, scale, and chord visualizations, including 24-fret full neck display and interactive toggles.
+## UI/UX
+- **Frontend Framework**: React SPA with Vite.
+- **Components**: `shadcn/ui` (Radix UI, Tailwind CSS) with custom CSS for musical key color-coding.
+- **Design Principles**: Mobile-first, touch-optimized, with a black and dark gold (`#D4AF37`) color scheme.
+- **Dynamic Elements**: Adaptive backgrounds based on selected genre, comprehensive fretboard diagrams with interactive toggles.
 
 ## Backend
-- **Server**: Express.js RESTful API with middleware for logging and error handling.
-- **Development**: Vite integration for Hot Module Replacement (HMR).
-- **Storage**: Abstracted storage interface (currently in-memory, with PostgreSQL session store integration).
-- **Session Management**: 
-  - **CRITICAL FIX (Oct 2025)**: Session cookies were not persisting due to two configuration issues:
-    1. `secure: true` prevented cookie transmission in Replit's HTTP→HTTPS proxy environment. Fixed by setting `secure: process.env.NODE_ENV === 'production'`.
-    2. CORS wildcard origin (`true`) prevented credentials from working. Fixed by returning specific origin (`callback(null, origin || '*')`).
-  - Uses express-session with PostgreSQL store (connect-pg-simple) for persistent sessions.
-  - Cookie config: HttpOnly, SameSite=Lax, MaxAge=7 days, Secure only in production.
+- **Server**: Express.js RESTful API.
+- **Development**: Vite integration for HMR.
+- **Session Management**: `express-session` with `connect-pg-simple` for persistent sessions, ensuring secure cookie handling (`HttpOnly`, `SameSite=Lax`, `MaxAge=7 days`, `Secure` in production).
 
 ## Data Storage
-- **Database**: PostgreSQL via Neon Database (serverless).
+- **Database**: PostgreSQL (Neon Database).
 - **ORM**: Drizzle ORM.
-- **Schema**: Users and chord progressions tables, with JSON storage for chord arrays.
-  - **Payment Provider Tracking (v1.10.0)**: Users table includes `paymentProvider` (stripe/google_play/app_store) and `revenueCatUserId` fields to support hybrid payment system.
+- **Schema**: Tables for users and chord progressions, including fields for payment provider tracking (`paymentProvider`, `revenueCatUserId`).
 - **Migrations**: Drizzle Kit.
 
 ## Key Features
 
 ### Core Musical Features
-- **3-Dice Bridge System (v1.10.0 - Nov 2025)**: Revolutionary chord progression generator using three 8-sided dice:
-  - **Main Chord Die**: Generates the starting chord using color groups and chord types
-  - **Bridge Pattern Die**: Selects musical connection method (Compatible Scale, Pentatonic Pattern, Chromatic Connection, or Arpeggio Bridge)
-  - **Supporting Chord Die**: Generates the ending chord
-  - **8 Color Groups**: Purple, Orange, Blue, Green, Red, Yellow, Pink, Teal (matching 8-sided dice design)
-  - **Bridge Pattern Types**: 4 musically-accurate connection patterns that link chords using scales, pentatonic boxes, chromatic passages, or arpeggios
-- **Musical Theory**: Color-coded key groups, numbered exotic chord types, 12x11 interactive chord chart, pentatonic scale guide, and dual fretboard tapping visualization.
-- **Progression Types**: Single chord generation or full riff creation with authentic, genre-specific progressions (e.g., Extreme Metal, Black Metal, Rock, Jazz, Funk, Classical) that transpose to the rolled key.
-- **Musical Accuracy**: Dynamic scale generation from interval formulas, preservation of accidental families during transposition, and correct modal accidental preferences.
-- **Fretboard Display Fix (Oct 2025)**: Chord name normalization ensures dice-generated chords (A#M7, C#5, etc.) correctly map to chord diagram database keys (Bbmaj7, C#, etc.) by converting: sharp→flat where needed (A#→Bb, D#→Eb, G#→Ab), M7/M9→maj7/maj9, and stripping power chord '5' suffix.
+- **3-Dice Bridge System**: Generates chord progressions using a Main Chord Die, Bridge Pattern Die (Compatible Scale, Pentatonic Pattern, Chromatic Connection, Arpeggio Bridge), and Supporting Chord Die, utilizing 8 color groups.
+- **Musical Theory Integration**: Color-coded key groups, exotic chord types, interactive chord chart, pentatonic scale guide, and dual fretboard visualization.
+- **Progression Types**: Single chord generation or genre-specific 4-chord riff creation (e.g., Extreme Metal, Jazz, Funk) that transpose to the rolled key.
+- **Musical Accuracy**: Dynamic scale generation, preservation of accidental families, and correct modal accidental preferences.
+- **Fretboard Display**: Normalizes dice-generated chord names to map correctly to chord diagram database keys (e.g., A#M7 to Bbmaj7).
 
-### Freemium Business Model
-- **Modes**: Demo/Guest mode (full premium access), Free Tier (limited access, 5 free riff generations), Premium Tier (unlimited features).
-- **Authentication**: Replit Auth for saving progress, plus email/password authentication for mobile app deployment.
-  - **CRITICAL FIX (Nov 2025 - v1.10.0)**: Email verification bypass in development mode - users can login immediately without verifying email for testing purposes. Production still requires email verification for security.
-  - **Signup UX Enhancement (Nov 2025 - v1.10.1)**: Completely redesigned signup success flow for Google Play Store users. After account creation, users now see a dedicated verification screen with:
-    - Clear "Check Your Email" header with success confirmation
-    - Display of exact email address where verification was sent
-    - 3-step numbered instructions for email verification process
-    - Prominent warning to check spam/junk folder
-    - "Resend Verification Email" button with loading states
-    - "Continue to Login" button for verified users
-    - Smart detection: Production shows full verification flow, development bypasses to immediate login
-- **Monetization**: 
-  - **Hybrid Payment System (v1.10.0)**: Platform-specific payment processing for optimal user experience and compliance:
-    - **Web Users**: Stripe payment processing (2.9% + $0.30 fees) with credit card checkout
-    - **Mobile Users (Android/iOS)**: Google Play Billing and App Store In-App Purchases via RevenueCat (15-30% platform fees)
-    - **Platform Detection**: Automatic detection using Capacitor.getPlatform() to show appropriate payment UI
-    - **Unified Backend**: Single subscription status API endpoint syncs both Stripe and RevenueCat subscriptions
-  - **Ad-supported token earning system**: Google AdMob rewarded video ads (max 5 per day) grant +1 dice roll token per ad watched.
-  - **Premium subscription**: $4.99/month for unlimited access to exotic chords, advanced genres, scales, and exercises.
-  - **AdMob Integration**: App ID `ca-app-pub-4798049989357665~2334475752`, Ad Unit ID `ca-app-pub-4798049989357665/6660733578`. Cross-platform support (web simulation, native Android/iOS via Capacitor plugin).
-  - **RevenueCat Integration**: Capacitor plugin v11.2.11, webhook-based subscription sync, REST API v1 for subscriber verification.
+### Freemium & Monetization
+- **Access Tiers**: Demo/Guest mode (full premium access without persistence), Free Tier (limited access), Premium Tier (unlimited features).
+- **Authentication**: Replit Auth, plus email/password with email verification (bypassed in development). Enhanced signup flow for mobile.
+- **Monetization**: Hybrid payment system using Stripe for web and RevenueCat (Google Play Billing/App Store IAP) for mobile, detected via `Capacitor.getPlatform()`.
+- **Ad-supported tokens**: Google AdMob rewarded video ads for additional dice rolls.
+- **Premium Subscription**: $4.99/month for advanced features.
 
 ### Referral Program
-- **Mechanism**: Unique collision-resistant referral codes.
+- **Mechanism**: Unique, collision-resistant referral codes.
 - **Rewards**: 1-month free Premium for referrers when referred users upgrade.
-- **Tracking**: Dashboard with stats, recent referrals, and sharing tools.
-- **Integration**: Referral code input during authentication with URL parameter support, atomic processing for reward claiming.
+- **Tracking**: User dashboard for stats and sharing tools.
 
 ### Premium Features
-- **Compatible Scales**: Identifies 2-4 musically compatible scales with fretboard visualization.
-- **Guitar Exercises**: Comprehensive practice section (8 categories, 4 skill levels) with detailed descriptions and fretboard diagrams.
-- **Enhanced Tapping**: Dedicated page with independent dual dice for two-hand tapping practice. Left dice (blue) generates open position chords (frets 0-7) from 32-chord database, right dice (orange) generates high position barre chords (frets 9+) from 35-chord database. Dice values actually control chord selection via database lookup. Visualized on dual fretboards with color coding (purple=root, blue=fretting, orange=tapping) and finger number labels.
-- **Optional Premium Dice**: Time Signature Dice and Metronome BPM Dice.
-- **Advanced Genres**: Neo-Classical, Spanish Flamenco, Black Metal, Death Metal, Rock, Funk, with genre-specific progressions and music theory.
-- **Guitar Classroom**: Premium-styled educational interface with 6 skill tiers featuring visual progression from beginner to master:
-  - **Enhanced Hero Section (v1.10.0)**: Gradient header with guitar icon, animated sparkles, 4 stat cards (total lessons, skill levels, premium count, user level), and "Free to Start, Premium to Master" info banner
-  - **Skill Level Tiers**: Beginner (green), Novice (blue), Intermediate (yellow), Advanced (orange/PRO badge), Expert (red/ADVANCED badge), Master (purple-gold/ELITE badge)
-  - **Advanced Section Enhancement**: Orange gradient border, PRO badge, flame icon, "Technical Refinement" banner
-  - **Expert Section Enhancement**: Red gradient border, ADVANCED badge, crown icon, "Professional Execution" banner
-  - **Master Section (Elite)**: Purple-gold gradients with shadow effects, ELITE badge, animated sparkles, inspirational header with Segovia/Hendrix/Paco de Lucía, three focus area cards (Virtuosic Technique, Theoretical Mastery, Professional Polish), gradient dividers, Journey to Mastery message with B.B. King quote
-  - **45 Lessons Total**: Comprehensive coverage from open chords to economy picking, with fretboard diagrams and scale integration
+- **Compatible Scales**: Identification and visualization of 2-4 musically compatible scales.
+- **Guitar Exercises**: Comprehensive practice section across 8 categories and 4 skill levels.
+- **Enhanced Tapping**: Dedicated page with independent dual dice for two-hand tapping practice, visualized on dual fretboards.
+- **Optional Dice**: Time Signature Dice and Metronome BPM Dice.
+- **Advanced Genres**: Neo-Classical, Spanish Flamenco, Black Metal, Death Metal, etc., with genre-specific progressions.
+- **Guitar Classroom**: Educational interface with 6 skill tiers (Beginner to Master), featuring visual progression and enhanced hero section.
 
-### Engagement Features
-- **Daily Practice Streak System**: Tracks consecutive days of dice rolls, offers milestone rewards (bonus tokens), and displays visual streak indicators.
-- **Analytics Tracking**: Comprehensive event tracking via Google Analytics 4 for user behavior, dice rolls, chord interactions, subscription conversions, and streak milestones.
-- **Affiliate Marketing System**: Music gear affiliate programs integrated throughout app with geo-detection (Sweetwater 5% US, Thomann 5% EU, Guitar Center/zZounds/Musician's Friend 3-5%). Strategic placements after dice rolls, in riff modal, exercises page, and classroom. Context-aware recommendations (e.g., BC Rich Warlock for metal genres, metronomes for exercises).
+### Engagement & Personalization
+- **Daily Practice Streak System**: Tracks consecutive dice rolls with milestone rewards.
+- **Analytics Tracking**: Google Analytics 4 for user behavior and monetization events.
+- **Affiliate Marketing**: Integrated music gear affiliate programs (Sweetwater, Thomann, Guitar Center) with context-aware recommendations.
+- **Personalization System**: Stores `playingStyle`, `preferredGenre`, `skillLevel`, and `hasCompletedOnboarding`.
+- **Onboarding Flow**: 3-step modal for new users to set preferences, with a "Skip for now" option.
+- **Dynamic Backgrounds**: `BackgroundProvider` context applies genre-specific backgrounds based on `preferredGenre`.
+- **Personalized Classroom**: "Recommended For You" section filters lessons by skill level and `preferredGenre`.
 
-### Personalization System (Oct 2025)
-- **User Preferences**: Database schema stores playingStyle (rhythm/lead), preferredGenre (music style), skillLevel (entry/intermediate/advanced/master), and hasCompletedOnboarding flag.
-- **Onboarding Flow**: New users complete 3-step modal asking about playing style, music preferences, and skill level during first login.
-  - **CRITICAL FIX (Nov 2025 - v1.10.0)**: Added "Skip for now" button to onboarding modal with null-guard cache handling, allowing guest users and test environments to bypass onboarding without crashes.
-- **Settings Modal**: Accessible via gear icon, allows users to update their preferences anytime with form state hydration via useEffect.
-- **Global Background Theme**: BackgroundProvider context uses preferredGenre to apply genre-specific backgrounds (metal, rock, jazz, blues, funk, etc.) across the app. Note: preferredGenre IS the background preference - backgrounds are genre-based.
-- **Personalized Classroom**: "Recommended For You" section filters lessons by skill level mapping (entry→beginner+novice, intermediate→beginner+novice+intermediate, advanced→intermediate+advanced+expert, master→advanced+expert+master) and prioritizes lessons matching preferred genre via keyword matching. Uses LessonWithSkillLevel interface with displayDifficulty field to map original lesson difficulties to the new 6-tier skill level system.
+### Guest/Demo Mode
+- Allows unauthenticated users full access to the dice interface and premium features without persistence, facilitating user acquisition and testing.
 
-### Guest/Demo Mode (Nov 2025 - v1.10.0)
-- **CRITICAL FIX**: Removed AuthGate blocking from home page, enabling true Demo/Guest mode as per product specification.
-- Unauthenticated users can now access the full dice interface with all premium features.
-- Authentication is only required for persistence features (save progressions, history, streak sync).
-- Fulfills product promise of "Demo/Guest mode (full premium access)" for user acquisition and testing.
-
-# Android Deployment
-
-## Build Configuration
+## Android Deployment
 - **App ID**: `com.chorddice.app`
-- **App Name**: Guitar Dice
-- **Current Version**: 1.10.0 (versionCode: 30)
-- **Framework**: Capacitor 7.4.3
-- **Keystore**: Pre-configured upload keystore for Play Store signing
-- **Build Output**: `dist/public` → Android WebView
-
-## GitHub Actions Workflows
-1. **android-build.yml**: Full deployment with auto-upload to Play Store Internal Testing
-   - Triggers on version tags (e.g., `v1.8.0`)
-   - Builds signed APK and AAB
-   - Uploads to Google Play Store automatically
-2. **build-android.yml**: CI testing workflow for pull requests and main branch
-
-## Required GitHub Secrets
-- `KEYSTORE_BASE64`: Base64-encoded keystore (see `android/keystore_base64.txt`)
-- `KEYSTORE_PASSWORD`: Keystore password
-- `KEY_ALIAS`: Signing key alias (default: `upload`)
-- `KEY_PASSWORD`: Key password
-- `SERVICE_ACCOUNT_JSON`: Google Play Console API service account
-
-## Deployment Process
-1. Update version in `android/app/build.gradle`
-2. Commit changes
-3. Create and push version tag: `git tag v1.8.0 && git push origin v1.8.0`
-4. GitHub Actions automatically builds and uploads to Play Store Internal Testing
-5. Promote through tracks: Internal → Alpha → Beta → Production
-
-For detailed instructions, see `DEPLOYMENT.md` and `GITHUB_SECRETS.md`.
+- **Version**: 1.10.0 (versionCode: 30)
+- **Framework**: Capacitor 7.4.3.
+- **Build Process**: GitHub Actions workflows for building signed APK/AAB and auto-uploading to Google Play Store Internal Testing.
 
 # External Dependencies
 
 - **Database**: Neon Database (PostgreSQL).
 - **UI Components**: Radix UI.
-- **Payment Processing**: Stripe.
+- **Payment Processing**: Stripe, RevenueCat.
 - **Authentication**: Replit Auth.
 - **Analytics**: Google Analytics 4.
-- **Ads**: Google AdMob (`@capacitor-community/admob` v7.4.3) for rewarded video ads.
+- **Ads**: Google AdMob (`@capacitor-community/admob`).
 - **Fonts**: Google Fonts (Inter, Architects Daughter, DM Sans, Fira Code).
 - **Development Tools**: TypeScript, ESLint, Prettier.
-- **Mobile Framework**: Capacitor for Android builds.
+- **Mobile Framework**: Capacitor.
