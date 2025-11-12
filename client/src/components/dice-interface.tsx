@@ -381,23 +381,60 @@ export default function DiceInterface({ onResult, onUpgrade }: DiceInterfaceProp
         ];
         return classicalProgressions[randomIndex];
       case 'flamenco':
-        // Spanish Flamenco uses E Phrygian mode (traditional)
-        // Phrygian: i-♭II-♭III-♭VII (authentic Spanish sound)
+        // Spanish Flamenco - Authentic palos using PHRYGIAN DOMINANT mode
+        // KEY: Most flamenco uses MAJOR tonic (E, not Em) with ♭II characteristic
+        // Classic Andalusian cadence: Am-G-F-E (iv-♭III-♭II-I) with MAJOR resolution
         if (isMinor) {
-          return [
-            buildChord(0, 'm'),    // i (tonic minor - E Phrygian)
-            buildChord(1),         // ♭II (Phrygian characteristic)
-            buildChord(3),         // ♭III
-            buildChord(10)         // ♭VII
+          // 10 authentic Phrygian dominant progressions (E major tonic, not Em)
+          // Semitone mapping from E: Am=+5, B=+7, C=+8, D=+10, E=0, F=+1, G=+3
+          const flamencoPhrygianProgressions = [
+            // 1. Soleá - Mother of flamenco, cierre resolves to MAJOR tonic
+            [buildChord(5, 'm'), buildChord(3), buildChord(1), buildChord(0, '7')],  // Am-G-F-E7 (classic cierre)
+            // 2. Seguiriya - Deep cante, Phrygian dominant resolution
+            [buildChord(0, '7'), buildChord(1), buildChord(3), buildChord(5, 'm')],  // E7-F-G-Am (reverse cadence)
+            // 3. Bulerías - Fast 12-beat compás, dominant tonic E
+            [buildChord(5, 'm'), buildChord(1), buildChord(0, '7'), buildChord(5, 'm')],  // Am-F-E7-Am
+            // 4. Tangos - Phrygian with major tonic resolution
+            [buildChord(0), buildChord(1), buildChord(3), buildChord(0)],  // E-F-G-E (Phrygian major)
+            // 5. Taranta - Mining song, Phrygian dominant (tono de Levante)
+            [buildChord(1), buildChord(3), buildChord(5, 'm'), buildChord(0, '7')],  // F-G-Am-E7
+            // 6. Granaína - Free-form with E7 tonic (Phrygian dominant)
+            [buildChord(3), buildChord(1), buildChord(0, '7'), buildChord(5, 'm')],  // G-F-E7-Am
+            // 7. Minera - Deep song, major tonic E with Phrygian color
+            [buildChord(1), buildChord(0), buildChord(3), buildChord(5, 'm')],  // F-E-G-Am
+            // 8. Soleá por Bulería - Hybrid, resolves to E major
+            [buildChord(5, 'm'), buildChord(3), buildChord(1), buildChord(0)],  // Am-G-F-E
+            // 9. Cartagenera - Phrygian dominant with E7 tonic
+            [buildChord(0, '7'), buildChord(1), buildChord(5, 'm'), buildChord(3)],  // E7-F-Am-G
+            // 10. Rondeña - From Ronda, classic Phrygian cadence to E
+            [buildChord(5, 'm'), buildChord(1), buildChord(3), buildChord(0)]  // Am-F-G-E
           ];
+          return flamencoPhrygianProgressions[randomIndex];
         } else {
-          // Major flamenco (less common, but uses similar cadences)
-          return [
-            buildChord(0),         // I
-            buildChord(10),        // ♭VII (Andalusian cadence)
-            buildChord(8),         // ♭VI
-            buildChord(7)          // V
+          // 10 authentic major flamenco progressions (traditional Andalusian cadences)
+          const flamencoMajorProgressions = [
+            // 1. Alegrías - Upbeat Cádiz, Andalusian cadence with V resolution
+            [buildChord(0), buildChord(10), buildChord(8), buildChord(7)],  // C-Bb-Ab-G (Andalusian)
+            // 2. Cantiñas - Joyful, proper V-I cadence
+            [buildChord(5), buildChord(7), buildChord(0), buildChord(7)],  // F-G-C-G (IV-V-I-V)
+            // 3. Fandangos de Huelva - Traditional I-IV-V-I
+            [buildChord(0), buildChord(5), buildChord(7), buildChord(0)],  // C-F-G-C
+            // 4. Colombianas - Latin fusion with V-I resolution
+            [buildChord(0), buildChord(8), buildChord(7), buildChord(0)],  // C-Ab-G-C
+            // 5. Rumba Flamenca - Popular rumba, Andalusian flavor
+            [buildChord(0), buildChord(10), buildChord(7), buildChord(0)],  // C-Bb-G-C
+            // 6. Caracoles - Festive, resolves V-I in compás
+            [buildChord(5), buildChord(0), buildChord(7), buildChord(0)],  // F-C-G-C (plagal + authentic)
+            // 7. Fandangos Naturales - Natural fandango, clear V-I
+            [buildChord(0), buildChord(7), buildChord(5), buildChord(7)],  // C-G-F-G (I-V-IV-V)
+            // 8. Romeras - Pilgrimage, Andalusian with V
+            [buildChord(0), buildChord(10), buildChord(7), buildChord(0)],  // C-Bb-G-C
+            // 9. Verdiales - Folk fandango, I-IV-V-I structure
+            [buildChord(0), buildChord(5), buildChord(7), buildChord(0)],  // C-F-G-C
+            // 10. Guajira - Cuban-Spanish, V-I resolution
+            [buildChord(7), buildChord(0), buildChord(10), buildChord(0)]  // G-C-Bb-C (V-I-♭VII-I)
           ];
+          return flamencoMajorProgressions[randomIndex];
         }
       case 'black-metal':
         // 10 authentic black metal progressions - power chords, minor, diminished, tritones, dissonance
