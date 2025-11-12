@@ -356,30 +356,61 @@ export default function DiceInterface({ onResult, onUpgrade }: DiceInterfaceProp
           ];
         }
       case 'neo-classical':
-        // 10 authentic classical progressions from Mozart, Bach, Beethoven, etc.
-        const classicalProgressions = [
-          // 1. Mozart Piano Sonata K. 545 - Authentic cadence
-          [buildChord(0), buildChord(5), buildChord(7), buildChord(0)],
-          // 2. Bach Prelude in C Major BWV 846 - Circle of fifths
-          [buildChord(9, 'm'), buildChord(2, 'm'), buildChord(7), buildChord(0)],
-          // 3. Handel variations - La Folia ground bass
-          [buildChord(2, 'm'), buildChord(9, '7'), buildChord(2, 'm'), buildChord(0)],
-          // 4. Bach chorales - Canon progression
-          [buildChord(0), buildChord(7), buildChord(9, 'm'), buildChord(4, 'm')],
-          // 5. Beethoven "Moonlight Sonata" - Minor descending
-          [buildChord(0, 'm'), buildChord(8), buildChord(3), buildChord(10)],
-          // 6. Mozart Eine Kleine Nachtmusik - Plagal-infused
-          [buildChord(0), buildChord(9, 'm'), buildChord(5), buildChord(7)],
-          // 7. Handel "Hallelujah" - Plagal cadence
-          [buildChord(5), buildChord(0), buildChord(7), buildChord(0)],
-          // 8. Schubert lieder - Deceptive cadence
-          [buildChord(7), buildChord(9, 'm'), buildChord(5), buildChord(0)],
-          // 9. Chopin preludes - Andalusian minor
-          [buildChord(0, 'm'), buildChord(10), buildChord(8), buildChord(7)],
-          // 10. Hildegard von Bingen (arr. Kronos) - Modal cycling
-          [buildChord(0, 'm'), buildChord(8), buildChord(5, 'm'), buildChord(3)]
-        ];
-        return classicalProgressions[randomIndex];
+        // Neo-Classical - Authentic progressions from Baroque, Classical, Romantic periods
+        // Spans 300+ years of Western classical music tradition
+        // Semitone mapping from C: C=0, D=+2, E=+4, F=+5, G=+7, A=+9, B=+11
+        //                 Minor: Cm=0m, Dm=+2m, Eb=+3, Fm=+5m, Gm=+7m, Ab=+8, Bb=+10
+        if (isMinor) {
+          // 10 authentic minor classical progressions
+          const classicalMinorProgressions = [
+            // 1. Bach - Toccata & Fugue in D Minor, BWV 565 (Baroque organ masterpiece)
+            [buildChord(0, 'm'), buildChord(7), buildChord(10), buildChord(0, 'm')],  // i-V-VII-i
+            // 2. Beethoven - Moonlight Sonata Op. 27 No. 2 (Romantic piano)
+            [buildChord(0, 'm'), buildChord(8), buildChord(10), buildChord(7)],  // i-♭VI-♭VII-V
+            // 3. Vivaldi - Winter from Four Seasons (Baroque strings)
+            [buildChord(0, 'm'), buildChord(5, 'm'), buildChord(7), buildChord(0, 'm')],  // i-iv-V-i (perfect cadence)
+            // 4. Chopin - Prelude in E Minor Op. 28 No. 4 (Romantic chromaticism)
+            [buildChord(0, 'm'), buildChord(8, 'maj7'), buildChord(5, 'm'), buildChord(7)],  // i-♭VImaj7-iv-V (chromatic predominant)
+            // 5. Bach - Chaconne from Partita No. 2 (Baroque violin, ground bass)
+            [buildChord(0, 'm'), buildChord(8), buildChord(5, 'm'), buildChord(7)],  // i-♭VI-iv-V
+            // 6. Mozart - Requiem in D Minor K. 626 (Classical sacred)
+            [buildChord(0, 'm'), buildChord(3), buildChord(10), buildChord(7)],  // i-♭III-♭VII-V
+            // 7. Brahms - Symphony No. 4 in E Minor (Late Romantic)
+            [buildChord(0, 'm'), buildChord(2, 'dim'), buildChord(7), buildChord(0, 'm')],  // i-ii°-V-i (Phrygian half cadence)
+            // 8. Rachmaninoff - Prelude in C# Minor Op. 3 No. 2 (Late Romantic dramatic)
+            [buildChord(7), buildChord(0, 'm'), buildChord(8), buildChord(7)],  // V-i-♭VI-V (dramatic resolution)
+            // 9. Scarlatti - Sonata in A Minor K. 109 (Baroque harpsichord)
+            [buildChord(0, 'm'), buildChord(5, 'm'), buildChord(11, 'dim'), buildChord(7)],  // i-iv-vii°-V (leading-tone dim)
+            // 10. Handel - Sarabande in D Minor (Baroque dance suite)
+            [buildChord(0, 'm'), buildChord(7, 'm'), buildChord(3), buildChord(7)]  // i-v-♭III-V (modal mixture)
+          ];
+          return classicalMinorProgressions[randomIndex];
+        } else {
+          // 10 authentic major classical progressions
+          const classicalMajorProgressions = [
+            // 1. Mozart - Eine Kleine Nachtmusik K. 525 (Classical serenade)
+            [buildChord(0), buildChord(5), buildChord(7), buildChord(0)],  // I-IV-V-I (perfect authentic)
+            // 2. Bach - Prelude in C Major BWV 846 (Well-Tempered Clavier Book I)
+            [buildChord(0), buildChord(2, 'm'), buildChord(7), buildChord(0)],  // I-ii-V-I (circle of fifths)
+            // 3. Handel - Hallelujah Chorus from Messiah (Baroque choral)
+            [buildChord(5), buildChord(0), buildChord(7), buildChord(0)],  // IV-I-V-I (plagal + authentic)
+            // 4. Beethoven - Symphony No. 9 "Ode to Joy" (Classical-Romantic transition)
+            [buildChord(0), buildChord(7), buildChord(9, 'm'), buildChord(5)],  // I-V-vi-IV (Canon progression)
+            // 5. Haydn - Surprise Symphony No. 94 (Classical orchestral)
+            [buildChord(0), buildChord(9, 'm'), buildChord(5), buildChord(7)],  // I-vi-IV-V (Romantic progression)
+            // 6. Pachelbel - Canon in D Major (Baroque ground bass)
+            [buildChord(0), buildChord(7), buildChord(9, 'm'), buildChord(4, 'm')],  // I-V-vi-iii (Canon)
+            // 7. Vivaldi - Spring from Four Seasons (Baroque concerto)
+            [buildChord(0), buildChord(5), buildChord(2, 'm'), buildChord(7)],  // I-IV-ii-V (pre-dominant)
+            // 8. Mozart - Piano Sonata No. 16 in C K. 545 (Classical pedagogy)
+            [buildChord(7), buildChord(0), buildChord(5), buildChord(7)],  // V-I-IV-V (Alberti bass)
+            // 9. Schubert - Ave Maria (Romantic lieder, deceptive cadence)
+            [buildChord(7), buildChord(9, 'm'), buildChord(5), buildChord(0)],  // V-vi-IV-I (deceptive)
+            // 10. Corelli - Christmas Concerto Op. 6 No. 8 (Baroque pastoral)
+            [buildChord(0), buildChord(4, 'm'), buildChord(7), buildChord(0)]  // I-iii-V-I (mediant progression)
+          ];
+          return classicalMajorProgressions[randomIndex];
+        }
       case 'flamenco':
         // Spanish Flamenco - Authentic palos using PHRYGIAN DOMINANT mode
         // KEY: Most flamenco uses MAJOR tonic (E, not Em) with ♭II characteristic
