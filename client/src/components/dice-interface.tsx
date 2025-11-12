@@ -192,54 +192,58 @@ export default function DiceInterface({ onResult, onUpgrade }: DiceInterfaceProp
 
     switch (genre) {
       case 'jazz':
+        // Jazz - Authentic progressions from Bebop, Hard Bop, Modal, Cool Jazz eras
+        // Characterized by extended harmony (9ths, 11ths, 13ths), altered dominants, ii-V-I
+        // Semitone mapping: Same as classical, but with extended chord qualities
         if (isMinor) {
           // 10 authentic minor jazz progressions with extended voicings
+          // Minor key semitone reference (C minor): Cm=0m, D=+2, Eb=+3, Fm=+5m, G=+7, Ab=+8, Bb=+10
           const jazzMinorProgressions = [
-            // 1. John Coltrane "Blue Bossa" - Minor ii-V-i with extensions
-            [buildChord(2, 'm7b5'), buildChord(7, '7b9'), buildChord(0, 'm9'), buildChord(5, 'm11')],
-            // 2. Minor ii-V-i with altered dominant
-            [buildChord(2, 'm7b5'), buildChord(7, '7alt'), buildChord(0, 'm7'), buildChord(8, 'maj7')],
-            // 3. Minor blues form with 9ths
-            [buildChord(0, 'm9'), buildChord(5, 'm11'), buildChord(0, 'm9'), buildChord(7, '7#5')],
-            // 4. Modal minor progression extended
-            [buildChord(0, 'm11'), buildChord(10, '13'), buildChord(8, 'maj9'), buildChord(7, '7b9')],
-            // 5. Minor turnaround with half-diminished
-            [buildChord(0, 'm9'), buildChord(9, 'm7'), buildChord(2, 'm7b5'), buildChord(7, '7alt')],
-            // 6. Dorian minor vamp with extensions
-            [buildChord(0, 'm11'), buildChord(5, 'm11'), buildChord(0, 'm9'), buildChord(5, 'm9')],
-            // 7. Minor with diminished passing chord
-            [buildChord(0, 'm7'), buildChord(1, 'dim7'), buildChord(2, 'm7b5'), buildChord(7, '7b9')],
-            // 8. Minor backdoor with 13th
-            [buildChord(5, 'm9'), buildChord(8, '13'), buildChord(0, 'm(maj7)'), buildChord(7, '7sus4')],
-            // 9. Minor Coltrane-style with altered dominant
-            [buildChord(0, 'm9'), buildChord(3, '7#5'), buildChord(8, 'maj7'), buildChord(0, 'm(maj7)')],
-            // 10. Extended minor turnaround with 9ths
-            [buildChord(4, 'm9'), buildChord(10, '7b9'), buildChord(0, 'm11'), buildChord(7, '7alt')]
+            // 1. John Coltrane "Blue Bossa" - Classic minor ii-V-i
+            [buildChord(2, 'm7b5'), buildChord(7, '7b9'), buildChord(0, 'm9'), buildChord(5, 'm11')],  // iiø7-V7b9-im9-ivm11
+            // 2. Miles Davis "So What" - Modal shift (Dm7-Ebm7 modal vamp)
+            [buildChord(0, 'm11'), buildChord(1, 'm11'), buildChord(0, 'm9'), buildChord(1, 'm9')],  // im11-♭iim11-im9-♭iim9 (modal shift)
+            // 3. Bill Evans "Autumn Leaves" - Minor turnaround (im9-IVmaj7-iiø7-V7alt)
+            [buildChord(0, 'm9'), buildChord(5, 'maj7'), buildChord(2, 'm7b5'), buildChord(7, '7alt')],  // im9-IVmaj7-iiø7-V7alt
+            // 4. Horace Silver "Song for My Father" - Latin jazz minor
+            [buildChord(0, 'm9'), buildChord(5, 'm11'), buildChord(0, 'm9'), buildChord(7, '7#5')],  // im9-ivm11-im9-V7#5
+            // 5. Wayne Shorter "Footprints" - Minor blues (Cm7-Fm7-Cm7-Cm7)
+            [buildChord(0, 'm9'), buildChord(5, 'm7'), buildChord(0, 'm9'), buildChord(0, 'm9')],  // im9-ivm7-im9-im9 (minor blues)
+            // 6. Herbie Hancock "Maiden Voyage" - Suspended minor modal
+            [buildChord(0, 'm11'), buildChord(10, '13'), buildChord(8, 'maj9'), buildChord(7, '7b9')],  // im11-♭VII13-♭VImaj9-V7b9
+            // 7. Charlie Parker "Confirmation" - Bebop minor with diminished
+            [buildChord(0, 'm7'), buildChord(1, 'dim7'), buildChord(2, 'm7b5'), buildChord(7, '7b9')],  // im7-#idim7-iiø7-V7b9
+            // 8. Chick Corea "Spain" - Modal minor with backdoor
+            [buildChord(5, 'm9'), buildChord(8, '13'), buildChord(0, 'm(maj7)'), buildChord(7, '7sus4')],  // ivm9-♭VI13-im(maj7)-V7sus4
+            // 9. Thelonious Monk "Round Midnight" - Chromatic minor
+            [buildChord(0, 'm9'), buildChord(3, '7#5'), buildChord(8, 'maj7'), buildChord(0, 'm(maj7)')],  // im9-♭III7#5-♭VImaj7-im(maj7)
+            // 10. Sonny Rollins "Doxy" - Minor blues turnaround
+            [buildChord(3, 'm9'), buildChord(10, '7b9'), buildChord(0, 'm11'), buildChord(7, '7alt')]  // ♭iiim9-♭VII7b9-im11-V7alt
           ];
           return jazzMinorProgressions[randomIndex];
         } else {
           // 10 authentic major jazz progressions with extended chords (9ths, 11ths, 13ths)
           const jazzMajorProgressions = [
-            // 1. Miles Davis "Autumn Leaves" - ii-V-I with 9ths
-            [buildChord(2, 'm9'), buildChord(7, '13'), buildChord(0, 'maj9'), buildChord(5, '6/9')],
-            // 2. Dizzy Gillespie "I Got Rhythm" - Extended rhythm changes
-            [buildChord(0, '6/9'), buildChord(9, 'm9'), buildChord(2, 'm11'), buildChord(7, '7b9')],
+            // 1. Miles Davis "Autumn Leaves" - Classic ii-V-I
+            [buildChord(2, 'm9'), buildChord(7, '13'), buildChord(0, 'maj9'), buildChord(5, '6/9')],  // iim9-V13-Imaj9-IV6/9
+            // 2. Dizzy Gillespie "I Got Rhythm" - Rhythm changes
+            [buildChord(0, '6/9'), buildChord(9, 'm9'), buildChord(2, 'm11'), buildChord(7, '7b9')],  // I6/9-vim9-iim11-V7b9
             // 3. Miles Davis "All Blues" - Blues with altered dominants
-            [buildChord(0, '9'), buildChord(5, '13'), buildChord(7, '7#5'), buildChord(0, '7sus4')],
+            [buildChord(0, '9'), buildChord(5, '13'), buildChord(7, '7#5'), buildChord(0, '7sus4')],  // I9-IV13-V7#5-I7sus4
             // 4. Duke Ellington "Satin Doll" - Extended turnaround
-            [buildChord(4, 'm11'), buildChord(9, 'm9'), buildChord(2, 'm7'), buildChord(7, '7alt')],
-            // 5. John Coltrane "Giant Steps" - Maj7#11 voicings
-            [buildChord(0, 'maj7#11'), buildChord(5, 'maj9'), buildChord(2, 'm11'), buildChord(7, '13')],
-            // 6. Dizzy Gillespie "Blues for Alice" - Bird blues extended
-            [buildChord(10, '13'), buildChord(3, '7b9'), buildChord(8, 'maj9'), buildChord(0, '6/9')],
-            // 7. John Coltrane "Giant Steps" - Coltrane changes with extensions
-            [buildChord(0, 'maj9'), buildChord(3, '7#5'), buildChord(8, 'maj7#11'), buildChord(11, '7b9')],
-            // 8. Thelonious Monk "Misty" - Backdoor with altered voicings
-            [buildChord(5, 'm11'), buildChord(10, '13'), buildChord(0, 'maj9'), buildChord(7, '7alt')],
-            // 9. Bill Evans "Waltz for Debby" - Sophisticated voicings
-            [buildChord(9, 'm9'), buildChord(2, 'm11'), buildChord(7, 'maj9'), buildChord(0, '6/9')],
-            // 10. Standard I-vi-ii-V with 9ths and 13ths
-            [buildChord(0, 'maj9'), buildChord(9, 'm9'), buildChord(2, 'm11'), buildChord(7, '13')]
+            [buildChord(4, 'm11'), buildChord(9, 'm9'), buildChord(2, 'm7'), buildChord(7, '7alt')],  // iiim11-vim9-iim7-V7alt
+            // 5. John Coltrane "Giant Steps" - Coltrane changes
+            [buildChord(0, 'maj7#11'), buildChord(5, 'maj9'), buildChord(2, 'm11'), buildChord(7, '13')],  // Imaj7#11-IVmaj9-iim11-V13
+            // 6. Charlie Parker "Confirmation" - Bebop turnaround
+            [buildChord(0, 'maj9'), buildChord(9, 'm9'), buildChord(2, 'm11'), buildChord(7, '13')],  // Imaj9-vim9-iim11-V13
+            // 7. Bill Evans "Waltz for Debby" - Sophisticated voicings
+            [buildChord(9, 'm9'), buildChord(2, 'm11'), buildChord(7, 'maj9'), buildChord(0, '6/9')],  // vim9-iim11-Vmaj9-I6/9
+            // 8. Thelonious Monk "Straight No Chaser" - Blues substitutions
+            [buildChord(0, 'maj9'), buildChord(3, '7#5'), buildChord(8, 'maj7#11'), buildChord(11, '7b9')],  // Imaj9-♭III7#5-♭VImaj7#11-VII7b9
+            // 9. Wes Montgomery "Four on Six" - Backdoor progression
+            [buildChord(5, 'm11'), buildChord(10, '13'), buildChord(0, 'maj9'), buildChord(7, '7alt')],  // ivm11-♭VII13-Imaj9-V7alt
+            // 10. Dexter Gordon "Cheese Cake" - Bebop blues
+            [buildChord(10, '13'), buildChord(3, '7b9'), buildChord(8, 'maj9'), buildChord(0, '6/9')]  // ♭VII13-♭III7b9-♭VImaj9-I6/9
           ];
           return jazzMajorProgressions[randomIndex];
         }
@@ -252,30 +256,61 @@ export default function DiceInterface({ onResult, onUpgrade }: DiceInterfaceProp
           buildChord(7, '7')     // V7
         ];
       case 'rock':
-        // 10 authentic rock progressions from Led Zeppelin, Iron Maiden, Ozzy, etc.
-        const rockProgressions = [
-          // 1. Ozzy Osbourne "Crazy Train" - Classic I-IV-V drive
-          [buildChord(0), buildChord(5), buildChord(7), buildChord(0)],
-          // 2. Led Zeppelin "Rock and Roll" - Uplifting I-IV-V
-          [buildChord(0), buildChord(5), buildChord(7), buildChord(0)],
-          // 3. U2 "With or Without You" - Anthemic cycle
-          [buildChord(0), buildChord(7), buildChord(9, 'm'), buildChord(5)],
-          // 4. System of a Down "Lonely Day" - Emotional build
-          [buildChord(9, 'm'), buildChord(5), buildChord(0), buildChord(7)],
-          // 5. Scorpions "Rock You Like a Hurricane" - Retro energy
-          [buildChord(0), buildChord(10), buildChord(5), buildChord(0)],
-          // 6. Iron Maiden "The Trooper" - Minor hard rock
-          [buildChord(0, 'm'), buildChord(7), buildChord(9, 'm'), buildChord(5)],
-          // 7. Kiss "Rock and Roll All Nite" - Simplified drive
-          [buildChord(0), buildChord(5), buildChord(7), buildChord(0)],
-          // 8. Red Hot Chili Peppers "Under the Bridge" - Descending tension
-          [buildChord(9, 'm'), buildChord(7), buildChord(5), buildChord(4, 'm')],
-          // 9. Dio "Holy Diver" - Melodic flow
-          [buildChord(0), buildChord(9, 'm'), buildChord(5), buildChord(7)],
-          // 10. Motley Crue "Kickstart My Heart" - Power sequence
-          [buildChord(0), buildChord(7), buildChord(5), buildChord(0)]
-        ];
-        return rockProgressions[randomIndex];
+        // Rock - Authentic progressions from Classic Rock, Hard Rock, Punk, Grunge, Alternative
+        // Spans 1960s-2000s rock music evolution
+        // Characterized by power chords, I-IV-V, I-V-vi-IV, and modal minor progressions
+        if (isMinor) {
+          // 10 authentic minor rock progressions
+          // Minor key semitone reference (C minor): Cm=0m, D=+2, Eb=+3, Fm=+5m, G=+7, Ab=+8, Bb=+10
+          const rockMinorProgressions = [
+            // 1. Iron Maiden "The Trooper" - Classic NWOBHM minor (Em-D-C-B)
+            [buildChord(0, 'm'), buildChord(10), buildChord(8), buildChord(7)],  // i-♭VII-♭VI-V
+            // 2. Metallica "Enter Sandman" - Heavy minor progression (Em-E5-C5-B5)
+            [buildChord(0, 'm'), buildChord(10), buildChord(8), buildChord(0, 'm')],  // i-♭VII-♭VI-i
+            // 3. Nirvana "Smells Like Teen Spirit" - Grunge classic (Fm-Db-Eb-Bb)
+            [buildChord(0, 'm'), buildChord(8), buildChord(10), buildChord(5)],  // i-♭VI-♭VII-IV
+            // 4. Black Sabbath "Iron Man" - Doom metal minor (Bm-D-Em-Bm)
+            [buildChord(0, 'm'), buildChord(3), buildChord(5, 'm'), buildChord(0, 'm')],  // i-♭III-iv-i
+            // 5. Alice in Chains "Man in the Box" - Grunge minor (Em-D-Em-C)
+            [buildChord(0, 'm'), buildChord(10), buildChord(0, 'm'), buildChord(8)],  // i-♭VII-i-♭VI
+            // 6. System of a Down "Toxicity" - Armenian Phrygian (Cm-Db-Eb-Cm)
+            [buildChord(0, 'm'), buildChord(1), buildChord(3), buildChord(0, 'm')],  // i-♭ii-♭III-i (Phrygian)
+            // 7. Soundgarden "Black Hole Sun" - Modal minor (Em-C-G-D)
+            [buildChord(0, 'm'), buildChord(8), buildChord(3), buildChord(10)],  // i-♭VI-♭III-♭VII
+            // 8. Tool "Schism" - Progressive minor (Dm-Gm-Bb-C)
+            [buildChord(0, 'm'), buildChord(5, 'm'), buildChord(8), buildChord(10)],  // i-iv-♭VI-♭VII
+            // 9. Radiohead "Creep" - Alternative (Gm-Bb-C-Cm) - needs major IV!
+            [buildChord(0, 'm'), buildChord(3), buildChord(5), buildChord(5, 'm')],  // i-♭III-IV-iv
+            // 10. Pearl Jam "Jeremy" - Grunge melodic minor (Am-G-F-E)
+            [buildChord(0, 'm'), buildChord(10), buildChord(8), buildChord(7)]  // i-♭VII-♭VI-V
+          ];
+          return rockMinorProgressions[randomIndex];
+        } else {
+          // 10 authentic major rock progressions
+          const rockMajorProgressions = [
+            // 1. Led Zeppelin "Rock and Roll" - Classic I-IV-V
+            [buildChord(0), buildChord(5), buildChord(7), buildChord(0)],  // I-IV-V-I
+            // 2. U2 "With or Without You" - Anthemic I-V-vi-IV
+            [buildChord(0), buildChord(7), buildChord(9, 'm'), buildChord(5)],  // I-V-vi-IV (Axis progression)
+            // 3. AC/DC "Back in Black" - Power chord I-IV-I-V
+            [buildChord(0), buildChord(5), buildChord(0), buildChord(7)],  // I-IV-I-V
+            // 4. The Who "Baba O'Riley" - Classic rock I-V-IV-I
+            [buildChord(0), buildChord(7), buildChord(5), buildChord(0)],  // I-V-IV-I
+            // 5. Tom Petty "Free Fallin'" - I-IV-I-V pattern
+            [buildChord(0), buildChord(5), buildChord(7), buildChord(5)],  // I-IV-V-IV
+            // 6. Green Day "Basket Case" - Punk I-V-vi-IV
+            [buildChord(0), buildChord(7), buildChord(9, 'm'), buildChord(5)],  // I-V-vi-IV
+            // 7. The Rolling Stones "Satisfaction" - I-IV with ♭VII
+            [buildChord(0), buildChord(10), buildChord(5), buildChord(0)],  // I-♭VII-IV-I
+            // 8. Foo Fighters "Everlong" - Alternative I-vi-IV-V
+            [buildChord(0), buildChord(9, 'm'), buildChord(5), buildChord(7)],  // I-vi-IV-V
+            // 9. The Killers "Mr. Brightside" - Indie rock I-IV-vi-V
+            [buildChord(0), buildChord(5), buildChord(9, 'm'), buildChord(7)],  // I-IV-vi-V
+            // 10. Queen "We Will Rock You" - Stomp I-IV-I progression
+            [buildChord(0), buildChord(5), buildChord(0), buildChord(5)]  // I-IV-I-IV
+          ];
+          return rockMajorProgressions[randomIndex];
+        }
       case 'pop':
         if (isMinor) {
           // i-♭VI-♭III-♭VII (minor pop)
@@ -313,30 +348,61 @@ export default function DiceInterface({ onResult, onUpgrade }: DiceInterfaceProp
           ];
         }
       case 'funk':
-        // 10 authentic funk progressions from Parliament-Funkadelic, Earth Wind & Fire, etc.
-        const funkProgressions = [
-          // 1. Parliament-Funkadelic "Give Up the Funk" - Static E9 vamp
-          [buildChord(0, '9'), buildChord(0, '9'), buildChord(0, '9'), buildChord(0, '9')],
-          // 2. Sly and the Family Stone "Thank You" - Minor-dominant alternation
-          [buildChord(9, 'm7'), buildChord(2, '7'), buildChord(9, 'm7'), buildChord(2, '7')],
-          // 3. Tower of Power "What Is Hip?" - Chromatic ninth shift
-          [buildChord(0, '9'), buildChord(2, '9'), buildChord(1, '9'), buildChord(0, '9')],
-          // 4. The Temptations "Papa Was A Rollin' Stone" - Soulful minor vamp
-          [buildChord(0, 'm7'), buildChord(5, 'm7'), buildChord(0, 'm7'), buildChord(5, 'm7')],
-          // 5. Earth Wind and Fire "September" - Extended groove
-          [buildChord(0, 'm9'), buildChord(5, '13'), buildChord(0, 'm9'), buildChord(5, '13')],
-          // 6. Bootsy Collins/Parliament "Flash Light" - Dominant resolution
-          [buildChord(7, '7'), buildChord(0, '7'), buildChord(7, '7'), buildChord(0, '7')],
-          // 7. Marvin Gaye "Got To Give It Up" - Minor cycle
-          [buildChord(0, 'm7'), buildChord(5, 'm7'), buildChord(0, 'm7'), buildChord(5, 'm7')],
-          // 8. Rick James "Super Freak" influences - Upbeat extension
-          [buildChord(2, '9'), buildChord(7, '9'), buildChord(2, '9'), buildChord(7, '9')],
-          // 9. Curtis Mayfield "Superfly" - Modal vamp
-          [buildChord(9, 'm'), buildChord(2, 'm'), buildChord(4, 'm'), buildChord(7)],
-          // 10. Zapp "More Bounce to the Ounce" - Static extended minor
-          [buildChord(0, 'm11'), buildChord(0, 'm11'), buildChord(0, 'm11'), buildChord(0, 'm11')]
-        ];
-        return funkProgressions[randomIndex];
+        // Funk - Authentic progressions from P-Funk, Motown, Soul, and Funk pioneers
+        // Characterized by static vamps, extended 9th/11th/13th chords, syncopated rhythms
+        // Often uses repetitive 1-2 chord grooves or ii-V modal vamps
+        if (isMinor) {
+          // 10 authentic minor funk progressions
+          // Minor key semitone reference (C minor): Cm=0m, D=+2, Eb=+3, Fm=+5m, G=+7, Ab=+8, Bb=+10
+          const funkMinorProgressions = [
+            // 1. The Temptations "Papa Was A Rollin' Stone" - Classic minor vamp (Cm7-Fm7)
+            [buildChord(0, 'm7'), buildChord(5, 'm7'), buildChord(0, 'm7'), buildChord(5, 'm7')],  // im7-ivm7-im7-ivm7
+            // 2. Marvin Gaye "Got To Give It Up" - Dorian groove (Am7-Dm7)
+            [buildChord(0, 'm7'), buildChord(5, 'm7'), buildChord(0, 'm7'), buildChord(5, 'm7')],  // im7-ivm7-im7-ivm7
+            // 3. Zapp "More Bounce to the Ounce" - Static minor vamp (Cm11)
+            [buildChord(0, 'm11'), buildChord(0, 'm11'), buildChord(0, 'm11'), buildChord(0, 'm11')],  // im11 (static)
+            // 4. Curtis Mayfield "Superfly" - Modal minor progression (Fm-Cm-Gm-Cm)
+            [buildChord(5, 'm9'), buildChord(0, 'm9'), buildChord(7, 'm9'), buildChord(0, 'm9')],  // ivm9-im9-vm9-im9
+            // 5. Stevie Wonder "Superstition" - Static Ebm7 vamp
+            [buildChord(0, 'm7'), buildChord(0, 'm7'), buildChord(0, 'm7'), buildChord(0, 'm7')],  // im7 (static)
+            // 6. Herbie Hancock "Chameleon" - Minor modal vamp (Bm7-Bm7)
+            [buildChord(0, 'm7'), buildChord(10, '7'), buildChord(0, 'm7'), buildChord(10, '7')],  // im7-♭VII7-im7-♭VII7
+            // 7. Kool & the Gang "Jungle Boogie" - Minor with suspended
+            [buildChord(0, 'm7'), buildChord(7, '7sus4'), buildChord(0, 'm7'), buildChord(7, '7sus4')],  // im7-V7sus4-im7-V7sus4
+            // 8. The Meters "Cissy Strut" - New Orleans funk minor (Cm9-Eb7)
+            [buildChord(0, 'm9'), buildChord(3, '9'), buildChord(0, 'm9'), buildChord(3, '9')],  // im9-♭III9-im9-♭III9
+            // 9. War "Low Rider" - Latin funk minor (Gm7-Gm7)
+            [buildChord(0, 'm7'), buildChord(10, '9'), buildChord(0, 'm7'), buildChord(10, '9')],  // im7-♭VII9-im7-♭VII9
+            // 10. Funkadelic "Maggot Brain" - Extended minor modal (Em11-D9-C-Bm)
+            [buildChord(0, 'm11'), buildChord(10, '9'), buildChord(8, 'maj7'), buildChord(7, 'm7')]  // im11-♭VII9-♭VImaj7-vm7
+          ];
+          return funkMinorProgressions[randomIndex];
+        } else {
+          // 10 authentic major funk progressions
+          const funkMajorProgressions = [
+            // 1. Parliament "Give Up the Funk" - Static dominant 9th vamp
+            [buildChord(0, '9'), buildChord(0, '9'), buildChord(0, '9'), buildChord(0, '9')],  // I9 (static)
+            // 2. Tower of Power "What Is Hip?" - Chromatic 9th movement
+            [buildChord(0, '9'), buildChord(2, '9'), buildChord(1, '9'), buildChord(0, '9')],  // I9-II9-♭II9-I9
+            // 3. Bootsy Collins "Flash Light" - V-I dominant shuffle
+            [buildChord(7, '7'), buildChord(0, '7'), buildChord(7, '7'), buildChord(0, '7')],  // V7-I7-V7-I7
+            // 4. James Brown "Get Up Offa That Thing" - ii-V funk
+            [buildChord(2, '9'), buildChord(7, '9'), buildChord(2, '9'), buildChord(7, '9')],  // ii9-V9-ii9-V9
+            // 5. Sly & the Family Stone "Thank You" - Extended ii-V
+            [buildChord(2, 'm11'), buildChord(7, '13'), buildChord(2, 'm11'), buildChord(7, '13')],  // iim11-V13-iim11-V13
+            // 6. Herbie Hancock "Chameleon" - Modal funk vamp
+            [buildChord(0, '7#9'), buildChord(10, '7#9'), buildChord(0, '7#9'), buildChord(10, '7#9')],  // I7#9-♭VII7#9-I7#9-♭VII7#9
+            // 7. Average White Band "Pick Up The Pieces" - Major 9th groove
+            [buildChord(0, 'maj9'), buildChord(5, '13'), buildChord(0, 'maj9'), buildChord(5, '13')],  // Imaj9-IV13-Imaj9-IV13
+            // 8. Jamiroquai "Virtual Insanity" - Modern funk
+            [buildChord(0, 'maj7'), buildChord(9, 'm7'), buildChord(2, 'm9'), buildChord(7, '13')],  // Imaj7-vim7-iim9-V13
+            // 9. Rick James "Super Freak" - Chromatic funk
+            [buildChord(0, '9'), buildChord(1, '9'), buildChord(2, '9'), buildChord(0, '9')],  // I9-♭II9-ii9-I9
+            // 10. Prince "Kiss" - Minimalist funk
+            [buildChord(0, '7'), buildChord(5, '7'), buildChord(0, '7'), buildChord(5, '7')]  // I7-IV7-I7-IV7
+          ];
+          return funkMajorProgressions[randomIndex];
+        }
       case 'metal':
         if (isMinor) {
           // i-♭VI-♭VII-i (minor metal power chord progression)
