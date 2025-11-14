@@ -8,6 +8,7 @@ import AdvancedScaleGuide from "@/components/advanced-scale-guide";
 import ScaleCombination from "@/components/scale-combination";
 import RiffModal from "@/components/riff-modal";
 import FretboardModal from "@/components/fretboard-modal";
+import FretboardDisplay from "@/components/fretboard-display";
 import SubscriptionModal from "@/components/subscription-modal";
 import { OnboardingModal } from "@/components/onboarding-modal";
 import { SettingsModal } from "@/components/settings-modal";
@@ -355,30 +356,67 @@ export default function Home() {
           onUpgrade={() => setShowSubscriptionModal(true)} 
         />
 
-        {/* Result Display */}
-        {result && result.type === 'single' && (
+        {/* Result Display - 3-Dice Bridge System */}
+        {result && result.type === 'single' && result.bridgePattern && result.mainChord && result.supportingChord && (
           <div className="bg-card rounded-lg p-6 border border-border animate-fade-in" data-testid="result-display">
-            <h3 className="text-lg font-semibold mb-4">Result</h3>
-            <div className="space-y-3">
-              <div className="bg-primary text-primary-foreground p-4 rounded-lg text-center">
-                <div className="text-sm text-primary-foreground/80 mb-1">Generated Chord</div>
-                <div className="text-2xl font-bold animate-chord-pulse" data-testid="text-generated-chord">{result.chord}</div>
-                <div className="text-sm text-primary-foreground/80 mt-1">Color Group: {result.colorName}</div>
+            <h3 className="text-lg font-semibold mb-4">3-Dice Bridge System Result</h3>
+            
+            {/* 3-Dice Summary */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
+              {/* Dice 1: Main Chord */}
+              <div className="bg-purple-600/10 border border-purple-600/30 rounded-lg p-3">
+                <div className="text-xs text-muted-foreground mb-1">Dice 1: Main Chord</div>
+                <div className="text-xl font-bold text-purple-600">{result.mainChord}</div>
               </div>
-              <div className="text-center">
-                <Button 
-                  variant="secondary" 
-                  className="hover:bg-accent hover:text-accent-foreground"
-                  data-testid="button-show-fretboard"
-                  onClick={() => handleShowFretboard()}
-                >
-                  <i className="fas fa-guitar mr-2"></i>Show Fretboard
-                  {selectedChord && selectedChord !== result.chord && (
-                    <span className="ml-1 text-xs">({selectedChord})</span>
-                  )}
-                </Button>
+              
+              {/* Dice 2: Bridge Pattern */}
+              <div className="bg-primary/10 border border-primary/30 rounded-lg p-3">
+                <div className="text-xs text-muted-foreground mb-1">Dice 2: Bridge</div>
+                <div className="text-lg font-bold text-primary mb-1">{result.bridgePattern.name}</div>
+                <div className="text-xs text-muted-foreground">{result.bridgePattern.description}</div>
+              </div>
+              
+              {/* Dice 3: Supporting Chord */}
+              <div className="bg-orange-600/10 border border-orange-600/30 rounded-lg p-3">
+                <div className="text-xs text-muted-foreground mb-1">Dice 3: Supporting</div>
+                <div className="text-xl font-bold text-orange-600">{result.supportingChord}</div>
               </div>
             </div>
+
+            {/* Fretboard Displays - Dice 1 and Dice 3 */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+              {/* Dice 1 Fretboard */}
+              <div>
+                <div className="text-sm font-semibold text-purple-600 mb-2">Dice 1: {result.mainChord}</div>
+                <FretboardDisplay
+                  chordDiagram={getChordDiagram(normalizeChordName(result.mainChord))}
+                  chordName={result.mainChord}
+                  showLegend={false}
+                />
+              </div>
+              
+              {/* Dice 3 Fretboard */}
+              <div>
+                <div className="text-sm font-semibold text-orange-600 mb-2">Dice 3: {result.supportingChord}</div>
+                <FretboardDisplay
+                  chordDiagram={getChordDiagram(normalizeChordName(result.supportingChord))}
+                  chordName={result.supportingChord}
+                  showLegend={false}
+                />
+              </div>
+            </div>
+
+            {/* Bridge Pattern Details */}
+            {result.bridgePattern.notes.length > 0 && result.bridgePattern.notes.length <= 7 && (
+              <div className="bg-muted/50 p-3 rounded-lg text-sm">
+                <strong>Bridge Scale Notes:</strong> {result.bridgePattern.notes.join(', ')}
+              </div>
+            )}
+            {result.bridgePattern.fretboardPattern && (
+              <div className="mt-2 text-sm text-muted-foreground">
+                <strong>How to connect:</strong> {result.bridgePattern.fretboardPattern}
+              </div>
+            )}
           </div>
         )}
 
