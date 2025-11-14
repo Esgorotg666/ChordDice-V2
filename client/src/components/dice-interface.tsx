@@ -114,7 +114,11 @@ export default function DiceInterface({ onResult, onUpgrade }: DiceInterfaceProp
   const [numberDiceValue, setNumberDiceValue] = useState(4);
   const [chordTypeDiceValue, setChordTypeDiceValue] = useState('Maj'); // Display chord type instead of number
   
-  // 3-Dice Bridge System
+  // 3-Dice Bridge System - Store display values
+  const [mainChordDisplay, setMainChordDisplay] = useState<string>('Roll');
+  const [bridgePatternDisplay, setBridgePatternDisplay] = useState<string>('Roll');
+  const [supportingChordDisplay, setSupportingChordDisplay] = useState<string>('Roll');
+  
   const [bridgeDiceValue, setbridgeDiceValue] = useState(4); // Bridge pattern selector (1-8)
   const [supportingDiceValue, setSupportingDiceValue] = useState(4); // Supporting chord selector
   
@@ -809,6 +813,11 @@ export default function DiceInterface({ onResult, onUpgrade }: DiceInterfaceProp
           
           // Generate bridge pattern (Dice 2) - connects main and supporting chords
           const bridgePattern = generateBridgePattern(mainChord, supportingChord);
+          
+          // Update dice displays with actual chord symbols and pattern name
+          setMainChordDisplay(mainChord);
+          setBridgePatternDisplay(bridgePattern.name);
+          setSupportingChordDisplay(supportingChord);
 
           if (currentMode === 'single') {
             // Single mode: Show main chord + bridge info
@@ -925,21 +934,21 @@ export default function DiceInterface({ onResult, onUpgrade }: DiceInterfaceProp
         {/* Dice 1: Main Chord */}
         <div className="text-center">
           <div 
-            className={`w-16 h-16 rounded-lg flex items-center justify-center mb-2 border-2 border-gray-600 bg-purple-600 ${isRolling ? 'animate-dice-roll' : ''}`}
+            className={`w-20 h-20 rounded-lg flex items-center justify-center mb-2 border-2 border-gray-600 bg-purple-600 ${isRolling ? 'animate-dice-roll' : ''}`}
             data-testid="dice-main"
           >
-            <span className="text-xl font-bold text-white drop-shadow-lg">{colorDiceValue}</span>
+            <span className="text-sm font-bold text-white drop-shadow-lg leading-tight">{mainChordDisplay}</span>
           </div>
           <span className="text-xs text-muted-foreground font-semibold">Main Chord</span>
         </div>
         
         {/* Dice 2: Bridge Pattern */}
-        <div className="text-center">
+        <div className="text-center max-w-[100px]">
           <div 
-            className={`w-16 h-16 rounded-lg flex items-center justify-center mb-2 border-2 border-primary bg-gradient-to-br from-primary/80 to-primary ${isRolling ? 'animate-dice-roll' : ''}`}
+            className={`w-20 h-20 rounded-lg flex items-center justify-center mb-2 border-2 border-primary bg-gradient-to-br from-primary/80 to-primary ${isRolling ? 'animate-dice-roll' : ''}`}
             data-testid="dice-bridge"
           >
-            <span className="text-xl font-bold text-white drop-shadow-lg">{bridgeDiceValue}</span>
+            <span className="text-[10px] font-bold text-white drop-shadow-lg leading-tight px-1 text-center">{bridgePatternDisplay}</span>
           </div>
           <span className="text-xs text-muted-foreground font-semibold">Bridge</span>
         </div>
@@ -947,10 +956,10 @@ export default function DiceInterface({ onResult, onUpgrade }: DiceInterfaceProp
         {/* Dice 3: Supporting Chord */}
         <div className="text-center">
           <div 
-            className={`dice-face w-16 h-16 rounded-lg flex items-center justify-center mb-2 border-2 border-gray-600 bg-orange-600 ${isRolling ? 'animate-dice-roll' : ''}`}
+            className={`dice-face w-20 h-20 rounded-lg flex items-center justify-center mb-2 border-2 border-gray-600 bg-orange-600 ${isRolling ? 'animate-dice-roll' : ''}`}
             data-testid="dice-supporting"
           >
-            <span className="text-xl font-bold text-white drop-shadow-lg">{supportingDiceValue}</span>
+            <span className="text-sm font-bold text-white drop-shadow-lg leading-tight">{supportingChordDisplay}</span>
           </div>
           <span className="text-xs text-muted-foreground font-semibold">Supporting</span>
         </div>
