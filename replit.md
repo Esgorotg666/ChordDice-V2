@@ -71,6 +71,7 @@ Preferred communication style: Simple, everyday language.
 - **Version**: 1.10.0 (versionCode: 30)
 - **Framework**: Capacitor 7.4.3.
 - **Build Process**: GitHub Actions workflows for building signed APK/AAB and auto-uploading to Google Play Store Internal Testing.
+- **Mobile API Configuration**: The Android/iOS app uses `VITE_API_URL` environment variable to connect to the backend server. This must be set to the published app URL (or Replit dev domain during development). The `queryClient.ts` automatically detects native platforms and builds full API URLs.
 
 # External Dependencies
 
