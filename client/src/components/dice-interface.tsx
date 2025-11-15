@@ -718,8 +718,21 @@ export default function DiceInterface({ onResult, onUpgrade }: DiceInterfaceProp
     // Generate chord combinations optimized for double hand tapping techniques
     const notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
     
-    // Chord types that work well for tapping (extended chords, wide intervals)
-    const tappingChordTypes = [
+    // Essential chord types for first dice (left hand/base chord)
+    const essentialChordTypes = [
+      '', 'm', '7', 'm7', 'M7', 'sus2', 'sus4', 'add9'
+    ];
+    
+    // Exotic chord types for third dice (tapping hand)
+    const exoticChordTypes = [
+      'dim7', 'm7b5', '+', '°',                   // Exotic diminished/augmented
+      '11', '13', 'm11', 'maj13',                 // Extended chords
+      '7#11', '7b9', '7#9',                       // Altered dominants
+      'maj7#11', '6/9', 'm6/9', 'm(maj7)', 'mMaj9' // Complex compound chords
+    ];
+    
+    // Mixed chord types for second and fourth positions
+    const mixedChordTypes = [
       'add9', 'add11', 'maj9', 'maj11', 'maj13',  // Extended major chords
       'm9', 'm11', 'm(maj7)', 'mMaj9',            // Extended minor chords  
       '9', '11', '13', '7#11', '7b9', '7#9',      // Dominant extensions
@@ -738,7 +751,23 @@ export default function DiceInterface({ onResult, onUpgrade }: DiceInterfaceProp
     for (let i = 0; i < 4; i++) {
       const noteIndex = (baseIndex + intervals[i]) % 12;
       const note = notes[noteIndex];
-      const chordType = tappingChordTypes[Math.floor(Math.random() * tappingChordTypes.length)];
+      
+      // Choose chord type based on position:
+      // Position 0 (first dice): Essential chord
+      // Position 2 (third dice): Exotic chord
+      // Positions 1 & 3: Mixed chord types
+      let chordType: string;
+      if (i === 0) {
+        // First dice: Essential chord
+        chordType = essentialChordTypes[Math.floor(Math.random() * essentialChordTypes.length)];
+      } else if (i === 2) {
+        // Third dice: Exotic chord
+        chordType = exoticChordTypes[Math.floor(Math.random() * exoticChordTypes.length)];
+      } else {
+        // Second and fourth: Mixed
+        chordType = mixedChordTypes[Math.floor(Math.random() * mixedChordTypes.length)];
+      }
+      
       progression.push(note + chordType);
     }
     
