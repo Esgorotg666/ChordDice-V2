@@ -1,6 +1,16 @@
 import { createContext, useContext, ReactNode } from "react";
 import { useQuery } from "@tanstack/react-query";
 
+// Import guitar-ONLY background images - BC Rich Warlock, Jackson, PRS, ESP, Ibanez, Schecter
+import warlockHeadstock from "@assets/generated_images/BC_Rich_Warlock_headstock_closeup_8b10fa2a.png";
+import warlockFull from "@assets/generated_images/BC_Rich_Warlock_full_body_d327c42d.png";
+import jacksonGuitar from "@assets/generated_images/Jackson_guitar_headstock_e0043b0a.png";
+import prsGuitar from "@assets/generated_images/PRS_Custom_24_guitar_7d603269.png";
+import espGuitar from "@assets/generated_images/ESP_LTD_metal_guitar_e487aed2.png";
+import ibanezGuitar from "@assets/generated_images/Ibanez_RG_series_guitar_52ce995e.png";
+import schecterGuitar from "@assets/generated_images/Schecter_Hellraiser_guitar_77b29d39.png";
+import njBeast from "@assets/generated_images/BC_Rich_NJ_Beast_f3e71217.png";
+
 type Genre = 
   | 'metal' 
   | 'black-metal' 
@@ -35,34 +45,21 @@ export function BackgroundProvider({ children }: { children: ReactNode }) {
     queryKey: ["/api/preferences"],
   });
 
-  // Import background images
-  const metalBg1 = new URL("../assets/metal-bg1.jpg", import.meta.url).href;
-  const metalBg2 = new URL("../assets/metal-bg2.jpg", import.meta.url).href;
-  const metalBg3 = new URL("../assets/metal-bg3.jpg", import.meta.url).href;
-  const studioBg1 = new URL("../assets/studio-bg1.jpg", import.meta.url).href;
-  const studioBg2 = new URL("../assets/studio-bg2.jpg", import.meta.url).href;
-  const flamencoBg1 = new URL("../assets/flamenco-bg1.jpg", import.meta.url).href;
-  const flamencoBg2 = new URL("../assets/flamenco-bg2.jpg", import.meta.url).href;
-  const folkBg1 = new URL("../assets/folk-bg1.jpg", import.meta.url).href;
-  const folkBg2 = new URL("../assets/folk-bg2.jpg", import.meta.url).href;
-  const rockBg1 = new URL("../assets/rock-bg1.jpg", import.meta.url).href;
-  const rockBg2 = new URL("../assets/rock-bg2.jpg", import.meta.url).href;
-
-  // Map genres to background images
+  // Map genres to background images - Guitar-only images
   const genreBackgrounds: Record<Genre, string[]> = {
-    'metal': [metalBg1, metalBg2, metalBg3],
-    'black-metal': [metalBg1, metalBg2, metalBg3],
-    'death-metal': [metalBg1, metalBg2, metalBg3],
-    'extreme-metal': [metalBg1, metalBg2, metalBg3],
-    'neo-classical': [studioBg1, studioBg2],
-    'flamenco': [flamencoBg1, flamencoBg2],
-    'jazz': [studioBg1, studioBg2],
-    'blues': [studioBg1, studioBg2],
-    'folk': [folkBg1, folkBg2],
-    'pop': [rockBg1, rockBg2],
-    'rock': [rockBg1, rockBg2],
-    'funk': [rockBg1, rockBg2],
-    'any': [metalBg1, metalBg2, metalBg3]
+    'metal': [warlockHeadstock, warlockFull, njBeast, espGuitar],
+    'black-metal': [schecterGuitar, warlockFull, ibanezGuitar, espGuitar],
+    'death-metal': [espGuitar, ibanezGuitar, warlockFull, schecterGuitar],
+    'extreme-metal': [njBeast, schecterGuitar, espGuitar, warlockHeadstock],
+    'neo-classical': [prsGuitar, ibanezGuitar, jacksonGuitar],
+    'flamenco': [prsGuitar, jacksonGuitar],
+    'jazz': [prsGuitar, ibanezGuitar],
+    'blues': [prsGuitar, jacksonGuitar],
+    'folk': [prsGuitar, ibanezGuitar],
+    'pop': [prsGuitar, jacksonGuitar, ibanezGuitar],
+    'rock': [jacksonGuitar, prsGuitar, ibanezGuitar, espGuitar],
+    'funk': [prsGuitar, jacksonGuitar, ibanezGuitar],
+    'any': [warlockHeadstock, warlockFull, jacksonGuitar, prsGuitar]
   };
 
   // Get the preferred genre or default to 'metal'
@@ -76,8 +73,17 @@ export function BackgroundProvider({ children }: { children: ReactNode }) {
   };
   normalizedGenre = legacyRemap[normalizedGenre] || normalizedGenre;
   
-  const preferredGenre = normalizedGenre as Genre;
-  const backgroundImages = genreBackgrounds[preferredGenre] || [metalBg1];
+  // Validate genre is in our supported list, fallback to 'metal' if unknown
+  const validGenres: Genre[] = ['metal', 'black-metal', 'death-metal', 'extreme-metal', 'neo-classical', 'flamenco', 'jazz', 'blues', 'folk', 'pop', 'rock', 'funk', 'any'];
+  const preferredGenre = validGenres.includes(normalizedGenre as Genre) ? (normalizedGenre as Genre) : 'metal';
+  
+  // Get background images for the genre with fallback
+  const backgroundImages = genreBackgrounds[preferredGenre] || genreBackgrounds['metal'];
+  
+  // Log if we're using fallback for debugging
+  if (!validGenres.includes(normalizedGenre as Genre) && normalizedGenre !== 'metal') {
+    console.warn(`Unknown genre "${normalizedGenre}", falling back to metal backgrounds`);
+  }
 
   return (
     <BackgroundContext.Provider value={{ preferredGenre, backgroundImages, isLoading }}>
