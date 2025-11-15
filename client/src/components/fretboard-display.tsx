@@ -25,16 +25,6 @@ export default function FretboardDisplay({
 }: FretboardDisplayProps) {
   const strings = ['E', 'A', 'D', 'G', 'B', 'E'];
   
-  // Calculate note name for a given string and fret
-  const getNoteAtFret = (stringIndex: number, fret: number): string => {
-    const notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
-    const openStringNotes = ['E', 'A', 'D', 'G', 'B', 'E'];
-    const openNote = openStringNotes[stringIndex];
-    const openNoteIndex = notes.indexOf(openNote);
-    const noteIndex = (openNoteIndex + fret) % 12;
-    return notes[noteIndex];
-  };
-  
   // Dynamically calculate fret range based on chord diagram
   // For standard chords (fret 0-1): show frets 0-5 (where 0 represents the nut/open strings)
   // For high fret chords (fret > 1): show frets startFret to startFret+5 (6 total frets)
@@ -88,29 +78,16 @@ export default function FretboardDisplay({
                   data-testid={`muted-string${stringIndex}`}
                   role="img"
                 >✗</span>
-              ) : position === 0 ? (() => {
-                const metadata = noteMetadata?.get(stringIndex);
-                const noteName = getNoteAtFret(stringIndex, 0);
-                const isRoot = metadata?.type === 'root';
-                const textColor = isRoot ? '#dc2626' : '#000000';
-                
-                return (
-                  <div 
-                    className="w-9 h-9 rounded-full flex items-center justify-center mx-auto font-bold shadow-md border-2"
-                    style={{ 
-                      backgroundColor: '#ffffff',
-                      color: textColor,
-                      borderColor: isRoot ? '#dc2626' : '#000000',
-                      fontSize: '13px'
-                    }}
-                    aria-label={`String ${strings[stringIndex]} open, note ${noteName}`}
-                    data-testid={`open-string${stringIndex}`}
-                    role="img"
-                  >
-                    {noteName}
-                  </div>
-                );
-              })() : null}
+              ) : position === 0 ? (
+                <div 
+                  className="w-6 h-6 bg-primary text-primary-foreground rounded-full flex items-center justify-center mx-auto text-sm font-bold"
+                  aria-label={`String ${strings[stringIndex]} open`}
+                  data-testid={`open-string${stringIndex}`}
+                  role="img"
+                >
+                  O
+                </div>
+              ) : null}
             </div>
           ))}
         </div>
@@ -134,28 +111,28 @@ export default function FretboardDisplay({
                   {/* Finger position - match absolute fret position */}
                   {chordDiagram.positions[stringIndex] === fret && (() => {
                     const metadata = noteMetadata?.get(stringIndex);
-                    const noteName = getNoteAtFret(stringIndex, fret);
-                    const ariaLabel = `String ${strings[stringIndex]}, fret ${fret}, note ${noteName}`;
+                    const colorClass = metadata?.color || highlightColor;
+                    const displayLabel = metadata?.label || chordDiagram.fingers?.[stringIndex] || '';
+                    const ariaLabel = `String ${strings[stringIndex]}, fret ${fret}, finger ${displayLabel}`;
                     
-                    // Playing card aesthetic: White background with black/red text
-                    // Root notes get red color, all other notes are black
-                    const isRoot = metadata?.type === 'root';
-                    const textColor = isRoot ? '#dc2626' : '#000000'; // red-600 : black
+                    // Map Tailwind classes to actual colors for inline styles
+                    const bgColorMap: Record<string, string> = {
+                      'bg-orange-500': '#f97316',
+                      'bg-purple-600': '#9333ea',
+                      'bg-blue-600': '#2563eb',
+                      'bg-blue-500': '#3b82f6'
+                    };
+                    const bgColor = bgColorMap[colorClass] || '#3b82f6';
                     
                     return (
                       <div 
-                        className="w-9 h-9 rounded-full flex items-center justify-center font-bold z-10 shadow-md border-2"
-                        style={{ 
-                          backgroundColor: '#ffffff',
-                          color: textColor,
-                          borderColor: isRoot ? '#dc2626' : '#000000',
-                          fontSize: '13px'
-                        }}
+                        className="w-6 h-6 rounded-full flex items-center justify-center text-white text-xs font-bold z-10"
+                        style={{ backgroundColor: bgColor }}
                         aria-label={ariaLabel}
                         data-testid={`marker-string${stringIndex}-fret${fret}`}
                         role="img"
                       >
-                        {noteName}
+                        {displayLabel}
                       </div>
                     );
                   })()}
@@ -176,32 +153,22 @@ export default function FretboardDisplay({
         </div>
       </div>
 
-      {/* Legend - Playing Card Style */}
+      {/* Legend */}
       {showLegend && (
         <div className="mt-6 space-y-2 text-sm">
-          <div className="flex items-center space-x-4 flex-wrap gap-2">
+          <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-2">
-              <div 
-                className="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold border-2 shadow-sm"
-                style={{ backgroundColor: '#ffffff', color: '#000000', borderColor: '#000000', fontSize: '11px' }}
-              >
-                C
-              </div>
-              <span className="text-muted-foreground">Note</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <div 
-                className="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold border-2 shadow-sm"
-                style={{ backgroundColor: '#ffffff', color: '#dc2626', borderColor: '#dc2626', fontSize: '11px' }}
-              >
-                E
-              </div>
-              <span className="text-muted-foreground">Root note</span>
+              <div className="w-4 h-4 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-xs">O</div>
+              <span className="text-muted-foreground">Open string</span>
             </div>
             <div className="flex items-center space-x-2">
               <span className="text-red-500 font-bold">✗</span>
               <span className="text-muted-foreground">Don't play</span>
             </div>
+          </div>
+          <div className="flex items-center space-x-2">
+            <div className={`w-4 h-4 ${highlightColor} rounded-full flex items-center justify-center text-white text-xs`}>1</div>
+            <span className="text-muted-foreground">Finger position (1=index, 2=middle, 3=ring, 4=pinky)</span>
           </div>
         </div>
       )}

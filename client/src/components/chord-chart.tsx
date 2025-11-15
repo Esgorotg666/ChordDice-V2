@@ -133,43 +133,29 @@ export default function ChordChart({ onChordSelect }: ChordChartProps) {
         Click any note to view all chord variations
       </p>
 
-      {/* Root Note Grid - Playing Card Style */}
+      {/* Root Note Grid */}
       <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3 md:gap-4">
         {majorKeys.map((key: string) => {
-          // Determine if note should be red (like red suits) or black (like black suits)
-          // Using sharps/flats for red, naturals for black pattern
-          const isRedNote = key.includes('#') || key.includes('♯') || key.includes('♭') || key.includes('b');
-          const textColor = isRedNote ? '#dc2626' : '#000000'; // red-600 : black
-          const borderColor = isRedNote ? '#dc2626' : '#000000';
+          const colorClass = getKeyColor(key);
           
           return (
             <button
               key={key}
               onClick={() => handleRootNoteClick(key)}
-              className="aspect-square rounded-xl shadow-lg flex flex-col items-center justify-center
+              className={`${colorClass} aspect-square rounded-xl shadow-lg flex flex-col items-center justify-center
                 cursor-pointer transform transition-all duration-200
                 hover:scale-110 hover:shadow-2xl active:scale-95
-                relative overflow-hidden group border-4"
-              style={{
-                backgroundColor: '#ffffff',
-                borderColor: borderColor
-              }}
+                relative overflow-hidden group`}
               data-testid={`root-note-${key}`}
             >
-              {/* Card shine effect on hover */}
-              <div className="absolute inset-0 bg-gradient-to-br from-gray-100 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              {/* Glossy overlay effect */}
+              <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
               
               {/* Note name */}
-              <span 
-                className="text-3xl md:text-4xl font-bold relative z-10"
-                style={{ color: textColor }}
-              >
+              <span className="text-3xl md:text-4xl font-bold text-white drop-shadow-lg relative z-10">
                 {key}
               </span>
-              <span 
-                className="text-xs mt-1 relative z-10 opacity-60"
-                style={{ color: textColor }}
-              >
+              <span className="text-xs text-white/80 mt-1 relative z-10">
                 Root Note
               </span>
             </button>
