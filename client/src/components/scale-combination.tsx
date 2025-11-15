@@ -6,7 +6,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useSubscription } from "@/hooks/useSubscription";
 import { useAuthContext } from "@/contexts/AuthContext";
 import { Crown, Lock, Shuffle, Music, Guitar, BookOpen } from "lucide-react";
-import { modes, NOTES, ModeDef, buildScaleByIntervals, generateRelatedScales } from "@/lib/music-data";
+import { modes, NOTES, ModeDef, buildScaleByIntervals, generateRelatedScales, getChordDiagram, type RelatedScale } from "@/lib/music-data";
+import FretboardDisplay from "@/components/fretboard-display";
 
 interface ScaleInfo {
   name: string;
@@ -163,7 +164,6 @@ interface ScaleCombinationProps {
 
 export default function ScaleCombination({ onUpgrade }: ScaleCombinationProps) {
   const { hasActiveSubscription } = useSubscription();
-  const { isDemoMode } = useAuthContext();
   const [selectedTab, setSelectedTab] = useState<string>("combinations");
   const [scaleCombination, setScaleCombination] = useState<ScaleInfo[]>([]);
   const [octaveCombination, setOctaveCombination] = useState<OctaveChord[]>([]);
@@ -172,7 +172,7 @@ export default function ScaleCombination({ onUpgrade }: ScaleCombinationProps) {
   const [selectedMode, setSelectedMode] = useState<ModeDef | null>(null);
   const [modeRoot, setModeRoot] = useState<string>('');
   const [modeNotes, setModeNotes] = useState<string[]>([]);
-  const [relatedScales, setRelatedScales] = useState<Array<{name: string, notes: string[], type: string}>>([]);
+  const [relatedScales, setRelatedScales] = useState<RelatedScale[]>([]);
 
   if (!hasActiveSubscription) {
     return (
@@ -567,12 +567,10 @@ export default function ScaleCombination({ onUpgrade }: ScaleCombinationProps) {
           <Music className="mr-2 h-5 w-5 text-primary" />
           Scale Combinations
         </h2>
-        {!isDemoMode && (
-          <Badge variant="secondary" className="bg-primary/10 text-primary">
-            <Crown className="mr-1 h-3 w-3" />
-            Premium
-          </Badge>
-        )}
+        <Badge variant="secondary" className="bg-primary/10 text-primary">
+          <Crown className="mr-1 h-3 w-3" />
+          Premium
+        </Badge>
       </div>
 
       <Tabs value={selectedTab} onValueChange={setSelectedTab} className="w-full">
@@ -657,30 +655,43 @@ export default function ScaleCombination({ onUpgrade }: ScaleCombinationProps) {
                 Octave Chord Pattern
               </h3>
               <div className="grid gap-3">
-                {octaveCombination.map((chord, index) => (
-                  <Card key={index} className="p-3 border">
-                    <div className="flex items-center justify-between mb-2">
-                      <Badge className="bg-indigo-500 text-white">
-                        {chord.name}
-                      </Badge>
-                      <span className="text-xs font-medium">
-                        Octave {chord.octave} - {chord.fretPosition}
-                      </span>
-                    </div>
-                    <div className="flex flex-wrap gap-1">
-                      {chord.notes.map((note, noteIndex) => (
-                        <Badge 
-                          key={noteIndex} 
-                          variant="outline" 
-                          className="text-xs"
-                          data-testid={`octave-note-${index}-${noteIndex}`}
-                        >
-                          {note.replace(/[0-9]/g, '')}
+                {octaveCombination.map((chord, index) => {
+                  const chordDiagram = getChordDiagram(chord.name);
+                  return (
+                    <Card key={index} className="p-3 border">
+                      <div className="flex items-center justify-between mb-2">
+                        <Badge className="bg-indigo-500 text-white">
+                          {chord.name}
                         </Badge>
-                      ))}
-                    </div>
-                  </Card>
-                ))}
+                        <span className="text-xs font-medium">
+                          Octave {chord.octave} - {chord.fretPosition}
+                        </span>
+                      </div>
+                      <div className="flex flex-wrap gap-1 mb-3">
+                        {chord.notes.map((note, noteIndex) => (
+                          <Badge 
+                            key={noteIndex} 
+                            variant="outline" 
+                            className="text-xs"
+                            data-testid={`octave-note-${index}-${noteIndex}`}
+                          >
+                            {note.replace(/[0-9]/g, '')}
+                          </Badge>
+                        ))}
+                      </div>
+                      
+                      {/* Fretboard Visualization for this octave chord */}
+                      <div className="mt-3">
+                        <FretboardDisplay 
+                          chordDiagram={chordDiagram} 
+                          chordName={chord.name}
+                          showLegend={index === 0}
+                          label={`Play at ${chord.fretPosition}`}
+                        />
+                      </div>
+                    </Card>
+                  );
+                })}
               </div>
               <Card className="p-3 bg-primary/5 border-primary/20">
                 <h4 className="font-semibold text-sm mb-2">🎸 Playing Tip</h4>
@@ -781,10 +792,10 @@ export default function ScaleCombination({ onUpgrade }: ScaleCombinationProps) {
                       <Card key={index} className="p-3 border border-dashed">
                         <div className="flex items-center justify-between mb-2">
                           <Badge variant="secondary">
-                            {scale.name}
+                            {scale.root} {scale.mode.name}
                           </Badge>
                           <span className="text-xs text-muted-foreground capitalize">
-                            {scale.type}
+                            {scale.mode.quality}
                           </span>
                         </div>
                         <div className="flex flex-wrap gap-1">
