@@ -9,7 +9,8 @@ import bcRichBlack from "@assets/mouser2_1763245506942.webp";
 import beastGuitar from "@assets/beast guitar_1763246735588.png";
 import customWarlock from "@assets/custom warlock_1763246735588.png";
 import jacksonV from "@assets/jackson v_1763246735589.png";
-import warlockOutline from "@assets/Guitar Dice Pay Page_1763246735589.png";
+import warlockOutline1 from "@assets/Guitar Dice Pay Page_1763246735589.png";
+import warlockOutline2 from "@assets/Guitar Dice Pay Page (2)_1763246735589.png";
 import prsGuitar from "@assets/generated_images/PRS_Custom_24_guitar_7d603269.png";
 import espGuitar from "@assets/generated_images/ESP_LTD_metal_guitar_e487aed2.png";
 import ibanezGuitar from "@assets/generated_images/Ibanez_RG_series_guitar_52ce995e.png";
@@ -51,19 +52,19 @@ export function BackgroundProvider({ children }: { children: ReactNode }) {
 
   // Map genres to background images - Premium Guitar Collection
   const genreBackgrounds: Record<Genre, string[]> = {
-    'metal': [warlockHero, customWarlock, jacksonV, bcRichRed, bcRichBlack],
-    'black-metal': [beastGuitar, bcRichBlack, customWarlock, schecterGuitar],
-    'death-metal': [espGuitar, customWarlock, jacksonV, bcRichBlack],
-    'extreme-metal': [beastGuitar, warlockHero, jacksonV, bcRichRed, customWarlock],
+    'metal': [warlockHero, customWarlock, jacksonV, bcRichRed, bcRichBlack, warlockOutline1],
+    'black-metal': [beastGuitar, bcRichBlack, customWarlock, schecterGuitar, warlockOutline2],
+    'death-metal': [espGuitar, customWarlock, jacksonV, bcRichBlack, warlockOutline1],
+    'extreme-metal': [beastGuitar, warlockHero, jacksonV, bcRichRed, customWarlock, warlockOutline2],
     'neo-classical': [prsGuitar, ibanezGuitar, warlockHeadstock],
     'flamenco': [prsGuitar, ibanezGuitar],
     'jazz': [prsGuitar, ibanezGuitar],
     'blues': [prsGuitar, ibanezGuitar],
     'folk': [prsGuitar, ibanezGuitar],
     'pop': [prsGuitar, ibanezGuitar],
-    'rock': [jacksonV, bcRichRed, prsGuitar, customWarlock],
+    'rock': [jacksonV, bcRichRed, prsGuitar, customWarlock, warlockOutline1],
     'funk': [prsGuitar, ibanezGuitar],
-    'any': [warlockHero, beastGuitar, jacksonV, prsGuitar]
+    'any': [warlockHero, beastGuitar, jacksonV, prsGuitar, warlockOutline1]
   };
 
   // Get the preferred genre or default to 'metal'

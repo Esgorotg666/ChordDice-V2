@@ -20,7 +20,8 @@ import bcRichBlack from "@assets/mouser2_1763245506942.webp";
 import beastGuitar from "@assets/beast guitar_1763246735588.png";
 import customWarlock from "@assets/custom warlock_1763246735588.png";
 import jacksonV from "@assets/jackson v_1763246735589.png";
-import warlockOutline from "@assets/Guitar Dice Pay Page_1763246735589.png";
+import warlockOutline1 from "@assets/Guitar Dice Pay Page_1763246735589.png";
+import warlockOutline2 from "@assets/Guitar Dice Pay Page (2)_1763246735589.png";
 import prsGuitar from "@assets/generated_images/PRS_Custom_24_guitar_7d603269.png";
 import espGuitar from "@assets/generated_images/ESP_LTD_metal_guitar_e487aed2.png";
 import ibanezGuitar from "@assets/generated_images/Ibanez_RG_series_guitar_52ce995e.png";
@@ -862,19 +863,19 @@ export default function DiceInterface({ onResult, onUpgrade }: DiceInterfaceProp
   // Genre-based background mapping with multiple images per genre - Premium Guitar Collection
   const backgroundImage = useMemo(() => {
     const genreBackgrounds: Record<Genre, string[]> = {
-      'metal': [warlockHero, customWarlock, jacksonV, bcRichRed, bcRichBlack],
-      'black-metal': [beastGuitar, bcRichBlack, customWarlock, schecterGuitar],
-      'death-metal': [espGuitar, customWarlock, jacksonV, bcRichBlack],
-      'extreme-metal': [beastGuitar, warlockHero, jacksonV, bcRichRed, customWarlock],
+      'metal': [warlockHero, customWarlock, jacksonV, bcRichRed, bcRichBlack, warlockOutline1],
+      'black-metal': [beastGuitar, bcRichBlack, customWarlock, schecterGuitar, warlockOutline2],
+      'death-metal': [espGuitar, customWarlock, jacksonV, bcRichBlack, warlockOutline1],
+      'extreme-metal': [beastGuitar, warlockHero, jacksonV, bcRichRed, customWarlock, warlockOutline2],
       'neo-classical': [prsGuitar, ibanezGuitar, warlockHeadstock],
       'flamenco': [prsGuitar, ibanezGuitar],
       'jazz': [prsGuitar, ibanezGuitar],
       'blues': [prsGuitar, ibanezGuitar],
       'folk': [prsGuitar, ibanezGuitar],
       'pop': [prsGuitar, ibanezGuitar],
-      'rock': [jacksonV, bcRichRed, prsGuitar, customWarlock],
+      'rock': [jacksonV, bcRichRed, prsGuitar, customWarlock, warlockOutline1],
       'funk': [prsGuitar, ibanezGuitar],
-      'any': [warlockHero, beastGuitar, jacksonV, prsGuitar]
+      'any': [warlockHero, beastGuitar, jacksonV, prsGuitar, warlockOutline1]
     };
     
     // Get backgrounds for selected genre
@@ -896,11 +897,23 @@ export default function DiceInterface({ onResult, onUpgrade }: DiceInterfaceProp
     >
       <h2 className="text-lg font-semibold mb-4 text-center">Roll the Dice</h2>
       
-      {/* Genre Selection */}
-      <div className="mb-4">
-        <label className="text-sm font-medium text-muted-foreground mb-2 block">Musical Genre</label>
+      {/* Genre Selection with decorative Warlock outline */}
+      <div className="mb-4 relative">
+        {/* Decorative red Warlock outline - subtle background */}
+        <div 
+          className="absolute -right-4 -top-6 w-32 h-32 opacity-10 pointer-events-none z-0"
+          style={{
+            backgroundImage: `url(${warlockOutline1})`,
+            backgroundSize: 'contain',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'center',
+            filter: 'brightness(2) contrast(1.5)'
+          }}
+        />
+        
+        <label className="text-sm font-medium text-muted-foreground mb-2 block relative z-10">Musical Genre</label>
         <Select value={selectedGenre} onValueChange={(value: Genre) => setSelectedGenre(value)}>
-          <SelectTrigger className="w-full" data-testid="select-genre">
+          <SelectTrigger className="w-full relative z-10" data-testid="select-genre">
             <SelectValue placeholder="Select a genre">
               {selectedGenre && genres.find(g => g.value === selectedGenre)?.label}
             </SelectValue>

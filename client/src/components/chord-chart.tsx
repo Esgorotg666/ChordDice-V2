@@ -3,8 +3,9 @@ import { chordTypes, exoticChordTypes, getAllKeys, colorGroups } from "@/lib/mus
 import { useSubscription } from "@/hooks/useSubscription";
 import { Lock, Crown, X } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 
 interface ChordChartProps {
   onChordSelect?: (chord: string) => void;
@@ -165,6 +166,12 @@ export default function ChordChart({ onChordSelect }: ChordChartProps) {
       {/* Transparent Playing Card Modal */}
       <Dialog open={showChordCards} onOpenChange={setShowChordCards}>
         <DialogContent className="max-w-6xl max-h-[90vh] overflow-y-auto bg-black/90 backdrop-blur-xl border-2 border-primary/30">
+          <VisuallyHidden>
+            <DialogTitle>{selectedRoot} Chord Family</DialogTitle>
+            <DialogDescription>
+              View all chord variations for the {selectedRoot} root note. Click any chord to view its fretboard diagram.
+            </DialogDescription>
+          </VisuallyHidden>
           <div className="relative">
             {/* Header */}
             <div className="flex items-center justify-between mb-6 pb-4 border-b border-primary/30">
