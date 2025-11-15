@@ -12,9 +12,11 @@ import { admobService } from "@/lib/admob-service";
 import { useToast } from "@/hooks/use-toast";
 import { useQuery } from "@tanstack/react-query";
 
-// Import guitar-ONLY background images - Real BC Rich Warlock as hero
+// Import guitar-ONLY background images - Real BC Rich collection as hero
 import warlockHero from "@assets/warlock2_1763245472144.jpg";
 import warlockHeadstock from "@assets/generated_images/BC_Rich_Warlock_headstock_closeup_8b10fa2a.png";
+import bcRichRed from "@assets/mouser_1763245486826.webp";
+import bcRichBlack from "@assets/mouser2_1763245506942.webp";
 import prsGuitar from "@assets/generated_images/PRS_Custom_24_guitar_7d603269.png";
 import espGuitar from "@assets/generated_images/ESP_LTD_metal_guitar_e487aed2.png";
 import ibanezGuitar from "@assets/generated_images/Ibanez_RG_series_guitar_52ce995e.png";
@@ -853,22 +855,22 @@ export default function DiceInterface({ onResult, onUpgrade }: DiceInterfaceProp
 
   const colorGroup = colorGroups[colorDiceValue - 1];
 
-  // Genre-based background mapping with multiple images per genre
+  // Genre-based background mapping with multiple images per genre - BC Rich collection
   const backgroundImage = useMemo(() => {
     const genreBackgrounds: Record<Genre, string[]> = {
-      'metal': [warlockHero, warlockHeadstock, espGuitar],
-      'black-metal': [schecterGuitar, warlockHero, espGuitar],
-      'death-metal': [espGuitar, schecterGuitar, warlockHero],
-      'extreme-metal': [warlockHero, schecterGuitar, espGuitar],
-      'neo-classical': [prsGuitar, ibanezGuitar],
+      'metal': [warlockHero, bcRichRed, bcRichBlack, espGuitar],
+      'black-metal': [bcRichBlack, warlockHero, schecterGuitar, espGuitar],
+      'death-metal': [espGuitar, bcRichBlack, schecterGuitar, warlockHero],
+      'extreme-metal': [warlockHero, bcRichRed, bcRichBlack, schecterGuitar],
+      'neo-classical': [prsGuitar, ibanezGuitar, warlockHeadstock],
       'flamenco': [prsGuitar, ibanezGuitar],
       'jazz': [prsGuitar, ibanezGuitar],
       'blues': [prsGuitar, ibanezGuitar],
       'folk': [prsGuitar, ibanezGuitar],
       'pop': [prsGuitar, ibanezGuitar],
-      'rock': [prsGuitar, ibanezGuitar, espGuitar],
+      'rock': [bcRichRed, prsGuitar, ibanezGuitar, espGuitar],
       'funk': [prsGuitar, ibanezGuitar],
-      'any': [warlockHero, prsGuitar]
+      'any': [warlockHero, bcRichRed, prsGuitar]
     };
     
     // Get backgrounds for selected genre
