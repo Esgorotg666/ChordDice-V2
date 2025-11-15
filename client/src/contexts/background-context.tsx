@@ -51,10 +51,11 @@ export function BackgroundProvider({ children }: { children: ReactNode }) {
   });
 
   // Map genres to background images - Premium Guitar Collection
+  // Purple Beast guitar with glowing eyes is the primary/hero background
   const genreBackgrounds: Record<Genre, string[]> = {
-    'metal': [warlockHero, customWarlock, jacksonV, bcRichRed, bcRichBlack, warlockOutline1],
+    'metal': [beastGuitar, warlockHero, customWarlock, jacksonV, bcRichRed, bcRichBlack, warlockOutline1],
     'black-metal': [beastGuitar, bcRichBlack, customWarlock, schecterGuitar, warlockOutline2],
-    'death-metal': [espGuitar, customWarlock, jacksonV, bcRichBlack, warlockOutline1],
+    'death-metal': [beastGuitar, espGuitar, customWarlock, jacksonV, bcRichBlack, warlockOutline1],
     'extreme-metal': [beastGuitar, warlockHero, jacksonV, bcRichRed, customWarlock, warlockOutline2],
     'neo-classical': [prsGuitar, ibanezGuitar, warlockHeadstock],
     'flamenco': [prsGuitar, ibanezGuitar],
@@ -62,9 +63,9 @@ export function BackgroundProvider({ children }: { children: ReactNode }) {
     'blues': [prsGuitar, ibanezGuitar],
     'folk': [prsGuitar, ibanezGuitar],
     'pop': [prsGuitar, ibanezGuitar],
-    'rock': [jacksonV, bcRichRed, prsGuitar, customWarlock, warlockOutline1],
+    'rock': [beastGuitar, jacksonV, bcRichRed, prsGuitar, customWarlock, warlockOutline1],
     'funk': [prsGuitar, ibanezGuitar],
-    'any': [warlockHero, beastGuitar, jacksonV, prsGuitar, warlockOutline1]
+    'any': [beastGuitar, warlockHero, jacksonV, prsGuitar, warlockOutline1]
   };
 
   // Get the preferred genre or default to 'metal'

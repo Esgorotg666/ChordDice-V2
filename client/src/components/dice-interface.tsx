@@ -861,11 +861,12 @@ export default function DiceInterface({ onResult, onUpgrade }: DiceInterfaceProp
   const colorGroup = colorGroups[colorDiceValue - 1];
 
   // Genre-based background mapping with multiple images per genre - Premium Guitar Collection
+  // Purple Beast guitar with glowing eyes is the primary/hero background
   const backgroundImage = useMemo(() => {
     const genreBackgrounds: Record<Genre, string[]> = {
-      'metal': [warlockHero, customWarlock, jacksonV, bcRichRed, bcRichBlack, warlockOutline1],
+      'metal': [beastGuitar, warlockHero, customWarlock, jacksonV, bcRichRed, bcRichBlack, warlockOutline1],
       'black-metal': [beastGuitar, bcRichBlack, customWarlock, schecterGuitar, warlockOutline2],
-      'death-metal': [espGuitar, customWarlock, jacksonV, bcRichBlack, warlockOutline1],
+      'death-metal': [beastGuitar, espGuitar, customWarlock, jacksonV, bcRichBlack, warlockOutline1],
       'extreme-metal': [beastGuitar, warlockHero, jacksonV, bcRichRed, customWarlock, warlockOutline2],
       'neo-classical': [prsGuitar, ibanezGuitar, warlockHeadstock],
       'flamenco': [prsGuitar, ibanezGuitar],
@@ -873,9 +874,9 @@ export default function DiceInterface({ onResult, onUpgrade }: DiceInterfaceProp
       'blues': [prsGuitar, ibanezGuitar],
       'folk': [prsGuitar, ibanezGuitar],
       'pop': [prsGuitar, ibanezGuitar],
-      'rock': [jacksonV, bcRichRed, prsGuitar, customWarlock, warlockOutline1],
+      'rock': [beastGuitar, jacksonV, bcRichRed, prsGuitar, customWarlock, warlockOutline1],
       'funk': [prsGuitar, ibanezGuitar],
-      'any': [warlockHero, beastGuitar, jacksonV, prsGuitar, warlockOutline1]
+      'any': [beastGuitar, warlockHero, jacksonV, prsGuitar, warlockOutline1]
     };
     
     // Get backgrounds for selected genre
