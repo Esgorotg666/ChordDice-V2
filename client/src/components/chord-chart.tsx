@@ -145,17 +145,17 @@ export default function ChordChart({ onChordSelect }: ChordChartProps) {
               className={`${colorClass} aspect-square rounded-xl shadow-lg flex flex-col items-center justify-center
                 cursor-pointer transform transition-all duration-200
                 hover:scale-110 hover:shadow-2xl active:scale-95
-                relative overflow-hidden group`}
+                relative group p-3 md:p-4`}
               data-testid={`root-note-${key}`}
             >
               {/* Glossy overlay effect */}
-              <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-xl"></div>
               
               {/* Note name */}
-              <span className="text-3xl md:text-4xl font-bold text-white drop-shadow-lg relative z-10">
+              <span className="text-3xl md:text-4xl font-bold text-white drop-shadow-lg relative z-10 leading-tight">
                 {key}
               </span>
-              <span className="text-xs text-white/80 mt-1 relative z-10">
+              <span className="text-xs text-white/80 mt-2 relative z-10">
                 Root Note
               </span>
             </button>
