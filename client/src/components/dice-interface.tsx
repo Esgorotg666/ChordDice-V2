@@ -885,7 +885,7 @@ export default function DiceInterface({ onResult, onUpgrade }: DiceInterfaceProp
     <div 
       className="bg-card rounded-lg p-6 border border-border relative overflow-hidden"
       style={{
-        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url(${backgroundImage})`,
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(${backgroundImage})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center'
       }}

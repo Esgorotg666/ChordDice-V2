@@ -208,18 +208,18 @@ export default function Home() {
     <div 
       className="bg-background text-foreground min-h-screen relative"
       style={backgroundImage ? {
-        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${backgroundImage})`,
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${backgroundImage})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundAttachment: 'fixed'
       } : undefined}
     >
-      {/* Background Overlay for better readability */}
-      <div className="absolute inset-0 bg-black/20 backdrop-blur-sm z-0"></div>
+      {/* Background Overlay for better readability - NO BLUR */}
+      <div className="absolute inset-0 bg-black/10 z-0"></div>
       {/* Dark gold accent glow */}
       <div className="absolute inset-0 pointer-events-none z-0">
-        <div className="absolute top-20 left-20 w-96 h-96 bg-yellow-900/5 blur-3xl" />
-        <div className="absolute bottom-20 right-20 w-96 h-96 bg-yellow-800/5 blur-3xl" />
+        <div className="absolute top-20 left-20 w-96 h-96 bg-yellow-900/10 blur-3xl" />
+        <div className="absolute bottom-20 right-20 w-96 h-96 bg-yellow-800/10 blur-3xl" />
       </div>
       
       {/* Content */}
