@@ -216,20 +216,21 @@ export default function ChordChart({ onChordSelect }: ChordChartProps) {
                       data-testid={`chord-card-${chordDisplay}`}
                     >
                       {/* Playing Card */}
-                      <div className={`${colorClass} rounded-xl p-4 shadow-2xl
+                      <div className={`${colorClass} rounded-xl p-5 shadow-2xl
                         transform transition-all duration-200
                         hover:scale-105 hover:shadow-[0_0_30px_rgba(212,175,55,0.4)]
                         active:scale-95
                         backdrop-blur-sm bg-opacity-80
                         border-2 border-white/20
-                        relative overflow-hidden`}
+                        relative overflow-hidden
+                        min-h-[100px]`}
                       >
                         {/* Card shine effect */}
                         <div className="absolute inset-0 bg-gradient-to-br from-white/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                         
                         {/* Chord name */}
-                        <div className="text-center relative z-10">
-                          <div className="text-3xl font-bold text-white mb-1">
+                        <div className="text-center relative z-10 py-1">
+                          <div className="text-3xl font-bold text-white mb-1 leading-relaxed">
                             {chordDisplay}
                           </div>
                           <div className="text-xs text-white/70 uppercase tracking-wider">
@@ -274,12 +275,13 @@ export default function ChordChart({ onChordSelect }: ChordChartProps) {
                       data-testid={`chord-card-${chordDisplay}`}
                     >
                       {/* Playing Card */}
-                      <div className={`${colorClass} rounded-xl p-4 shadow-2xl
+                      <div className={`${colorClass} rounded-xl p-5 shadow-2xl
                         ${isLocked ? 'opacity-50' : 'hover:scale-105 hover:shadow-[0_0_30px_rgba(212,175,55,0.4)] active:scale-95'}
                         transform transition-all duration-200
                         backdrop-blur-sm bg-opacity-80
                         border-2 border-white/20
-                        relative overflow-hidden`}
+                        relative overflow-hidden
+                        min-h-[100px]`}
                       >
                         {/* Lock overlay for premium */}
                         {isLocked && (
@@ -292,8 +294,8 @@ export default function ChordChart({ onChordSelect }: ChordChartProps) {
                         <div className={`absolute inset-0 bg-gradient-to-br from-white/30 via-transparent to-transparent opacity-0 ${!isLocked && 'group-hover:opacity-100'} transition-opacity`}></div>
                         
                         {/* Chord name */}
-                        <div className="text-center relative z-10">
-                          <div className="text-3xl font-bold text-white mb-1">
+                        <div className="text-center relative z-10 py-1">
+                          <div className="text-3xl font-bold text-white mb-1 leading-relaxed">
                             {chordDisplay}
                           </div>
                           <div className="text-xs text-white/70 uppercase tracking-wider">
