@@ -1,7 +1,10 @@
+import { useState } from "react";
 import { chordTypes, exoticChordTypes, getAllKeys, colorGroups } from "@/lib/music-data";
 import { useSubscription } from "@/hooks/useSubscription";
-import { Lock, Crown } from "lucide-react";
+import { Lock, Crown, X } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
 
 interface ChordChartProps {
   onChordSelect?: (chord: string) => void;
@@ -11,6 +14,9 @@ export default function ChordChart({ onChordSelect }: ChordChartProps) {
   const { hasActiveSubscription } = useSubscription();
   const allKeys = getAllKeys();
   const majorKeys = allKeys.slice(0, 12);
+  
+  const [selectedRoot, setSelectedRoot] = useState<string | null>(null);
+  const [showChordCards, setShowChordCards] = useState(false);
 
   const getKeyColor = (key: string): string => {
     for (const group of colorGroups) {
@@ -32,12 +38,10 @@ export default function ChordChart({ onChordSelect }: ChordChartProps) {
   };
 
   const normalizeChordKey = (key: string, chordType: string): string => {
-    // Step 1: Convert Unicode symbols to ASCII
     let normalizedKey = key
       .replace(/♭/g, 'b')
       .replace(/♯/g, '#');
     
-    // Step 2: Map enharmonic equivalents to match chordDiagrams keys
     const enharmonicMap: Record<string, string> = {
       'A#': 'Bb',
       'D#': 'Eb',
@@ -48,7 +52,6 @@ export default function ChordChart({ onChordSelect }: ChordChartProps) {
       normalizedKey = enharmonicMap[normalizedKey];
     }
     
-    // Step 3: Add suffix based on chord type (matching chordDiagrams keys exactly)
     const suffixes: Record<string, string> = {
       'Major': '',
       'Minor': 'm',
@@ -57,18 +60,18 @@ export default function ChordChart({ onChordSelect }: ChordChartProps) {
       '9th': '9',
       'Minor 6th': 'm6',
       'Minor 7th': 'm7',
-      'Major 7th': 'maj7',     // Fixed: was 'M7'
-      'Diminished': 'dim',      // Fixed: was '°'
-      'Augmented': 'aug',       // Fixed: was '+'
+      'Major 7th': 'maj7',
+      'Diminished': 'dim',
+      'Augmented': 'aug',
       'Suspended': 'sus4',
       '11th': '11',
       '13th': '13',
       'Minor 9th': 'm9',
       'Add9': 'add9',
       '6/9': '6/9',
-      'Diminished 7th': 'dim7',   // Fixed: was '°7'
-      'Half-diminished': 'm7b5',  // Fixed: was 'ø7'
-      'Augmented 7th': '7#5'      // Fixed: was '+7'
+      'Diminished 7th': 'dim7',
+      'Half-diminished': 'm7b5',
+      'Augmented 7th': '7#5'
     };
     
     const suffix = suffixes[chordType] || '';
@@ -104,79 +107,209 @@ export default function ChordChart({ onChordSelect }: ChordChartProps) {
     return abbreviations[chordType] || chordType;
   };
 
-  const handleChordClick = (chord: string) => {
-    console.log('Selected chord:', chord);
-    trackEvent('chord_click', 'ChordChart', chord, 1);
-    onChordSelect?.(chord);
+  const handleRootNoteClick = (key: string) => {
+    setSelectedRoot(key);
+    setShowChordCards(true);
+    trackEvent('root_note_click', 'ChordChart', key, 1);
   };
 
-  const renderChordGrid = (types: string[], title: string, isPremium: boolean = false) => (
-    <div className="mb-6">
-      <h3 className="text-sm md:text-base font-semibold mb-3 flex items-center">
-        {isPremium && (
-          <Crown className="h-4 w-4 mr-2 text-yellow-500" />
-        )}
-        {title}
-        {isPremium && !hasActiveSubscription && (
-          <Lock className="h-4 w-4 ml-2 text-muted-foreground" />
-        )}
-      </h3>
-      
-      <div className="overflow-x-auto -mx-3 md:mx-0 px-3 md:px-0">
-        <div className="grid grid-cols-13 gap-0.5 md:gap-1 mb-1 md:mb-2 min-w-[700px] md:min-w-[800px]">
-          <div className="text-center font-bold text-muted-foreground text-[10px] md:text-xs p-1 md:p-2">Type</div>
-          {majorKeys.map((key: string) => (
-            <div key={key} className="text-center font-bold text-foreground text-xs md:text-sm p-1 md:p-2">
-              {key}
-            </div>
-          ))}
-        </div>
+  const handleChordCardClick = (chord: string) => {
+    trackEvent('chord_card_click', 'ChordChart', chord, 1);
+    onChordSelect?.(chord);
+    setShowChordCards(false);
+  };
 
-        <div className="space-y-0.5 md:space-y-1 min-w-[700px] md:min-w-[800px]">
-          {types.map((chordType: string) => (
-            <div key={chordType} className="grid grid-cols-13 gap-0.5 md:gap-1">
-              <div className="text-center py-1.5 md:py-2 px-0.5 md:px-1 bg-muted rounded text-foreground font-bold text-[10px] md:text-xs flex items-center justify-center">
-                {getAbbreviation(chordType)}
-              </div>
-              {majorKeys.map((key: string) => {
-                const chordDisplay = formatChordDisplay(key, chordType);
-                const colorClass = getKeyColor(key);
-                const isLocked = isPremium && !hasActiveSubscription;
-                
-                return (
-                  <div
-                    key={`${key}-${chordType}`}
-                    className={`${colorClass} p-1.5 md:p-2 rounded text-center text-white font-bold text-xs md:text-sm ${
-                      isLocked 
-                        ? 'opacity-50 cursor-not-allowed relative' 
-                        : 'cursor-pointer active:scale-95 md:hover:scale-105 md:hover:brightness-110'
-                    } transition-all touch-manipulation`}
-                    onClick={() => !isLocked && handleChordClick(chordDisplay)}
-                    data-testid={`chord-${key}-${chordType}`}
-                  >
-                    {isLocked && (
-                      <Lock className="h-3 w-3 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
-                    )}
-                    <span className={isLocked ? 'opacity-0' : ''}>{chordDisplay}</span>
-                  </div>
-                );
-              })}
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
+  const allChordTypes = [...chordTypes, ...exoticChordTypes];
 
   return (
-    <div className="bg-card rounded-lg p-3 md:p-4 border border-border">
-      <h2 className="text-base md:text-lg font-semibold mb-3 md:mb-4 flex items-center">
-        <i className="fas fa-table mr-2 text-primary"></i>Chord Chart
+    <div className="bg-card rounded-lg p-4 md:p-6 border border-border">
+      <h2 className="text-base md:text-lg font-semibold mb-4 flex items-center">
+        <i className="fas fa-music mr-2 text-primary"></i>
+        Root Notes - Select to View Chords
       </h2>
       
-      {renderChordGrid(chordTypes, "Essential Chords", false)}
-      
-      {renderChordGrid(exoticChordTypes, "Exotic Chords (Premium)", true)}
+      <p className="text-sm text-muted-foreground mb-4">
+        Click any note to view all chord variations
+      </p>
+
+      {/* Root Note Grid */}
+      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3 md:gap-4">
+        {majorKeys.map((key: string) => {
+          const colorClass = getKeyColor(key);
+          
+          return (
+            <button
+              key={key}
+              onClick={() => handleRootNoteClick(key)}
+              className={`${colorClass} aspect-square rounded-xl shadow-lg flex flex-col items-center justify-center
+                cursor-pointer transform transition-all duration-200
+                hover:scale-110 hover:shadow-2xl active:scale-95
+                relative overflow-hidden group`}
+              data-testid={`root-note-${key}`}
+            >
+              {/* Glossy overlay effect */}
+              <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              
+              {/* Note name */}
+              <span className="text-3xl md:text-4xl font-bold text-white drop-shadow-lg relative z-10">
+                {key}
+              </span>
+              <span className="text-xs text-white/80 mt-1 relative z-10">
+                Root Note
+              </span>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Transparent Playing Card Modal */}
+      <Dialog open={showChordCards} onOpenChange={setShowChordCards}>
+        <DialogContent className="max-w-6xl max-h-[90vh] overflow-y-auto bg-black/90 backdrop-blur-xl border-2 border-primary/30">
+          <div className="relative">
+            {/* Header */}
+            <div className="flex items-center justify-between mb-6 pb-4 border-b border-primary/30">
+              <div className="flex items-center gap-3">
+                <div className={`${getKeyColor(selectedRoot || '')} w-16 h-16 rounded-lg flex items-center justify-center shadow-xl`}>
+                  <span className="text-3xl font-bold text-white">{selectedRoot}</span>
+                </div>
+                <div>
+                  <h3 className="text-2xl font-bold text-white">
+                    {selectedRoot} Chord Family
+                  </h3>
+                  <p className="text-sm text-muted-foreground">
+                    Click any chord to view on fretboard
+                  </p>
+                </div>
+              </div>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setShowChordCards(false)}
+                className="text-white hover:bg-white/10"
+              >
+                <X className="h-6 w-6" />
+              </Button>
+            </div>
+
+            {/* Essential Chords */}
+            <div className="mb-8">
+              <h4 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                Essential Chords
+              </h4>
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                {chordTypes.map((chordType: string) => {
+                  const chordDisplay = formatChordDisplay(selectedRoot || '', chordType);
+                  const colorClass = getKeyColor(selectedRoot || '');
+                  
+                  return (
+                    <button
+                      key={chordType}
+                      onClick={() => handleChordCardClick(chordDisplay)}
+                      className="group relative"
+                      data-testid={`chord-card-${chordDisplay}`}
+                    >
+                      {/* Playing Card */}
+                      <div className={`${colorClass} rounded-xl p-4 shadow-2xl
+                        transform transition-all duration-200
+                        hover:scale-105 hover:shadow-[0_0_30px_rgba(212,175,55,0.4)]
+                        active:scale-95
+                        backdrop-blur-sm bg-opacity-80
+                        border-2 border-white/20
+                        relative overflow-hidden`}
+                      >
+                        {/* Card shine effect */}
+                        <div className="absolute inset-0 bg-gradient-to-br from-white/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        
+                        {/* Chord name */}
+                        <div className="text-center relative z-10">
+                          <div className="text-3xl font-bold text-white mb-1">
+                            {chordDisplay}
+                          </div>
+                          <div className="text-xs text-white/70 uppercase tracking-wider">
+                            {chordType}
+                          </div>
+                        </div>
+
+                        {/* Corner decorations */}
+                        <div className="absolute top-2 left-2 text-white/30">
+                          <i className="fas fa-music text-xs"></i>
+                        </div>
+                        <div className="absolute bottom-2 right-2 text-white/30">
+                          <i className="fas fa-music text-xs"></i>
+                        </div>
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Exotic Chords (Premium) */}
+            <div>
+              <h4 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                <Crown className="h-5 w-5 text-yellow-500" />
+                Exotic Chords
+                {!hasActiveSubscription && (
+                  <Lock className="h-4 w-4 text-muted-foreground ml-2" />
+                )}
+              </h4>
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                {exoticChordTypes.map((chordType: string) => {
+                  const chordDisplay = formatChordDisplay(selectedRoot || '', chordType);
+                  const colorClass = getKeyColor(selectedRoot || '');
+                  const isLocked = !hasActiveSubscription;
+                  
+                  return (
+                    <button
+                      key={chordType}
+                      onClick={() => !isLocked && handleChordCardClick(chordDisplay)}
+                      className={`group relative ${isLocked ? 'cursor-not-allowed' : ''}`}
+                      data-testid={`chord-card-${chordDisplay}`}
+                    >
+                      {/* Playing Card */}
+                      <div className={`${colorClass} rounded-xl p-4 shadow-2xl
+                        ${isLocked ? 'opacity-50' : 'hover:scale-105 hover:shadow-[0_0_30px_rgba(212,175,55,0.4)] active:scale-95'}
+                        transform transition-all duration-200
+                        backdrop-blur-sm bg-opacity-80
+                        border-2 border-white/20
+                        relative overflow-hidden`}
+                      >
+                        {/* Lock overlay for premium */}
+                        {isLocked && (
+                          <div className="absolute inset-0 flex items-center justify-center bg-black/50 z-20">
+                            <Lock className="h-8 w-8 text-white" />
+                          </div>
+                        )}
+
+                        {/* Card shine effect */}
+                        <div className={`absolute inset-0 bg-gradient-to-br from-white/30 via-transparent to-transparent opacity-0 ${!isLocked && 'group-hover:opacity-100'} transition-opacity`}></div>
+                        
+                        {/* Chord name */}
+                        <div className="text-center relative z-10">
+                          <div className="text-3xl font-bold text-white mb-1">
+                            {chordDisplay}
+                          </div>
+                          <div className="text-xs text-white/70 uppercase tracking-wider">
+                            {chordType}
+                          </div>
+                        </div>
+
+                        {/* Corner decorations */}
+                        <div className="absolute top-2 left-2 text-white/30">
+                          <i className="fas fa-music text-xs"></i>
+                        </div>
+                        <div className="absolute bottom-2 right-2 text-white/30">
+                          <i className="fas fa-music text-xs"></i>
+                        </div>
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
