@@ -48,11 +48,19 @@ Preferred communication style: Simple, everyday language.
 
 ### Premium Features
 - **Compatible Scales**: Identification and visualization of 2-4 musically compatible scales.
+- **Advanced Scale Guide**: Expanded from 5 to 14 professional scales organized in categories (Pentatonic, Modes, Exotic) with fretboard visualization, clickable notes, detailed formulas, compatible chords, and usage tips.
 - **Guitar Exercises**: Comprehensive practice section across 8 categories and 4 skill levels.
 - **Enhanced Tapping**: Dedicated page with independent dual dice for two-hand tapping practice, visualized on dual fretboards.
 - **Optional Dice**: Time Signature Dice and Metronome BPM Dice.
 - **Advanced Genres**: Neo-Classical, Spanish Flamenco, Black Metal, Death Metal, etc., with genre-specific progressions.
 - **Guitar Classroom**: Educational interface with 6 skill tiers (Beginner to Master), featuring visual progression and enhanced hero section.
+
+### Educational Resources (Free)
+- **Guitar Builder's Workshop**: Comprehensive repair and modification guides accessible at `/workshop`:
+  - **Maintenance Guides**: Restringing, truss rod adjustment, bridge/nut setup, Floyd Rose setup and intonation, pickup installation, tuning machine replacement.
+  - **Electronics Guides**: Volume/tone pot replacement, input jack replacement, component value selection.
+  - **Wiring Diagrams**: Complete ASCII diagrams for pickup configurations (1HB, 2HB, HSS, HH Active, Hybrid Active/Passive) and switch configurations (2-way, 3-way, 5-way with various volume/tone setups).
+  - **Expert Tips**: Safety warnings, tool recommendations, troubleshooting guides, and professional best practices.
 
 ### Engagement & Personalization
 - **Daily Practice Streak System**: Tracks consecutive dice rolls with milestone rewards.
