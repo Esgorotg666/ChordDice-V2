@@ -1,11 +1,15 @@
 import { createContext, useContext, ReactNode } from "react";
 import { useQuery } from "@tanstack/react-query";
 
-// Import guitar-ONLY background images - Real BC Rich collection as hero
+// Import guitar-ONLY background images - Premium BC Rich & Metal Guitar Collection
 import warlockHero from "@assets/warlock2_1763245472144.jpg";
 import warlockHeadstock from "@assets/generated_images/BC_Rich_Warlock_headstock_closeup_8b10fa2a.png";
 import bcRichRed from "@assets/mouser_1763245486826.webp";
 import bcRichBlack from "@assets/mouser2_1763245506942.webp";
+import beastGuitar from "@assets/beast guitar_1763246735588.png";
+import customWarlock from "@assets/custom warlock_1763246735588.png";
+import jacksonV from "@assets/jackson v_1763246735589.png";
+import warlockOutline from "@assets/Guitar Dice Pay Page_1763246735589.png";
 import prsGuitar from "@assets/generated_images/PRS_Custom_24_guitar_7d603269.png";
 import espGuitar from "@assets/generated_images/ESP_LTD_metal_guitar_e487aed2.png";
 import ibanezGuitar from "@assets/generated_images/Ibanez_RG_series_guitar_52ce995e.png";
@@ -45,21 +49,21 @@ export function BackgroundProvider({ children }: { children: ReactNode }) {
     queryKey: ["/api/preferences"],
   });
 
-  // Map genres to background images - Guitar-only images with BC Rich collection
+  // Map genres to background images - Premium Guitar Collection
   const genreBackgrounds: Record<Genre, string[]> = {
-    'metal': [warlockHero, bcRichRed, bcRichBlack, espGuitar],
-    'black-metal': [bcRichBlack, warlockHero, schecterGuitar, espGuitar],
-    'death-metal': [espGuitar, bcRichBlack, schecterGuitar, warlockHero],
-    'extreme-metal': [warlockHero, bcRichRed, bcRichBlack, schecterGuitar],
+    'metal': [warlockHero, customWarlock, jacksonV, bcRichRed, bcRichBlack],
+    'black-metal': [beastGuitar, bcRichBlack, customWarlock, schecterGuitar],
+    'death-metal': [espGuitar, customWarlock, jacksonV, bcRichBlack],
+    'extreme-metal': [beastGuitar, warlockHero, jacksonV, bcRichRed, customWarlock],
     'neo-classical': [prsGuitar, ibanezGuitar, warlockHeadstock],
     'flamenco': [prsGuitar, ibanezGuitar],
     'jazz': [prsGuitar, ibanezGuitar],
     'blues': [prsGuitar, ibanezGuitar],
     'folk': [prsGuitar, ibanezGuitar],
     'pop': [prsGuitar, ibanezGuitar],
-    'rock': [bcRichRed, prsGuitar, ibanezGuitar, espGuitar],
+    'rock': [jacksonV, bcRichRed, prsGuitar, customWarlock],
     'funk': [prsGuitar, ibanezGuitar],
-    'any': [warlockHero, bcRichRed, prsGuitar]
+    'any': [warlockHero, beastGuitar, jacksonV, prsGuitar]
   };
 
   // Get the preferred genre or default to 'metal'
