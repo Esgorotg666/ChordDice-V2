@@ -47,8 +47,8 @@ export default function ScaleFretboard({
   const nutColor = "bg-gradient-to-b from-amber-100 to-amber-200";
 
   return (
-    <div className="w-full">
-      <div className={`${fretboardBg} rounded-lg p-3 border-2 border-amber-950/40 shadow-lg relative overflow-hidden`}>
+    <div className="w-full overflow-x-auto">
+      <div className={`${fretboardBg} rounded-lg p-2 sm:p-3 border-2 border-amber-950/40 shadow-lg relative min-w-fit`}>
         {/* Wood grain texture overlay */}
         <div className="absolute inset-0 opacity-10 pointer-events-none">
           <div className="absolute inset-0" style={{
@@ -122,8 +122,8 @@ export default function ScaleFretboard({
                       {displayMode === "notes" && pos && (
                         <div
                           className={`
-                            relative z-20 w-6 h-6 sm:w-7 sm:h-7 rounded-full flex items-center justify-center
-                            text-[10px] sm:text-xs font-bold transition-all hover:scale-110 cursor-default
+                            relative z-20 w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 rounded-full flex items-center justify-center
+                            text-[9px] sm:text-[10px] md:text-xs font-bold transition-all hover:scale-110 cursor-default
                             ${pos.isRoot 
                               ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/60 ring-2 ring-primary/40' 
                               : 'bg-card text-card-foreground border-2 border-primary/50 hover:border-primary/70'
@@ -139,8 +139,8 @@ export default function ScaleFretboard({
                       {displayMode === "fingers" && fingerPos && (
                         <div
                           className={`
-                            relative z-20 w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center
-                            text-xs sm:text-sm font-bold transition-all hover:scale-110 cursor-default
+                            relative z-20 w-5 h-5 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full flex items-center justify-center
+                            text-[10px] sm:text-xs md:text-sm font-bold transition-all hover:scale-110 cursor-default
                             ${fingerPos.isRoot 
                               ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/60 ring-2 ring-primary/40' 
                               : 'bg-gray-800 text-white border-2 border-gray-600 shadow-md'
