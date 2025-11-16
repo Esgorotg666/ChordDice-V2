@@ -62,6 +62,13 @@ Preferred communication style: Simple, everyday language.
 - **Guitar Classroom**: Educational interface with 6 skill tiers (Beginner to Master), featuring visual progression and enhanced hero section.
 
 ### Educational Resources (Free)
+- **Chord Reference Guide**: Comprehensive chord formula reference accessible at `/chord-reference`:
+  - **5 Chord Type Tables**: Major, Minor, Dominant 7th, Diminished, and Augmented chords
+  - **Complete Coverage**: All 12 musical keys with sharps, flats, and enharmonic equivalents
+  - **Chord Formulas**: Shows root, third, fifth (and seventh for dom7) for each chord
+  - **Educational Content**: Explanations of each chord type's characteristics and usage
+  - **Responsive Tables**: Mobile-optimized with horizontal scroll support
+  - **Tabbed Interface**: Easy navigation between chord types
 - **Guitar Builder's Workshop**: Comprehensive repair and modification guides accessible at `/workshop`:
   - **Maintenance Guides**: Restringing, truss rod adjustment, bridge/nut setup, Floyd Rose setup and intonation, pickup installation, tuning machine replacement.
   - **Electronics Guides**: Volume/tone pot replacement, input jack replacement, component value selection.
