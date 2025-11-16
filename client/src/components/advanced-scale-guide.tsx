@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -7,6 +7,8 @@ import { useSubscription } from "@/hooks/useSubscription";
 import { useAuthContext } from "@/contexts/AuthContext";
 import { Crown, Lock, Music, Info, Guitar } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import ScaleFretboard from "@/components/scale-fretboard";
+import { getScalePositions } from "@/lib/scales";
 
 interface ScaleType {
   name: string;
@@ -338,6 +340,11 @@ export default function AdvancedScaleGuide({ onUpgrade, onChordSelect }: Advance
   const currentScale = scaleTypes[selectedScale];
   const availableKeys = Object.keys(currentScale.keys);
 
+  // Calculate complete fretboard positions for the selected scale and key
+  const fretboardPositions = useMemo(() => {
+    return getScalePositions(selectedScale, selectedKey, currentScale.formula);
+  }, [selectedScale, selectedKey, currentScale.formula]);
+
   const handleNoteClick = (note: string, chord: string) => {
     if (onChordSelect) {
       onChordSelect(chord);
@@ -494,33 +501,21 @@ export default function AdvancedScaleGuide({ onUpgrade, onChordSelect }: Advance
         </div>
       </div>
 
-      {/* Simplified Fretboard Pattern Visualization */}
+      {/* Complete Fretboard Visualization */}
       <Card className="bg-muted/30">
         <CardContent className="p-4">
           <h4 className="text-sm font-semibold mb-3 flex items-center gap-2">
             <Guitar className="h-4 w-4" />
-            Fretboard Pattern Guide
+            Complete Fretboard Scale Map
           </h4>
-          <div className="space-y-2">
-            {['E', 'B', 'G', 'D', 'A', 'E'].map((string, idx) => (
-              <div key={idx} className="flex items-center gap-2">
-                <span className="text-xs font-medium text-muted-foreground w-4">{string}</span>
-                <div className="flex-1 h-8 bg-background rounded border border-border flex items-center px-2 gap-1">
-                  {currentScale.fretboardPattern[idx]?.map((fret, fretIdx) => (
-                    <div
-                      key={fretIdx}
-                      className="w-6 h-6 rounded-full bg-primary flex items-center justify-center text-xs text-primary-foreground font-bold"
-                    >
-                      {fret}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-          <p className="text-xs text-muted-foreground mt-3 text-center">
-            Numbers represent fret positions on each string. This is one common pattern - explore the full neck!
+          <p className="text-xs text-muted-foreground mb-4">
+            All {selectedKey} {currentScale.name} notes across the entire fretboard (0-15 frets)
           </p>
+          <ScaleFretboard 
+            positions={fretboardPositions} 
+            rootNote={selectedKey}
+            numFrets={15}
+          />
         </CardContent>
       </Card>
     </div>
