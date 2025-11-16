@@ -48,7 +48,13 @@ Preferred communication style: Simple, everyday language.
 
 ### Premium Features
 - **Compatible Scales**: Identification and visualization of 2-4 musically compatible scales.
-- **Advanced Scale Guide**: Expanded from 5 to 14 professional scales organized in categories (Pentatonic, Modes, Exotic) with fretboard visualization, clickable notes, detailed formulas, compatible chords, and usage tips.
+- **Advanced Scale Guide**: Expanded from 5 to 14 professional scales organized in categories (Pentatonic, Modes, Exotic) with dual-diagram fretboard visualization:
+  - **Dual-Diagram Fretboard**: Toggle between "Notes" mode (displays note names with root highlighting) and "Fingers" mode (shows numbered finger positions 1-4 for Box Position 1 patterns)
+  - **Realistic Fretboard Visuals**: Wood grain texture, nut visualization, graduated string thickness, fret inlay dots (3,5,7,9,12), and metallic fret wires
+  - **Curated Fingering Patterns**: Available for A Minor Pentatonic, C Major Pentatonic, and A Dorian (more scales coming soon)
+  - **Auto-Fallback**: Automatically switches to Notes mode when fingering data is unavailable for a scale/key combination
+  - **Mobile-Responsive**: Optimized marker sizes and spacing for 375px+ viewports with horizontal scroll support
+  - **Interactive Features**: Clickable notes, detailed scale formulas, compatible chords, and usage tips
 - **Guitar Exercises**: Comprehensive practice section across 8 categories and 4 skill levels.
 - **Enhanced Tapping**: Dedicated page with independent dual dice for two-hand tapping practice, visualized on dual fretboards.
 - **Optional Dice**: Time Signature Dice and Metronome BPM Dice.
