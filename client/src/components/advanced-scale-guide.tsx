@@ -1,14 +1,16 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useSubscription } from "@/hooks/useSubscription";
 import { useAuthContext } from "@/contexts/AuthContext";
-import { Crown, Lock, Music, Info, Guitar } from "lucide-react";
+import { Crown, Lock, Music, Info, Guitar, Hand } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import ScaleFretboard from "@/components/scale-fretboard";
+import ScaleFretboard, { type FretboardDisplayMode } from "@/components/scale-fretboard";
 import { getScalePositions } from "@/lib/scales";
+import { getFingeringPattern, hasFingeringPattern } from "@/lib/fretboard-fingerings";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 
 interface ScaleType {
   name: string;
@@ -265,6 +267,7 @@ export default function AdvancedScaleGuide({ onUpgrade, onChordSelect }: Advance
   const [selectedScale, setSelectedScale] = useState<string>("minor_pentatonic");
   const [selectedKey, setSelectedKey] = useState<string>("A");
   const [selectedCategory, setSelectedCategory] = useState<'pentatonic' | 'modes' | 'exotic'>('pentatonic');
+  const [displayMode, setDisplayMode] = useState<FretboardDisplayMode>('notes');
 
   const handleScaleChange = (scaleKey: string) => {
     setSelectedScale(scaleKey);
@@ -344,6 +347,23 @@ export default function AdvancedScaleGuide({ onUpgrade, onChordSelect }: Advance
   const fretboardPositions = useMemo(() => {
     return getScalePositions(selectedScale, selectedKey, currentScale.formula);
   }, [selectedScale, selectedKey, currentScale.formula]);
+
+  // Get fingering pattern for current scale and key
+  const fingeringPattern = useMemo(() => {
+    const pattern = getFingeringPattern(selectedScale, selectedKey, 'box1');
+    return pattern ? pattern.positions : [];
+  }, [selectedScale, selectedKey]);
+
+  const hasFingeringData = useMemo(() => {
+    return hasFingeringPattern(selectedScale, selectedKey);
+  }, [selectedScale, selectedKey]);
+
+  // Auto-switch back to notes mode when scale/key changes and fingering data is not available
+  useEffect(() => {
+    if (displayMode === 'fingers' && !hasFingeringData) {
+      setDisplayMode('notes');
+    }
+  }, [selectedScale, selectedKey, hasFingeringData, displayMode]);
 
   const handleNoteClick = (note: string, chord: string) => {
     if (onChordSelect) {
@@ -504,17 +524,56 @@ export default function AdvancedScaleGuide({ onUpgrade, onChordSelect }: Advance
       {/* Complete Fretboard Visualization */}
       <Card className="bg-muted/30">
         <CardContent className="p-4">
-          <h4 className="text-sm font-semibold mb-3 flex items-center gap-2">
-            <Guitar className="h-4 w-4" />
-            Complete Fretboard Scale Map
-          </h4>
-          <p className="text-xs text-muted-foreground mb-3">
-            All {selectedKey} {currentScale.name} notes across the fretboard (complete octave)
-          </p>
+          <div className="flex items-center justify-between mb-3">
+            <h4 className="text-sm font-semibold flex items-center gap-2">
+              <Guitar className="h-4 w-4" />
+              Fretboard Diagrams
+            </h4>
+            
+            {/* Toggle between Note Labels and Finger Positions */}
+            <div className="flex gap-1 bg-muted rounded-lg p-1">
+              <Button
+                variant={displayMode === 'notes' ? 'default' : 'ghost'}
+                size="sm"
+                onClick={() => setDisplayMode('notes')}
+                className="h-7 text-xs"
+                data-testid="button-mode-notes"
+              >
+                <Music className="h-3 w-3 mr-1" />
+                Notes
+              </Button>
+              <Button
+                variant={displayMode === 'fingers' ? 'default' : 'ghost'}
+                size="sm"
+                onClick={() => setDisplayMode('fingers')}
+                className="h-7 text-xs"
+                disabled={!hasFingeringData}
+                title={!hasFingeringData ? 'Fingering pattern not available for this scale/key combination' : 'Show suggested finger positions'}
+                data-testid="button-mode-fingers"
+              >
+                <Hand className="h-3 w-3 mr-1" />
+                Fingers
+              </Button>
+            </div>
+          </div>
+
+          {/* Description based on mode */}
+          {displayMode === 'notes' ? (
+            <p className="text-xs text-muted-foreground mb-3">
+              All {selectedKey} {currentScale.name} notes across the fretboard (complete octave)
+            </p>
+          ) : (
+            <p className="text-xs text-muted-foreground mb-3">
+              Suggested finger positions for {selectedKey} {currentScale.name} - Box Position 1
+            </p>
+          )}
+
           <ScaleFretboard 
             positions={fretboardPositions} 
             rootNote={selectedKey}
             numFrets={12}
+            displayMode={displayMode}
+            fingeringPattern={fingeringPattern}
           />
         </CardContent>
       </Card>

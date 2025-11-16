@@ -1,3 +1,11 @@
+export type ChordDiagram = {
+  name: string;
+  positions: (number | 'X')[];
+  fingers?: number[];
+  fret?: number;
+};
+
+// Complete Guitar Chord Library - 480 Chords (12 keys × 40 variations)
 export const chordDiagrams: Record<string, ChordDiagram> = {
   'A': { name: 'A Major', positions: ['X', 0, 2, 2, 2, 0] },
   'Am': { name: 'A Minor', positions: ['X', 0, 2, 2, 1, 0] },
