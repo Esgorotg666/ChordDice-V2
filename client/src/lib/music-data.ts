@@ -291,7 +291,170 @@ export const generateScale = (root: string, intervals: number[], preferFlats: bo
   return intervals.map(interval => transposeNote(root, interval, preferFlats));
 };
 
-// Common pentatonic scales
+// Comprehensive Scale Library
+export interface ScaleDef {
+  id: string;
+  name: string;
+  category: 'major' | 'minor' | 'pentatonic' | 'blues' | 'modal' | 'exotic';
+  intervals: number[];
+  degreeFormula: string[];
+  description: string;
+  preferFlats?: boolean;
+  color: string;
+}
+
+// All scales for comprehensive reference
+export const allScales: ScaleDef[] = [
+  // Major Scales
+  {
+    id: 'major',
+    name: 'Major Scale (Ionian)',
+    category: 'major',
+    intervals: [0, 2, 4, 5, 7, 9, 11],
+    degreeFormula: ['1', '2', '3', '4', '5', '6', '7'],
+    description: 'The major scale - bright and happy. Foundation of Western music.',
+    color: 'rgb(59, 130, 246)'
+  },
+  
+  // Minor Scales
+  {
+    id: 'natural_minor',
+    name: 'Natural Minor Scale (Aeolian)',
+    category: 'minor',
+    intervals: [0, 2, 3, 5, 7, 8, 10],
+    degreeFormula: ['1', '2', '♭3', '4', '5', '♭6', '♭7'],
+    description: 'Natural minor - melancholic and emotional. Most common minor scale.',
+    preferFlats: true,
+    color: 'rgb(234, 179, 8)'
+  },
+  {
+    id: 'harmonic_minor',
+    name: 'Harmonic Minor Scale',
+    category: 'minor',
+    intervals: [0, 2, 3, 5, 7, 8, 11],
+    degreeFormula: ['1', '2', '♭3', '4', '5', '♭6', '7'],
+    description: 'Minor with raised 7th - exotic, classical sound. Creates tension and resolution.',
+    preferFlats: true,
+    color: 'rgb(147, 51, 234)'
+  },
+  {
+    id: 'melodic_minor',
+    name: 'Melodic Minor Scale',
+    category: 'minor',
+    intervals: [0, 2, 3, 5, 7, 9, 11],
+    degreeFormula: ['1', '2', '♭3', '4', '5', '6', '7'],
+    description: 'Minor with raised 6th and 7th - smooth ascending sound. Jazz favorite.',
+    preferFlats: true,
+    color: 'rgb(236, 72, 153)'
+  },
+  
+  // Modes
+  {
+    id: 'dorian',
+    name: 'Dorian Mode',
+    category: 'modal',
+    intervals: [0, 2, 3, 5, 7, 9, 10],
+    degreeFormula: ['1', '2', '♭3', '4', '5', '6', '♭7'],
+    description: 'Minor with natural 6th - jazzy and sophisticated. Common in rock and jazz.',
+    preferFlats: true,
+    color: 'rgb(34, 197, 94)'
+  },
+  {
+    id: 'phrygian',
+    name: 'Phrygian Mode',
+    category: 'modal',
+    intervals: [0, 1, 3, 5, 7, 8, 10],
+    degreeFormula: ['1', '♭2', '♭3', '4', '5', '♭6', '♭7'],
+    description: 'Dark and exotic - Spanish/Mediterranean flavor. Distinctive flat 2nd.',
+    preferFlats: true,
+    color: 'rgb(168, 85, 247)'
+  },
+  {
+    id: 'lydian',
+    name: 'Lydian Mode',
+    category: 'modal',
+    intervals: [0, 2, 4, 6, 7, 9, 11],
+    degreeFormula: ['1', '2', '3', '♯4', '5', '6', '7'],
+    description: 'Major with sharp 4th - dreamy and floating. Bright and uplifting.',
+    color: 'rgb(249, 115, 22)'
+  },
+  {
+    id: 'mixolydian',
+    name: 'Mixolydian Mode',
+    category: 'modal',
+    intervals: [0, 2, 4, 5, 7, 9, 10],
+    degreeFormula: ['1', '2', '3', '4', '5', '6', '♭7'],
+    description: 'Major with flat 7th - bluesy and dominant. Rock and blues staple.',
+    preferFlats: true,
+    color: 'rgb(239, 68, 68)'
+  },
+  {
+    id: 'locrian',
+    name: 'Locrian Mode',
+    category: 'modal',
+    intervals: [0, 1, 3, 5, 6, 8, 10],
+    degreeFormula: ['1', '♭2', '♭3', '4', '♭5', '♭6', '♭7'],
+    description: 'Most unstable mode - theoretical and rarely used melodically. Diminished feel.',
+    preferFlats: true,
+    color: 'rgb(107, 114, 128)'
+  },
+  
+  // Pentatonic Scales
+  {
+    id: 'pentatonic_major',
+    name: 'Pentatonic Major Scale',
+    category: 'pentatonic',
+    intervals: [0, 2, 4, 7, 9],
+    degreeFormula: ['1', '2', '3', '5', '6'],
+    description: 'Bright, happy sound - used in country, rock, blues. Easy to improvise with.',
+    color: 'rgb(34, 211, 238)'
+  },
+  {
+    id: 'pentatonic_minor',
+    name: 'Pentatonic Minor Scale',
+    category: 'pentatonic',
+    intervals: [0, 3, 5, 7, 10],
+    degreeFormula: ['1', '♭3', '4', '5', '♭7'],
+    description: 'Dark, bluesy sound - most common in rock and blues. Perfect for soloing.',
+    preferFlats: true,
+    color: 'rgb(251, 146, 60)'
+  },
+  
+  // Blues
+  {
+    id: 'blues',
+    name: 'Blues Scale',
+    category: 'blues',
+    intervals: [0, 3, 5, 6, 7, 10],
+    degreeFormula: ['1', '♭3', '4', '♭5', '5', '♭7'],
+    description: 'Minor pentatonic + blue note (♭5) - quintessential blues sound.',
+    preferFlats: true,
+    color: 'rgb(99, 102, 241)'
+  },
+  
+  // Exotic Scales
+  {
+    id: 'whole_tone',
+    name: 'Whole Tone Scale',
+    category: 'exotic',
+    intervals: [0, 2, 4, 6, 8, 10],
+    degreeFormula: ['1', '2', '3', '♯4', '♯5', '♭7'],
+    description: 'Symmetrical scale of whole steps - dreamy, ambiguous, impressionistic.',
+    color: 'rgb(124, 58, 237)'
+  },
+  {
+    id: 'diminished',
+    name: 'Diminished Scale (Half-Whole)',
+    category: 'exotic',
+    intervals: [0, 1, 3, 4, 6, 7, 9, 10],
+    degreeFormula: ['1', '♭2', '♭3', '3', '♯4', '5', '6', '♭7'],
+    description: 'Alternating half and whole steps - tense, dissonant, jazz and metal.',
+    preferFlats: true,
+    color: 'rgb(190, 24, 93)'
+  }
+];
+
+// Common pentatonic scales (kept for backward compatibility)
 export const pentatonicScales = {
   major: {
     name: 'Major Pentatonic',
@@ -308,6 +471,11 @@ export const pentatonicScales = {
     intervals: [0, 3, 5, 6, 7, 10], // 1, ♭3, 4, ♭5, 5, ♭7
     description: 'Minor pentatonic + blue note (♭5) - quintessential blues sound'
   }
+};
+
+// Helper to get a scale by ID
+export const getScaleById = (id: string): ScaleDef | undefined => {
+  return allScales.find(scale => scale.id === id);
 };
 
 // Get chord diagram by chord symbol
