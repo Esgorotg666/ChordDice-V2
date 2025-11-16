@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { Link, useLocation } from "wouter";
-import { Settings, Crown, User, LogOut, Users, Trash2, MoreVertical, BookOpen, Wrench } from "lucide-react";
+import { Settings, Crown, User, LogOut, Users, Trash2, MoreVertical, BookOpen, Wrench, Music } from "lucide-react";
 import DiceInterface from "@/components/dice-interface";
 import ChordChart from "@/components/chord-chart";
 import PentatonicGuide from "@/components/pentatonic-guide";
@@ -462,6 +462,17 @@ export default function Home() {
                 data-testid="button-workshop"
               >
                 <Wrench className="mr-2 h-4 w-4" />Workshop
+              </Button>
+            </Link>
+
+            {/* Chord Reference - Free */}
+            <Link href="/chord-reference">
+              <Button 
+                variant="secondary" 
+                className="w-full py-3 px-4 hover:bg-accent hover:text-accent-foreground transition-all transform active:scale-95"
+                data-testid="button-chord-reference"
+              >
+                <Music className="mr-2 h-4 w-4" />Chord Reference
               </Button>
             </Link>
             

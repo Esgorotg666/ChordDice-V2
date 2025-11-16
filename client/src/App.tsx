@@ -14,6 +14,7 @@ import ScalesPage from "@/pages/scales";
 import ExercisesPage from "@/pages/exercises";
 import ClassroomPage from "@/pages/classroom";
 import GuitarWorkshop from "@/pages/guitar-workshop";
+import ChordReference from "@/pages/chord-reference";
 import ReferralsPage from "@/pages/referrals";
 import ChatPage from "@/pages/chat";
 import LoginPage from "@/pages/login";
@@ -39,6 +40,7 @@ function Router() {
       <Route path="/exercises" component={ExercisesPage} />
       <Route path="/classroom" component={ClassroomPage} />
       <Route path="/workshop" component={GuitarWorkshop} />
+      <Route path="/chord-reference" component={ChordReference} />
       <Route path="/login" component={LoginPage} />
       <Route path="/signup" component={SignupPage} />
       <Route path="/forgot-password" component={ForgotPasswordPage} />
