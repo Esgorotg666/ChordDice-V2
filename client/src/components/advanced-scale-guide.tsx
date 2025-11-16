@@ -508,13 +508,13 @@ export default function AdvancedScaleGuide({ onUpgrade, onChordSelect }: Advance
             <Guitar className="h-4 w-4" />
             Complete Fretboard Scale Map
           </h4>
-          <p className="text-xs text-muted-foreground mb-4">
-            All {selectedKey} {currentScale.name} notes across the entire fretboard (0-15 frets)
+          <p className="text-xs text-muted-foreground mb-3">
+            All {selectedKey} {currentScale.name} notes across the fretboard (complete octave)
           </p>
           <ScaleFretboard 
             positions={fretboardPositions} 
             rootNote={selectedKey}
-            numFrets={15}
+            numFrets={12}
           />
         </CardContent>
       </Card>

@@ -6,7 +6,7 @@ interface ScaleFretboardProps {
   numFrets?: number;
 }
 
-export default function ScaleFretboard({ positions, rootNote, numFrets = 15 }: ScaleFretboardProps) {
+export default function ScaleFretboard({ positions, rootNote, numFrets = 12 }: ScaleFretboardProps) {
   const strings = ["E", "B", "G", "D", "A", "E"];
   const frets = Array.from({ length: numFrets + 1 }, (_, i) => i);
 
@@ -22,16 +22,16 @@ export default function ScaleFretboard({ positions, rootNote, numFrets = 15 }: S
   };
 
   return (
-    <div className="w-full overflow-x-auto">
-      <div className="min-w-[800px] bg-gradient-to-b from-amber-900/20 to-amber-950/30 rounded-lg p-4 border border-primary/20">
+    <div className="w-full">
+      <div className="bg-gradient-to-b from-amber-900/20 to-amber-950/30 rounded-lg p-3 border border-primary/20">
         {/* Fret markers (top) */}
-        <div className="flex mb-2">
-          <div className="w-12 flex-shrink-0" /> {/* String labels spacer */}
+        <div className="flex mb-1.5">
+          <div className="w-10 flex-shrink-0" /> {/* String labels spacer */}
           <div className="flex-1 flex">
             {frets.map(fret => (
               <div
                 key={fret}
-                className="flex-1 text-center text-xs text-muted-foreground font-mono"
+                className="flex-1 text-center text-[10px] text-muted-foreground font-mono"
               >
                 {fret}
               </div>
@@ -44,7 +44,7 @@ export default function ScaleFretboard({ positions, rootNote, numFrets = 15 }: S
           {strings.map((stringName, stringNum) => (
             <div key={stringNum} className="flex items-center group">
               {/* String label */}
-              <div className="w-12 flex-shrink-0 text-sm font-bold text-muted-foreground text-right pr-3">
+              <div className="w-10 flex-shrink-0 text-xs font-bold text-muted-foreground text-right pr-2">
                 {stringName}
               </div>
 
@@ -67,23 +67,23 @@ export default function ScaleFretboard({ positions, rootNote, numFrets = 15 }: S
                       className="flex-1 flex items-center justify-center relative"
                       data-testid={`fret-${stringName}-${fret}`}
                     >
-                      {/* Fret marker dots (3, 5, 7, 9, 12, 15) */}
+                      {/* Fret marker dots (3, 5, 7, 9, 12) */}
                       {isInlayFret && stringNum === 2 && (
-                        <div className="absolute w-2 h-2 bg-muted-foreground/20 rounded-full -z-10" />
+                        <div className="absolute w-1.5 h-1.5 bg-muted-foreground/20 rounded-full -z-10" />
                       )}
                       {fret === 12 && stringNum === 4 && (
-                        <div className="absolute w-2 h-2 bg-muted-foreground/20 rounded-full -z-10" />
+                        <div className="absolute w-1.5 h-1.5 bg-muted-foreground/20 rounded-full -z-10" />
                       )}
 
                       {/* Scale note */}
                       {pos && (
                         <div
                           className={`
-                            relative z-10 w-8 h-8 rounded-full flex items-center justify-center
-                            text-xs font-bold transition-all hover:scale-110
+                            relative z-10 w-6 h-6 sm:w-7 sm:h-7 rounded-full flex items-center justify-center
+                            text-[10px] sm:text-xs font-bold transition-all hover:scale-110
                             ${pos.isRoot 
-                              ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/50 ring-2 ring-primary/30' 
-                              : 'bg-card text-card-foreground border-2 border-primary/40 hover:border-primary/60'
+                              ? 'bg-primary text-primary-foreground shadow-md shadow-primary/50 ring-1 ring-primary/30' 
+                              : 'bg-card text-card-foreground border border-primary/40 hover:border-primary/60'
                             }
                           `}
                           data-testid={`note-${pos.note}-${fret}`}
@@ -106,15 +106,15 @@ export default function ScaleFretboard({ positions, rootNote, numFrets = 15 }: S
         </div>
 
         {/* Legend */}
-        <div className="mt-4 pt-3 border-t border-border flex items-center gap-6 justify-center text-xs">
-          <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-bold shadow-sm">
+        <div className="mt-3 pt-2 border-t border-border flex items-center gap-4 justify-center text-[10px] sm:text-xs">
+          <div className="flex items-center gap-1.5">
+            <div className="w-5 h-5 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-bold shadow-sm text-[10px]">
               {rootNote}
             </div>
-            <span className="text-muted-foreground">Root Note</span>
+            <span className="text-muted-foreground">Root</span>
           </div>
-          <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded-full bg-card border-2 border-primary/40 flex items-center justify-center text-card-foreground font-bold">
+          <div className="flex items-center gap-1.5">
+            <div className="w-5 h-5 rounded-full bg-card border border-primary/40 flex items-center justify-center text-card-foreground font-bold">
               •
             </div>
             <span className="text-muted-foreground">Scale Tone</span>
