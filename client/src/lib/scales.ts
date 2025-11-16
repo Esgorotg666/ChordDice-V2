@@ -7,8 +7,9 @@ export interface FretPosition {
   isRoot: boolean;
 }
 
-// Standard guitar tuning (EADGBE) in semitones from C
-const STANDARD_TUNING = [4, 9, 2, 7, 11, 4]; // E, A, D, G, B, E
+// Standard guitar tuning in semitones from C
+// Ordered from high E to low E to match UI display (top to bottom)
+const STANDARD_TUNING = [4, 11, 7, 2, 9, 4]; // high E, B, G, D, A, low E
 const NOTE_NAMES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 const NOTE_NAMES_FLAT = ["C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"];
 
