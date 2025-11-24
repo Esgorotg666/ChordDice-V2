@@ -36,7 +36,7 @@ Preferred communication style: Simple, everyday language.
 
 ### Freemium & Monetization
 - **Access Tiers**: Demo/Guest mode (full premium access without persistence), Free Tier (limited access), Premium Tier (unlimited features).
-- **Authentication**: Replit Auth, plus email/password with email verification (bypassed in development). Enhanced signup flow for mobile.
+- **Authentication**: Simplified dual-auth system supporting both Replit Auth (Google Sign-In) and email/password. No email verification required for immediate account access across all devices.
 - **Monetization**: Hybrid payment system using Stripe for web and RevenueCat (Google Play Billing/App Store IAP) for mobile, detected via `Capacitor.getPlatform()`.
 - **Ad-supported tokens**: Google AdMob rewarded video ads for additional dice rolls.
 - **Premium Subscription**: $4.99/month for advanced features.
