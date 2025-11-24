@@ -615,6 +615,80 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // RevenueCat webhook handler (for mobile subscriptions)
+  app.post('/api/revenuecat/webhook', express.json(), async (req, res) => {
+    try {
+      // Verify webhook authorization
+      const authHeader = req.headers['authorization'];
+      const webhookSecret = process.env.REVENUECAT_WEBHOOK_SECRET;
+
+      if (!authHeader || !webhookSecret) {
+        console.error('[RevenueCat Webhook] Missing authorization header or webhook secret');
+        return res.status(401).json({ error: 'Unauthorized' });
+      }
+
+      if (authHeader !== webhookSecret) {
+        console.error('[RevenueCat Webhook] Invalid authorization header');
+        return res.status(401).json({ error: 'Unauthorized' });
+      }
+
+      const event = req.body;
+      console.log('[RevenueCat Webhook] Received event:', event.type);
+
+      // Extract user info from RevenueCat event
+      const revenueCatUserId = event.event?.app_user_id;
+      
+      if (!revenueCatUserId) {
+        console.error('[RevenueCat Webhook] No app_user_id in event');
+        return res.status(400).json({ error: 'Missing app_user_id' });
+      }
+
+      // Find user by RevenueCat user ID
+      const dbUser = await storage.getUserByRevenueCatId(revenueCatUserId);
+      
+      if (!dbUser) {
+        console.error(`[RevenueCat Webhook] User not found for RevenueCat ID: ${revenueCatUserId}`);
+        return res.status(404).json({ error: 'User not found' });
+      }
+
+      // Handle different event types
+      switch (event.type) {
+        case 'INITIAL_PURCHASE':
+        case 'RENEWAL':
+        case 'PRODUCT_CHANGE': {
+          const expiresDate = event.event?.expiration_at_ms 
+            ? new Date(event.event.expiration_at_ms)
+            : new Date(Date.now() + 30 * 24 * 60 * 60 * 1000); // Default 30 days
+          
+          await storage.updateSubscriptionStatus(dbUser.id, 'active', expiresDate);
+          console.log(`[RevenueCat Webhook] Subscription activated for user ${dbUser.id}, expires: ${expiresDate}`);
+          break;
+        }
+
+        case 'CANCELLATION':
+        case 'EXPIRATION': {
+          await storage.updateSubscriptionStatus(dbUser.id, 'canceled');
+          console.log(`[RevenueCat Webhook] Subscription canceled/expired for user ${dbUser.id}`);
+          break;
+        }
+
+        case 'BILLING_ISSUE': {
+          await storage.updateSubscriptionStatus(dbUser.id, 'past_due');
+          console.log(`[RevenueCat Webhook] Billing issue for user ${dbUser.id}`);
+          break;
+        }
+
+        default:
+          console.log(`[RevenueCat Webhook] Unhandled event type: ${event.type}`);
+      }
+
+      res.json({ received: true });
+    } catch (error) {
+      console.error('[RevenueCat Webhook] Error processing webhook:', error);
+      res.status(500).json({ error: 'Webhook processing failed' });
+    }
+  });
+
   // Cancel subscription
   app.post('/api/subscription/cancel', isAuthenticated, csrfProtection, async (req: any, res) => {
     try {

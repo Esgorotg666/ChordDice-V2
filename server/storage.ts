@@ -33,6 +33,8 @@ export interface IStorage {
   updateUserStripeInfo(userId: string, stripeCustomerId: string, stripeSubscriptionId: string): Promise<User | undefined>;
   updateSubscriptionStatus(userId: string, status: string, expiry?: Date): Promise<User | undefined>;
   getUserByStripeCustomer(customerId: string): Promise<[User | undefined]>;
+  getUserByRevenueCatId(revenueCatUserId: string): Promise<User | undefined>;
+  updateUserRevenueCatInfo(userId: string, revenueCatUserId: string): Promise<User | undefined>;
   
   // User preferences methods
   updateUserPreferences(userId: string, preferences: { preferredGenre?: string; playingStyle?: string; skillLevel?: string; hasCompletedOnboarding?: boolean; }): Promise<User | undefined>;
@@ -234,6 +236,24 @@ export class DatabaseStorage implements IStorage {
   async getUserByStripeCustomer(customerId: string): Promise<[User | undefined]> {
     const [user] = await db.select().from(users).where(eq(users.stripeCustomerId, customerId));
     return [user];
+  }
+
+  async getUserByRevenueCatId(revenueCatUserId: string): Promise<User | undefined> {
+    const [user] = await db.select().from(users).where(eq(users.revenueCatUserId, revenueCatUserId));
+    return user;
+  }
+
+  async updateUserRevenueCatInfo(userId: string, revenueCatUserId: string): Promise<User | undefined> {
+    const [user] = await db
+      .update(users)
+      .set({
+        revenueCatUserId,
+        paymentProvider: 'revenuecat',
+        updatedAt: new Date(),
+      })
+      .where(eq(users.id, userId))
+      .returning();
+    return user;
   }
 
   // User preferences methods
