@@ -59,43 +59,12 @@ router.post('/register', createRateLimitMiddleware(mutationRateLimiter, "registr
       password: hashedPassword,
     });
     
-    // In development, allow immediate login without verification
-    if (isDevelopment) {
-      console.log('[DEV MODE] User created - can login immediately without verification:', user.email);
-      res.status(201).json({ 
-        message: 'Account created successfully! You can now log in. (Email verification not required in development mode)',
-        requiresVerification: false
-      });
-    } else {
-      // Production: require email verification
-      const verificationToken = generateVerificationToken();
-      const verificationExpiry = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours
-      
-      await storage.setEmailVerificationToken(user.id, verificationToken, verificationExpiry);
-      
-      // Send verification email - Use Replit public domain for external access
-      const host = req.get('host');
-      const isLocalhost = host?.includes('localhost') || host?.includes('127.0.0.1');
-      const baseUrl = isLocalhost && process.env.REPLIT_DEV_DOMAIN 
-        ? `https://${process.env.REPLIT_DEV_DOMAIN}`
-        : `${req.protocol}://${host}`;
-        
-      const emailSent = await sendVerificationEmail(
-        user.email,
-        user.username || user.email.split('@')[0],
-        verificationToken,
-        baseUrl
-      );
-      
-      if (!emailSent) {
-        console.error('Failed to send verification email');
-      }
-      
-      res.status(201).json({ 
-        message: 'Account created successfully! Please check your email to verify your account.',
-        requiresVerification: true
-      });
-    }
+    // EMAIL VERIFICATION REMOVED - Allow immediate login for all users
+    console.log('[AUTH] User created - can login immediately:', user.email);
+    res.status(201).json({ 
+      message: 'Account created successfully! You can now log in.',
+      requiresVerification: false
+    });
     
   } catch (error: any) {
     console.error('Registration error:', error);
@@ -131,20 +100,8 @@ router.post('/login', createRateLimitMiddleware(mutationRateLimiter, "login"), a
       return res.status(401).json({ message: 'Invalid username or password' });
     }
     
-    // Check if email is verified (skip verification check in development mode)
-    const isDevelopment = process.env.NODE_ENV !== 'production';
-    if (!user.isEmailVerified && !isDevelopment) {
-      return res.status(403).json({ 
-        message: 'Please verify your email address before logging in',
-        requiresVerification: true,
-        email: user.email
-      });
-    }
-    
-    // Log dev mode bypass for debugging
-    if (!user.isEmailVerified && isDevelopment) {
-      console.log('[DEV MODE] Allowing unverified user to login:', user.email);
-    }
+    // EMAIL VERIFICATION REMOVED - Allow all users to login regardless of verification status
+    console.log('[AUTH] User login:', user.email, 'verified:', user.isEmailVerified);
     
     // Set user session
     (req.session as any).userId = user.id;
