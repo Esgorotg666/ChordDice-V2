@@ -451,6 +451,54 @@ export const allScales: ScaleDef[] = [
     description: 'Alternating half and whole steps - tense, dissonant, jazz and metal.',
     preferFlats: true,
     color: 'rgb(190, 24, 93)'
+  },
+  {
+    id: 'hirajoshi',
+    name: 'Hirajoshi Scale',
+    category: 'exotic',
+    intervals: [0, 2, 3, 7, 8],
+    degreeFormula: ['1', '2', '♭3', '5', '♭6'],
+    description: 'Japanese pentatonic scale - mysterious, contemplative sound used in traditional and modern music.',
+    preferFlats: true,
+    color: 'rgb(236, 72, 153)'
+  },
+  {
+    id: 'hungarian_minor',
+    name: 'Hungarian Minor Scale',
+    category: 'exotic',
+    intervals: [0, 2, 3, 6, 7, 8, 11],
+    degreeFormula: ['1', '2', '♭3', '♯4', '5', '♭6', '7'],
+    description: 'Dark, exotic scale with augmented 2nd intervals - Eastern European, gypsy, and neo-classical metal.',
+    preferFlats: true,
+    color: 'rgb(147, 51, 234)'
+  },
+  {
+    id: 'bebop_dominant',
+    name: 'Bebop Dominant Scale',
+    category: 'exotic',
+    intervals: [0, 2, 4, 5, 7, 9, 10, 11],
+    degreeFormula: ['1', '2', '3', '4', '5', '6', '♭7', '7'],
+    description: 'Mixolydian + major 7th - essential jazz scale for smooth chromatic lines over dominant chords.',
+    color: 'rgb(6, 182, 212)'
+  },
+  {
+    id: 'double_harmonic_major',
+    name: 'Double Harmonic Major Scale',
+    category: 'exotic',
+    intervals: [0, 1, 4, 5, 7, 8, 11],
+    degreeFormula: ['1', '♭2', '3', '4', '5', '♭6', '7'],
+    description: 'Byzantine/Arabic scale with two augmented 2nds - exotic, Middle Eastern, flamenco.',
+    preferFlats: true,
+    color: 'rgb(220, 38, 38)'
+  },
+  {
+    id: 'acoustic',
+    name: 'Acoustic Scale',
+    category: 'exotic',
+    intervals: [0, 2, 4, 6, 7, 9, 10],
+    degreeFormula: ['1', '2', '3', '♯4', '5', '6', '♭7'],
+    description: 'Lydian Dominant (Lydian ♯2) - bright, open sound derived from overtone series, fusion and jazz-rock.',
+    color: 'rgb(251, 191, 36)'
   }
 ];
 

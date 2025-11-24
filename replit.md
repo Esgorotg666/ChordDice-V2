@@ -48,7 +48,7 @@ Preferred communication style: Simple, everyday language.
 
 ### Premium Features
 - **Compatible Scales**: Identification and visualization of 2-4 musically compatible scales.
-- **Advanced Scale Guide**: Expanded from 5 to 14 professional scales organized in categories (Pentatonic, Modes, Exotic) with dual-diagram fretboard visualization:
+- **Advanced Scale Guide**: Comprehensive library of 19 professional scales organized in categories (Major, Minor, Modes, Pentatonic, Blues, Exotic) with dual-diagram fretboard visualization:
   - **Dual-Diagram Fretboard**: Toggle between "Notes" mode (displays note names with root highlighting) and "Fingers" mode (shows numbered finger positions 1-4 for Box Position 1 patterns)
   - **Realistic Fretboard Visuals**: Wood grain texture, nut visualization, graduated string thickness, fret inlay dots (3,5,7,9,12), and metallic fret wires
   - **Curated Fingering Patterns**: Available for A Minor Pentatonic, C Major Pentatonic, and A Dorian (more scales coming soon)
@@ -59,7 +59,11 @@ Preferred communication style: Simple, everyday language.
 - **Enhanced Tapping**: Dedicated page with independent dual dice for two-hand tapping practice, visualized on dual fretboards.
 - **Optional Dice**: Time Signature Dice and Metronome BPM Dice.
 - **Advanced Genres**: Neo-Classical, Spanish Flamenco, Black Metal, Death Metal, etc., with genre-specific progressions.
-- **Guitar Classroom**: Educational interface with 6 skill tiers (Beginner to Master), featuring visual progression and enhanced hero section.
+- **Guitar Classroom**: Comprehensive educational system with 6 skill tiers (Beginner to Master) and 20+ genre-specific lessons, featuring:
+  - **Core Theory Lessons**: Rhythm Essentials Bootcamp, Chord Construction 101, Functional Harmony Workshop
+  - **Skill Development**: Ear-Training Primer, Pentatonic Navigation (5-box system), Groove & Time Mastery
+  - **Advanced Topics**: Modal Improvisation Lab, Creative Voice Leading for jazz/neo-soul
+  - **Genre-Specific Training**: Rock, Metal, Blues, Jazz, Funk with progressive difficulty levels
 
 ### Educational Resources (Free)
 - **Chord Reference Guide**: Comprehensive chord formula reference accessible at `/chord-reference`:

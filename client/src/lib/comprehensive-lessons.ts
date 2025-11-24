@@ -1322,6 +1322,336 @@ export const generalBeginnerLessons: Lesson[] = [
         tips: ['Be patient with yourself', 'Record yourself weekly', 'Join guitar community for support']
       }
     ]
+  },
+  {
+    id: 'general-16',
+    difficulty: 'beginner',
+    genre: 'general',
+    title: 'Rhythm Essentials Bootcamp',
+    description: 'Master time, counting, and rhythmic foundation - the heartbeat of guitar playing',
+    fretboardPatterns: [
+      { name: 'Single Note Rhythm', positions: [0, 'x', 'x', 'x', 'x', 'x'], fingers: [0, 0, 0, 0, 0, 0] }
+    ],
+    scales: [],
+    subsections: [
+      {
+        id: 'general-16-1',
+        title: 'Understanding Musical Time',
+        content: 'Most music is in 4/4 time: 4 beats per measure. Count: 1-2-3-4, 1-2-3-4. Tap your foot on each number. This is the pulse.',
+        technique: 'Always use a metronome. Start at 60 BPM (beats per minute). Play one downstroke per beat on open Low E string.',
+        tips: ['Metronome is non-negotiable', 'Count out loud while playing', 'Feel don\'t just count']
+      },
+      {
+        id: 'general-16-2',
+        title: 'Quarter, Eighth, and Sixteenth Notes',
+        content: 'Quarter notes: 1 per beat (1-2-3-4). Eighth notes: 2 per beat (1-and-2-and-3-and-4-and). Sixteenth notes: 4 per beat (1-e-and-a-2-e-and-a).',
+        technique: 'Practice subdivision pyramid: 4 quarter notes, then 8 eighth notes, then 16 sixteenth notes on one string.',
+        tips: ['Start slow at 60 BPM', 'Alternate picking for eighths/sixteenths', 'Lock in with metronome click']
+      },
+      {
+        id: 'general-16-3',
+        title: 'Syncopation and Rhythm Patterns',
+        content: 'Syncopation = emphasis on off-beats (the "and"). Play on: 1-AND-2-AND-3-AND-4-AND. Skip some downbeats for groove.',
+        technique: 'Practice reggae skank: muted chords on "and" beats only. Creates bouncy, danceable feel.',
+        tips: ['Essential for funk, reggae, pop', 'Listen to James Brown for syncopation', 'Develops groove pocket']
+      },
+      {
+        id: 'general-16-4',
+        title: 'Daily Rhythm Drills',
+        content: 'Drill 1: Play whole notes (4 beats each). Drill 2: Quarter notes. Drill 3: Eighth notes. Drill 4: Triplets (1-and-a-2-and-a). Drill 5: Sixteenth notes.',
+        technique: 'Set timer: 2 minutes per drill at 80 BPM. Increase by 5 BPM weekly. Track in practice journal.',
+        tips: ['Best ROI exercise for guitarists', '10 minutes daily transforms playing', 'Rhythm > everything else']
+      }
+    ]
+  },
+  {
+    id: 'general-17',
+    difficulty: 'beginner',
+    genre: 'general',
+    title: 'Chord Construction 101',
+    description: 'Understand how chords are built - unlock the fretboard and music theory',
+    fretboardPatterns: [
+      { name: 'C Major Triad', positions: ['x', 3, 2, 0, 1, 0], fingers: [0, 3, 2, 0, 1, 0] },
+      { name: 'A Minor Triad', positions: ['x', 0, 2, 2, 1, 0], fingers: [0, 0, 2, 3, 1, 0] }
+    ],
+    scales: [],
+    subsections: [
+      {
+        id: 'general-17-1',
+        title: 'The Major Scale Foundation',
+        content: 'All chords come from scales. C Major scale: C-D-E-F-G-A-B-C. Number them 1-2-3-4-5-6-7-8. These numbers are scale degrees.',
+        technique: 'Memorize: W-W-H-W-W-W-H (W=whole step, H=half step). This pattern builds ANY major scale.',
+        tips: ['Foundation of all Western music theory', 'Know this in every key', 'Start with C (no sharps/flats)']
+      },
+      {
+        id: 'general-17-2',
+        title: 'Building Triads (3-Note Chords)',
+        content: 'Major chord formula: 1-3-5 (root, major 3rd, perfect 5th). C Major = C-E-G. Minor chord: 1-♭3-5. A Minor = A-C-E.',
+        technique: 'Take any note. Count up major scale: 1st note, skip one (3rd), skip one (5th). That\'s a major triad.',
+        tips: ['Major = happy sound', 'Minor = sad sound', 'Only 3 notes make a chord']
+      },
+      {
+        id: 'general-17-3',
+        title: 'Seventh Chords',
+        content: 'Add the 7th note for richer sound. Major 7th: 1-3-5-7 (Cmaj7 = C-E-G-B). Dominant 7th: 1-3-5-♭7 (C7 = C-E-G-B♭). Minor 7th: 1-♭3-5-♭7.',
+        technique: 'Dominant 7 wants to resolve down a 5th (G7→C). Creates tension and release in progressions.',
+        tips: ['Used in jazz, blues, funk', 'More colorful than triads', 'Foundation for extensions (9ths, 11ths, 13ths)']
+      },
+      {
+        id: 'general-17-4',
+        title: 'Practical Application',
+        content: 'Find root on Low E string. Build major chord: root + 4 frets (major 3rd) + 7 frets (perfect 5th). Move this anywhere.',
+        technique: 'Example: F chord. Low E fret 1 (F). Fret 5 on that string (A, major 3rd). Fret 8 (C, perfect 5th).',
+        tips: ['Understand WHY chord shapes work', 'Build chords anywhere on neck', 'Theory unlocks freedom']
+      }
+    ]
+  },
+  {
+    id: 'general-18',
+    difficulty: 'intermediate',
+    genre: 'general',
+    title: 'Ear-Training Primer',
+    description: 'Develop your musical ear to play what you hear and improvise freely',
+    fretboardPatterns: [],
+    scales: [
+      { name: 'Major Scale', pattern: 'W-W-H-W-W-W-H', notes: ['1', '2', '3', '4', '5', '6', '7'] }
+    ],
+    subsections: [
+      {
+        id: 'general-18-1',
+        title: 'Interval Recognition',
+        content: 'Intervals are distance between notes. Minor 2nd (Jaws theme), Major 3rd (Oh When the Saints), Perfect 5th (Star Wars), Octave (Somewhere Over Rainbow).',
+        technique: 'Sing intervals using song references. Then find them on guitar. Match what you hear to fretboard positions.',
+        tips: ['Start with perfect 5th (easiest)', 'Use song method for memorization', 'Practice 5 minutes daily']
+      },
+      {
+        id: 'general-18-2',
+        title: 'Singing What You Play',
+        content: 'Play a note. Sing it. Play next note. Sing it. This connects ear to fingers. Do this with scales, riffs, melodies.',
+        technique: 'Use A Minor Pentatonic scale. Play each note, sing it immediately after. Slow tempo. Lock in pitch.',
+        tips: ['Feels awkward at first - that\'s normal', 'Most important skill for improvisation', 'Guitarists who sing solos are better players']
+      },
+      {
+        id: 'general-18-3',
+        title: 'Melody Transcription',
+        content: 'Pick a simple melody (Happy Birthday, Twinkle Twinkle). Figure it out by ear on one string. No tabs. Just listen and find notes.',
+        technique: 'Start on Low E string fret 0. Hum melody. Is next note higher or lower? Try notes until it matches.',
+        tips: ['Develops relative pitch', 'Makes learning songs 10x faster', 'First step to playing by ear']
+      },
+      {
+        id: 'general-18-4',
+        title: 'Chord Quality Recognition',
+        content: 'Close eyes. Have friend play major or minor chord. Identify which. Major = bright/happy. Minor = dark/sad. Dominant 7 = bluesy/unresolved.',
+        technique: 'Use guitar or piano app. Play random chords. Guess major/minor/dominant. Track accuracy. Aim for 90%+.',
+        tips: ['Essential for learning songs by ear', 'Develops harmonic awareness', 'Free apps available: EarMaster, Perfect Ear']
+      }
+    ]
+  },
+  {
+    id: 'general-19',
+    difficulty: 'intermediate',
+    genre: 'general',
+    title: 'Pentatonic Navigation',
+    description: 'Master the 5 pentatonic box positions across the entire fretboard',
+    fretboardPatterns: [
+      { name: 'Box 1 (A Minor Pent)', positions: [5, 5, 5, 5, 5, 5], fingers: [1, 1, 1, 1, 1, 1] },
+      { name: 'Box 2', positions: [8, 8, 7, 7, 8, 8], fingers: [1, 1, 1, 1, 1, 1] }
+    ],
+    scales: [
+      { name: 'Minor Pentatonic', pattern: '1-♭3-4-5-♭7', notes: ['A', 'C', 'D', 'E', 'G'] }
+    ],
+    subsections: [
+      {
+        id: 'general-19-1',
+        title: 'The 5 Box Position System',
+        content: 'Minor pentatonic has 5 interlocking box patterns that cover the whole neck. Learn them in order: Box 1 (fret 5), Box 2 (fret 7-8), Box 3 (fret 10), Box 4 (fret 12), Box 5 (fret 15).',
+        technique: 'Start with Box 1 (most important). Spend 1 week per box. Practice ascending, descending, and random patterns.',
+        tips: ['Most important scale for rock/blues', 'Box 1 = 80% of solos', 'Connect boxes later']
+      },
+      {
+        id: 'general-19-2',
+        title: 'Connecting the Boxes',
+        content: 'Box 1 and 2 share notes. Slide from Box 1 top note (fret 8, high E) to Box 2 bottom (fret 8, low E). Boxes overlap.',
+        technique: 'Practice "vertical" moves: stay in one box. Then "horizontal": shift between boxes smoothly mid-phrase.',
+        tips: ['Opens entire fretboard', 'Essential for long solos', 'Study BB King, Slash for box connection']
+      },
+      {
+        id: 'general-19-3',
+        title: 'Pentatonic Licks and Phrases',
+        content: 'Learn classic licks: Box 1 pull-off run (5-8p5 on high E). Bend at fret 8 (B string) up whole step. Double-stop bends.',
+        technique: 'Transcribe 5 short licks from favorite guitarists. Loop them until muscle memory. Add to vocabulary.',
+        tips: ['Licks = vocabulary words', 'Combine licks = sentences/solos', 'Steal from the best']
+      },
+      {
+        id: 'general-19-4',
+        title: 'Major Pentatonic Relationship',
+        content: 'A Minor Pentatonic = C Major Pentatonic (same notes, different root). Box 1 A Minor = Box 4 C Major. Learn both perspectives.',
+        technique: 'Play Box 1 starting on fret 5 (A minor) vs fret 8 (C major). Hear how tonal center shifts.',
+        tips: ['Unlock country/rock lead sounds', 'Major pent = brighter, happier', 'Same shapes, different context']
+      }
+    ]
+  },
+  {
+    id: 'general-20',
+    difficulty: 'intermediate',
+    genre: 'general',
+    title: 'Functional Harmony Workshop',
+    description: 'Understand how chords relate and create tension-and-release in progressions',
+    fretboardPatterns: [],
+    scales: [],
+    subsections: [
+      {
+        id: 'general-20-1',
+        title: 'Diatonic Harmony (Chords in a Key)',
+        content: 'Every major key has 7 chords built from its scale. In C Major: I=Cmaj, ii=Dm, iii=Em, IV=Fmaj, V=G7, vi=Am, vii°=Bdim. Upper case=major, lower=minor.',
+        technique: 'Harmonize C major scale in 3rds: C-E-G (Cmaj), D-F-A (Dm), E-G-B (Em), etc. This creates diatonic chords.',
+        tips: ['Most songs use only diatonic chords', 'Roman numerals work in ALL keys', 'Master this = write songs easily']
+      },
+      {
+        id: 'general-20-2',
+        title: 'Chord Functions: Tonic-Subdominant-Dominant',
+        content: 'Tonic (I): Home base, stable. Subdominant (IV): Movement away. Dominant (V): Strong pull back to I. V→I = strongest resolution in music.',
+        technique: 'Play: C-F-G-C. Feel how F creates motion, G creates tension, C resolves. This is functional harmony.',
+        tips: ['Used in 1000s of hits', 'Creates emotional arc', 'V7 (dominant 7th) even stronger']
+      },
+      {
+        id: 'general-20-3',
+        title: 'Secondary Dominants',
+        content: 'Borrow chords from other keys. In C major, A7 (not diatonic) resolves to ii (Dm). A7→Dm borrowed from D minor. Creates richer harmony.',
+        technique: 'Turn any chord into dominant 7th to target next chord. I-V7/vi-vi = C-E7-Am. E7 borrowed, creates tension→Am.',
+        tips: ['Used in jazz, Beatles songs', 'Adds color beyond diatonic', 'Study "I Will" by Beatles']
+      },
+      {
+        id: 'general-20-4',
+        title: 'Modal Interchange and Borrowed Chords',
+        content: 'Borrow chords from parallel minor. C Major can borrow from C Minor: ♭VII (B♭maj), ♭VI (A♭maj), iv (Fm). Sounds darker, dramatic.',
+        technique: 'Play C-Fm-C-G. Fm borrowed from C minor. Creates emotional shift without changing key.',
+        tips: ['Common in rock/pop', 'Radiohead uses this heavily', 'Expands harmonic palette']
+      }
+    ]
+  },
+  {
+    id: 'general-21',
+    difficulty: 'intermediate',
+    genre: 'general',
+    title: 'Groove & Time Mastery',
+    description: 'Develop deep pocket, swing feel, and rhythmic sophistication',
+    fretboardPatterns: [],
+    scales: [],
+    subsections: [
+      {
+        id: 'general-21-1',
+        title: 'Finding the Pocket',
+        content: 'Pocket = rhythmic sweet spot where groove lives. Play slightly behind beat (laid back) or on top (aggressive). Feel > mechanical precision.',
+        technique: 'Record yourself with drum machine. Listen back. Are you rushing (ahead of beat) or dragging (behind)? Adjust feel.',
+        tips: ['Study Nile Rodgers (disco pocket)', 'John Mayer (laid-back blues)', 'Malcolm Young (on-top rock)']
+      },
+      {
+        id: 'general-21-2',
+        title: 'Swing vs Straight Time',
+        content: 'Straight eighths: 1-and-2-and (even). Swing eighths: 1-and(a)-2-and(a) (triplet-based, uneven). Jazz, blues, shuffle use swing.',
+        technique: 'Metronome at 90 BPM, triplet subdivision. Play on 1st and 3rd triplet note. That\'s swing feel.',
+        tips: ['Essential for blues, jazz, swing', 'Feels "bouncy"', 'Listen to Count Basie Orchestra']
+      },
+      {
+        id: 'general-21-3',
+        title: 'Polyrhythmic Exercises',
+        content: 'Play 3 notes per beat while foot taps 4 (3 over 4). Or 5 over 4. Develops independence and rhythmic complexity.',
+        technique: 'Left hand plays quarter notes (1-2-3-4). Right hand plays triplets (1-and-a-2-and-a). Coordination drill.',
+        tips: ['Challenging but transformative', 'Opens rhythmic possibilities', 'Used in progressive rock, math metal']
+      },
+      {
+        id: 'general-21-4',
+        title: 'Playing to a Click Track',
+        content: 'Metronome discipline = professional playing. Set click. Play 8 bars perfectly locked in. Then mute click. Play 8 bars. Unmute. Are you still on?',
+        technique: 'Start 60 BPM, increase 5 BPM weekly until comfortable at 120 BPM. Practice every rhythm pattern (whole notes → 16ths).',
+        tips: ['Non-negotiable for session work', 'Develops internal clock', 'Makes band playing easier']
+      }
+    ]
+  },
+  {
+    id: 'general-22',
+    difficulty: 'mastery',
+    genre: 'general',
+    title: 'Modal Improvisation Lab',
+    description: 'Advanced modal concepts for creative, sophisticated soloing',
+    fretboardPatterns: [],
+    scales: [
+      { name: 'Dorian Mode', pattern: '1-2-♭3-4-5-6-♭7', notes: ['D', 'E', 'F', 'G', 'A', 'B', 'C'] },
+      { name: 'Mixolydian Mode', pattern: '1-2-3-4-5-6-♭7', notes: ['G', 'A', 'B', 'C', 'D', 'E', 'F'] }
+    ],
+    subsections: [
+      {
+        id: 'general-22-1',
+        title: 'Modal vs Tonal Thinking',
+        content: 'Tonal: Chords change, melody follows harmony. Modal: One chord vamps, melody explores mode color tones. D Dorian over Dm7: emphasize 6th (B) and major 2nd (E).',
+        technique: 'Solo over Dm7 vamp using D Dorian. Target characteristic tones (6th, 9th). Avoid thinking "this is C major".',
+        tips: ['Study Miles Davis "So What" (Dorian)', 'Santana uses Dorian heavily', 'Modal = horizontal, tonal = vertical thinking']
+      },
+      {
+        id: 'general-22-2',
+        title: 'Targeting Modal Characteristic Tones',
+        content: 'Each mode has color tones. Dorian: ♮6. Phrygian: ♭2. Lydian: ♯4. Mixolydian: ♭7. Emphasize these for modal flavor.',
+        technique: 'Over Dm7: Resolve phrases to B (natural 6) or E (major 9). Creates Dorian sound vs Aeolian (minor).',
+        tips: ['Land on color tones on downbeats', 'Use color tones in bends', 'Defines modal character']
+      },
+      {
+        id: 'general-22-3',
+        title: 'Modal Interchange in Solos',
+        content: 'Switch modes over same chord. Over C: start Ionian (major), shift to Lydian (♯4), then Mixolydian (♭7). Creates evolving colors.',
+        technique: 'Map modes to fretboard positions. Know where characteristic tone is in each box. Shift emphasis mid-solo.',
+        tips: ['Allan Holdsworth signature technique', 'Creates "outside" sounds', 'Requires deep theory knowledge']
+      },
+      {
+        id: 'general-22-4',
+        title: 'Modal Composition',
+        content: 'Write progressions that stay in one mode. D Dorian: Dm7-Em7-Dm7 (stay in D Dorian). No V7 chord (that\'s tonal function).',
+        technique: 'Avoid functional harmony. Modal music = static or oscillating. Think texture and color vs tension-release.',
+        tips: ['Study Bill Evans modal compositions', 'Common in fusion, prog rock', 'Requires unlearning tonal habits']
+      }
+    ]
+  },
+  {
+    id: 'general-23',
+    difficulty: 'mastery',
+    genre: 'general',
+    title: 'Creative Voice Leading Intensive',
+    description: 'Master smooth, sophisticated chord movement for jazz, neo-soul, and advanced composition',
+    fretboardPatterns: [
+      { name: 'Cmaj7', positions: ['x', 3, 2, 0, 0, 0], fingers: [0, 3, 2, 0, 0, 0] },
+      { name: 'Am7', positions: ['x', 0, 2, 0, 1, 0], fingers: [0, 0, 2, 0, 1, 0] }
+    ],
+    scales: [],
+    subsections: [
+      {
+        id: 'general-23-1',
+        title: 'Voice Leading Principles',
+        content: 'Move each chord tone to nearest available tone in next chord. Cmaj7 (C-E-G-B) → Am7 (A-C-E-G): E stays, G stays, B→A (down 2 frets), C stays. Minimal motion = smooth.',
+        technique: 'Instead of changing chord shapes, move individual fingers minimally. Think horizontal (voice movement) not vertical (chord blocks).',
+        tips: ['Creates jazz/R&B sound', 'Opposite of strumming big shapes', 'Study Bill Evans, Robert Glasper']
+      },
+      {
+        id: 'general-23-2',
+        title: 'Drop 2 and Drop 3 Voicings',
+        content: 'Drop 2: Take 2nd-highest note of close voicing, drop it one octave. Creates spread voicing. Drop 3: Same with 3rd-highest note. Opens up chords.',
+        technique: 'Cmaj7 close: C-E-G-B. Drop 2: C-G-B-E (dropped G). Fingering: x-3-2-0-0-x. Jazzier, less dense.',
+        tips: ['Standard jazz voicings', 'Each drop voicing has 4 inversions', 'Learn on middle 4 strings first']
+      },
+      {
+        id: 'general-23-3',
+        title: 'Chromatic Approach Tones',
+        content: 'Approach chord tones from half-step above or below. Cmaj7 (C-E-G-B). Approach E from D# or F. Creates smooth, jazzy transitions.',
+        technique: 'Play Cmaj7. Before changing to Fmaj7, insert chromatic passing chord (Cmaj7 → C#dim7 → Fmaj7). Creates motion.',
+        tips: ['Used in bebop constantly', 'Creates harmonic interest', 'Study Charlie Parker changes']
+      },
+      {
+        id: 'general-23-4',
+        title: 'Reharmonization Techniques',
+        content: 'Substitute chords with similar function. I → iii or vi. V → vii°. ii-V → tritone sub (♭II-V). Changes color without changing progression.',
+        technique: 'Take simple I-IV-V-I. Reharmonize: Imaj7-#IVm7♭5-♭IIImaj7-bVImaj7-IImaj7-♭IImaj7-Imaj7. Same basic motion, richer harmony.',
+        tips: ['Steely Dan signature sound', 'Requires deep harmonic knowledge', 'Start with tritone substitution']
+      }
+    ]
   }
 ];
 
