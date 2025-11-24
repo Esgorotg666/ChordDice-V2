@@ -73,9 +73,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.use('/api/auth', authRoutes);
 
   // Account deletion endpoint for Google Play Store compliance
-  app.post("/api/delete-account", async (req: any, res) => {
+  // SECURITY: Requires authentication - user must be logged in to delete their own account
+  app.post("/api/delete-account", isAuthenticated, async (req: any, res) => {
     try {
       const { email } = req.body;
+      const authenticatedUserId = req.userId;
       
       if (!email || typeof email !== 'string') {
         return res.status(400).send("Email is required");
@@ -88,10 +90,22 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(404).send("Account not found");
       }
 
+      // SECURITY: Only allow users to delete their own account
+      if (user.id !== authenticatedUserId) {
+        return res.status(403).send("You can only delete your own account");
+      }
+
       // Delete all user data
       await storage.deleteUserCascade(user.id);
       
-      res.status(200).send("Account deleted successfully");
+      // Destroy the session after account deletion
+      req.session.destroy((err: any) => {
+        if (err) {
+          console.error("Session destruction error:", err);
+        }
+        res.status(200).send("Account deleted successfully");
+      });
+      
     } catch (error) {
       console.error("Account deletion error:", error);
       res.status(500).send("Internal server error");
