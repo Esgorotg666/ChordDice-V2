@@ -5,6 +5,54 @@ import FretboardDisplay, { NoteMetadata } from "@/components/fretboard-display";
 import { getChordDiagram, ChordDiagram } from "@/lib/music-data";
 import { Guitar, Info } from "lucide-react";
 
+// Normalize chord names to match chord diagram keys
+function normalizeChordName(chord: string): string {
+  let normalized = chord;
+  
+  // Convert unicode music symbols to ASCII equivalents
+  normalized = normalized.replace(/♭/g, 'b');  // Unicode flat → 'b'
+  normalized = normalized.replace(/♯/g, '#');  // Unicode sharp → '#'
+  
+  // Convert sharps to flats where database uses flats (A#, D#, G# → Bb, Eb, Ab)
+  const sharpToFlat: Record<string, string> = {
+    'A#': 'Bb',
+    'D#': 'Eb',
+    'G#': 'Ab'
+  };
+  
+  for (const [sharp, flat] of Object.entries(sharpToFlat)) {
+    if (normalized.startsWith(sharp)) {
+      normalized = normalized.replace(sharp, flat);
+      break;
+    }
+  }
+  
+  // Fix chord symbols (handle both at end and in middle of chord name)
+  normalized = normalized.replace(/\+(?=$|[0-9])/, 'aug');  // A+ → Aaug, A+7 → Aaug7
+  normalized = normalized.replace(/°(?=$|[0-9])/, 'dim');   // A° → Adim, A°7 → Adim7
+  normalized = normalized.replace(/ø/, 'm7b5');             // Half-diminished anywhere
+  
+  // Fix suspended chords: sus → sus4
+  normalized = normalized.replace(/sus(?![24])/, 'sus4');
+  
+  // Fix Major notation: Maj → ''
+  normalized = normalized.replace(/Maj(?![0-9])/, '');
+  
+  // Fix Major 7th/9th/11th/13th: M7 → maj7, etc.
+  normalized = normalized.replace(/M7/, 'maj7');
+  normalized = normalized.replace(/M9/, 'maj9');
+  normalized = normalized.replace(/M11/, 'maj11');
+  normalized = normalized.replace(/M13/, 'maj13');
+  
+  // Fix power chords: remove '5' suffix (A5 → A)
+  normalized = normalized.replace(/^([A-G](?:#|b)?)5$/, '$1');
+  
+  // Fix minor notation variations: min → m
+  normalized = normalized.replace(/min(?=[0-9]|$)/, 'm');
+  
+  return normalized;
+}
+
 // Helper function to create note metadata for color coding
 function createNoteMetadata(diagram: ChordDiagram, isTapping: boolean = false): Map<number, NoteMetadata> {
   const metadata = new Map<number, NoteMetadata>();
@@ -72,8 +120,8 @@ export default function TappingSection({ currentChords = [] }: TappingSectionPro
       
       // Create pairs from all consecutive chords
       for (let i = 0; i < currentChords.length - 1; i++) {
-        const baseChord = currentChords[i].replace(/\s/g, '');
-        const tapChord = currentChords[i + 1].replace(/\s/g, '');
+        const baseChord = normalizeChordName(currentChords[i].replace(/\s/g, ''));
+        const tapChord = normalizeChordName(currentChords[i + 1].replace(/\s/g, ''));
         
         const baseDiagram = getChordDiagram(baseChord);
         const tapDiagram = getChordDiagram(tapChord);

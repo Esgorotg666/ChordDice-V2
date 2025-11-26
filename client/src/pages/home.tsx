@@ -136,16 +136,17 @@ export default function Home() {
   const normalizeChordName = (chord: string): string => {
     let normalized = chord;
     
-    // Convert sharps to flats where database uses flats
-    // Database has: Ab, Bb, C#, Eb, F# (mixed sharp/flat notation)
+    // FIRST: Convert unicode music symbols to ASCII equivalents
+    normalized = normalized.replace(/♭/g, 'b');  // Unicode flat → 'b'
+    normalized = normalized.replace(/♯/g, '#');  // Unicode sharp → '#'
+    
+    // Convert sharps to flats where database uses flats (A#, D#, G# → Bb, Eb, Ab)
     const sharpToFlat: Record<string, string> = {
-      'A#': 'Bb',  // Database uses Bb, not A#
-      'D#': 'Eb',  // Database uses Eb, not D#
-      'G#': 'Ab'   // Database uses Ab, not G#
-      // C# and F# are kept as-is (database uses C# and F#)
+      'A#': 'Bb',
+      'D#': 'Eb',
+      'G#': 'Ab'
     };
     
-    // Replace sharp notes at the start of the chord name
     for (const [sharp, flat] of Object.entries(sharpToFlat)) {
       if (normalized.startsWith(sharp)) {
         normalized = normalized.replace(sharp, flat);
@@ -153,24 +154,34 @@ export default function Home() {
       }
     }
     
-    // Fix chord symbols: + → aug, ° → dim, ø → m7b5
-    normalized = normalized.replace(/\+$/, 'aug');  // B+ → Baug
-    normalized = normalized.replace(/°$/, 'dim');   // G#° → G#dim (then converted to Abdim)
-    normalized = normalized.replace(/ø$/, 'm7b5'); // Half-diminished
+    // Fix chord symbols (handle both at end and in middle of chord name)
+    // Must handle compound chords like +7, °7, etc.
+    normalized = normalized.replace(/\+(?=$|[0-9])/, 'aug');  // A+ → Aaug, A+7 → Aaug7
+    normalized = normalized.replace(/°(?=$|[0-9])/, 'dim');   // A° → Adim, A°7 → Adim7
+    normalized = normalized.replace(/ø/, 'm7b5');             // Half-diminished anywhere
     
     // Fix suspended chords: sus → sus4 (database has sus4 and sus2, not just sus)
-    normalized = normalized.replace(/sus$/, 'sus4');
+    normalized = normalized.replace(/sus(?![24])/, 'sus4');   // Asus → Asus4, but keep Asus2/Asus4
     
-    // Fix Major notation: Maj → maj (FMaj → Fmaj, then becomes F for major)
-    normalized = normalized.replace(/Maj$/, '');  // FMaj → F (major chords have no suffix)
+    // Fix Major notation: Maj → '' (major chords have no suffix in database)
+    normalized = normalized.replace(/Maj(?![0-9])/, '');      // FMaj → F, but keep Maj7/Maj9
     
-    // Fix Major 7th: M7 → maj7, M9 → maj9
-    normalized = normalized.replace(/M7$/, 'maj7');
-    normalized = normalized.replace(/M9$/, 'maj9');
+    // Fix Major 7th/9th/11th/13th: M7 → maj7, etc.
+    normalized = normalized.replace(/M7/, 'maj7');
+    normalized = normalized.replace(/M9/, 'maj9');
+    normalized = normalized.replace(/M11/, 'maj11');
+    normalized = normalized.replace(/M13/, 'maj13');
     
-    // Fix power chords: remove '5' suffix (database just has 'C', 'C#', 'Bb' not 'C5', 'C#5', 'Bb5')
-    // But keep alterations like 7#5, 7b5, m7b5
+    // Fix power chords: remove '5' suffix (A5 → A)
     normalized = normalized.replace(/^([A-G](?:#|b)?)5$/, '$1');
+    
+    // Fix minor notation variations: min → m
+    normalized = normalized.replace(/min(?=[0-9]|$)/, 'm');   // Amin → Am, Amin7 → Am7
+    
+    // Ensure proper case for chord types
+    normalized = normalized.replace(/dim7/i, 'dim7');
+    normalized = normalized.replace(/add9/i, 'add9');
+    normalized = normalized.replace(/add11/i, 'add11');
     
     return normalized;
   };
