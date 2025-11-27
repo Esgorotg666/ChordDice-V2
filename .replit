@@ -101,3 +101,8 @@ author = "agent"
 task = "shell.exec"
 args = "npm run dev"
 waitForPort = 5000
+
+[userenv]
+
+[userenv.shared]
+VITE_REVENUECAT_API_KEY = "goog_ZEDUipiCWyYzXnfpYKJupFgThwN"
