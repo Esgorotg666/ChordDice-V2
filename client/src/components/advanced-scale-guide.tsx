@@ -252,6 +252,87 @@ const scaleTypes: Record<string, ScaleType> = {
     keys: {
       "C": ["C", "Db", "Eb", "E", "F#", "G", "A", "Bb"]
     }
+  },
+  phrygian_dominant: {
+    name: "Phrygian Dominant",
+    intervals: [1, 1, 3, 4, 5, 5, 7],
+    description: "Spanish/Flamenco scale - exotic and passionate",
+    formula: "1 - b2 - 3 - 4 - 5 - b6 - b7",
+    compatibleChords: ["Major", "7th", "7th b9", "Dominant"],
+    usageTips: "Essential for flamenco, metal, and Middle Eastern music. The major 3rd with flat 2 creates signature Spanish tension.",
+    degrees: ["Root", "Minor 2nd", "Major 3rd", "Perfect 4th", "Perfect 5th", "Minor 6th", "Minor 7th"],
+    fretboardPattern: [[0,1], [0,3], [0,1], [0,2], [0,1], [0,2], [0,2]],
+    category: 'exotic',
+    keys: {
+      "E": ["E", "F", "G#", "A", "B", "C", "D"],
+      "A": ["A", "Bb", "C#", "D", "E", "F", "G"],
+      "D": ["D", "Eb", "F#", "G", "A", "Bb", "C"],
+      "B": ["B", "C", "D#", "E", "F#", "G", "A"]
+    }
+  },
+  super_locrian: {
+    name: "Super Locrian (Altered)",
+    intervals: [1, 1, 2, 3, 4, 5, 7],
+    description: "The altered scale - maximum tension over dominant chords",
+    formula: "1 - b2 - b3 - b4 - b5 - b6 - b7",
+    compatibleChords: ["7th alt", "7th #9 b13", "7th b9 #9"],
+    usageTips: "Jazz essential for altered dominants. Every note except root is altered. Creates maximum tension before resolution.",
+    degrees: ["Root", "Minor 2nd", "Minor 3rd", "Dim 4th", "Dim 5th", "Minor 6th", "Minor 7th"],
+    fretboardPattern: [[0,1], [0,1], [0,2], [0,1], [0,2], [0,2], [0,2]],
+    category: 'exotic',
+    keys: {
+      "G": ["G", "Ab", "Bb", "Cb", "Db", "Eb", "F"],
+      "C": ["C", "Db", "Eb", "Fb", "Gb", "Ab", "Bb"],
+      "D": ["D", "Eb", "F", "Gb", "Ab", "Bb", "C"]
+    }
+  },
+  japanese: {
+    name: "Japanese (In Sen)",
+    intervals: [1, 1, 4, 5, 7],
+    description: "Traditional Japanese pentatonic - haunting and mystical",
+    formula: "1 - b2 - 4 - 5 - b7",
+    compatibleChords: ["Minor", "sus4", "Minor 7th"],
+    usageTips: "Creates authentic Japanese/Asian atmosphere. The b2 gives it distinctive Eastern character. Great for ambient and world music.",
+    degrees: ["Root", "Minor 2nd", "Perfect 4th", "Perfect 5th", "Minor 7th"],
+    fretboardPattern: [[0,1], [0,4], [0,2], [0,3], [0,2]],
+    category: 'exotic',
+    keys: {
+      "D": ["D", "Eb", "G", "A", "C"],
+      "A": ["A", "Bb", "D", "E", "G"],
+      "E": ["E", "F", "A", "B", "D"]
+    }
+  },
+  hungarian_minor: {
+    name: "Hungarian Minor",
+    intervals: [1, 2, 3, 4.5, 5, 6, 7],
+    description: "Gypsy scale - dark and dramatic with augmented 2nd",
+    formula: "1 - 2 - b3 - #4 - 5 - b6 - 7",
+    compatibleChords: ["Minor", "Minor maj7", "Augmented"],
+    usageTips: "Creates dramatic gypsy/Eastern European flavor. The #4 and natural 7 create exotic tension. Popular in metal and classical.",
+    degrees: ["Root", "2nd", "Minor 3rd", "Aug 4th", "Perfect 5th", "Minor 6th", "Major 7th"],
+    fretboardPattern: [[0,2], [0,1], [0,3], [0,1], [0,1], [0,3], [0,1]],
+    category: 'exotic',
+    keys: {
+      "A": ["A", "B", "C", "D#", "E", "F", "G#"],
+      "E": ["E", "F#", "G", "A#", "B", "C", "D#"],
+      "D": ["D", "E", "F", "G#", "A", "Bb", "C#"]
+    }
+  },
+  bebop_dominant: {
+    name: "Bebop Dominant",
+    intervals: [1, 2, 3, 4, 5, 6, 7, 7.5],
+    description: "Jazz bebop scale with passing tone - 8 notes for smooth lines",
+    formula: "1 - 2 - 3 - 4 - 5 - 6 - b7 - 7",
+    compatibleChords: ["7th", "9th", "13th", "Dominant"],
+    usageTips: "The added major 7th creates smooth 8th note lines. Essential for bebop and jazz improvisation. Keeps chord tones on strong beats.",
+    degrees: ["Root", "2nd", "Major 3rd", "4th", "5th", "6th", "Minor 7th", "Major 7th"],
+    fretboardPattern: [[0,2], [0,2], [0,2], [0,2], [0,2], [0,1], [0,1], [0,2]],
+    category: 'exotic',
+    keys: {
+      "G": ["G", "A", "B", "C", "D", "E", "F", "F#"],
+      "C": ["C", "D", "E", "F", "G", "A", "Bb", "B"],
+      "F": ["F", "G", "A", "Bb", "C", "D", "Eb", "E"]
+    }
   }
 };
 

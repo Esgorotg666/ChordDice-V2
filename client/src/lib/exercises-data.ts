@@ -517,6 +517,234 @@ export const exercises: Exercise[] = [
     bpm: { min: 60, max: 120 },
     techniques: ['Muscle memory', 'Fretboard knowledge', 'Mental practice'],
     difficulty: 9
+  },
+
+  // Fingerpicking Exercises
+  {
+    id: 'finger-01',
+    title: 'Travis Picking Basics',
+    category: 'Rhythm',
+    skillLevel: 'Intermediate',
+    description: 'Learn the foundational thumb-alternating bass pattern',
+    whyImportant: 'Essential fingerpicking technique. Creates full, rhythmic sound used in folk, country, and acoustic styles.',
+    instructions: [
+      'Thumb plays alternating bass on strings 4-6',
+      'Index, middle, ring play melody on strings 1-3',
+      'Practice steady thumb: beat 1 on root, beat 3 on 5th',
+      'Add melody notes on beats 2 and 4',
+      'Start with C and G chord shapes'
+    ],
+    bpm: { min: 60, max: 100 },
+    techniques: ['Travis picking', 'Thumb independence', 'Fingerstyle'],
+    difficulty: 6
+  },
+  {
+    id: 'finger-02',
+    title: 'Classical Fingerpicking Patterns',
+    category: 'Rhythm',
+    skillLevel: 'Advanced',
+    description: 'Master PIMA patterns for classical guitar technique',
+    whyImportant: 'Foundation of classical guitar. Develops finger independence and creates beautiful arpeggiated accompaniments.',
+    instructions: [
+      'Use proper hand position: wrist elevated',
+      'Practice p-i-m-a ascending pattern',
+      'Try p-a-m-i descending pattern',
+      'Combine with chord changes',
+      'Keep notes flowing without gaps'
+    ],
+    bpm: { min: 70, max: 120 },
+    techniques: ['Classical fingerpicking', 'PIMA technique', 'Finger independence'],
+    difficulty: 7
+  },
+
+  // String Skipping Exercises
+  {
+    id: 'skip-01',
+    title: 'Basic String Skipping',
+    category: 'Lead & Solo',
+    skillLevel: 'Intermediate',
+    description: 'Practice skipping strings for wider interval jumps',
+    whyImportant: 'Creates angular, modern sound. Essential for prog, fusion, and contemporary rock styles.',
+    instructions: [
+      'Play note on 6th string, skip to 4th string',
+      'Practice ascending: E string to D string to B string',
+      'Use alternate picking throughout',
+      'Focus on accuracy over speed',
+      'Apply to pentatonic scale patterns'
+    ],
+    bpm: { min: 70, max: 120 },
+    techniques: ['String skipping', 'Accuracy', 'Wide intervals'],
+    difficulty: 6
+  },
+  {
+    id: 'skip-02',
+    title: 'Advanced String Skipping Arpeggios',
+    category: 'Lead & Solo',
+    skillLevel: 'Extreme',
+    description: 'Complex string-skipping arpeggio patterns',
+    whyImportant: 'Signature technique of Paul Gilbert and modern shredders. Creates impressive, technically demanding lines.',
+    instructions: [
+      'Play Am arpeggio skipping 2 strings',
+      'Pattern: 6th-3rd-1st string sequence',
+      'Maintain strict alternate picking',
+      'Add economy picking for efficiency',
+      'Build speed while maintaining clarity'
+    ],
+    bpm: { min: 100, max: 180 },
+    techniques: ['String skipping', 'Arpeggios', 'Alternate picking', 'Shred'],
+    difficulty: 10
+  },
+
+  // Alternate Picking Exercises
+  {
+    id: 'alt-01',
+    title: 'Single String Alternate Picking',
+    category: 'Lead & Solo',
+    skillLevel: 'Beginner',
+    description: 'Develop strict down-up picking motion on one string',
+    whyImportant: 'Foundation of speed and accuracy. Clean alternate picking is essential for fast, articulate playing.',
+    instructions: [
+      'Pick open E string: down-up-down-up',
+      'Keep wrist relaxed, motion small',
+      'Use metronome starting at 60 BPM',
+      'Increase 5 BPM when comfortable',
+      'Practice on all 6 strings'
+    ],
+    bpm: { min: 60, max: 160 },
+    techniques: ['Alternate picking', 'Pick control', 'Timing'],
+    difficulty: 3
+  },
+  {
+    id: 'alt-02',
+    title: 'Cross-String Alternate Picking',
+    category: 'Lead & Solo',
+    skillLevel: 'Advanced',
+    description: 'Maintain alternate picking across multiple strings',
+    whyImportant: 'Critical for fluid scale runs. Many players lose sync when crossing strings - this drill fixes that.',
+    instructions: [
+      'Play 3-note-per-string pattern',
+      'Strict alternate picking across strings',
+      'Inside picking: up to higher string',
+      'Outside picking: down to higher string',
+      'Practice both approaches equally'
+    ],
+    bpm: { min: 80, max: 160 },
+    techniques: ['Cross-picking', 'String crossing', 'Inside/outside picking'],
+    difficulty: 8
+  },
+
+  // Speed Building
+  {
+    id: 'speed-01',
+    title: 'Chromatic Speed Builder',
+    category: 'Lead & Solo',
+    skillLevel: 'Intermediate',
+    description: 'Develop finger speed with chromatic exercises',
+    whyImportant: 'Builds finger independence and speed. The chromatic pattern isolates technique from musical thinking.',
+    instructions: [
+      'Play 1-2-3-4 on each string ascending',
+      'Descend with 4-3-2-1 pattern',
+      'Start at 60 BPM with 16th notes',
+      'Increase 5 BPM daily when clean',
+      'Focus on evenness between fingers'
+    ],
+    bpm: { min: 60, max: 180 },
+    techniques: ['Chromatic exercise', 'Speed building', 'Finger independence'],
+    difficulty: 5
+  },
+  {
+    id: 'speed-02',
+    title: 'Burst Speed Training',
+    category: 'Lead & Solo',
+    skillLevel: 'Extreme',
+    description: 'Short bursts at maximum speed',
+    whyImportant: 'Breaks through speed plateaus. Training fast for short bursts builds neural pathways for sustained speed.',
+    instructions: [
+      'Choose 4-8 note lick',
+      'Play at comfortable speed 4 times',
+      'Play once at maximum speed',
+      'Return to comfortable speed',
+      'Repeat burst cycle 10 times'
+    ],
+    bpm: { min: 120, max: 220 },
+    techniques: ['Speed bursts', 'Maximum speed', 'Plateau breaking'],
+    difficulty: 9
+  },
+
+  // Legato Exercises
+  {
+    id: 'legato-01',
+    title: 'Legato Scale Runs',
+    category: 'Hammer-On/Pull-Off',
+    skillLevel: 'Intermediate',
+    description: 'Play scales using only hammer-ons and pull-offs',
+    whyImportant: 'Creates smooth, flowing lines without pick attack. Essential for jazz, fusion, and expressive rock solos.',
+    instructions: [
+      'Play A minor pentatonic with no picking',
+      'Hammer up, pull down on each string',
+      'Only pick first note of each string',
+      'Focus on even volume across notes',
+      'Build speed while maintaining smoothness'
+    ],
+    bpm: { min: 70, max: 140 },
+    techniques: ['Legato', 'Hammer-ons', 'Pull-offs', 'Economy'],
+    difficulty: 6
+  },
+  {
+    id: 'legato-02',
+    title: 'Allan Holdsworth Legato',
+    category: 'Hammer-On/Pull-Off',
+    skillLevel: 'Extreme',
+    description: 'Wide-stretch legato across entire fretboard',
+    whyImportant: 'The ultimate legato technique. Creates horn-like phrasing with complete independence from pick.',
+    instructions: [
+      'Use 4-note-per-string patterns',
+      'Stretch pinky to reach extended positions',
+      'Slide between positions for smooth transition',
+      'Practice with no pick attacks at all',
+      'Work on even dynamics throughout'
+    ],
+    bpm: { min: 80, max: 160 },
+    techniques: ['Wide legato', 'Position shifts', 'Finger stretching'],
+    difficulty: 10
+  },
+
+  // Warm-Up Routines
+  {
+    id: 'warmup-01',
+    title: '5-Minute Warm-Up Routine',
+    category: 'Practice Techniques',
+    skillLevel: 'Beginner',
+    description: 'Essential pre-practice warm-up sequence',
+    whyImportant: 'Prevents injury and prepares muscles. A proper warm-up leads to better technique and longer practice sessions.',
+    instructions: [
+      'Finger stretches away from guitar (30 sec)',
+      'Slow chromatic exercise ascending (1 min)',
+      'Slow chromatic exercise descending (1 min)',
+      'Simple chord changes C-G-Am-F (1 min)',
+      'Easy scale run at comfortable tempo (1.5 min)'
+    ],
+    bpm: { min: 40, max: 80 },
+    techniques: ['Warm-up', 'Stretching', 'Injury prevention'],
+    difficulty: 1
+  },
+  {
+    id: 'warmup-02',
+    title: 'Advanced Technical Warm-Up',
+    category: 'Practice Techniques',
+    skillLevel: 'Advanced',
+    description: 'Comprehensive 15-minute technical preparation',
+    whyImportant: 'Prepares all technical aspects. Ensures peak performance for demanding practice or performance.',
+    instructions: [
+      'Spider exercise all positions (3 min)',
+      'Scale sequencing patterns (3 min)',
+      'Arpeggio patterns across strings (3 min)',
+      'String skipping drills (3 min)',
+      'Legato patterns at medium speed (3 min)'
+    ],
+    bpm: { min: 60, max: 120 },
+    techniques: ['Complete warm-up', 'Technical preparation', 'All techniques'],
+    difficulty: 7
   }
 ];
 

@@ -48,14 +48,14 @@ Preferred communication style: Simple, everyday language.
 
 ### Premium Features
 - **Compatible Scales**: Identification and visualization of 2-4 musically compatible scales.
-- **Advanced Scale Guide**: Comprehensive library of 19 professional scales organized in categories (Major, Minor, Modes, Pentatonic, Blues, Exotic) with dual-diagram fretboard visualization:
+- **Advanced Scale Guide**: Comprehensive library of 25+ professional scales organized in categories (Major, Minor, Modes, Pentatonic, Blues, Exotic) with dual-diagram fretboard visualization:
   - **Dual-Diagram Fretboard**: Toggle between "Notes" mode (displays note names with root highlighting) and "Fingers" mode (shows numbered finger positions 1-4 for Box Position 1 patterns)
   - **Realistic Fretboard Visuals**: Wood grain texture, nut visualization, graduated string thickness, fret inlay dots (3,5,7,9,12), and metallic fret wires
   - **Curated Fingering Patterns**: Available for A Minor Pentatonic, C Major Pentatonic, and A Dorian (more scales coming soon)
   - **Auto-Fallback**: Automatically switches to Notes mode when fingering data is unavailable for a scale/key combination
   - **Mobile-Responsive**: Optimized marker sizes and spacing for 375px+ viewports with horizontal scroll support
   - **Interactive Features**: Clickable notes, detailed scale formulas, compatible chords, and usage tips
-- **Guitar Exercises**: Comprehensive practice section across 8 categories and 4 skill levels.
+- **Guitar Exercises**: Comprehensive practice section with 40+ exercises across 12 categories and 4 skill levels, including warm-up routines, speed building, legato, string skipping, and fingerpicking techniques.
 - **Enhanced Tapping**: Dedicated page with independent dual dice for two-hand tapping practice, visualized on dual fretboards.
 - **Optional Dice**: Time Signature Dice and Metronome BPM Dice.
 - **Advanced Genres**: Neo-Classical, Spanish Flamenco, Black Metal, Death Metal, etc., with genre-specific progressions.
@@ -93,7 +93,7 @@ Preferred communication style: Simple, everyday language.
 
 ## Android Deployment
 - **App ID**: `com.chorddice.app`
-- **Version**: 1.10.0 (versionCode: 30)
+- **Version**: 1.11.0 (versionCode: 35, auto-incremented via CI)
 - **Framework**: Capacitor 7.4.3.
 - **Build Process**: GitHub Actions workflows for building signed APK/AAB and auto-uploading to Google Play Store Internal Testing.
 - **Mobile API Configuration**: The Android/iOS app uses `VITE_API_URL` environment variable to connect to the backend server. This must be set to the published app URL (or Replit dev domain during development). The `queryClient.ts` automatically detects native platforms and builds full API URLs.
