@@ -9,7 +9,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { Settings as SettingsIcon, Palette, Guitar, Music, TrendingUp, Info } from "lucide-react";
 
-const APP_VERSION = "1.11.0";
+const APP_VERSION = "1.12.0";
 
 interface SettingsModalProps {
   open: boolean;

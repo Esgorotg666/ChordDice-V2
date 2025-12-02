@@ -93,7 +93,7 @@ Preferred communication style: Simple, everyday language.
 
 ## Android Deployment
 - **App ID**: `com.chorddice.app`
-- **Version**: 1.11.0 (versionCode: 35, auto-incremented via CI)
+- **Version**: 1.12.0 (versionCode: 36, auto-incremented via CI)
 - **Framework**: Capacitor 7.4.3.
 - **Build Process**: GitHub Actions workflows for building signed APK/AAB and auto-uploading to Google Play Store Internal Testing.
 - **Mobile API Configuration**: The Android/iOS app uses `VITE_API_URL` environment variable to connect to the backend server. This must be set to the published app URL (or Replit dev domain during development). The `queryClient.ts` automatically detects native platforms and builds full API URLs.
