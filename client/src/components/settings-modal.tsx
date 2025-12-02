@@ -7,7 +7,9 @@ import { Separator } from "@/components/ui/separator";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { Settings as SettingsIcon, Palette, Guitar, Music, TrendingUp } from "lucide-react";
+import { Settings as SettingsIcon, Palette, Guitar, Music, TrendingUp, Info } from "lucide-react";
+
+const APP_VERSION = "1.11.0";
 
 interface SettingsModalProps {
   open: boolean;
@@ -245,6 +247,17 @@ export function SettingsModal({ open, onOpenChange }: SettingsModalProps) {
                   ))}
                 </div>
               </RadioGroup>
+            </div>
+
+            <Separator className="bg-gray-800" />
+
+            {/* App Info */}
+            <div className="flex items-center justify-between text-sm text-gray-500">
+              <div className="flex items-center gap-2">
+                <Info className="w-4 h-4" />
+                <span>Guitar Dice</span>
+              </div>
+              <span data-testid="text-app-version">Version {APP_VERSION}</span>
             </div>
           </div>
         )}
