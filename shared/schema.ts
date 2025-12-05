@@ -77,8 +77,10 @@ export const users = pgTable("users", {
 export const chordProgressions = pgTable("chord_progressions", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
   userId: varchar("user_id").references(() => users.id),
+  name: varchar("name", { length: 100 }), // User-defined name for the progression
   type: text("type").notNull(), // 'single' or 'riff'
   chords: jsonb("chords").notNull(), // Array of chord strings
+  genre: varchar("genre", { length: 50 }), // Genre used when generating
   colorRoll: text("color_roll"),
   numberRoll: text("number_roll"),
   isFavorite: text("is_favorite").default("false"),
@@ -177,12 +179,28 @@ export const userPreferencesSchema = z.object({
 
 export const insertChordProgressionSchema = createInsertSchema(chordProgressions).pick({
   userId: true,
+  name: true,
   type: true,
   chords: true,
+  genre: true,
   colorRoll: true,
   numberRoll: true,
   isFavorite: true,
 });
+
+// Account summary type for profile page
+export const accountSummarySchema = z.object({
+  email: z.string(),
+  username: z.string().nullable(),
+  subscriptionStatus: z.string(),
+  subscriptionExpiry: z.date().nullable(),
+  daysUntilRenewal: z.number().nullable(),
+  referralCode: z.string().nullable(),
+  savedProgressionsCount: z.number(),
+  maxProgressions: z.number(),
+});
+
+export type AccountSummary = z.infer<typeof accountSummarySchema>;
 
 export const insertReferralSchema = createInsertSchema(referrals).pick({
   referrerUserId: true,
