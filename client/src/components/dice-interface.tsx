@@ -140,18 +140,17 @@ export default function DiceInterface({ onResult, onUpgrade }: DiceInterfaceProp
       '9th': '9',
       'Minor 6th': 'm6',
       'Minor 7th': 'm7',
-      'Major 7th': 'M7',
-      'Diminished': '°',
-      'Augmented': '+',
-      'Suspended': 'sus',
-      // Add all exotic chord types for consistency
-      ...Object.fromEntries(
-        Object.values(exoticNumbers).map(exotic => [exotic, exotic === 'Major 7th' ? 'M7' : 
-          exotic === 'Diminished' ? '°' : 
-          exotic === 'Augmented' ? '+' :
-          exotic === 'Suspended' ? 'sus' :
-          exotic === '9th' ? '9' : exotic])
-      )
+      'Major 7th': 'maj7',
+      'Minor 9th': 'm9',
+      'Major 9th': 'maj9',
+      'Diminished': 'dim',
+      'Augmented': 'aug',
+      'Suspended': 'sus4',
+      '11th': '11',
+      '13th': '13',
+      'add9': 'add9',
+      'dim7': 'dim7',
+      'm7b5': 'm7b5'
     };
 
     return key + (chordSuffixes[type] || '');
@@ -629,10 +628,14 @@ export default function DiceInterface({ onResult, onUpgrade }: DiceInterfaceProp
     const selectedKey = colorGroup.keys[Math.floor(Math.random() * colorGroup.keys.length)];
     const rootNote = getChordRoot(selectedKey);
     
-    // Single mode ALWAYS uses simple, common chord types regardless of genre
-    // This gives practical chords that every guitarist knows
-    const simpleChordTypes = ['Major', 'Minor', '7th', 'Minor 7th', 'Major 7th', 'Suspended'];
-    const chordType = simpleChordTypes[numberRoll % simpleChordTypes.length];
+    // Full variety of chord types for truly random single rolls
+    const allChordTypes = [
+      'Major', 'Minor', '7th', 'Minor 7th', 'Major 7th', 
+      '6th', 'Minor 6th', '9th', 'Minor 9th', 'Major 9th',
+      'Suspended', 'add9', 'Diminished', 'Augmented',
+      '11th', '13th', 'dim7', 'm7b5'
+    ];
+    const chordType = allChordTypes[Math.floor(Math.random() * allChordTypes.length)];
     
     return {
       chord: formatChord(rootNote, chordType),
