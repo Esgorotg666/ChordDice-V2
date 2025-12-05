@@ -21,6 +21,8 @@ type Genre =
   | 'black-metal' 
   | 'death-metal' 
   | 'extreme-metal' 
+  | 'thrash-metal'
+  | 'djent'
   | 'neo-classical' 
   | 'flamenco' 
   | 'jazz' 
@@ -28,7 +30,20 @@ type Genre =
   | 'folk' 
   | 'pop' 
   | 'rock' 
+  | 'hard-rock'
+  | 'grunge'
+  | 'punk'
+  | 'prog-rock'
+  | 'post-rock'
+  | 'shoegaze'
+  | 'indie'
   | 'funk'
+  | 'rnb'
+  | 'gospel'
+  | 'country'
+  | 'reggae'
+  | 'bossa-nova'
+  | 'latin'
   | 'any';
 
 interface BackgroundContextType {
@@ -57,6 +72,8 @@ export function BackgroundProvider({ children }: { children: ReactNode }) {
     'black-metal': [beastGuitar, bcRichBlack, customWarlock, schecterGuitar, warlockOutline2],
     'death-metal': [beastGuitar, espGuitar, customWarlock, jacksonV, bcRichBlack, warlockOutline1],
     'extreme-metal': [beastGuitar, warlockHero, jacksonV, bcRichRed, customWarlock, warlockOutline2],
+    'thrash-metal': [beastGuitar, jacksonV, espGuitar, bcRichRed, warlockOutline1],
+    'djent': [ibanezGuitar, espGuitar, schecterGuitar],
     'neo-classical': [prsGuitar, ibanezGuitar, warlockHeadstock],
     'flamenco': [prsGuitar, ibanezGuitar],
     'jazz': [prsGuitar, ibanezGuitar],
@@ -64,7 +81,20 @@ export function BackgroundProvider({ children }: { children: ReactNode }) {
     'folk': [prsGuitar, ibanezGuitar],
     'pop': [prsGuitar, ibanezGuitar],
     'rock': [beastGuitar, jacksonV, bcRichRed, prsGuitar, customWarlock, warlockOutline1],
+    'hard-rock': [beastGuitar, jacksonV, bcRichRed, warlockHero, warlockOutline1],
+    'grunge': [beastGuitar, jacksonV, espGuitar],
+    'punk': [beastGuitar, jacksonV, bcRichRed],
+    'prog-rock': [prsGuitar, ibanezGuitar, schecterGuitar],
+    'post-rock': [prsGuitar, ibanezGuitar],
+    'shoegaze': [prsGuitar, ibanezGuitar],
+    'indie': [prsGuitar, ibanezGuitar],
     'funk': [prsGuitar, ibanezGuitar],
+    'rnb': [prsGuitar, ibanezGuitar],
+    'gospel': [prsGuitar, ibanezGuitar],
+    'country': [prsGuitar, ibanezGuitar],
+    'reggae': [prsGuitar, ibanezGuitar],
+    'bossa-nova': [prsGuitar, ibanezGuitar],
+    'latin': [prsGuitar, ibanezGuitar],
     'any': [beastGuitar, warlockHero, jacksonV, prsGuitar, warlockOutline1]
   };
 
@@ -74,13 +104,17 @@ export function BackgroundProvider({ children }: { children: ReactNode }) {
   
   // Remap legacy renamed genres
   const legacyRemap: Record<string, string> = {
-    'classical': 'neo-classical',
-    'country': 'folk'
+    'classical': 'neo-classical'
   };
   normalizedGenre = legacyRemap[normalizedGenre] || normalizedGenre;
   
   // Validate genre is in our supported list, fallback to 'metal' if unknown
-  const validGenres: Genre[] = ['metal', 'black-metal', 'death-metal', 'extreme-metal', 'neo-classical', 'flamenco', 'jazz', 'blues', 'folk', 'pop', 'rock', 'funk', 'any'];
+  const validGenres: Genre[] = [
+    'metal', 'black-metal', 'death-metal', 'extreme-metal', 'thrash-metal', 'djent',
+    'neo-classical', 'flamenco', 'jazz', 'blues', 'folk', 'pop', 'rock',
+    'hard-rock', 'grunge', 'punk', 'prog-rock', 'post-rock', 'shoegaze', 'indie',
+    'funk', 'rnb', 'gospel', 'country', 'reggae', 'bossa-nova', 'latin', 'any'
+  ];
   const preferredGenre = validGenres.includes(normalizedGenre as Genre) ? (normalizedGenre as Genre) : 'metal';
   
   // Get background images for the genre with fallback

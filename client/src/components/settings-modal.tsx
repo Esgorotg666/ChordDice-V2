@@ -18,12 +18,22 @@ interface SettingsModalProps {
 
 const GENRES = [
   { value: "metal", label: "Metal", icon: "🤘", description: "Dark, heavy backgrounds" },
-  { value: "jazz", label: "Jazz", icon: "🎷", description: "Smooth, sophisticated vibes" },
-  { value: "funk", label: "Funk", icon: "🎸", description: "Groovy, colorful atmosphere" },
+  { value: "hard-rock", label: "Hard Rock", icon: "🎸", description: "Stadium rock energy" },
+  { value: "grunge", label: "Grunge", icon: "⚡", description: "Seattle underground vibes" },
+  { value: "prog-rock", label: "Progressive Rock", icon: "🎹", description: "Epic, complex soundscapes" },
+  { value: "punk", label: "Punk", icon: "🔥", description: "Raw, rebellious spirit" },
   { value: "rock", label: "Rock", icon: "🎵", description: "Classic rock aesthetics" },
-  { value: "neo-classical", label: "Neo-Classical", icon: "🎻", description: "Elegant, refined styling" },
+  { value: "jazz", label: "Jazz", icon: "🎷", description: "Smooth, sophisticated vibes" },
+  { value: "funk", label: "Funk", icon: "🕺", description: "Groovy, colorful atmosphere" },
   { value: "blues", label: "Blues", icon: "🎺", description: "Moody, soulful tones" },
-  { value: "folk", label: "Folk", icon: "🪕", description: "Warm, rustic feel" }
+  { value: "rnb", label: "R&B / Soul", icon: "🎤", description: "Smooth, soulful feels" },
+  { value: "gospel", label: "Gospel", icon: "🙌", description: "Uplifting spiritual tones" },
+  { value: "country", label: "Country", icon: "🤠", description: "Nashville warmth" },
+  { value: "folk", label: "Folk", icon: "🪕", description: "Warm, rustic feel" },
+  { value: "reggae", label: "Reggae", icon: "🌴", description: "Island chill vibes" },
+  { value: "indie", label: "Indie", icon: "🎧", description: "Alternative aesthetics" },
+  { value: "neo-classical", label: "Neo-Classical", icon: "🎻", description: "Elegant, refined styling" },
+  { value: "bossa-nova", label: "Bossa Nova", icon: "☕", description: "Brazilian café ambiance" }
 ];
 
 const PLAYING_STYLES = [

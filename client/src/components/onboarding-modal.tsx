@@ -14,12 +14,22 @@ interface OnboardingModalProps {
 
 const GENRES = [
   { value: "metal", label: "Metal", icon: "🤘" },
-  { value: "jazz", label: "Jazz", icon: "🎷" },
-  { value: "funk", label: "Funk", icon: "🎸" },
+  { value: "hard-rock", label: "Hard Rock", icon: "🎸" },
+  { value: "grunge", label: "Grunge", icon: "⚡" },
+  { value: "prog-rock", label: "Prog Rock", icon: "🎹" },
+  { value: "punk", label: "Punk", icon: "🔥" },
   { value: "rock", label: "Rock", icon: "🎵" },
-  { value: "neo-classical", label: "Neo-Classical", icon: "🎻" },
+  { value: "jazz", label: "Jazz", icon: "🎷" },
+  { value: "funk", label: "Funk", icon: "🕺" },
   { value: "blues", label: "Blues", icon: "🎺" },
-  { value: "folk", label: "Folk", icon: "🪕" }
+  { value: "rnb", label: "R&B/Soul", icon: "🎤" },
+  { value: "gospel", label: "Gospel", icon: "🙌" },
+  { value: "country", label: "Country", icon: "🤠" },
+  { value: "folk", label: "Folk", icon: "🪕" },
+  { value: "reggae", label: "Reggae", icon: "🌴" },
+  { value: "indie", label: "Indie", icon: "🎧" },
+  { value: "neo-classical", label: "Neo-Classical", icon: "🎻" },
+  { value: "bossa-nova", label: "Bossa Nova", icon: "☕" }
 ];
 
 const PLAYING_STYLES = [
