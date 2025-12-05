@@ -26,6 +26,7 @@ import DeleteAccountPage from "@/pages/deleteAccount";
 import AccountDeletionInfoPage from "@/pages/accountDeletionInfo";
 import PrivacyPolicyPage from "@/pages/privacy-policy";
 import TermsOfServicePage from "@/pages/terms-of-service";
+import AccountPage from "@/pages/account";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -52,6 +53,7 @@ function Router() {
       <Route path="/terms-of-service" component={TermsOfServicePage} />
       <Route path="/referrals" component={ReferralsPage} />
       <Route path="/chat" component={ChatPage} />
+      <Route path="/account" component={AccountPage} />
       <Route component={NotFound} />
     </Switch>
   );
