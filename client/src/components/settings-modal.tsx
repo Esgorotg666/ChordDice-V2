@@ -158,8 +158,9 @@ export function SettingsModal({ open, onOpenChange }: SettingsModalProps) {
               <RadioGroup value={selectedGenre} onValueChange={handleGenreChange}>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {GENRES.map((genre) => (
-                    <label
+                    <div
                       key={genre.value}
+                      onClick={() => handleGenreChange(genre.value)}
                       className={`flex items-start space-x-3 border rounded-lg p-3 cursor-pointer transition-all ${
                         selectedGenre === genre.value
                           ? "border-gold bg-gold/10"
@@ -171,13 +172,13 @@ export function SettingsModal({ open, onOpenChange }: SettingsModalProps) {
                       <div className="flex items-start gap-2 flex-1">
                         <span className="text-xl">{genre.icon}</span>
                         <div className="flex-1">
-                          <Label htmlFor={`bg-${genre.value}`} className="font-semibold cursor-pointer">
+                          <span className="font-semibold">
                             {genre.label}
-                          </Label>
+                          </span>
                           <p className="text-xs text-gray-500 mt-0.5">{genre.description}</p>
                         </div>
                       </div>
-                    </label>
+                    </div>
                   ))}
                 </div>
               </RadioGroup>
@@ -197,8 +198,9 @@ export function SettingsModal({ open, onOpenChange }: SettingsModalProps) {
               <RadioGroup value={playingStyle} onValueChange={handlePlayingStyleChange}>
                 <div className="space-y-2">
                   {PLAYING_STYLES.map((style) => (
-                    <label
+                    <div
                       key={style.value}
+                      onClick={() => handlePlayingStyleChange(style.value)}
                       className={`flex items-center space-x-3 border rounded-lg p-3 cursor-pointer transition-all ${
                         playingStyle === style.value
                           ? "border-gold bg-gold/10"
@@ -207,10 +209,10 @@ export function SettingsModal({ open, onOpenChange }: SettingsModalProps) {
                       data-testid={`radio-style-${style.value}`}
                     >
                       <RadioGroupItem value={style.value} id={`style-${style.value}`} />
-                      <Label htmlFor={`style-${style.value}`} className="font-medium cursor-pointer flex-1">
+                      <span className="font-medium flex-1">
                         {style.label}
-                      </Label>
-                    </label>
+                      </span>
+                    </div>
                   ))}
                 </div>
               </RadioGroup>
@@ -230,8 +232,9 @@ export function SettingsModal({ open, onOpenChange }: SettingsModalProps) {
               <RadioGroup value={skillLevel} onValueChange={handleSkillLevelChange}>
                 <div className="grid grid-cols-2 gap-2">
                   {SKILL_LEVELS.map((level) => (
-                    <label
+                    <div
                       key={level.value}
+                      onClick={() => handleSkillLevelChange(level.value)}
                       className={`flex items-center space-x-3 border rounded-lg p-3 cursor-pointer transition-all ${
                         skillLevel === level.value
                           ? "border-gold bg-gold/10"
@@ -240,10 +243,10 @@ export function SettingsModal({ open, onOpenChange }: SettingsModalProps) {
                       data-testid={`radio-level-${level.value}`}
                     >
                       <RadioGroupItem value={level.value} id={`level-${level.value}`} />
-                      <Label htmlFor={`level-${level.value}`} className="font-medium cursor-pointer flex-1">
+                      <span className="font-medium flex-1">
                         {level.label}
-                      </Label>
-                    </label>
+                      </span>
+                    </div>
                   ))}
                 </div>
               </RadioGroup>

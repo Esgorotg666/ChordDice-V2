@@ -827,20 +827,22 @@ export default function DiceInterface({ onResult, onUpgrade }: DiceInterfaceProp
           onResult({ type: 'riff', progression });
         } else {
           // 3-Dice Bridge System
-          // Roll all three dice
-          const mainDiceRoll = Math.floor(Math.random() * 8) + 1;
+          // Roll all three dice with independent random values
+          const mainColorRoll = Math.floor(Math.random() * 8) + 1;
+          const mainNumberRoll = Math.floor(Math.random() * 8) + 1;
           const bridgeRoll = Math.floor(Math.random() * 8) + 1;
-          const supportingDiceRoll = Math.floor(Math.random() * 8) + 1;
+          const supportingColorRoll = Math.floor(Math.random() * 8) + 1;
+          const supportingNumberRoll = Math.floor(Math.random() * 8) + 1;
           
-          setColorDiceValue(mainDiceRoll);
+          setColorDiceValue(mainColorRoll);
           setbridgeDiceValue(bridgeRoll);
-          setSupportingDiceValue(supportingDiceRoll);
+          setSupportingDiceValue(supportingColorRoll);
           
-          // Generate main chord (Dice 1)
-          const { chord: mainChord, colorName } = generateChord(mainDiceRoll, mainDiceRoll);
+          // Generate main chord (Dice 1) with its own random values
+          const { chord: mainChord, colorName } = generateChord(mainColorRoll, mainNumberRoll);
           
-          // Generate supporting chord (Dice 3)
-          const { chord: supportingChord } = generateChord(supportingDiceRoll, supportingDiceRoll);
+          // Generate supporting chord (Dice 3) with its own independent random values
+          const { chord: supportingChord } = generateChord(supportingColorRoll, supportingNumberRoll);
           
           // Generate bridge pattern (Dice 2) - connects main and supporting chords
           const bridgePattern = generateBridgePattern(mainChord, supportingChord);

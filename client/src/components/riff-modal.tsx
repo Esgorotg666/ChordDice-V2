@@ -5,9 +5,42 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 import FretboardDisplay from "@/components/fretboard-display";
-import { getChordDiagram, type BridgePattern } from "@/lib/music-data";
+import { getChordDiagram, colorGroups, type BridgePattern } from "@/lib/music-data";
 import GearRecommendations from "@/components/gear-recommendations";
 import { App } from '@capacitor/app';
+
+// Color mapping for chord display based on colorGroups
+const colorClassMap: Record<string, { bg: string; border: string; text: string }> = {
+  'Purple': { bg: 'from-purple-700 to-purple-900', border: 'border-purple-800', text: 'text-purple-400' },
+  'Orange': { bg: 'from-orange-600 to-orange-800', border: 'border-orange-700', text: 'text-orange-400' },
+  'Blue': { bg: 'from-blue-600 to-blue-800', border: 'border-blue-700', text: 'text-blue-400' },
+  'Green': { bg: 'from-green-600 to-green-800', border: 'border-green-700', text: 'text-green-400' },
+  'Red': { bg: 'from-red-700 to-red-900', border: 'border-red-800', text: 'text-red-400' },
+  'Yellow': { bg: 'from-yellow-600 to-yellow-800', border: 'border-yellow-700', text: 'text-yellow-400' },
+  'Pink': { bg: 'from-pink-600 to-pink-800', border: 'border-pink-700', text: 'text-pink-400' },
+  'Teal': { bg: 'from-teal-600 to-teal-800', border: 'border-teal-700', text: 'text-teal-400' }
+};
+
+// Get color based on chord root note
+const getChordColor = (chord: string): { bg: string; border: string; text: string } => {
+  // Extract root note from chord (e.g., "Am7" -> "A", "C#m" -> "C#", "Bb7" -> "Bb")
+  const rootMatch = chord.match(/^([A-G][#♯b♭]?)/);
+  if (!rootMatch) return colorClassMap['Red']; // Default to red
+  
+  let root = rootMatch[1];
+  // Normalize accidentals
+  root = root.replace('♯', '#').replace('♭', 'b');
+  
+  // Find which color group contains this root
+  for (const group of colorGroups) {
+    const normalizedKeys = group.keys.map(k => k.replace('♯', '#').replace('♭', 'b'));
+    if (normalizedKeys.includes(root)) {
+      return colorClassMap[group.name] || colorClassMap['Red'];
+    }
+  }
+  
+  return colorClassMap['Red']; // Default fallback
+};
 
 interface RiffModalProps {
   isOpen: boolean;
@@ -251,6 +284,7 @@ export default function RiffModal({ isOpen, onClose, progression, bridgePattern,
             const isRevealed = revealedChords.has(index);
             const normalizedChord = normalizeChordName(chord);
             const diagram = getChordDiagram(normalizedChord);
+            const chordColor = getChordColor(chord);
             
             return (
               <div
@@ -258,14 +292,14 @@ export default function RiffModal({ isOpen, onClose, progression, bridgePattern,
                 className="flex flex-col gap-2"
                 data-testid={`chord-container-${index + 1}`}
               >
-                {/* Clickable Dice */}
+                {/* Clickable Dice with color matching chord chart */}
                 <button
                   onClick={() => toggleChordReveal(index)}
                   className={`
-                    aspect-square w-full bg-gradient-to-br from-red-700 to-red-900 
-                    border-2 border-red-800 rounded-lg 
+                    aspect-square w-full bg-gradient-to-br ${chordColor.bg}
+                    border-2 ${chordColor.border} rounded-lg 
                     flex flex-col items-center justify-center gap-2
-                    hover:from-red-600 hover:to-red-800 
+                    hover:opacity-90
                     transition-all duration-200 
                     ${isRevealed ? 'ring-2 ring-[#D4AF37] ring-offset-2 ring-offset-background' : ''}
                   `}
