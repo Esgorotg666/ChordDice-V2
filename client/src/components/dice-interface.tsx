@@ -145,8 +145,10 @@ export default function DiceInterface({ onResult, onUpgrade }: DiceInterfaceProp
       'Major 9th': 'maj9',
       'Diminished': 'dim',
       'Augmented': 'aug',
-      'Suspended': 'sus4',
+      'sus4': 'sus4',
+      'sus2': 'sus2',
       '11th': '11',
+      'Minor 11th': 'm11',
       '13th': '13',
       'add9': 'add9',
       'dim7': 'dim7',
@@ -628,12 +630,29 @@ export default function DiceInterface({ onResult, onUpgrade }: DiceInterfaceProp
     const selectedKey = colorGroup.keys[Math.floor(Math.random() * colorGroup.keys.length)];
     const rootNote = getChordRoot(selectedKey);
     
-    // Full variety of chord types for truly random single rolls
+    // Only chord types that have diagrams in the database
+    // Weighted towards common chords (Major/Minor appear more often)
     const allChordTypes = [
-      'Major', 'Minor', '7th', 'Minor 7th', 'Major 7th', 
-      '6th', 'Minor 6th', '9th', 'Minor 9th', 'Major 9th',
-      'Suspended', 'add9', 'Diminished', 'Augmented',
-      '11th', '13th', 'dim7', 'm7b5'
+      'Major', 'Major', 'Major',  // More common
+      'Minor', 'Minor', 'Minor',  // More common
+      '7th', '7th',               // Common
+      'Minor 7th', 'Minor 7th',   // Common
+      'Major 7th',                // Less common
+      '6th',
+      'Minor 6th', 
+      '9th',
+      'Minor 9th',
+      'Major 9th',
+      'sus4',
+      'sus2',
+      'add9',
+      'Diminished',
+      'dim7',
+      'Augmented',
+      'm7b5',
+      '11th',
+      'Minor 11th',
+      '13th'
     ];
     const chordType = allChordTypes[Math.floor(Math.random() * allChordTypes.length)];
     

@@ -197,8 +197,42 @@ export default function ChordReference() {
           </p>
         </div>
 
+        {/* Chord Symbol Legend */}
+        <Card className="mb-6 bg-primary/5 border-primary/30">
+          <CardHeader className="pb-2">
+            <CardTitle className="text-base flex items-center gap-2">
+              <Info className="h-4 w-4 text-primary" />
+              Chord Symbol Guide
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="pt-0">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 text-sm">
+              <div><span className="font-bold text-primary">C</span> = Major</div>
+              <div><span className="font-bold text-primary">Cm</span> = Minor</div>
+              <div><span className="font-bold text-primary">C7</span> = Dominant 7th</div>
+              <div><span className="font-bold text-primary">Cmaj7</span> = Major 7th</div>
+              <div><span className="font-bold text-primary">Cm7</span> = Minor 7th</div>
+              <div><span className="font-bold text-primary">C6</span> = Major 6th</div>
+              <div><span className="font-bold text-primary">Cm6</span> = Minor 6th</div>
+              <div><span className="font-bold text-primary">C9</span> = 9th (dom)</div>
+              <div><span className="font-bold text-primary">Cmaj9</span> = Major 9th</div>
+              <div><span className="font-bold text-primary">Cm9</span> = Minor 9th</div>
+              <div><span className="font-bold text-primary">C11</span> = 11th</div>
+              <div><span className="font-bold text-primary">C13</span> = 13th</div>
+              <div><span className="font-bold text-primary">Csus4</span> = Suspended 4th</div>
+              <div><span className="font-bold text-primary">Csus2</span> = Suspended 2nd</div>
+              <div><span className="font-bold text-primary">Cadd9</span> = Add 9th</div>
+              <div><span className="font-bold text-primary">Cdim</span> = Diminished</div>
+              <div><span className="font-bold text-primary">Cdim7</span> = Dim. 7th</div>
+              <div><span className="font-bold text-primary">Caug</span> = Augmented</div>
+              <div><span className="font-bold text-primary">Cm7b5</span> = Half-dim.</div>
+              <div><span className="font-bold text-primary">C+</span> = Augmented</div>
+            </div>
+          </CardContent>
+        </Card>
+
         {/* Info Alert */}
-        <Alert className="mb-6 bg-primary/10 border-primary/30">
+        <Alert className="mb-6 bg-muted/50 border-border">
           <Info className="h-4 w-4" />
           <AlertDescription className="text-sm">
             Each table shows the notes that make up chords in all 12 keys. Enharmonic equivalents are shown in parentheses (e.g., E♯ = F).
