@@ -7,6 +7,7 @@ import {
   type InsertReferral,
   type ChatMessage,
   type InsertChatMessage,
+  type AccountSummary,
   users,
   chordProgressions,
   referrals,
@@ -58,6 +59,12 @@ export interface IStorage {
   updateChordProgression(id: string, updates: Partial<ChordProgression>): Promise<ChordProgression | undefined>;
   deleteChordProgression(id: string): Promise<boolean>;
   getFavoriteProgressions(userId: string): Promise<ChordProgression[]>;
+  
+  // Account summary methods (for profile page)
+  getAccountSummary(userId: string): Promise<AccountSummary | undefined>;
+  getProgressionsForUser(userId: string): Promise<ChordProgression[]>;
+  createProgressionWithLimit(userId: string, progression: Omit<InsertChordProgression, 'userId'>): Promise<ChordProgression>;
+  deleteProgressionForUser(userId: string, progressionId: string): Promise<boolean>;
   
   // Chat message methods
   createChatMessage(message: InsertChatMessage): Promise<ChatMessage>;
@@ -670,6 +677,79 @@ export class DatabaseStorage implements IStorage {
       .select()
       .from(chordProgressions)
       .where(and(eq(chordProgressions.userId, userId), eq(chordProgressions.isFavorite, "true")));
+  }
+
+  // Account summary methods (for profile page)
+  async getAccountSummary(userId: string): Promise<AccountSummary | undefined> {
+    const user = await this.getUser(userId);
+    if (!user) return undefined;
+
+    // Count user's saved progressions
+    const progressions = await db
+      .select()
+      .from(chordProgressions)
+      .where(eq(chordProgressions.userId, userId));
+    
+    // Calculate days until renewal
+    let daysUntilRenewal: number | null = null;
+    if (user.subscriptionExpiry && user.subscriptionStatus === 'active') {
+      const now = new Date();
+      const expiry = new Date(user.subscriptionExpiry);
+      const diffTime = expiry.getTime() - now.getTime();
+      daysUntilRenewal = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+      if (daysUntilRenewal < 0) daysUntilRenewal = 0;
+    }
+
+    return {
+      email: user.email,
+      username: user.username,
+      subscriptionStatus: user.subscriptionStatus || 'free',
+      subscriptionExpiry: user.subscriptionExpiry,
+      daysUntilRenewal,
+      referralCode: user.referralCode,
+      savedProgressionsCount: progressions.length,
+      maxProgressions: 10,
+    };
+  }
+
+  async getProgressionsForUser(userId: string): Promise<ChordProgression[]> {
+    return await db
+      .select()
+      .from(chordProgressions)
+      .where(eq(chordProgressions.userId, userId))
+      .orderBy(desc(chordProgressions.createdAt));
+  }
+
+  async createProgressionWithLimit(userId: string, progression: Omit<InsertChordProgression, 'userId'>): Promise<ChordProgression> {
+    const MAX_PROGRESSIONS = 10;
+    
+    // Check current count
+    const existingProgressions = await db
+      .select()
+      .from(chordProgressions)
+      .where(eq(chordProgressions.userId, userId));
+    
+    if (existingProgressions.length >= MAX_PROGRESSIONS) {
+      throw new Error(`You can only save up to ${MAX_PROGRESSIONS} chord progressions. Please delete some to save new ones.`);
+    }
+
+    const [newProgression] = await db
+      .insert(chordProgressions)
+      .values({ ...progression, userId })
+      .returning();
+    
+    return newProgression;
+  }
+
+  async deleteProgressionForUser(userId: string, progressionId: string): Promise<boolean> {
+    // Only delete if the progression belongs to the user
+    const result = await db
+      .delete(chordProgressions)
+      .where(and(
+        eq(chordProgressions.id, progressionId),
+        eq(chordProgressions.userId, userId)
+      ));
+    return (result.rowCount ?? 0) > 0;
   }
 
   // Chat message methods
