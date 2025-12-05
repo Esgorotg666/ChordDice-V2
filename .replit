@@ -106,3 +106,4 @@ waitForPort = 5000
 
 [userenv.shared]
 VITE_REVENUECAT_API_KEY = "goog_ZEDUipiCWyYzXnfpYKJupFgThwN"
+VITE_API_URL = "https://b854b4e9-4cfa-4504-b80e-9184073568ee-00-7fsh5aya6npy.janeway.replit.dev"
