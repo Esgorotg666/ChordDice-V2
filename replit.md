@@ -88,6 +88,18 @@ Preferred communication style: Simple, everyday language.
 - **Dynamic Backgrounds**: `BackgroundProvider` context applies genre-specific backgrounds based on `preferredGenre`.
 - **Personalized Classroom**: "Recommended For You" section filters lessons by skill level and `preferredGenre`.
 
+### Account Management
+- **Account Page** (`/account`): Comprehensive profile and management interface:
+  - **Profile Display**: Shows user email, username, and subscription status badge
+  - **Subscription Status**: Premium users see days until renewal countdown
+  - **Saved Progressions**: Up to 10 chord progressions per user with delete functionality
+  - **Progression Cards**: Display genre, chords, and creation timestamp
+  - **Quick Actions**: Manage Subscription (Stripe portal), Refer Friend, Delete Account
+- **Progression Saving**: Users can save rolled chord progressions from the RiffModal
+  - Auto-generates names like "Rock Riff" based on selected genre
+  - Hard limit of 10 saved progressions per user enforced at storage layer
+  - 409 response when limit exceeded with user-friendly feedback
+
 ### Guest/Demo Mode
 - Allows unauthenticated users full access to the dice interface and premium features without persistence, facilitating user acquisition and testing.
 
