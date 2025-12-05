@@ -76,16 +76,16 @@ export const getTappingCombinationsForChord = (baseChord: string): TappingVoicin
   return Object.values(tappingCombinations).filter(combo => combo.baseChord === baseChord);
 };
 
-// Exotic chord types mapping (dice roll number to chord type)
+// Chord types mapping (dice roll number to chord type) - balanced variety
 export const exoticNumbers: Record<number, string> = {
-  1: 'Diminished',
-  2: 'Augmented',
-  3: 'Suspended',
-  4: 'Major 7th',
-  5: '9th',
-  6: 'Maj',
-  7: 'Maj',
-  8: 'Maj'
+  1: 'Major',
+  2: 'Minor',
+  3: '7th',
+  4: 'Minor 7th',
+  5: 'Major 7th',
+  6: '6th',
+  7: 'Suspended',
+  8: 'Diminished'
 };
 
 // Chord types for the basic chord grid
