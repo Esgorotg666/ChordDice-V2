@@ -18,9 +18,13 @@ interface SettingsModalProps {
 
 const GENRES = [
   { value: "metal", label: "Metal", icon: "🤘", description: "Dark, heavy backgrounds" },
+  { value: "thrash-metal", label: "Thrash Metal", icon: "⚔️", description: "Speed metal intensity" },
+  { value: "djent", label: "Djent", icon: "🔧", description: "Modern progressive metal" },
   { value: "hard-rock", label: "Hard Rock", icon: "🎸", description: "Stadium rock energy" },
   { value: "grunge", label: "Grunge", icon: "⚡", description: "Seattle underground vibes" },
   { value: "prog-rock", label: "Progressive Rock", icon: "🎹", description: "Epic, complex soundscapes" },
+  { value: "post-rock", label: "Post-Rock", icon: "🌅", description: "Ambient, cinematic swells" },
+  { value: "shoegaze", label: "Shoegaze", icon: "👟", description: "Dreamy walls of sound" },
   { value: "punk", label: "Punk", icon: "🔥", description: "Raw, rebellious spirit" },
   { value: "rock", label: "Rock", icon: "🎵", description: "Classic rock aesthetics" },
   { value: "jazz", label: "Jazz", icon: "🎷", description: "Smooth, sophisticated vibes" },
@@ -33,7 +37,8 @@ const GENRES = [
   { value: "reggae", label: "Reggae", icon: "🌴", description: "Island chill vibes" },
   { value: "indie", label: "Indie", icon: "🎧", description: "Alternative aesthetics" },
   { value: "neo-classical", label: "Neo-Classical", icon: "🎻", description: "Elegant, refined styling" },
-  { value: "bossa-nova", label: "Bossa Nova", icon: "☕", description: "Brazilian café ambiance" }
+  { value: "bossa-nova", label: "Bossa Nova", icon: "☕", description: "Brazilian café ambiance" },
+  { value: "latin", label: "Latin", icon: "💃", description: "Salsa, cumbia rhythms" }
 ];
 
 const PLAYING_STYLES = [
