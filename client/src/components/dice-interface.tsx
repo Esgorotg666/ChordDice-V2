@@ -42,7 +42,7 @@ interface DiceInterfaceProps {
   onUpgrade?: () => void;
 }
 
-type Genre = 'any' | 'jazz' | 'blues' | 'rock' | 'pop' | 'folk' | 'funk' | 'metal' | 'extreme-metal' | 'neo-classical' | 'black-metal' | 'death-metal' | 'flamenco';
+type Genre = 'any' | 'jazz' | 'blues' | 'rock' | 'pop' | 'folk' | 'funk' | 'metal' | 'extreme-metal' | 'neo-classical' | 'black-metal' | 'death-metal' | 'flamenco' | 'country' | 'reggae' | 'rnb' | 'gospel' | 'punk' | 'prog-rock' | 'indie' | 'grunge' | 'hard-rock' | 'thrash-metal' | 'djent' | 'post-rock' | 'shoegaze' | 'bossa-nova' | 'latin';
 
 const genres: { value: Genre; label: string; description: string; isPremium?: boolean }[] = [
   { value: 'any', label: 'Any Style', description: 'Random chord combinations' },
@@ -51,12 +51,27 @@ const genres: { value: Genre; label: string; description: string; isPremium?: bo
   { value: 'rock', label: 'Rock', description: 'Power chords, simple triads', isPremium: true },
   { value: 'pop', label: 'Pop', description: 'Catchy progressions like vi-IV-I-V' },
   { value: 'folk', label: 'Folk', description: 'Simple triads, traditional patterns' },
+  { value: 'country', label: 'Country', description: 'Nashville numbers, train beats, twangy triads' },
+  { value: 'reggae', label: 'Reggae', description: 'Off-beat rhythms, major keys, one-drop grooves' },
+  { value: 'rnb', label: 'R&B / Soul', description: 'Smooth 7ths, neo-soul voicings, gospel influence', isPremium: true },
+  { value: 'gospel', label: 'Gospel', description: 'Church progressions, 2-5-1 turnarounds, praise chords', isPremium: true },
   { value: 'funk', label: 'Funk', description: 'Syncopated 9ths, 7sus4, Dorian grooves', isPremium: true },
+  { value: 'bossa-nova', label: 'Bossa Nova', description: 'Brazilian jazz, maj7/9 chords, syncopated samba', isPremium: true },
+  { value: 'latin', label: 'Latin', description: 'Salsa, cumbia, son cubano rhythmic patterns', isPremium: true },
   { value: 'neo-classical', label: 'Neo-Classical', description: 'Harmonic minor, diminished 7ths, Bach-inspired', isPremium: true },
   { value: 'flamenco', label: 'Spanish Flamenco', description: 'Phrygian mode, rasgueado patterns, authentic Spanish guitar', isPremium: true },
+  { value: 'indie', label: 'Indie', description: 'Jangly guitars, suspended chords, atmospheric layers' },
+  { value: 'punk', label: 'Punk', description: 'Fast power chords, aggressive I-IV-V, three-chord anthems', isPremium: true },
+  { value: 'grunge', label: 'Grunge', description: 'Seattle sound, heavy distortion, minor key angst', isPremium: true },
+  { value: 'hard-rock', label: 'Hard Rock', description: 'Heavy riffs, classic I-IV-V with attitude', isPremium: true },
+  { value: 'prog-rock', label: 'Progressive Rock', description: 'Complex time signatures, modal interchange, epic structures', isPremium: true },
+  { value: 'post-rock', label: 'Post-Rock', description: 'Ambient swells, delay-heavy, cinematic builds', isPremium: true },
+  { value: 'shoegaze', label: 'Shoegaze', description: 'Wall of sound, dreamy chords, ethereal textures', isPremium: true },
   { value: 'metal', label: 'Metal', description: 'Power chords, chromatic riffs, aggressive progressions', isPremium: true },
+  { value: 'thrash-metal', label: 'Thrash Metal', description: 'Fast palm-muting, chromatic speed riffs', isPremium: true },
   { value: 'black-metal', label: 'Black Metal', description: 'Tremolo picking, minor keys, atmospheric dissonance', isPremium: true },
   { value: 'death-metal', label: 'Death Metal', description: 'Low tunings, palm muting, brutal chromatic riffs', isPremium: true },
+  { value: 'djent', label: 'Djent', description: 'Polyrhythmic, extended range, syncopated chugs', isPremium: true },
   { value: 'extreme-metal', label: 'Extreme Metal', description: 'Diminished, tritones, dissonant intervals', isPremium: true }
 ];
 
@@ -617,6 +632,439 @@ export default function DiceInterface({ onResult, onUpgrade }: DiceInterfaceProp
           [buildChord(0, 'm'), buildChord(8), buildChord(3), buildChord(10)]
         ];
         return extremeMetalProgressions[randomIndex];
+      case 'country':
+        // Country - Nashville number system, train beat progressions
+        if (isMinor) {
+          const countryMinorProgressions = [
+            [buildChord(0, 'm'), buildChord(5), buildChord(0, 'm'), buildChord(7)],  // i-IV-i-V
+            [buildChord(0, 'm'), buildChord(3), buildChord(5), buildChord(0, 'm')],  // i-III-IV-i
+            [buildChord(0, 'm'), buildChord(8), buildChord(10), buildChord(0, 'm')], // i-VI-VII-i
+            [buildChord(0, 'm'), buildChord(5, 'm'), buildChord(7), buildChord(0, 'm')], // i-iv-V-i
+            [buildChord(0, 'm'), buildChord(3), buildChord(10), buildChord(0, 'm')], // i-III-VII-i
+            [buildChord(0, 'm'), buildChord(10), buildChord(5), buildChord(7)], // i-VII-IV-V
+            [buildChord(0, 'm'), buildChord(5, 'm'), buildChord(3), buildChord(7)], // i-iv-III-V
+            [buildChord(0, 'm'), buildChord(7), buildChord(3), buildChord(5)], // i-V-III-IV
+            [buildChord(0, 'm'), buildChord(3), buildChord(7), buildChord(0, 'm')], // i-III-V-i
+            [buildChord(0, 'm'), buildChord(8), buildChord(5), buildChord(7)] // i-VI-IV-V
+          ];
+          return countryMinorProgressions[randomIndex];
+        } else {
+          const countryMajorProgressions = [
+            [buildChord(0), buildChord(5), buildChord(7), buildChord(0)],  // I-IV-V-I (classic)
+            [buildChord(0), buildChord(9, 'm'), buildChord(5), buildChord(7)],  // I-vi-IV-V
+            [buildChord(0), buildChord(5), buildChord(0), buildChord(7)],  // I-IV-I-V
+            [buildChord(0), buildChord(7), buildChord(5), buildChord(0)],  // I-V-IV-I
+            [buildChord(5), buildChord(0), buildChord(7), buildChord(0)],  // IV-I-V-I
+            [buildChord(0), buildChord(5), buildChord(9, 'm'), buildChord(7)],  // I-IV-vi-V
+            [buildChord(0), buildChord(2, 'm'), buildChord(5), buildChord(7)],  // I-ii-IV-V
+            [buildChord(0), buildChord(7), buildChord(9, 'm'), buildChord(5)],  // I-V-vi-IV
+            [buildChord(5), buildChord(7), buildChord(0), buildChord(0)],  // IV-V-I-I
+            [buildChord(0), buildChord(0), buildChord(5), buildChord(7)]   // I-I-IV-V
+          ];
+          return countryMajorProgressions[randomIndex];
+        }
+      case 'reggae':
+        // Reggae - Off-beat rhythms, major keys, one-drop
+        if (isMinor) {
+          const reggaeMinorProgressions = [
+            [buildChord(0, 'm'), buildChord(5, 'm'), buildChord(0, 'm'), buildChord(7)],  // i-iv-i-V
+            [buildChord(0, 'm'), buildChord(3), buildChord(10), buildChord(0, 'm')],  // i-III-VII-i
+            [buildChord(0, 'm'), buildChord(8), buildChord(3), buildChord(10)],  // i-VI-III-VII
+            [buildChord(0, 'm'), buildChord(5, 'm'), buildChord(3), buildChord(10)],  // i-iv-III-VII
+            [buildChord(0, 'm'), buildChord(10), buildChord(8), buildChord(0, 'm')],  // i-VII-VI-i
+            [buildChord(0, 'm'), buildChord(5, 'm'), buildChord(10), buildChord(0, 'm')], // i-iv-VII-i
+            [buildChord(0, 'm'), buildChord(3), buildChord(5, 'm'), buildChord(10)], // i-III-iv-VII
+            [buildChord(0, 'm'), buildChord(8), buildChord(10), buildChord(5, 'm')], // i-VI-VII-iv
+            [buildChord(0, 'm'), buildChord(10), buildChord(3), buildChord(0, 'm')], // i-VII-III-i
+            [buildChord(0, 'm'), buildChord(5, 'm'), buildChord(8), buildChord(10)]  // i-iv-VI-VII
+          ];
+          return reggaeMinorProgressions[randomIndex];
+        } else {
+          const reggaeMajorProgressions = [
+            [buildChord(0), buildChord(5), buildChord(0), buildChord(7)],  // I-IV-I-V
+            [buildChord(0), buildChord(7), buildChord(9, 'm'), buildChord(5)],  // I-V-vi-IV
+            [buildChord(0), buildChord(5), buildChord(9, 'm'), buildChord(7)],  // I-IV-vi-V
+            [buildChord(0), buildChord(9, 'm'), buildChord(5), buildChord(0)],  // I-vi-IV-I
+            [buildChord(0), buildChord(5), buildChord(7), buildChord(5)],  // I-IV-V-IV
+            [buildChord(0), buildChord(0), buildChord(5), buildChord(7)],  // I-I-IV-V
+            [buildChord(0), buildChord(5), buildChord(0), buildChord(5)],  // I-IV-I-IV
+            [buildChord(0), buildChord(7), buildChord(5), buildChord(0)],  // I-V-IV-I
+            [buildChord(5), buildChord(0), buildChord(5), buildChord(7)],  // IV-I-IV-V
+            [buildChord(0), buildChord(2, 'm'), buildChord(5), buildChord(7)]  // I-ii-IV-V
+          ];
+          return reggaeMajorProgressions[randomIndex];
+        }
+      case 'rnb':
+        // R&B / Soul - Smooth 7ths, neo-soul voicings
+        if (isMinor) {
+          const rnbMinorProgressions = [
+            [buildChord(0, 'm7'), buildChord(5, 'm7'), buildChord(3, 'maj7'), buildChord(10, '7')],  // im7-ivm7-IIImaj7-VII7
+            [buildChord(0, 'm9'), buildChord(3, 'maj9'), buildChord(8, 'maj7'), buildChord(7, '7')],  // im9-IIImaj9-VImaj7-V7
+            [buildChord(0, 'm7'), buildChord(10, '7'), buildChord(3, 'maj7'), buildChord(8, 'maj7')], // im7-VII7-IIImaj7-VImaj7
+            [buildChord(0, 'm9'), buildChord(5, 'm7'), buildChord(10, 'maj7'), buildChord(0, 'm9')], // im9-ivm7-VIImaj7-im9
+            [buildChord(0, 'm7'), buildChord(3, '9'), buildChord(8, 'maj7'), buildChord(7, '7b9')],  // im7-III9-VImaj7-V7b9
+            [buildChord(2, 'dim7'), buildChord(7, '7'), buildChord(0, 'm9'), buildChord(5, 'm7')],   // iidim7-V7-im9-ivm7
+            [buildChord(0, 'm11'), buildChord(5, 'm9'), buildChord(3, 'maj7'), buildChord(10, '9')], // im11-ivm9-IIImaj7-VII9
+            [buildChord(0, 'mmaj7'), buildChord(0, 'm7'), buildChord(5, 'm7'), buildChord(7, '7')],  // immaj7-im7-ivm7-V7
+            [buildChord(0, 'm9'), buildChord(10, 'maj7'), buildChord(8, '6'), buildChord(7, '7#5')], // im9-VIImaj7-VI6-V7#5
+            [buildChord(0, 'm7'), buildChord(3, 'maj7'), buildChord(5, 'm7'), buildChord(10, '7')]   // im7-IIImaj7-ivm7-VII7
+          ];
+          return rnbMinorProgressions[randomIndex];
+        } else {
+          const rnbMajorProgressions = [
+            [buildChord(0, 'maj7'), buildChord(9, 'm7'), buildChord(2, 'm7'), buildChord(7, '7')],   // Imaj7-vim7-iim7-V7
+            [buildChord(0, 'maj9'), buildChord(5, 'maj7'), buildChord(9, 'm9'), buildChord(2, 'm7')], // Imaj9-IVmaj7-vim9-iim7
+            [buildChord(0, '6'), buildChord(4, 'm7'), buildChord(9, 'm7'), buildChord(2, 'm9')],     // I6-iiim7-vim7-iim9
+            [buildChord(0, 'maj7'), buildChord(10, 'maj7'), buildChord(9, 'm7'), buildChord(7, '7')], // Imaj7-VIImaj7-vim7-V7
+            [buildChord(0, 'maj9'), buildChord(9, 'm9'), buildChord(5, 'maj7'), buildChord(7, '13')], // Imaj9-vim9-IVmaj7-V13
+            [buildChord(2, 'm9'), buildChord(7, '13'), buildChord(0, 'maj7'), buildChord(5, 'maj9')], // iim9-V13-Imaj7-IVmaj9
+            [buildChord(0, 'maj7'), buildChord(3, 'maj7'), buildChord(9, 'm7'), buildChord(2, 'm7')], // Imaj7-IIImaj7-vim7-iim7
+            [buildChord(5, 'maj7'), buildChord(4, 'm7'), buildChord(0, 'maj9'), buildChord(7, '7')],  // IVmaj7-iiim7-Imaj9-V7
+            [buildChord(0, 'maj7'), buildChord(2, 'm7'), buildChord(4, 'm7'), buildChord(5, 'maj7')], // Imaj7-iim7-iiim7-IVmaj7
+            [buildChord(9, 'm9'), buildChord(5, 'maj7'), buildChord(7, '9'), buildChord(0, 'maj7')]   // vim9-IVmaj7-V9-Imaj7
+          ];
+          return rnbMajorProgressions[randomIndex];
+        }
+      case 'gospel':
+        // Gospel - Church progressions, 2-5-1 turnarounds
+        if (isMinor) {
+          const gospelMinorProgressions = [
+            [buildChord(2, 'dim7'), buildChord(7, '7b9'), buildChord(0, 'm7'), buildChord(5, 'm7')], // iidim7-V7b9-im7-ivm7
+            [buildChord(0, 'm7'), buildChord(3, 'maj7'), buildChord(8, 'maj7'), buildChord(7, '7')], // im7-IIImaj7-VImaj7-V7
+            [buildChord(0, 'mmaj7'), buildChord(0, 'm7'), buildChord(0, 'm6'), buildChord(7, '7')],  // immaj7-im7-im6-V7 (chromatic)
+            [buildChord(5, 'm7'), buildChord(10, '7'), buildChord(3, 'maj7'), buildChord(7, '7b9')], // ivm7-VII7-IIImaj7-V7b9
+            [buildChord(0, 'm9'), buildChord(8, 'maj7'), buildChord(10, '9'), buildChord(0, 'm7')],  // im9-VImaj7-VII9-im7
+            [buildChord(2, 'dim7'), buildChord(7, '7#9'), buildChord(0, 'm9'), buildChord(3, 'maj7')], // iidim7-V7#9-im9-IIImaj7
+            [buildChord(0, 'm7'), buildChord(5, 'm7'), buildChord(2, 'dim7'), buildChord(7, '7')],   // im7-ivm7-iidim7-V7
+            [buildChord(8, 'maj7'), buildChord(10, '7'), buildChord(0, 'm7'), buildChord(7, '7b9')], // VImaj7-VII7-im7-V7b9
+            [buildChord(0, 'm9'), buildChord(3, '7'), buildChord(8, 'maj7'), buildChord(7, '7')],    // im9-III7-VImaj7-V7
+            [buildChord(5, 'm9'), buildChord(10, '13'), buildChord(0, 'mmaj7'), buildChord(7, '7')]  // ivm9-VII13-immaj7-V7
+          ];
+          return gospelMinorProgressions[randomIndex];
+        } else {
+          const gospelMajorProgressions = [
+            [buildChord(2, 'm7'), buildChord(7, '7'), buildChord(0, 'maj7'), buildChord(5, 'maj7')], // iim7-V7-Imaj7-IVmaj7
+            [buildChord(0, 'maj7'), buildChord(9, 'm7'), buildChord(2, 'm7'), buildChord(7, '7')],   // Imaj7-vim7-iim7-V7
+            [buildChord(5, 'maj7'), buildChord(4, 'm7'), buildChord(2, 'm7'), buildChord(7, '13')],  // IVmaj7-iiim7-iim7-V13
+            [buildChord(0, 'maj9'), buildChord(1, 'dim7'), buildChord(2, 'm7'), buildChord(7, '7')], // Imaj9-#Idim7-iim7-V7
+            [buildChord(9, 'm7'), buildChord(10, '7'), buildChord(0, 'maj7'), buildChord(7, '9')],   // vim7-VII7-Imaj7-V9
+            [buildChord(2, 'm9'), buildChord(7, '13'), buildChord(4, 'm7'), buildChord(0, 'maj7')],  // iim9-V13-iiim7-Imaj7
+            [buildChord(0, '6'), buildChord(4, 'm7'), buildChord(5, 'maj7'), buildChord(7, '7')],    // I6-iiim7-IVmaj7-V7
+            [buildChord(0, 'maj7'), buildChord(10, 'maj7'), buildChord(9, 'm7'), buildChord(7, '7')], // Imaj7-VIImaj7-vim7-V7
+            [buildChord(5, '6'), buildChord(0, 'maj7'), buildChord(2, 'm9'), buildChord(7, '13')],   // IV6-Imaj7-iim9-V13
+            [buildChord(0, 'maj9'), buildChord(5, 'maj7'), buildChord(9, 'm7'), buildChord(7, '7')]  // Imaj9-IVmaj7-vim7-V7
+          ];
+          return gospelMajorProgressions[randomIndex];
+        }
+      case 'punk':
+        // Punk - Fast power chords, aggressive I-IV-V
+        if (isMinor) {
+          const punkMinorProgressions = [
+            [buildChord(0, 'm'), buildChord(3), buildChord(5), buildChord(0, 'm')],  // i-III-IV-i
+            [buildChord(0, 'm'), buildChord(5), buildChord(3), buildChord(7)],       // i-IV-III-V
+            [buildChord(0, 'm'), buildChord(8), buildChord(10), buildChord(0, 'm')], // i-VI-VII-i
+            [buildChord(0, 'm'), buildChord(10), buildChord(5), buildChord(0, 'm')], // i-VII-IV-i
+            [buildChord(0, 'm'), buildChord(3), buildChord(10), buildChord(5)],      // i-III-VII-IV
+            [buildChord(0, 'm'), buildChord(5), buildChord(0, 'm'), buildChord(7)],  // i-IV-i-V
+            [buildChord(5), buildChord(0, 'm'), buildChord(10), buildChord(3)],      // IV-i-VII-III
+            [buildChord(0, 'm'), buildChord(10), buildChord(8), buildChord(10)],     // i-VII-VI-VII
+            [buildChord(3), buildChord(5), buildChord(0, 'm'), buildChord(7)],       // III-IV-i-V
+            [buildChord(0, 'm'), buildChord(0, 'm'), buildChord(5), buildChord(7)]   // i-i-IV-V
+          ];
+          return punkMinorProgressions[randomIndex];
+        } else {
+          const punkMajorProgressions = [
+            [buildChord(0), buildChord(5), buildChord(7), buildChord(0)],  // I-IV-V-I
+            [buildChord(0), buildChord(7), buildChord(5), buildChord(0)],  // I-V-IV-I
+            [buildChord(0), buildChord(0), buildChord(5), buildChord(7)],  // I-I-IV-V
+            [buildChord(0), buildChord(5), buildChord(0), buildChord(7)],  // I-IV-I-V
+            [buildChord(5), buildChord(0), buildChord(7), buildChord(0)],  // IV-I-V-I
+            [buildChord(0), buildChord(7), buildChord(0), buildChord(5)],  // I-V-I-IV
+            [buildChord(0), buildChord(10), buildChord(5), buildChord(0)], // I-VII-IV-I
+            [buildChord(5), buildChord(7), buildChord(0), buildChord(0)],  // IV-V-I-I
+            [buildChord(0), buildChord(5), buildChord(7), buildChord(5)],  // I-IV-V-IV
+            [buildChord(7), buildChord(5), buildChord(0), buildChord(0)]   // V-IV-I-I
+          ];
+          return punkMajorProgressions[randomIndex];
+        }
+      case 'grunge':
+        // Grunge - Seattle sound, heavy distortion, minor key
+        if (isMinor) {
+          const grungeMinorProgressions = [
+            [buildChord(0, 'm'), buildChord(8), buildChord(10), buildChord(5)],      // i-VI-VII-IV (Teen Spirit)
+            [buildChord(0, 'm'), buildChord(10), buildChord(0, 'm'), buildChord(8)], // i-VII-i-VI
+            [buildChord(0, 'm'), buildChord(3), buildChord(5, 'm'), buildChord(0, 'm')], // i-III-iv-i
+            [buildChord(0, 'm'), buildChord(10), buildChord(8), buildChord(7)],      // i-VII-VI-V
+            [buildChord(0, 'm'), buildChord(8), buildChord(3), buildChord(10)],      // i-VI-III-VII
+            [buildChord(0, 'm'), buildChord(5, 'm'), buildChord(8), buildChord(10)], // i-iv-VI-VII
+            [buildChord(0, 'm'), buildChord(1), buildChord(3), buildChord(0, 'm')],  // i-bII-III-i (Phrygian)
+            [buildChord(0, 'm'), buildChord(3), buildChord(8), buildChord(7)],       // i-III-VI-V
+            [buildChord(0, 'm'), buildChord(10), buildChord(5, 'm'), buildChord(3)], // i-VII-iv-III
+            [buildChord(0, 'm'), buildChord(8), buildChord(0, 'm'), buildChord(10)]  // i-VI-i-VII
+          ];
+          return grungeMinorProgressions[randomIndex];
+        } else {
+          const grungeMajorProgressions = [
+            [buildChord(0), buildChord(7), buildChord(9, 'm'), buildChord(5)],  // I-V-vi-IV
+            [buildChord(0), buildChord(10), buildChord(5), buildChord(0)],      // I-VII-IV-I
+            [buildChord(0), buildChord(9, 'm'), buildChord(5), buildChord(7)],  // I-vi-IV-V
+            [buildChord(0), buildChord(5), buildChord(9, 'm'), buildChord(7)],  // I-IV-vi-V
+            [buildChord(0), buildChord(7), buildChord(5), buildChord(9, 'm')],  // I-V-IV-vi
+            [buildChord(5), buildChord(0), buildChord(7), buildChord(9, 'm')],  // IV-I-V-vi
+            [buildChord(0), buildChord(10), buildChord(9, 'm'), buildChord(5)], // I-VII-vi-IV
+            [buildChord(9, 'm'), buildChord(5), buildChord(0), buildChord(7)],  // vi-IV-I-V
+            [buildChord(0), buildChord(5), buildChord(10), buildChord(0)],      // I-IV-VII-I
+            [buildChord(0), buildChord(9, 'm'), buildChord(10), buildChord(5)]  // I-vi-VII-IV
+          ];
+          return grungeMajorProgressions[randomIndex];
+        }
+      case 'hard-rock':
+        // Hard Rock - Heavy riffs, classic I-IV-V with attitude
+        if (isMinor) {
+          const hardRockMinorProgressions = [
+            [buildChord(0, 'm'), buildChord(10), buildChord(8), buildChord(7)],  // i-VII-VI-V
+            [buildChord(0, 'm'), buildChord(3), buildChord(5), buildChord(0, 'm')], // i-III-IV-i
+            [buildChord(0, 'm'), buildChord(8), buildChord(10), buildChord(0, 'm')], // i-VI-VII-i
+            [buildChord(0, 'm'), buildChord(5), buildChord(10), buildChord(0, 'm')], // i-IV-VII-i
+            [buildChord(0, 'm'), buildChord(10), buildChord(5), buildChord(7)],  // i-VII-IV-V
+            [buildChord(0, 'm'), buildChord(3), buildChord(8), buildChord(10)],  // i-III-VI-VII
+            [buildChord(5), buildChord(0, 'm'), buildChord(10), buildChord(8)],  // IV-i-VII-VI
+            [buildChord(0, 'm'), buildChord(7), buildChord(3), buildChord(5)],   // i-V-III-IV
+            [buildChord(10), buildChord(8), buildChord(0, 'm'), buildChord(7)],  // VII-VI-i-V
+            [buildChord(0, 'm'), buildChord(5), buildChord(3), buildChord(7)]    // i-IV-III-V
+          ];
+          return hardRockMinorProgressions[randomIndex];
+        } else {
+          const hardRockMajorProgressions = [
+            [buildChord(0), buildChord(5), buildChord(7), buildChord(0)],  // I-IV-V-I
+            [buildChord(0), buildChord(10), buildChord(5), buildChord(0)], // I-VII-IV-I
+            [buildChord(0), buildChord(7), buildChord(5), buildChord(0)],  // I-V-IV-I
+            [buildChord(0), buildChord(5), buildChord(0), buildChord(7)],  // I-IV-I-V
+            [buildChord(5), buildChord(0), buildChord(10), buildChord(0)], // IV-I-VII-I
+            [buildChord(0), buildChord(10), buildChord(0), buildChord(5)], // I-VII-I-IV
+            [buildChord(7), buildChord(5), buildChord(0), buildChord(0)],  // V-IV-I-I
+            [buildChord(0), buildChord(5), buildChord(10), buildChord(7)], // I-IV-VII-V
+            [buildChord(0), buildChord(0), buildChord(5), buildChord(7)],  // I-I-IV-V
+            [buildChord(5), buildChord(7), buildChord(0), buildChord(10)]  // IV-V-I-VII
+          ];
+          return hardRockMajorProgressions[randomIndex];
+        }
+      case 'prog-rock':
+        // Progressive Rock - Complex time signatures, modal interchange
+        if (isMinor) {
+          const progRockMinorProgressions = [
+            [buildChord(0, 'm7'), buildChord(3, 'maj7'), buildChord(8, 'maj7'), buildChord(5, 'm7')], // im7-IIImaj7-VImaj7-ivm7
+            [buildChord(0, 'm'), buildChord(10), buildChord(6, 'dim'), buildChord(7)],  // i-VII-#IVdim-V
+            [buildChord(0, 'm9'), buildChord(2, 'dim7'), buildChord(3, 'maj7'), buildChord(7, '7')], // im9-iidim7-IIImaj7-V7
+            [buildChord(0, 'm'), buildChord(8, 'maj7'), buildChord(10), buildChord(5, 'm7')], // i-VImaj7-VII-ivm7
+            [buildChord(0, 'm7'), buildChord(5, 'm7'), buildChord(3, 'maj7'), buildChord(8, 'maj7')], // im7-ivm7-IIImaj7-VImaj7
+            [buildChord(0, 'mmaj7'), buildChord(7, '7'), buildChord(3, 'aug'), buildChord(8, 'maj7')], // immaj7-V7-IIIaug-VImaj7
+            [buildChord(0, 'm'), buildChord(6, 'm'), buildChord(3), buildChord(10)],  // i-#ivm-III-VII (tritone sub)
+            [buildChord(5, 'm9'), buildChord(0, 'm7'), buildChord(10, 'maj7'), buildChord(7, '7#9')], // ivm9-im7-VIImaj7-V7#9
+            [buildChord(0, 'm7'), buildChord(3, '7'), buildChord(8, 'maj7'), buildChord(2, 'dim7')], // im7-III7-VImaj7-iidim7
+            [buildChord(0, 'm'), buildChord(8, 'add9'), buildChord(10, 'sus4'), buildChord(7)]  // i-VIadd9-VIIsus4-V
+          ];
+          return progRockMinorProgressions[randomIndex];
+        } else {
+          const progRockMajorProgressions = [
+            [buildChord(0, 'maj7'), buildChord(10, 'maj7'), buildChord(9, 'm7'), buildChord(5, 'maj7')], // Imaj7-VIImaj7-vim7-IVmaj7
+            [buildChord(0), buildChord(8, 'maj7'), buildChord(10), buildChord(7)],  // I-VImaj7-VII-V
+            [buildChord(0, 'maj9'), buildChord(2, 'm7'), buildChord(6, 'dim'), buildChord(7, '7')], // Imaj9-iim7-#IVdim-V7
+            [buildChord(0, 'add9'), buildChord(4, 'm7'), buildChord(9, 'm7'), buildChord(5, 'maj7')], // Iadd9-iiim7-vim7-IVmaj7
+            [buildChord(5, 'maj7'), buildChord(6, 'dim7'), buildChord(9, 'm7'), buildChord(7, 'sus4')], // IVmaj7-#IVdim7-vim7-Vsus4
+            [buildChord(0, 'maj7'), buildChord(3, 'maj7'), buildChord(8, 'maj7'), buildChord(1, 'maj7')], // Imaj7-IIImaj7-VImaj7-bIImaj7
+            [buildChord(0), buildChord(9, 'm'), buildChord(6, 'dim'), buildChord(5)],  // I-vi-#IVdim-IV
+            [buildChord(2, 'm9'), buildChord(7, '7'), buildChord(0, 'maj7'), buildChord(10, 'maj7')], // iim9-V7-Imaj7-VIImaj7
+            [buildChord(0, 'sus4'), buildChord(0), buildChord(9, 'm'), buildChord(5, 'add9')], // Isus4-I-vi-IVadd9
+            [buildChord(0, 'maj7'), buildChord(4, 'm7'), buildChord(6, 'm7'), buildChord(2, 'm7')]  // Imaj7-iiim7-#ivm7-iim7
+          ];
+          return progRockMajorProgressions[randomIndex];
+        }
+      case 'indie':
+        // Indie - Jangly guitars, suspended chords
+        if (isMinor) {
+          const indieMinorProgressions = [
+            [buildChord(0, 'm'), buildChord(3), buildChord(10), buildChord(5)],  // i-III-VII-IV
+            [buildChord(0, 'm'), buildChord(8), buildChord(10), buildChord(3)],  // i-VI-VII-III
+            [buildChord(0, 'm'), buildChord(5, 'sus4'), buildChord(3), buildChord(10)], // i-ivsus4-III-VII
+            [buildChord(0, 'm'), buildChord(10), buildChord(8), buildChord(5, 'm')], // i-VII-VI-iv
+            [buildChord(0, 'm'), buildChord(3, 'add9'), buildChord(8), buildChord(10)], // i-IIIadd9-VI-VII
+            [buildChord(0, 'm'), buildChord(5, 'm7'), buildChord(3, 'maj7'), buildChord(10)], // i-ivm7-IIImaj7-VII
+            [buildChord(0, 'm'), buildChord(8, 'sus2'), buildChord(10), buildChord(5, 'm')], // i-VIsus2-VII-iv
+            [buildChord(3), buildChord(0, 'm'), buildChord(10), buildChord(8)],  // III-i-VII-VI
+            [buildChord(0, 'm'), buildChord(10, 'sus4'), buildChord(3), buildChord(5, 'm')], // i-VIIsus4-III-iv
+            [buildChord(0, 'm'), buildChord(3), buildChord(5, 'm'), buildChord(10)]  // i-III-iv-VII
+          ];
+          return indieMinorProgressions[randomIndex];
+        } else {
+          const indieMajorProgressions = [
+            [buildChord(0), buildChord(7), buildChord(9, 'm'), buildChord(5)],  // I-V-vi-IV
+            [buildChord(0, 'add9'), buildChord(9, 'm'), buildChord(5), buildChord(7, 'sus4')], // Iadd9-vi-IV-Vsus4
+            [buildChord(0), buildChord(5, 'sus2'), buildChord(9, 'm'), buildChord(7)], // I-IVsus2-vi-V
+            [buildChord(0, 'sus4'), buildChord(0), buildChord(5), buildChord(9, 'm')], // Isus4-I-IV-vi
+            [buildChord(0), buildChord(4, 'm'), buildChord(5), buildChord(7)],  // I-iii-IV-V
+            [buildChord(9, 'm'), buildChord(5), buildChord(0), buildChord(7, 'sus4')], // vi-IV-I-Vsus4
+            [buildChord(0, 'add9'), buildChord(5, 'add9'), buildChord(9, 'm7'), buildChord(7)], // Iadd9-IVadd9-vim7-V
+            [buildChord(0), buildChord(10), buildChord(5), buildChord(9, 'm')], // I-VII-IV-vi
+            [buildChord(5), buildChord(9, 'm'), buildChord(0), buildChord(7, 'sus4')], // IV-vi-I-Vsus4
+            [buildChord(0), buildChord(9, 'm7'), buildChord(5, 'maj7'), buildChord(7)]  // I-vim7-IVmaj7-V
+          ];
+          return indieMajorProgressions[randomIndex];
+        }
+      case 'post-rock':
+        // Post-Rock - Ambient swells, delay-heavy, cinematic
+        if (isMinor) {
+          const postRockMinorProgressions = [
+            [buildChord(0, 'm'), buildChord(8, 'add9'), buildChord(3), buildChord(10)], // i-VIadd9-III-VII
+            [buildChord(0, 'm'), buildChord(5, 'm'), buildChord(8, 'maj7'), buildChord(10)], // i-iv-VImaj7-VII
+            [buildChord(0, 'm'), buildChord(3, 'sus4'), buildChord(8), buildChord(5, 'm')], // i-IIIsus4-VI-iv
+            [buildChord(0, 'm'), buildChord(10, 'sus2'), buildChord(3), buildChord(8)], // i-VIIsus2-III-VI
+            [buildChord(0, 'm7'), buildChord(3, 'maj7'), buildChord(10), buildChord(5, 'm7')], // im7-IIImaj7-VII-ivm7
+            [buildChord(8), buildChord(0, 'm'), buildChord(10), buildChord(3)],  // VI-i-VII-III
+            [buildChord(0, 'm'), buildChord(8, 'sus4'), buildChord(10, 'add9'), buildChord(3)], // i-VIsus4-VIIadd9-III
+            [buildChord(0, 'm'), buildChord(5, 'm7'), buildChord(3), buildChord(10, 'sus4')], // i-ivm7-III-VIIsus4
+            [buildChord(0, 'm'), buildChord(3), buildChord(8, 'add9'), buildChord(10)], // i-III-VIadd9-VII
+            [buildChord(5, 'm'), buildChord(0, 'm'), buildChord(3), buildChord(8)]  // iv-i-III-VI
+          ];
+          return postRockMinorProgressions[randomIndex];
+        } else {
+          const postRockMajorProgressions = [
+            [buildChord(0, 'add9'), buildChord(5), buildChord(9, 'm'), buildChord(7, 'sus4')], // Iadd9-IV-vi-Vsus4
+            [buildChord(0), buildChord(9, 'm'), buildChord(5, 'sus2'), buildChord(7)], // I-vi-IVsus2-V
+            [buildChord(0, 'sus4'), buildChord(0), buildChord(9, 'm'), buildChord(5)], // Isus4-I-vi-IV
+            [buildChord(0, 'maj7'), buildChord(4, 'm7'), buildChord(9, 'm7'), buildChord(5, 'add9')], // Imaj7-iiim7-vim7-IVadd9
+            [buildChord(5), buildChord(0), buildChord(9, 'm'), buildChord(4, 'm')], // IV-I-vi-iii
+            [buildChord(0), buildChord(10), buildChord(5), buildChord(9, 'm7')], // I-VII-IV-vim7
+            [buildChord(0, 'sus2'), buildChord(5, 'add9'), buildChord(9, 'm'), buildChord(7)], // Isus2-IVadd9-vi-V
+            [buildChord(9, 'm'), buildChord(5, 'sus4'), buildChord(0), buildChord(7, 'sus4')], // vi-IVsus4-I-Vsus4
+            [buildChord(0), buildChord(4, 'm'), buildChord(9, 'm'), buildChord(5)], // I-iii-vi-IV
+            [buildChord(0, 'add9'), buildChord(9, 'm7'), buildChord(5, 'maj7'), buildChord(7, 'sus4')]  // Iadd9-vim7-IVmaj7-Vsus4
+          ];
+          return postRockMajorProgressions[randomIndex];
+        }
+      case 'shoegaze':
+        // Shoegaze - Wall of sound, dreamy chords
+        if (isMinor) {
+          const shoegazeMinorProgressions = [
+            [buildChord(0, 'm'), buildChord(3, 'add9'), buildChord(8), buildChord(10)], // i-IIIadd9-VI-VII
+            [buildChord(0, 'm7'), buildChord(5, 'm7'), buildChord(3, 'maj7'), buildChord(10)], // im7-ivm7-IIImaj7-VII
+            [buildChord(0, 'm'), buildChord(10, 'sus4'), buildChord(8, 'add9'), buildChord(3)], // i-VIIsus4-VIadd9-III
+            [buildChord(0, 'm'), buildChord(8, 'sus2'), buildChord(10), buildChord(5, 'm')], // i-VIsus2-VII-iv
+            [buildChord(0, 'm9'), buildChord(3, 'maj7'), buildChord(8, 'add9'), buildChord(10)], // im9-IIImaj7-VIadd9-VII
+            [buildChord(0, 'm'), buildChord(5, 'm7'), buildChord(10, 'add9'), buildChord(3)], // i-ivm7-VIIadd9-III
+            [buildChord(8), buildChord(10), buildChord(0, 'm'), buildChord(3)],  // VI-VII-i-III
+            [buildChord(0, 'm'), buildChord(3, 'sus4'), buildChord(10), buildChord(8)], // i-IIIsus4-VII-VI
+            [buildChord(0, 'm'), buildChord(10), buildChord(5, 'm'), buildChord(3, 'add9')], // i-VII-iv-IIIadd9
+            [buildChord(5, 'm7'), buildChord(0, 'm'), buildChord(8), buildChord(10)]  // ivm7-i-VI-VII
+          ];
+          return shoegazeMinorProgressions[randomIndex];
+        } else {
+          const shogazeMajorProgressions = [
+            [buildChord(0, 'add9'), buildChord(5, 'sus2'), buildChord(9, 'm'), buildChord(7)], // Iadd9-IVsus2-vi-V
+            [buildChord(0, 'sus4'), buildChord(0), buildChord(5, 'add9'), buildChord(9, 'm7')], // Isus4-I-IVadd9-vim7
+            [buildChord(0), buildChord(10, 'sus4'), buildChord(5), buildChord(9, 'm')], // I-VIIsus4-IV-vi
+            [buildChord(0, 'maj7'), buildChord(9, 'm7'), buildChord(5, 'add9'), buildChord(7, 'sus4')], // Imaj7-vim7-IVadd9-Vsus4
+            [buildChord(0), buildChord(5, 'sus4'), buildChord(9, 'm'), buildChord(4, 'm')], // I-IVsus4-vi-iii
+            [buildChord(5), buildChord(0, 'add9'), buildChord(9, 'm7'), buildChord(7)], // IV-Iadd9-vim7-V
+            [buildChord(0, 'sus2'), buildChord(9, 'm'), buildChord(5, 'add9'), buildChord(10)], // Isus2-vi-IVadd9-VII
+            [buildChord(0), buildChord(4, 'm'), buildChord(5, 'sus4'), buildChord(9, 'm')], // I-iii-IVsus4-vi
+            [buildChord(9, 'm7'), buildChord(5), buildChord(0, 'add9'), buildChord(7, 'sus4')], // vim7-IV-Iadd9-Vsus4
+            [buildChord(0, 'add9'), buildChord(10), buildChord(5, 'sus2'), buildChord(9, 'm')]  // Iadd9-VII-IVsus2-vi
+          ];
+          return shogazeMajorProgressions[randomIndex];
+        }
+      case 'thrash-metal':
+        // Thrash Metal - Fast palm-muting, chromatic speed riffs
+        const thrashMetalProgressions = [
+          [buildChord(0, 'm'), buildChord(11), buildChord(10), buildChord(9)],  // Chromatic descent
+          [buildChord(0, 'm'), buildChord(6), buildChord(0, 'm'), buildChord(7)],  // i-tritone-i-V
+          [buildChord(0, 'm'), buildChord(1), buildChord(0, 'm'), buildChord(10)], // i-bII-i-VII (Phrygian)
+          [buildChord(0, 'm'), buildChord(8), buildChord(10), buildChord(7)],  // i-VI-VII-V
+          [buildChord(0, 'm'), buildChord(3), buildChord(5), buildChord(7)],   // i-III-IV-V
+          [buildChord(0, 'm'), buildChord(10), buildChord(8), buildChord(0, 'm')], // i-VII-VI-i
+          [buildChord(0, 'm'), buildChord(1), buildChord(3), buildChord(1)],   // i-bII-III-bII
+          [buildChord(0, 'm'), buildChord(5, 'm'), buildChord(7), buildChord(0, 'm')], // i-iv-V-i
+          [buildChord(0, 'm'), buildChord(6), buildChord(7), buildChord(0, 'm')], // i-tritone-V-i
+          [buildChord(0, 'm'), buildChord(11), buildChord(0, 'm'), buildChord(10)]  // i-vii-i-VII
+        ];
+        return thrashMetalProgressions[randomIndex];
+      case 'djent':
+        // Djent - Polyrhythmic, extended range, syncopated chugs
+        const djentProgressions = [
+          [buildChord(0, 'm'), buildChord(0, 'm'), buildChord(10), buildChord(8)], // Syncopated static i
+          [buildChord(0, 'm'), buildChord(6), buildChord(0, 'm'), buildChord(11)], // i-tritone-i-vii
+          [buildChord(0, 'm'), buildChord(1), buildChord(8), buildChord(0, 'm')],  // i-bII-VI-i
+          [buildChord(0, 'm'), buildChord(0, 'm'), buildChord(6), buildChord(0, 'm')], // Static with tritone stab
+          [buildChord(0, 'm'), buildChord(3), buildChord(6), buildChord(10)],  // i-III-tritone-VII
+          [buildChord(0, 'm7'), buildChord(6, 'm'), buildChord(0, 'm7'), buildChord(1)], // im7-tritone-im7-bII
+          [buildChord(0, 'm'), buildChord(8), buildChord(6), buildChord(3)],   // i-VI-tritone-III
+          [buildChord(0, 'm'), buildChord(10), buildChord(0, 'm'), buildChord(6)], // i-VII-i-tritone
+          [buildChord(0, 'm'), buildChord(1, 'm'), buildChord(0, 'm'), buildChord(10)], // i-bii-i-VII
+          [buildChord(0, 'm'), buildChord(0, 'm'), buildChord(1), buildChord(0, 'm')]  // Staccato static
+        ];
+        return djentProgressions[randomIndex];
+      case 'bossa-nova':
+        // Bossa Nova - Brazilian jazz, maj7/9 chords
+        if (isMinor) {
+          const bossaNovaMinorProgressions = [
+            [buildChord(0, 'm9'), buildChord(5, 'm7'), buildChord(2, 'dim7'), buildChord(7, '7b9')], // im9-ivm7-iidim7-V7b9
+            [buildChord(0, 'm7'), buildChord(3, 'maj7'), buildChord(8, '6'), buildChord(7, '7')],   // im7-IIImaj7-VI6-V7
+            [buildChord(0, 'mmaj7'), buildChord(0, 'm7'), buildChord(5, 'm6'), buildChord(7, '7b9')], // immaj7-im7-ivm6-V7b9
+            [buildChord(0, 'm9'), buildChord(8, 'maj7'), buildChord(10, '7'), buildChord(0, 'm7')], // im9-VImaj7-VII7-im7
+            [buildChord(2, 'dim7'), buildChord(7, '7'), buildChord(0, 'm9'), buildChord(5, 'm7')],  // iidim7-V7-im9-ivm7
+            [buildChord(0, 'm7'), buildChord(10, 'maj7'), buildChord(3, 'maj7'), buildChord(7, '7')], // im7-VIImaj7-IIImaj7-V7
+            [buildChord(0, 'm6'), buildChord(5, 'm7'), buildChord(8, 'maj7'), buildChord(7, '7#9')], // im6-ivm7-VImaj7-V7#9
+            [buildChord(0, 'm9'), buildChord(3, '7'), buildChord(8, 'maj7'), buildChord(2, 'dim7')], // im9-III7-VImaj7-iidim7
+            [buildChord(5, 'm9'), buildChord(0, 'm7'), buildChord(10, '7'), buildChord(7, '7')],    // ivm9-im7-VII7-V7
+            [buildChord(0, 'm7'), buildChord(5, 'm6'), buildChord(2, 'dim7'), buildChord(7, '7b9')]  // im7-ivm6-iidim7-V7b9
+          ];
+          return bossaNovaMinorProgressions[randomIndex];
+        } else {
+          const bossaNovaMajorProgressions = [
+            [buildChord(0, 'maj9'), buildChord(6, 'dim7'), buildChord(9, 'm7'), buildChord(7, '7')], // Imaj9-#IVdim7-vim7-V7
+            [buildChord(0, 'maj7'), buildChord(9, 'm7'), buildChord(2, 'm9'), buildChord(7, '13')], // Imaj7-vim7-iim9-V13
+            [buildChord(0, '6'), buildChord(1, 'dim7'), buildChord(2, 'm7'), buildChord(7, '7')],   // I6-#Idim7-iim7-V7
+            [buildChord(0, 'maj9'), buildChord(3, 'maj7'), buildChord(9, 'm7'), buildChord(5, 'maj7')], // Imaj9-IIImaj7-vim7-IVmaj7
+            [buildChord(2, 'm7'), buildChord(7, '7'), buildChord(4, 'm7'), buildChord(0, 'maj7')],  // iim7-V7-iiim7-Imaj7
+            [buildChord(0, 'maj7'), buildChord(4, 'm7'), buildChord(6, 'dim7'), buildChord(9, 'm7')], // Imaj7-iiim7-#IVdim7-vim7
+            [buildChord(0, '6'), buildChord(9, 'm9'), buildChord(2, 'm7'), buildChord(7, '9')],     // I6-vim9-iim7-V9
+            [buildChord(0, 'maj9'), buildChord(10, '7'), buildChord(9, 'm7'), buildChord(7, '7')],  // Imaj9-VII7-vim7-V7
+            [buildChord(5, 'maj7'), buildChord(6, 'dim7'), buildChord(9, 'm7'), buildChord(2, 'm9')], // IVmaj7-#IVdim7-vim7-iim9
+            [buildChord(0, 'maj7'), buildChord(2, 'm7'), buildChord(4, 'm7'), buildChord(7, '13')]  // Imaj7-iim7-iiim7-V13
+          ];
+          return bossaNovaMajorProgressions[randomIndex];
+        }
+      case 'latin':
+        // Latin - Salsa, cumbia, son cubano
+        if (isMinor) {
+          const latinMinorProgressions = [
+            [buildChord(0, 'm7'), buildChord(5, 'm7'), buildChord(7, '7'), buildChord(0, 'm7')], // im7-ivm7-V7-im7
+            [buildChord(0, 'm'), buildChord(3), buildChord(10), buildChord(7)],  // i-III-VII-V
+            [buildChord(0, 'm7'), buildChord(8, 'maj7'), buildChord(10, '7'), buildChord(0, 'm7')], // im7-VImaj7-VII7-im7
+            [buildChord(0, 'm'), buildChord(5, 'm'), buildChord(3), buildChord(7)],  // i-iv-III-V
+            [buildChord(0, 'm9'), buildChord(3, 'maj7'), buildChord(5, 'm7'), buildChord(7, '7b9')], // im9-IIImaj7-ivm7-V7b9
+            [buildChord(0, 'm'), buildChord(10), buildChord(3), buildChord(7)],  // i-VII-III-V
+            [buildChord(5, 'm7'), buildChord(0, 'm7'), buildChord(10, '7'), buildChord(7, '7')], // ivm7-im7-VII7-V7
+            [buildChord(0, 'm7'), buildChord(3, '7'), buildChord(8, 'maj7'), buildChord(7, '7')], // im7-III7-VImaj7-V7
+            [buildChord(0, 'm'), buildChord(5, 'm'), buildChord(10), buildChord(7)],  // i-iv-VII-V
+            [buildChord(0, 'm7'), buildChord(8, '6'), buildChord(3, 'maj7'), buildChord(7, '7#9')]  // im7-VI6-IIImaj7-V7#9
+          ];
+          return latinMinorProgressions[randomIndex];
+        } else {
+          const latinMajorProgressions = [
+            [buildChord(0), buildChord(5), buildChord(7), buildChord(0)],  // I-IV-V-I
+            [buildChord(0, 'maj7'), buildChord(9, 'm7'), buildChord(2, 'm7'), buildChord(7, '7')], // Imaj7-vim7-iim7-V7
+            [buildChord(0), buildChord(5), buildChord(9, 'm'), buildChord(7)],  // I-IV-vi-V
+            [buildChord(0, '7'), buildChord(5, '7'), buildChord(0, '7'), buildChord(7, '7')], // I7-IV7-I7-V7
+            [buildChord(2, 'm7'), buildChord(7, '7'), buildChord(0, 'maj7'), buildChord(5, 'maj7')], // iim7-V7-Imaj7-IVmaj7
+            [buildChord(0), buildChord(7), buildChord(5), buildChord(0)],  // I-V-IV-I
+            [buildChord(0, 'maj7'), buildChord(4, 'm7'), buildChord(9, 'm7'), buildChord(7, '7')], // Imaj7-iiim7-vim7-V7
+            [buildChord(5), buildChord(0), buildChord(7), buildChord(0)],  // IV-I-V-I
+            [buildChord(0, '6'), buildChord(2, 'm7'), buildChord(5, 'maj7'), buildChord(7, '9')], // I6-iim7-IVmaj7-V9
+            [buildChord(0), buildChord(9, 'm'), buildChord(5), buildChord(7)]  // I-vi-IV-V
+          ];
+          return latinMajorProgressions[randomIndex];
+        }
       default:
         // Random exotic chords for "any"
         const exoticTypes = Object.values(exoticNumbers);
@@ -912,6 +1360,8 @@ export default function DiceInterface({ onResult, onUpgrade }: DiceInterfaceProp
       'black-metal': [beastGuitar, bcRichBlack, customWarlock, schecterGuitar, warlockOutline2],
       'death-metal': [beastGuitar, espGuitar, customWarlock, jacksonV, bcRichBlack, warlockOutline1],
       'extreme-metal': [beastGuitar, warlockHero, jacksonV, bcRichRed, customWarlock, warlockOutline2],
+      'thrash-metal': [beastGuitar, jacksonV, espGuitar, bcRichRed, warlockOutline1],
+      'djent': [ibanezGuitar, espGuitar, schecterGuitar],
       'neo-classical': [prsGuitar, ibanezGuitar, warlockHeadstock],
       'flamenco': [prsGuitar, ibanezGuitar],
       'jazz': [prsGuitar, ibanezGuitar],
@@ -919,7 +1369,20 @@ export default function DiceInterface({ onResult, onUpgrade }: DiceInterfaceProp
       'folk': [prsGuitar, ibanezGuitar],
       'pop': [prsGuitar, ibanezGuitar],
       'rock': [beastGuitar, jacksonV, bcRichRed, prsGuitar, customWarlock, warlockOutline1],
+      'hard-rock': [beastGuitar, jacksonV, bcRichRed, warlockHero, warlockOutline1],
+      'grunge': [beastGuitar, jacksonV, espGuitar],
+      'punk': [beastGuitar, jacksonV, bcRichRed],
+      'prog-rock': [prsGuitar, ibanezGuitar, schecterGuitar],
+      'post-rock': [prsGuitar, ibanezGuitar],
+      'shoegaze': [prsGuitar, ibanezGuitar],
+      'indie': [prsGuitar, ibanezGuitar],
       'funk': [prsGuitar, ibanezGuitar],
+      'rnb': [prsGuitar, ibanezGuitar],
+      'gospel': [prsGuitar, ibanezGuitar],
+      'country': [prsGuitar, ibanezGuitar],
+      'reggae': [prsGuitar, ibanezGuitar],
+      'bossa-nova': [prsGuitar, ibanezGuitar],
+      'latin': [prsGuitar, ibanezGuitar],
       'any': [beastGuitar, warlockHero, jacksonV, prsGuitar, warlockOutline1]
     };
     
