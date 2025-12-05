@@ -5,29 +5,143 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
+import { Skeleton } from "@/components/ui/skeleton";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/hooks/useAuth";
 import { queryClient, apiRequest } from "@/lib/queryClient";
+import RiffModal from "@/components/riff-modal";
 import { 
   User, 
   Mail, 
   Crown, 
   Calendar, 
   Trash2, 
-  Users, 
   Music, 
   ArrowLeft,
   CreditCard,
   Loader2,
-  Share2
+  Share2,
+  Play,
+  Dices,
+  Sparkles
 } from "lucide-react";
 import type { AccountSummary, ChordProgression } from "@shared/schema";
+
+const genreColors: Record<string, { bg: string; border: string; text: string }> = {
+  'Rock': { bg: 'from-red-600/20 to-orange-600/20', border: 'border-red-500/30', text: 'text-red-400' },
+  'Metal': { bg: 'from-gray-600/20 to-zinc-700/20', border: 'border-gray-500/30', text: 'text-gray-300' },
+  'Blues': { bg: 'from-blue-600/20 to-indigo-600/20', border: 'border-blue-500/30', text: 'text-blue-400' },
+  'Jazz': { bg: 'from-purple-600/20 to-violet-600/20', border: 'border-purple-500/30', text: 'text-purple-400' },
+  'Funk': { bg: 'from-orange-500/20 to-yellow-500/20', border: 'border-orange-500/30', text: 'text-orange-400' },
+  'Pop': { bg: 'from-pink-500/20 to-rose-500/20', border: 'border-pink-500/30', text: 'text-pink-400' },
+  'Country': { bg: 'from-amber-600/20 to-yellow-600/20', border: 'border-amber-500/30', text: 'text-amber-400' },
+  'Reggae': { bg: 'from-green-600/20 to-emerald-600/20', border: 'border-green-500/30', text: 'text-green-400' },
+  'Classical': { bg: 'from-slate-500/20 to-gray-500/20', border: 'border-slate-400/30', text: 'text-slate-300' },
+  'default': { bg: 'from-gold/10 to-amber-500/10', border: 'border-gold/30', text: 'text-gold' }
+};
+
+const getGenreColors = (genre?: string | null) => {
+  if (!genre) return genreColors['default'];
+  return genreColors[genre] || genreColors['default'];
+};
+
+function AccountSkeleton() {
+  return (
+    <div className="space-y-6">
+      <Card className="bg-gray-900 border-gray-800">
+        <CardHeader>
+          <Skeleton className="h-6 w-48 bg-gray-800" />
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="flex items-center justify-between">
+            <Skeleton className="h-4 w-16 bg-gray-800" />
+            <Skeleton className="h-4 w-40 bg-gray-800" />
+          </div>
+          <div className="flex items-center justify-between">
+            <Skeleton className="h-4 w-20 bg-gray-800" />
+            <Skeleton className="h-4 w-24 bg-gray-800" />
+          </div>
+        </CardContent>
+      </Card>
+
+      <Card className="bg-gray-900 border-gray-800">
+        <CardHeader>
+          <Skeleton className="h-6 w-40 bg-gray-800" />
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="flex items-center justify-between">
+            <Skeleton className="h-4 w-12 bg-gray-800" />
+            <Skeleton className="h-6 w-20 bg-gray-800 rounded-full" />
+          </div>
+          <Skeleton className="h-10 w-full bg-gray-800" />
+        </CardContent>
+      </Card>
+
+      <Card className="bg-gray-900 border-gray-800">
+        <CardHeader>
+          <div className="flex items-center gap-2">
+            <Skeleton className="h-6 w-40 bg-gray-800" />
+            <Skeleton className="h-5 w-12 bg-gray-800 rounded-full" />
+          </div>
+          <Skeleton className="h-4 w-64 bg-gray-800" />
+        </CardHeader>
+        <CardContent className="space-y-3">
+          {[1, 2, 3].map((i) => (
+            <div key={i} className="p-4 bg-gray-800/50 rounded-lg border border-gray-700/50">
+              <div className="flex items-center justify-between">
+                <div className="flex-1 space-y-2">
+                  <Skeleton className="h-5 w-32 bg-gray-700" />
+                  <Skeleton className="h-4 w-48 bg-gray-700" />
+                  <Skeleton className="h-5 w-16 bg-gray-700 rounded-full" />
+                </div>
+                <div className="flex gap-2">
+                  <Skeleton className="h-9 w-9 bg-gray-700 rounded" />
+                  <Skeleton className="h-9 w-9 bg-gray-700 rounded" />
+                </div>
+              </div>
+            </div>
+          ))}
+        </CardContent>
+      </Card>
+    </div>
+  );
+}
+
+function EmptyProgressions() {
+  const [, navigate] = useLocation();
+  
+  return (
+    <div className="text-center py-10">
+      <div className="relative mx-auto w-24 h-24 mb-4">
+        <div className="absolute inset-0 bg-gold/10 rounded-full animate-pulse" />
+        <div className="absolute inset-2 bg-gold/5 rounded-full" />
+        <div className="absolute inset-0 flex items-center justify-center">
+          <Dices className="w-12 h-12 text-gold/50" />
+        </div>
+        <Sparkles className="absolute -top-1 -right-1 w-6 h-6 text-gold animate-bounce" style={{ animationDelay: '0.5s' }} />
+      </div>
+      <h3 className="text-lg font-semibold text-white mb-2">No Saved Progressions</h3>
+      <p className="text-gray-400 mb-4 max-w-xs mx-auto">
+        Roll the dice to generate epic chord progressions, then save your favorites here!
+      </p>
+      <Button 
+        onClick={() => navigate('/')}
+        className="bg-gold hover:bg-gold/90 text-black"
+        data-testid="button-start-rolling"
+      >
+        <Dices className="w-4 h-4 mr-2" />
+        Start Rolling
+      </Button>
+    </div>
+  );
+}
 
 export default function AccountPage() {
   const [, navigate] = useLocation();
   const { toast } = useToast();
   const { user, isAuthenticated, isLoading: authLoading } = useAuth();
   const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [selectedProgression, setSelectedProgression] = useState<ChordProgression | null>(null);
 
   const { data: summary, isLoading: summaryLoading } = useQuery<AccountSummary>({
     queryKey: ['/api/account/summary'],
@@ -96,6 +210,14 @@ export default function AccountPage() {
     navigate('/delete-account');
   };
 
+  const handleReplayProgression = (progression: ChordProgression) => {
+    setSelectedProgression(progression);
+  };
+
+  const closeReplayModal = () => {
+    setSelectedProgression(null);
+  };
+
   if (authLoading) {
     return (
       <div className="min-h-screen bg-black flex items-center justify-center">
@@ -157,9 +279,7 @@ export default function AccountPage() {
         </h1>
 
         {isLoading ? (
-          <div className="flex justify-center py-12">
-            <Loader2 className="w-8 h-8 animate-spin text-gold" />
-          </div>
+          <AccountSkeleton />
         ) : (
           <div className="space-y-6">
             <Card className="bg-gray-900 border-gray-800">
@@ -263,50 +383,84 @@ export default function AccountPage() {
               <CardContent>
                 {progressions && progressions.length > 0 ? (
                   <div className="space-y-3">
-                    {progressions.map((progression) => (
-                      <div 
-                        key={progression.id}
-                        className="flex items-center justify-between p-3 bg-gray-800 rounded-lg border border-gray-700"
-                        data-testid={`progression-item-${progression.id}`}
-                      >
-                        <div className="flex-1">
-                          <div className="font-medium text-white">
-                            {progression.name || 'Untitled Progression'}
-                          </div>
-                          <div className="text-sm text-gray-400">
-                            {Array.isArray(progression.chords) 
-                              ? (progression.chords as string[]).join(' → ')
-                              : 'No chords'}
-                          </div>
-                          {progression.genre && (
-                            <Badge variant="outline" className="mt-1 text-xs border-gray-600">
-                              {progression.genre}
-                            </Badge>
-                          )}
-                        </div>
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          onClick={() => handleDeleteProgression(progression.id)}
-                          disabled={deletingId === progression.id}
-                          className="text-red-400 hover:text-red-300 hover:bg-red-900/20"
-                          data-testid={`button-delete-progression-${progression.id}`}
+                    {progressions.map((progression, index) => {
+                      const colors = getGenreColors(progression.genre);
+                      return (
+                        <div 
+                          key={progression.id}
+                          className={`group relative p-4 bg-gradient-to-r ${colors.bg} rounded-xl border ${colors.border} transition-all duration-300 hover:scale-[1.01] hover:shadow-lg`}
+                          data-testid={`progression-item-${progression.id}`}
+                          style={{ 
+                            animationDelay: `${index * 50}ms`,
+                            animation: 'fadeInUp 0.4s ease-out forwards'
+                          }}
                         >
-                          {deletingId === progression.id ? (
-                            <Loader2 className="w-4 h-4 animate-spin" />
-                          ) : (
-                            <Trash2 className="w-4 h-4" />
-                          )}
-                        </Button>
-                      </div>
-                    ))}
+                          <div className="flex items-start justify-between gap-4">
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center gap-2 mb-2">
+                                <Music className={`w-4 h-4 ${colors.text} flex-shrink-0`} />
+                                <h4 className="font-semibold text-white truncate">
+                                  {progression.name || 'Untitled Progression'}
+                                </h4>
+                              </div>
+                              
+                              <div className="flex flex-wrap gap-1.5 mb-3">
+                                {Array.isArray(progression.chords) && 
+                                  (progression.chords as string[]).map((chord, i) => (
+                                    <span 
+                                      key={i}
+                                      className="px-2 py-0.5 bg-black/30 rounded text-sm text-white/90 font-mono"
+                                    >
+                                      {chord}
+                                    </span>
+                                  ))
+                                }
+                              </div>
+                              
+                              {progression.genre && (
+                                <Badge 
+                                  variant="outline" 
+                                  className={`text-xs ${colors.border} ${colors.text} bg-black/20`}
+                                >
+                                  {progression.genre}
+                                </Badge>
+                              )}
+                            </div>
+                            
+                            <div className="flex items-center gap-2 flex-shrink-0">
+                              <Button
+                                variant="ghost"
+                                size="icon"
+                                onClick={() => handleReplayProgression(progression)}
+                                className={`${colors.text} hover:bg-white/10 transition-colors`}
+                                data-testid={`button-replay-progression-${progression.id}`}
+                                title="Replay Progression"
+                              >
+                                <Play className="w-4 h-4" />
+                              </Button>
+                              <Button
+                                variant="ghost"
+                                size="icon"
+                                onClick={() => handleDeleteProgression(progression.id)}
+                                disabled={deletingId === progression.id}
+                                className="text-red-400 hover:text-red-300 hover:bg-red-900/20 transition-colors"
+                                data-testid={`button-delete-progression-${progression.id}`}
+                                title="Delete Progression"
+                              >
+                                {deletingId === progression.id ? (
+                                  <Loader2 className="w-4 h-4 animate-spin" />
+                                ) : (
+                                  <Trash2 className="w-4 h-4" />
+                                )}
+                              </Button>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
                   </div>
                 ) : (
-                  <div className="text-center py-8 text-gray-500">
-                    <Music className="w-12 h-12 mx-auto mb-3 opacity-50" />
-                    <p>No saved progressions yet</p>
-                    <p className="text-sm mt-1">Roll the dice and save your favorite chord progressions!</p>
-                  </div>
+                  <EmptyProgressions />
                 )}
               </CardContent>
             </Card>
@@ -342,6 +496,28 @@ export default function AccountPage() {
           </div>
         )}
       </div>
+
+      {selectedProgression && (
+        <RiffModal
+          isOpen={!!selectedProgression}
+          onClose={closeReplayModal}
+          progression={Array.isArray(selectedProgression.chords) ? selectedProgression.chords as string[] : []}
+          genre={selectedProgression.genre || undefined}
+        />
+      )}
+
+      <style>{`
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `}</style>
     </div>
   );
 }
