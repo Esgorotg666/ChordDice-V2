@@ -628,28 +628,16 @@ export default function DiceInterface({ onResult, onUpgrade }: DiceInterfaceProp
     const colorGroup = colorGroups[colorRoll - 1];
     const selectedKey = colorGroup.keys[Math.floor(Math.random() * colorGroup.keys.length)];
     const rootNote = getChordRoot(selectedKey);
-    const minor = isMinorKey(selectedKey);
     
-    if (selectedGenre === 'any') {
-      // Original logic for "any" genre - use formatChord for consistency
-      let chordType: string;
-      if (exoticNumbers[numberRoll as keyof typeof exoticNumbers]) {
-        chordType = exoticNumbers[numberRoll as keyof typeof exoticNumbers];
-      } else {
-        chordType = 'Major';
-      }
-      return {
-        chord: formatChord(rootNote, chordType),
-        colorName: colorGroup.name
-      };
-    } else {
-      // For genre-specific single chords, use the first chord from the progression
-      const progression = getGenreProgressions(selectedGenre, rootNote, minor);
-      return {
-        chord: progression[0],
-        colorName: colorGroup.name
-      };
-    }
+    // Single mode ALWAYS uses simple, common chord types regardless of genre
+    // This gives practical chords that every guitarist knows
+    const simpleChordTypes = ['Major', 'Minor', '7th', 'Minor 7th', 'Major 7th', 'Suspended'];
+    const chordType = simpleChordTypes[numberRoll % simpleChordTypes.length];
+    
+    return {
+      chord: formatChord(rootNote, chordType),
+      colorName: colorGroup.name
+    };
   };
 
   const generateRiff = (colorRoll: number, numberRoll: number) => {
