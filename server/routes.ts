@@ -427,6 +427,118 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // NOTE: Reward processing should be triggered by Stripe webhooks or protected cron jobs
   // This endpoint is removed for security - referral rewards will be processed automatically
 
+  // ============== ACCOUNT PAGE ROUTES ==============
+  
+  // Get account summary for profile page
+  app.get('/api/account/summary', isAuthenticated, async (req: any, res) => {
+    try {
+      const userId = req.userId;
+      const summary = await storage.getAccountSummary(userId);
+      
+      if (!summary) {
+        return res.status(404).json({ message: "Account not found" });
+      }
+      
+      res.json(summary);
+    } catch (error) {
+      console.error("Error fetching account summary:", error);
+      res.status(500).json({ message: "Failed to fetch account summary" });
+    }
+  });
+
+  // Get saved progressions for user
+  app.get('/api/account/progressions', isAuthenticated, async (req: any, res) => {
+    try {
+      const userId = req.userId;
+      const progressions = await storage.getProgressionsForUser(userId);
+      res.json(progressions);
+    } catch (error) {
+      console.error("Error fetching progressions:", error);
+      res.status(500).json({ message: "Failed to fetch saved progressions" });
+    }
+  });
+
+  // Save a new chord progression (with 10 limit)
+  app.post('/api/account/progressions', isAuthenticated, csrfProtection, async (req: any, res) => {
+    try {
+      const userId = req.userId;
+      
+      // Validate request body
+      const saveProgressionSchema = z.object({
+        name: z.string().max(100, "Name too long").optional(),
+        type: z.enum(['single', 'riff']),
+        chords: z.array(z.string()),
+        genre: z.string().max(50).optional(),
+        colorRoll: z.string().optional(),
+        numberRoll: z.string().optional(),
+      });
+      
+      const validatedData = saveProgressionSchema.parse(req.body);
+      
+      const progression = await storage.createProgressionWithLimit(userId, {
+        ...validatedData,
+        isFavorite: "false",
+      });
+      
+      res.status(201).json(progression);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ 
+          message: "Invalid progression data", 
+          errors: error.errors 
+        });
+      }
+      if (error instanceof Error && error.message.includes("only save up to")) {
+        return res.status(400).json({ message: error.message });
+      }
+      console.error("Error saving progression:", error);
+      res.status(500).json({ message: "Failed to save progression" });
+    }
+  });
+
+  // Delete a saved progression
+  app.delete('/api/account/progressions/:id', isAuthenticated, csrfProtection, async (req: any, res) => {
+    try {
+      const userId = req.userId;
+      const progressionId = req.params.id;
+      
+      const deleted = await storage.deleteProgressionForUser(userId, progressionId);
+      
+      if (!deleted) {
+        return res.status(404).json({ message: "Progression not found or not authorized" });
+      }
+      
+      res.json({ message: "Progression deleted successfully" });
+    } catch (error) {
+      console.error("Error deleting progression:", error);
+      res.status(500).json({ message: "Failed to delete progression" });
+    }
+  });
+
+  // Create Stripe customer portal session for subscription management
+  app.post('/api/subscription/portal', isAuthenticated, csrfProtection, async (req: any, res) => {
+    try {
+      const userId = req.userId;
+      const user = await storage.getUser(userId);
+      
+      if (!user?.stripeCustomerId) {
+        return res.status(400).json({ message: "No active subscription found" });
+      }
+      
+      const session = await stripe.billingPortal.sessions.create({
+        customer: user.stripeCustomerId,
+        return_url: `${req.headers.origin || 'https://guitardicepro.replit.app'}/account`,
+      });
+      
+      res.json({ url: session.url });
+    } catch (error) {
+      console.error("Error creating portal session:", error);
+      res.status(500).json({ message: "Failed to create subscription management session" });
+    }
+  });
+
+  // ============== END ACCOUNT PAGE ROUTES ==============
+
   // Stripe subscription route
   app.post('/api/create-subscription', isAuthenticated, csrfProtection, async (req: any, res) => {
     if (!req.isAuthenticated()) {
