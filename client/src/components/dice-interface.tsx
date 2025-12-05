@@ -4,6 +4,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Badge } from "@/components/ui/badge";
 import { Crown, Play, Eye } from "lucide-react";
 import { colorGroups, exoticNumbers, generateBridgePattern, type BridgePattern } from "@/lib/music-data";
+import { VALID_CHORD_SUFFIXES, chordDiagrams } from "@/lib/generated-chords";
 import { useAuthContext } from "@/contexts/AuthContext";
 import { useSubscription } from "@/hooks/useSubscription";
 import { useUsageTracking } from "@/hooks/useUsageTracking";
@@ -132,6 +133,7 @@ export default function DiceInterface({ onResult, onUpgrade }: DiceInterfaceProp
   const [metronomeValue, setMetronomeValue] = useState(120);
 
   const formatChord = (key: string, type: string) => {
+    // Only suffixes that exist in generated-chords.ts database
     const chordSuffixes: Record<string, string> = {
       'Major': '',
       'Minor': 'm',
@@ -151,8 +153,7 @@ export default function DiceInterface({ onResult, onUpgrade }: DiceInterfaceProp
       'Minor 11th': 'm11',
       '13th': '13',
       'add9': 'add9',
-      'dim7': 'dim7',
-      'm7b5': 'm7b5'
+      'dim7': 'dim7'
     };
 
     return key + (chordSuffixes[type] || '');
@@ -208,11 +209,11 @@ export default function DiceInterface({ onResult, onUpgrade }: DiceInterfaceProp
           // Minor key semitone reference (C minor): Cm=0m, D=+2, Eb=+3, Fm=+5m, G=+7, Ab=+8, Bb=+10
           const jazzMinorProgressions = [
             // 1. John Coltrane "Blue Bossa" - Classic minor ii-V-i
-            [buildChord(2, 'm7b5'), buildChord(7, '7b9'), buildChord(0, 'm9'), buildChord(5, 'm11')],  // iiø7-V7b9-im9-ivm11
+            [buildChord(2, 'dim7'), buildChord(7, '7b9'), buildChord(0, 'm9'), buildChord(5, 'm11')],  // iiø7-V7b9-im9-ivm11
             // 2. Miles Davis "So What" - Modal shift (Dm7-Ebm7 modal vamp)
             [buildChord(0, 'm11'), buildChord(1, 'm11'), buildChord(0, 'm9'), buildChord(1, 'm9')],  // im11-♭iim11-im9-♭iim9 (modal shift)
-            // 3. Bill Evans "Autumn Leaves" - Minor turnaround (im9-IVmaj7-iiø7-V7alt)
-            [buildChord(0, 'm9'), buildChord(5, 'maj7'), buildChord(2, 'm7b5'), buildChord(7, '7alt')],  // im9-IVmaj7-iiø7-V7alt
+            // 3. Bill Evans "Autumn Leaves" - Minor turnaround (im9-IVmaj7-iiø7-V7b9)
+            [buildChord(0, 'm9'), buildChord(5, 'maj7'), buildChord(2, 'dim7'), buildChord(7, '7b9')],  // im9-IVmaj7-iiø7-V7b9
             // 4. Horace Silver "Song for My Father" - Latin jazz minor
             [buildChord(0, 'm9'), buildChord(5, 'm11'), buildChord(0, 'm9'), buildChord(7, '7#5')],  // im9-ivm11-im9-V7#5
             // 5. Wayne Shorter "Footprints" - Minor blues (Cm7-Fm7-Cm7-Cm7)
@@ -220,38 +221,38 @@ export default function DiceInterface({ onResult, onUpgrade }: DiceInterfaceProp
             // 6. Herbie Hancock "Maiden Voyage" - Suspended minor modal
             [buildChord(0, 'm11'), buildChord(10, '13'), buildChord(8, 'maj9'), buildChord(7, '7b9')],  // im11-♭VII13-♭VImaj9-V7b9
             // 7. Charlie Parker "Confirmation" - Bebop minor with diminished
-            [buildChord(0, 'm7'), buildChord(1, 'dim7'), buildChord(2, 'm7b5'), buildChord(7, '7b9')],  // im7-#idim7-iiø7-V7b9
+            [buildChord(0, 'm7'), buildChord(1, 'dim7'), buildChord(2, 'dim7'), buildChord(7, '7b9')],  // im7-#idim7-iiø7-V7b9
             // 8. Chick Corea "Spain" - Modal minor with backdoor
-            [buildChord(5, 'm9'), buildChord(8, '13'), buildChord(0, 'm(maj7)'), buildChord(7, '7sus4')],  // ivm9-♭VI13-im(maj7)-V7sus4
+            [buildChord(5, 'm9'), buildChord(8, '13'), buildChord(0, 'mmaj7'), buildChord(7, '7')],  // ivm9-♭VI13-immaj7-V7
             // 9. Thelonious Monk "Round Midnight" - Chromatic minor
-            [buildChord(0, 'm9'), buildChord(3, '7#5'), buildChord(8, 'maj7'), buildChord(0, 'm(maj7)')],  // im9-♭III7#5-♭VImaj7-im(maj7)
+            [buildChord(0, 'm9'), buildChord(3, '7#5'), buildChord(8, 'maj7'), buildChord(0, 'mmaj7')],  // im9-♭III7#5-♭VImaj7-immaj7
             // 10. Sonny Rollins "Doxy" - Minor blues turnaround
-            [buildChord(3, 'm9'), buildChord(10, '7b9'), buildChord(0, 'm11'), buildChord(7, '7alt')]  // ♭iiim9-♭VII7b9-im11-V7alt
+            [buildChord(3, 'm9'), buildChord(10, '7b9'), buildChord(0, 'm11'), buildChord(7, '7b9')]  // ♭iiim9-♭VII7b9-im11-V7b9
           ];
           return jazzMinorProgressions[randomIndex];
         } else {
           // 10 authentic major jazz progressions with extended chords (9ths, 11ths, 13ths)
           const jazzMajorProgressions = [
             // 1. Miles Davis "Autumn Leaves" - Classic ii-V-I
-            [buildChord(2, 'm9'), buildChord(7, '13'), buildChord(0, 'maj9'), buildChord(5, '6/9')],  // iim9-V13-Imaj9-IV6/9
+            [buildChord(2, 'm9'), buildChord(7, '13'), buildChord(0, 'maj9'), buildChord(5, '6')],  // iim9-V13-Imaj9-IV6
             // 2. Dizzy Gillespie "I Got Rhythm" - Rhythm changes
-            [buildChord(0, '6/9'), buildChord(9, 'm9'), buildChord(2, 'm11'), buildChord(7, '7b9')],  // I6/9-vim9-iim11-V7b9
+            [buildChord(0, '6'), buildChord(9, 'm9'), buildChord(2, 'm11'), buildChord(7, '7b9')],  // I6-vim9-iim11-V7b9
             // 3. Miles Davis "All Blues" - Blues with altered dominants
-            [buildChord(0, '9'), buildChord(5, '13'), buildChord(7, '7#5'), buildChord(0, '7sus4')],  // I9-IV13-V7#5-I7sus4
+            [buildChord(0, '9'), buildChord(5, '13'), buildChord(7, '7#5'), buildChord(0, '7')],  // I9-IV13-V7#5-I7
             // 4. Duke Ellington "Satin Doll" - Extended turnaround
-            [buildChord(4, 'm11'), buildChord(9, 'm9'), buildChord(2, 'm7'), buildChord(7, '7alt')],  // iiim11-vim9-iim7-V7alt
+            [buildChord(4, 'm11'), buildChord(9, 'm9'), buildChord(2, 'm7'), buildChord(7, '7b9')],  // iiim11-vim9-iim7-V7b9
             // 5. John Coltrane "Giant Steps" - Coltrane changes
-            [buildChord(0, 'maj7#11'), buildChord(5, 'maj9'), buildChord(2, 'm11'), buildChord(7, '13')],  // Imaj7#11-IVmaj9-iim11-V13
+            [buildChord(0, 'maj7'), buildChord(5, 'maj9'), buildChord(2, 'm11'), buildChord(7, '13')],  // Imaj7-IVmaj9-iim11-V13
             // 6. Charlie Parker "Confirmation" - Bebop turnaround
             [buildChord(0, 'maj9'), buildChord(9, 'm9'), buildChord(2, 'm11'), buildChord(7, '13')],  // Imaj9-vim9-iim11-V13
             // 7. Bill Evans "Waltz for Debby" - Sophisticated voicings
-            [buildChord(9, 'm9'), buildChord(2, 'm11'), buildChord(7, 'maj9'), buildChord(0, '6/9')],  // vim9-iim11-Vmaj9-I6/9
+            [buildChord(9, 'm9'), buildChord(2, 'm11'), buildChord(7, 'maj9'), buildChord(0, '6')],  // vim9-iim11-Vmaj9-I6
             // 8. Thelonious Monk "Straight No Chaser" - Blues substitutions
-            [buildChord(0, 'maj9'), buildChord(3, '7#5'), buildChord(8, 'maj7#11'), buildChord(11, '7b9')],  // Imaj9-♭III7#5-♭VImaj7#11-VII7b9
+            [buildChord(0, 'maj9'), buildChord(3, '7#5'), buildChord(8, 'maj7'), buildChord(11, '7b9')],  // Imaj9-♭III7#5-♭VImaj7-VII7b9
             // 9. Wes Montgomery "Four on Six" - Backdoor progression
-            [buildChord(5, 'm11'), buildChord(10, '13'), buildChord(0, 'maj9'), buildChord(7, '7alt')],  // ivm11-♭VII13-Imaj9-V7alt
+            [buildChord(5, 'm11'), buildChord(10, '13'), buildChord(0, 'maj9'), buildChord(7, '7b9')],  // ivm11-♭VII13-Imaj9-V7b9
             // 10. Dexter Gordon "Cheese Cake" - Bebop blues
-            [buildChord(10, '13'), buildChord(3, '7b9'), buildChord(8, 'maj9'), buildChord(0, '6/9')]  // ♭VII13-♭III7b9-♭VImaj9-I6/9
+            [buildChord(10, '13'), buildChord(3, '7b9'), buildChord(8, 'maj9'), buildChord(0, '6')]  // ♭VII13-♭III7b9-♭VImaj9-I6
           ];
           return jazzMajorProgressions[randomIndex];
         }
@@ -375,8 +376,8 @@ export default function DiceInterface({ onResult, onUpgrade }: DiceInterfaceProp
             [buildChord(0, 'm7'), buildChord(0, 'm7'), buildChord(0, 'm7'), buildChord(0, 'm7')],  // im7 (static)
             // 6. Herbie Hancock "Chameleon" - Minor modal vamp (Bm7-Bm7)
             [buildChord(0, 'm7'), buildChord(10, '7'), buildChord(0, 'm7'), buildChord(10, '7')],  // im7-♭VII7-im7-♭VII7
-            // 7. Kool & the Gang "Jungle Boogie" - Minor with suspended
-            [buildChord(0, 'm7'), buildChord(7, '7sus4'), buildChord(0, 'm7'), buildChord(7, '7sus4')],  // im7-V7sus4-im7-V7sus4
+            // 7. Kool & the Gang "Jungle Boogie" - Minor with dominant
+            [buildChord(0, 'm7'), buildChord(7, '7'), buildChord(0, 'm7'), buildChord(7, '7')],  // im7-V7-im7-V7
             // 8. The Meters "Cissy Strut" - New Orleans funk minor (Cm9-Eb7)
             [buildChord(0, 'm9'), buildChord(3, '9'), buildChord(0, 'm9'), buildChord(3, '9')],  // im9-♭III9-im9-♭III9
             // 9. War "Low Rider" - Latin funk minor (Gm7-Gm7)
@@ -413,20 +414,20 @@ export default function DiceInterface({ onResult, onUpgrade }: DiceInterfaceProp
         }
       case 'metal':
         if (isMinor) {
-          // i-♭VI-♭VII-i (minor metal power chord progression)
+          // i-♭VI-♭VII-i (minor metal progression)
           return [
-            buildChord(0, '5'),    // i5 (power chord)
-            buildChord(8, '5'),    // ♭VI5
-            buildChord(10, '5'),   // ♭VII5
-            buildChord(0, '5')     // i5
+            buildChord(0, 'm'),    // i (minor)
+            buildChord(8),         // ♭VI (major)
+            buildChord(10),        // ♭VII (major)
+            buildChord(0, 'm')     // i (minor)
           ];
         } else {
           // I-♭VII-♭VI-♭VII (major metal)
           return [
-            buildChord(0, '5'),    // I5 (power chord)
-            buildChord(10, '5'),   // ♭VII5
-            buildChord(8, '5'),    // ♭VI5
-            buildChord(10, '5')    // ♭VII5
+            buildChord(0),         // I (major)
+            buildChord(10),        // ♭VII (major)
+            buildChord(8),         // ♭VI (major)
+            buildChord(10)         // ♭VII (major)
           ];
         }
       case 'neo-classical':
@@ -630,34 +631,34 @@ export default function DiceInterface({ onResult, onUpgrade }: DiceInterfaceProp
     const selectedKey = colorGroup.keys[Math.floor(Math.random() * colorGroup.keys.length)];
     const rootNote = getChordRoot(selectedKey);
     
-    // Only chord types that have diagrams in the database
-    // Weighted towards common chords (Major/Minor appear more often)
-    const allChordTypes = [
-      'Major', 'Major', 'Major',  // More common
-      'Minor', 'Minor', 'Minor',  // More common
-      '7th', '7th',               // Common
-      'Minor 7th', 'Minor 7th',   // Common
-      'Major 7th',                // Less common
-      '6th',
-      'Minor 6th', 
-      '9th',
-      'Minor 9th',
-      'Major 9th',
-      'sus4',
-      'sus2',
-      'add9',
-      'Diminished',
-      'dim7',
-      'Augmented',
-      'm7b5',
-      '11th',
-      'Minor 11th',
-      '13th'
+    // Use ONLY suffixes from VALID_CHORD_SUFFIXES (verified to have diagrams)
+    // Weighted towards common chords
+    const weightedSuffixes = [
+      '', '', '', '',           // Major (most common)
+      'm', 'm', 'm', 'm',       // Minor (most common)
+      '7', '7', '7',            // Dominant 7th (very common)
+      'm7', 'm7',               // Minor 7th
+      'maj7',                   // Major 7th
+      '6',                      // 6th
+      'm6',                     // Minor 6th
+      '9',                      // 9th
+      'm9',                     // Minor 9th
+      'maj9',                   // Major 9th
+      'sus4',                   // Suspended 4th
+      'sus2',                   // Suspended 2nd
+      'add9',                   // Add 9th
+      'dim',                    // Diminished
+      'dim7',                   // Diminished 7th
+      'aug',                    // Augmented
+      '11',                     // 11th
+      'm11',                    // Minor 11th
+      '13',                     // 13th
     ];
-    const chordType = allChordTypes[Math.floor(Math.random() * allChordTypes.length)];
+    const suffix = weightedSuffixes[Math.floor(Math.random() * weightedSuffixes.length)];
+    const chord = rootNote + suffix;
     
     return {
-      chord: formatChord(rootNote, chordType),
+      chord,
       colorName: colorGroup.name
     };
   };
@@ -709,10 +710,9 @@ export default function DiceInterface({ onResult, onUpgrade }: DiceInterfaceProp
     // Completely random chord generation for premium users
     const notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
     const allChordTypes = [
-      '', 'm', '7', 'M7', 'm7', '6', 'm6', '9', 'm9', 'add9', 'sus2', 'sus4', 
-      '°', '+', 'dim7', 'm7b5', '11', '13', 'maj9', 'maj11', 'maj13',
-      '7sus4', '7sus2', 'add11', 'add13', '6/9', 'm6/9', 'alt', '7#5', '7b5',
-      'm(maj7)', 'mMaj9', '7#9', '7b9', '7#11', 'maj7#11'
+      '', 'm', '7', 'maj7', 'm7', '6', 'm6', '9', 'm9', 'add9', 'sus2', 'sus4', 
+      'dim', 'aug', 'dim7', '11', '13', 'maj9', 'm11',
+      '7#5', '7b5', 'mmaj7', '7#9', '7b9'
     ];
     
     const progression: string[] = [];
@@ -730,25 +730,25 @@ export default function DiceInterface({ onResult, onUpgrade }: DiceInterfaceProp
     const notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
     
     // Essential chord types for first dice (left hand/base chord)
+    // Using ONLY suffixes from VALID_CHORD_SUFFIXES
     const essentialChordTypes = [
-      '', 'm', '7', 'm7', 'M7', 'sus2', 'sus4', 'add9'
+      '', 'm', '7', 'm7', 'maj7', 'sus2', 'sus4', 'add9'
     ];
     
     // Exotic chord types for third dice (tapping hand)
     const exoticChordTypes = [
-      'dim7', 'm7b5', '+', '°',                   // Exotic diminished/augmented
-      '11', '13', 'm11', 'maj13',                 // Extended chords
-      '7#11', '7b9', '7#9',                       // Altered dominants
-      'maj7#11', '6/9', 'm6/9', 'm(maj7)', 'mMaj9' // Complex compound chords
+      'dim7', 'dim', 'aug',                       // Exotic diminished/augmented
+      '11', '13', 'm11', 'm13',                   // Extended chords
+      '7b9', '7#9', '7#5', '7b5',                 // Altered dominants
+      'mmaj7', 'm9', 'm6'                         // Complex compound chords
     ];
     
     // Mixed chord types for second and fourth positions
     const mixedChordTypes = [
-      'add9', 'add11', 'maj9', 'maj11', 'maj13',  // Extended major chords
-      'm9', 'm11', 'm(maj7)', 'mMaj9',            // Extended minor chords  
-      '9', '11', '13', '7#11', '7b9', '7#9',      // Dominant extensions
-      'sus2', 'sus4', '7sus4', '7sus2',           // Suspended chords
-      'maj7#11', '6/9', 'm6/9', 'add13'          // Compound intervals
+      'add9', 'maj9', 'm9',                       // Extended major/minor chords
+      '9', '11', '13', '7b9', '7#9',              // Dominant extensions
+      'sus2', 'sus4',                             // Suspended chords
+      '6', 'm6', 'mmaj7', 'm11', 'm13'            // Compound intervals
     ];
     
     // Create a progression that flows well for tapping patterns

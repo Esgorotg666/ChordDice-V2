@@ -488,3 +488,68 @@ export const chordDiagrams: Record<string, ChordDiagram> = {
   'Ab9_barre': { name: 'Ab9 Barre', positions: [4, 6, 4, 5, 6, 6], fret: 4 },
   'Ab7#9_barre': { name: 'Ab7#9 Barre', positions: [4, 6, 4, 5, 6, 7], fret: 4 },
 };
+
+// Valid chord suffixes that have diagrams (non-barre versions)
+export const VALID_CHORD_SUFFIXES = [
+  '',       // Major
+  'm',      // Minor
+  '7',      // Dominant 7th
+  'm7',     // Minor 7th
+  'maj7',   // Major 7th
+  'sus4',   // Suspended 4th
+  'sus2',   // Suspended 2nd
+  'aug',    // Augmented
+  'dim',    // Diminished
+  'dim7',   // Diminished 7th
+  'add9',   // Add 9th
+  '6',      // 6th
+  'm6',     // Minor 6th
+  '9',      // 9th
+  'mmaj7',  // Minor Major 7th
+  '7#9',    // 7 sharp 9
+  'maj9',   // Major 9th
+  'm9',     // Minor 9th
+  '7b9',    // 7 flat 9
+  '7#5',    // 7 sharp 5
+  '7b5',    // 7 flat 5
+  '11',     // 11th
+  'm11',    // Minor 11th
+  '13',     // 13th
+  'm13',    // Minor 13th
+] as const;
+
+// Check if a chord has a diagram available
+export const hasChordDiagram = (chordName: string): boolean => {
+  // Normalize sharp/flat for lookup
+  const normalized = chordName
+    .replace(/♯/g, '#')
+    .replace(/♭/g, 'b')
+    .replace(/A#/g, 'Bb')
+    .replace(/D#/g, 'Eb')
+    .replace(/G#/g, 'Ab');
+  
+  return chordName in chordDiagrams || normalized in chordDiagrams;
+};
+
+// Get a fallback chord if the original doesn't have a diagram
+export const getFallbackChord = (root: string, suffix: string): string => {
+  // Map invalid suffixes to valid ones
+  const fallbackMap: Record<string, string> = {
+    'm7b5': 'dim7',
+    '7sus4': '7',
+    '7sus2': '7',
+    '7alt': '7b9',
+    'm(maj7)': 'mmaj7',
+    'maj7#11': 'maj7',
+    '7#11': '7',
+    'add11': 'add9',
+    '6/9': '6',
+    'm6/9': 'm6',
+    'mMaj9': 'm9',
+    'maj11': 'maj9',
+    'maj13': '13',
+  };
+  
+  const validSuffix = fallbackMap[suffix] || '';
+  return root + validSuffix;
+};
