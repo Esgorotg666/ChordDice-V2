@@ -50,13 +50,15 @@ interface RiffModalProps {
   bridgePattern?: BridgePattern;
   mainChord?: string;
   supportingChord?: string;
+  genre?: string;
 }
 
-export default function RiffModal({ isOpen, onClose, progression, bridgePattern, mainChord, supportingChord }: RiffModalProps) {
+export default function RiffModal({ isOpen, onClose, progression, bridgePattern, mainChord, supportingChord, genre }: RiffModalProps) {
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const [isSaved, setIsSaved] = useState(false);
   const [revealedChords, setRevealedChords] = useState<Set<number>>(new Set());
+  const [saveLimitReached, setSaveLimitReached] = useState(false);
 
   // Normalize chord names to match chord diagram keys
   const normalizeChordName = (chord: string): string => {
@@ -117,6 +119,7 @@ export default function RiffModal({ isOpen, onClose, progression, bridgePattern,
     if (isOpen) {
       setIsSaved(false);
       setRevealedChords(new Set());
+      setSaveLimitReached(false);
     }
   }, [isOpen, progression]);
 
@@ -158,26 +161,45 @@ export default function RiffModal({ isOpen, onClose, progression, bridgePattern,
 
   const saveProgressionMutation = useMutation({
     mutationFn: async () => {
-      return await apiRequest('POST', '/api/chord-progressions', {
+      const progressionName = `${genre || 'Riff'} - ${progression.slice(0, 2).join(' → ')}`;
+      return await apiRequest('POST', '/api/account/progressions', {
+        name: progressionName,
         type: 'riff',
         chords: progression,
-        isFavorite: "true"
+        genre: genre || undefined,
       });
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['/api/chord-progressions'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/account/progressions'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/account/summary'] });
       setIsSaved(true);
       toast({
         title: "Saved!",
-        description: "Chord progression saved to favorites"
+        description: "Chord progression saved to your account"
       });
     },
-    onError: () => {
-      toast({
-        title: "Error",
-        description: "Failed to save progression",
-        variant: "destructive"
-      });
+    onError: (error: Error) => {
+      const isLimitError = error.message?.includes('only save up to');
+      if (isLimitError) {
+        setSaveLimitReached(true);
+        toast({
+          title: "Save Limit Reached",
+          description: "You can only save up to 10 progressions. Delete some to save new ones.",
+          variant: "destructive"
+        });
+      } else if (error.message?.includes('401')) {
+        toast({
+          title: "Sign In Required",
+          description: "Please sign in to save progressions to your account",
+          variant: "destructive"
+        });
+      } else {
+        toast({
+          title: "Error",
+          description: "Failed to save progression",
+          variant: "destructive"
+        });
+      }
     }
   });
 
@@ -354,7 +376,7 @@ export default function RiffModal({ isOpen, onClose, progression, bridgePattern,
             variant="secondary" 
             className="flex-1 font-medium min-h-[48px] hover:bg-accent hover:text-accent-foreground"
             onClick={handleSave}
-            disabled={saveProgressionMutation.isPending || isSaved}
+            disabled={saveProgressionMutation.isPending || isSaved || saveLimitReached}
             data-testid="button-save"
           >
             {saveProgressionMutation.isPending ? (
@@ -364,6 +386,10 @@ export default function RiffModal({ isOpen, onClose, progression, bridgePattern,
             ) : isSaved ? (
               <>
                 <i className="fas fa-check mr-2"></i>Saved
+              </>
+            ) : saveLimitReached ? (
+              <>
+                <i className="fas fa-exclamation-circle mr-2"></i>Limit Reached
               </>
             ) : (
               <>

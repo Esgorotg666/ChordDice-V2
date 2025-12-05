@@ -36,6 +36,7 @@ interface DiceInterfaceProps {
     bridgePattern?: BridgePattern;
     mainChord?: string;
     supportingChord?: string;
+    genre?: string;
   }) => void;
   onUpgrade?: () => void;
 }
@@ -819,12 +820,12 @@ export default function DiceInterface({ onResult, onUpgrade }: DiceInterfaceProp
           // Random mode - generate completely random chord progression
           const progression = generateRandomChords();
           trackEvent('dice_roll', 'Dice', `${currentMode}-${selectedGenre}`, 1);
-          onResult({ type: 'riff', progression });
+          onResult({ type: 'riff', progression, genre: selectedGenre });
         } else if (currentMode === 'tapping') {
           // Tapping mode - generate double hand tapping chord combinations
           const progression = generateTappingChords();
           trackEvent('dice_roll', 'Dice', `${currentMode}-${selectedGenre}`, 1);
-          onResult({ type: 'riff', progression });
+          onResult({ type: 'riff', progression, genre: selectedGenre });
         } else {
           // 3-Dice Bridge System
           // Roll all three dice with independent random values
@@ -861,7 +862,8 @@ export default function DiceInterface({ onResult, onUpgrade }: DiceInterfaceProp
               colorName,
               bridgePattern,
               mainChord,
-              supportingChord
+              supportingChord,
+              genre: selectedGenre
             });
           } else {
             // Riff mode: Create 3-chord progression (Main → Supporting → Variation)
@@ -872,7 +874,8 @@ export default function DiceInterface({ onResult, onUpgrade }: DiceInterfaceProp
               progression,
               bridgePattern,
               mainChord,
-              supportingChord
+              supportingChord,
+              genre: selectedGenre
             });
           }
         }

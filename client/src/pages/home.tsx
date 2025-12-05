@@ -41,6 +41,7 @@ interface GeneratedResult {
   bridgePattern?: BridgePattern;
   mainChord?: string;
   supportingChord?: string;
+  genre?: string;
 }
 
 export default function Home() {
@@ -566,6 +567,7 @@ export default function Home() {
           bridgePattern={result.bridgePattern}
           mainChord={result.mainChord}
           supportingChord={result.supportingChord}
+          genre={result.genre}
         />
       )}
 
