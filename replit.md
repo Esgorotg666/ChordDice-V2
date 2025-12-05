@@ -58,7 +58,7 @@ Preferred communication style: Simple, everyday language.
 - **Guitar Exercises**: Comprehensive practice section with 40+ exercises across 12 categories and 4 skill levels, including warm-up routines, speed building, legato, string skipping, and fingerpicking techniques.
 - **Enhanced Tapping**: Dedicated page with independent dual dice for two-hand tapping practice, visualized on dual fretboards.
 - **Optional Dice**: Time Signature Dice and Metronome BPM Dice.
-- **Advanced Genres**: Neo-Classical, Spanish Flamenco, Black Metal, Death Metal, etc., with genre-specific progressions.
+- **Advanced Genres**: 28+ genres including Rock, Metal, Jazz, Blues, Funk, Folk, Neo-Classical, Extreme Metal, Spanish Flamenco, Black Metal, Death Metal, Country, Reggae, R&B/Soul, Gospel, Punk, Grunge, Hard Rock, Prog Rock, Indie, Post-Rock, Shoegaze, Thrash Metal, Djent, Bossa Nova, and Latin - each with 10 authentic chord progressions.
 - **Guitar Classroom**: Comprehensive educational system with 6 skill tiers (Beginner to Master) and 20+ genre-specific lessons, featuring:
   - **Core Theory Lessons**: Rhythm Essentials Bootcamp, Chord Construction 101, Functional Harmony Workshop
   - **Skill Development**: Ear-Training Primer, Pentatonic Navigation (5-box system), Groove & Time Mastery
@@ -105,7 +105,7 @@ Preferred communication style: Simple, everyday language.
 
 ## Android Deployment
 - **App ID**: `com.chorddice.app`
-- **Version**: 1.12.0 (versionCode: 36, auto-incremented via CI)
+- **Version**: 1.13.0 (versionCode: 37, auto-incremented via CI)
 - **Framework**: Capacitor 7.4.3.
 - **Build Process**: GitHub Actions workflows for building signed APK/AAB and auto-uploading to Google Play Store Internal Testing.
 - **Mobile API Configuration**: The Android/iOS app uses `VITE_API_URL` environment variable to connect to the backend server. This must be set to the published app URL (or Replit dev domain during development). The `queryClient.ts` automatically detects native platforms and builds full API URLs.
