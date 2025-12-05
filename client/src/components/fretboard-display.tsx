@@ -54,7 +54,7 @@ export default function FretboardDisplay({
           {label}
         </div>
       )}
-      <h4 className="text-lg font-semibold mb-4 text-center">{chordDiagram.name}</h4>
+      <h4 className="text-lg font-semibold mb-4 text-center">{chordName}</h4>
       
       {/* Fretboard visualization */}
       <div className="relative">

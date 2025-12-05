@@ -92,6 +92,18 @@ export default function RiffModal({ isOpen, onClose, progression, bridgePattern,
     normalized = normalized.replace(/add9/i, 'add9');
     normalized = normalized.replace(/add11/i, 'add11');
     
+    normalized = normalized.replace(/m\(maj7\)/i, 'mmaj7');
+    normalized = normalized.replace(/mMaj7/i, 'mmaj7');
+    normalized = normalized.replace(/mMaj9/i, 'mmaj9');
+    
+    normalized = normalized.replace(/7sus4/, '7sus4');
+    normalized = normalized.replace(/7sus2/, '7sus2');
+    
+    normalized = normalized.replace(/maj7#11/i, 'maj7');
+    normalized = normalized.replace(/7#11/i, '7');
+    normalized = normalized.replace(/maj11/i, 'maj9');
+    normalized = normalized.replace(/7alt/i, '7#9');
+    
     return normalized;
   };
 
